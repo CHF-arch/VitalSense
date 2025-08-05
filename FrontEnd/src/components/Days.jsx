@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Days.module.css";
 
 export default function Days() {
-  const [allDays, setAllDays] = useState(true);
+  const [allDays, setAllDays] = useState(false);
   const days = [
     "Sunday",
     "Monday",
@@ -96,7 +96,6 @@ export default function Days() {
 
   const todaysMeals = weeklyMeals[currentDay];
   const handleAllDays = () => {
-    // e.preventDefault();
     setAllDays(!allDays);
   };
   return (
@@ -135,9 +134,12 @@ export default function Days() {
                   </thead>
                   <tbody>
                     {dayMeals.map((meal) => (
-                      <h3 key={meal.id}>
-                        {meal.name} - {meal.description}
-                      </h3>
+                      // <h3 key={meal.id}>
+                      <tr key={meal.id}>
+                        <td>{meal.name}</td>
+                        <td>{meal.description}</td>
+                      </tr>
+                      // </h3>
                     ))}
                   </tbody>
                 </table>
