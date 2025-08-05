@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Days.module.css";
 
 export default function Days() {
-  const [allDays, setAllDays] = useState(false);
+  const [allDays, setAllDays] = useState(true);
   const days = [
     "Sunday",
     "Monday",
@@ -95,8 +95,8 @@ export default function Days() {
   };
 
   const todaysMeals = weeklyMeals[currentDay];
-  const handleAllDays = (e) => {
-    e.preventDefault();
+  const handleAllDays = () => {
+    // e.preventDefault();
     setAllDays(!allDays);
   };
   return (
@@ -123,24 +123,26 @@ export default function Days() {
         <div>
           {days.map((day) => {
             const dayMeals = weeklyMeals[day];
-            <div key={day}>
-              <h2>{day} Meals</h2>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th>Meal</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dayMeals.map((meal) => (
-                    <h3 key={meal.id}>
-                      {meal.name} - {meal.description}
-                    </h3>
-                  ))}
-                </tbody>
-              </table>
-            </div>;
+            return (
+              <div key={day}>
+                <h2>{day} Meals</h2>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>Meal</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dayMeals.map((meal) => (
+                      <h3 key={meal.id}>
+                        {meal.name} - {meal.description}
+                      </h3>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
           })}
         </div>
       )}
