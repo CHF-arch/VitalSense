@@ -13,9 +13,6 @@ public class ClientService : IClientService
         _context = context;
     }
 
-    public async Task<IEnumerable<Client>> GetAllAsync()
-        => await _context.Clients.ToListAsync();
-
     public async Task<Client?> GetByIdAsync(Guid id)
         => await _context.Clients.FindAsync(id);
 
@@ -48,5 +45,10 @@ public class ClientService : IClientService
         _context.Clients.Remove(client);
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<IEnumerable<Client>> GetAllByDieticianAsync(Guid dieticianId)
+    {
+        return await _context.Clients.Where(c => c.DieticianId == dieticianId).ToListAsync();
     }
 }

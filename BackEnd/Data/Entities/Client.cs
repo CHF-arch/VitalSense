@@ -33,4 +33,7 @@ public class Client
 
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
+
+    [Column("dietician_id")]
+    public Guid DieticianId { get; set; }
 }

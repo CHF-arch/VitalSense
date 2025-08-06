@@ -19,17 +19,34 @@ public class ClientController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<ClientResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
-        var clients = await _clientService.GetAllAsync();
+        var dieticianIdClaim = User.FindFirst("userid")?.Value;
+        if (string.IsNullOrEmpty(dieticianIdClaim) || !Guid.TryParse(dieticianIdClaim, out var dieticianId))
+        {
+            return Unauthorized();
+        }
+
+        var clients = await _clientService.GetAllByDieticianAsync(dieticianId);
         return Ok(clients);
     }
 
     [HttpGet(ApiEndpoints.Clients.GetById)]
     [ProducesResponseType(typeof(ClientResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
+        var dieticianIdClaim = User.FindFirst("userid")?.Value;
+        if (string.IsNullOrEmpty(dieticianIdClaim) || !Guid.TryParse(dieticianIdClaim, out var dieticianId))
+        {
+            return Unauthorized();
+        }
+
         var client = await _clientService.GetByIdAsync(id);
         if (client == null) return NotFound();
+
+        if (client.DieticianId != dieticianId)
+            return Forbid();
+
         return Ok(client);
     }
 
@@ -37,6 +54,12 @@ public class ClientController : ControllerBase
     [ProducesResponseType(typeof(ClientResponse), StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CreateClientRequest request)
     {
+        var dieticianIdClaim = User.FindFirst("userid")?.Value;
+        if (string.IsNullOrEmpty(dieticianIdClaim) || !Guid.TryParse(dieticianIdClaim, out var dieticianId))
+        {
+            return Unauthorized();
+        }
+
         var client = new Client
         {
             Id = Guid.NewGuid(),
@@ -47,7 +70,8 @@ public class ClientController : ControllerBase
             DateOfBirth = request.DateOfBirth,
             Gender = request.Gender,
             Notes = request.Notes,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            DieticianId = dieticianId
         };
 
         var created = await _clientService.CreateAsync(client);

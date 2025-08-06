@@ -19,8 +19,8 @@ public static class ApiEndpoints
         private const string Base = $"{ApiBase}/clients";
         public const string Create = $"{Base}";
         public const string GetAll = $"{Base}";
-        public const string GetById = $"{Base}/:id";
-        public const string Edit = $"{Base}/:id";
-        public const string Delete = $"{Base}/:id";
+        public const string GetById = $"{Base}/{{id}}";
+        public const string Edit = $"{Base}/{{id}}";
+        public const string Delete = $"{Base}/{{id}}";
     }
 }
