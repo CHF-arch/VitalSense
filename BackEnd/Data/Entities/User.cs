@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DietManagement.Api.Data.Entities;
 
+[Table("users")]
 public class User
 {
     [Column("id")]

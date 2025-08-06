@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DietManagement.Api.Data.Entities;
 
+[Table("clients")]
 public class Client
 {
     [Column("id")]
@@ -24,6 +25,9 @@ public class Client
 
     [Column("gender")]
     public string? Gender { get; set; }
+
+    [Column("has_card")]
+    public bool HasCard { get; set; } = false;
 
     [Column("notes")]
     public string? Notes { get; set; }

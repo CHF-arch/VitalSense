@@ -69,6 +69,7 @@ public class ClientController : ControllerBase
             Phone = request.Phone,
             DateOfBirth = request.DateOfBirth,
             Gender = request.Gender,
+            HasCard = request.HasCard,
             Notes = request.Notes,
             CreatedAt = DateTime.UtcNow,
             DieticianId = dieticianId
@@ -85,6 +86,7 @@ public class ClientController : ControllerBase
             Phone = created.Phone,
             DateOfBirth = created.DateOfBirth,
             Gender = created.Gender,
+            HasCard = created.HasCard,
             Notes = created.Notes,
             CreatedAt = created.CreatedAt,
             UpdatedAt = created.UpdatedAt
