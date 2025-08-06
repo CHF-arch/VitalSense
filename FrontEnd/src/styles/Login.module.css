@@ -1,0 +1,79 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff; /* A very light green */
+}
+
+.form {
+  background-color: #ffffff; /* A slightly darker, soft green */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.h2 {
+  color: #3b5d3b; /* A darker green for text */
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #3b5d3b;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #c8e6c9; /* A light green border */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #81c784; /* A more vibrant green on focus */
+  box-shadow: 0 0 5px rgba(129, 199, 132, 0.5);
+}
+
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #66bb6a; /* A pleasant medium green */
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4caf50; /* A slightly darker green on hover */
+}
+
+.p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #3b5d3b;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.toggleButton:hover {
+  color: #388e3c;
+}
