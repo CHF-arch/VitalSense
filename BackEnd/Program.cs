@@ -30,6 +30,9 @@ builder.Services.AddSwaggerGen();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Add health check for database
+builder.Services.AddHealthChecks();
+
 // Add authentication
 builder.Services.AddAuthentication(x =>
 {
@@ -93,6 +96,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 

@@ -23,4 +23,10 @@ public static class ApiEndpoints
         public const string Edit = $"{Base}/{{id}}";
         public const string Delete = $"{Base}/{{id}}";
     }
+
+    public static class Health
+    {
+        private const string Base = $"{ApiBase}/health";
+        public const string Get = $"{Base}";
+    }
 }
