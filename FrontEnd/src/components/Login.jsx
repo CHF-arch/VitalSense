@@ -1,19 +1,56 @@
 import { useState } from "react";
 import styles from "../styles/Login.module.css";
+import { loginUser, signUpUser } from "../services/auth.js"; // Assuming these functions are defined in authService.js
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
   };
-
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+    const loginData = {
+      username: username,
+      password: password,
+    };
+    await loginUser(loginData.username, loginData.password);
+    setUsername("");
+    setPassword("");
+  };
+  const handleSubmitSignUp = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    const signUpData = {
+      username: username,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
+    signUpUser(
+      signUpData.username,
+      signUpData.email,
+      signUpData.password,
+      signUpData.confirmPassword
+    );
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setConfirmPassword("");
+  };
   return (
     <div className={styles.loginContainer}>
       {isSignUp ? (
         <div className={styles.form}>
           <h2 className={styles.h2}>Sign Up</h2>
-          <form>
+          <form onSubmit={handleSubmitSignUp}>
             <label className={styles.label}>
               Email:
               <input
@@ -21,6 +58,8 @@ export default function Login() {
                 name="email"
                 placeholder="Email"
                 className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </label>
 
@@ -31,6 +70,8 @@ export default function Login() {
                 name="username"
                 placeholder="Username"
                 className={styles.input}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </label>
 
@@ -41,6 +82,8 @@ export default function Login() {
                 name="password"
                 placeholder="Password"
                 className={styles.input}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
 
@@ -51,6 +94,8 @@ export default function Login() {
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 className={styles.input}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </label>
 
@@ -72,14 +117,16 @@ export default function Login() {
       ) : (
         <div className={styles.form}>
           <h2 className={styles.h2}>Login</h2>
-          <form>
+          <form onSubmit={handleSubmitLogin}>
             <label className={styles.label}>
-              Email:
+              UserName :
               <input
-                type="email"
-                name="email"
-                placeholder="Email"
+                type="username"
+                name="username"
+                placeholder="Username"
                 className={styles.input}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </label>
 
@@ -90,6 +137,8 @@ export default function Login() {
                 name="password"
                 placeholder="Password"
                 className={styles.input}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
 

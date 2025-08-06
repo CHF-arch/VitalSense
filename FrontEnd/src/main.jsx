@@ -7,6 +7,9 @@ import App from "./App.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import TodayMeal from "./pages/TodayMealPage.jsx";
+import ClientsListPage from "./pages/ClientsListPage.jsx";
+import AddClientPage from "./pages/AddClientPage.jsx";
+
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -27,9 +30,15 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  {
+    path: "/clients",
+    element: <ClientsListPage />,
+  },
+  {
+    path: "/add-client",
+    element: <AddClientPage />,
+  },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );

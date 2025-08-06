@@ -134,12 +134,10 @@ export default function Days() {
                   </thead>
                   <tbody>
                     {dayMeals.map((meal) => (
-                      // <h3 key={meal.id}>
                       <tr key={meal.id}>
                         <td>{meal.name}</td>
                         <td>{meal.description}</td>
                       </tr>
-                      // </h3>
                     ))}
                   </tbody>
                 </table>

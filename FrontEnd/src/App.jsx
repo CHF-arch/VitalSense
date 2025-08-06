@@ -14,6 +14,9 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/meal" element={<TodayMeal />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/clients" element={<ClientsListPage />} />
+          <Route path="/add-client" element={<AddClientPage />} />
+          <Route path="/:id" element={<CustomerPage />} />
         </Routes>
       </BroswerRoter>
     </div>
