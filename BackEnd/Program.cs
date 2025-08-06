@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 // Add controllers
 builder.Services.AddControllers();
@@ -56,7 +57,7 @@ builder.Services.AddFluentValidationAutoValidation(config =>
 });
 builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
 
-// Add this before builder.Build()
+// Enable Cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -69,7 +70,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Add this before app.UseAuthentication();
 app.UseCors("AllowAll");
 
 using (var scope = app.Services.CreateScope())

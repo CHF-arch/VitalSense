@@ -13,4 +13,14 @@ public static class ApiEndpoints
         public const string RefreshToken = $"{Base}/refresh";
         public const string Me = $"{Base}/me";
     }
+
+    public static class Clients
+    {
+        private const string Base = $"{ApiBase}/clients";
+        public const string Create = $"{Base}";
+        public const string GetAll = $"{Base}";
+        public const string GetById = $"{Base}/:id";
+        public const string Edit = $"{Base}/:id";
+        public const string Delete = $"{Base}/:id";
+    }
 }
