@@ -9,5 +9,8 @@ namespace DietManagement.Api.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<MealPlan> MealPlans { get; set; }
+        public DbSet<MealDay> MealDays { get; set; }
+        public DbSet<Meal> Meals { get; set; }
     }
 }
