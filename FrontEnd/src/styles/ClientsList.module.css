@@ -111,6 +111,192 @@
   gap: 32px;
 }
 
+.clientGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.clientCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.clientCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #d1d5db;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.cardActions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.editIcon,
+.deleteIcon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: #6b7280;
+}
+
+.editIcon:hover {
+  background: #f3f4f6;
+  color: #3b82f6;
+}
+
+.deleteIcon:hover {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.infoIcon {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.infoText {
+  color: #374151;
+  font-weight: 400;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.genderBadge {
+  margin-left: auto;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.genderText {
+  color: #9ca3af;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: auto;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusIcon {
+  color: #9ca3af;
+}
+
+.statusBadge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusYes {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.statusNo {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.joinedDate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 11px;
+}
+
+.joinedLabel {
+  color: #9ca3af;
+  margin-bottom: 1px;
+}
+
+.joinedText {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.notesSection {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.notesContent {
+  padding: 6px 8px;
+  background: #f9fafb;
+  border-radius: 4px;
+  color: #6b7280;
+  font-size: 11px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
 .clientItem {
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid rgba(226, 232, 240, 0.8);
@@ -144,16 +330,11 @@
 }
 
 .clientName {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #1e293b;
-  letter-spacing: -0.03em;
-  margin-bottom: 12px;
-  line-height: 1.2;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .clientDetails {
@@ -333,6 +514,18 @@
 }
 
 /* Responsive design */
+@media (max-width: 1200px) {
+  .clientGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .clientGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 32px 24px;
@@ -342,6 +535,36 @@
     flex-direction: column;
     gap: 16px;
     padding: 20px;
+  }
+
+  .clientGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .clientCard {
+    padding: 16px;
+    min-height: auto;
+  }
+
+  .cardHeader {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .cardActions {
+    align-self: flex-start;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .joinedDate {
+    align-items: flex-start;
   }
 
   .clientDetails {
@@ -371,7 +594,7 @@
   }
 
   .clientName {
-    font-size: 1.5rem;
+    font-size: 1.125rem;
   }
 }
 
