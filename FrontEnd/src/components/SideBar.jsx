@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "../styles/SideBar.module.css";
 
 export default function SideBar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const dieticianName = localStorage.getItem("dieticianName") || "Dietician";
 
   const handleLogout = () => {
@@ -13,16 +14,29 @@ export default function SideBar() {
 
   return (
     <div className={styles.sidebar}>
-      <div className={styles.dieticianNameBox}>
-        <span className={styles.dieticianName}>{dieticianName}</span>
+      <div className={styles.brandSection}>
+        <div className={styles.brandTitle}>NutriCare</div>
+        <div className={styles.brandSubtitle}>Management System</div>
       </div>
+
       <nav className={styles.nav}>
-        <Link to="/dashboard" className={styles.navItem}>
+        <Link
+          to="/dashboard"
+          className={`${styles.navItem} ${
+            location.pathname === "/dashboard" ? styles.active : ""
+          }`}
+        >
           Dashboard
         </Link>
-        <Link to="/clients" className={styles.navItem}>
+        <Link
+          to="/clients"
+          className={`${styles.navItem} ${
+            location.pathname === "/clients" ? styles.active : ""
+          }`}
+        >
           Clients
         </Link>
+
         <button onClick={handleLogout} className={styles.logoutButton}>
           Logout
         </button>

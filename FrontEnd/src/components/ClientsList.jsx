@@ -42,9 +42,9 @@ export default function ClientsList() {
       lastName: client.lastName,
       email: client.email,
       phone: client.phone,
-      dateOfBirth: client.dateOfBirth.split("T")[0], // Format for input type date
+      dateOfBirth: client.dateOfBirth.split("T")[0],
       gender: client.gender,
-      hascard: client.hascard,
+      hasCard: client.hasCard,
       notes: client.notes,
     });
   };
@@ -89,31 +89,42 @@ export default function ClientsList() {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.loading}>Loading clients...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.error}>Error: {error.message}</div>
+      </div>
+    );
   }
 
   if (clients.length === 0) {
     return (
       <div className={styles.container}>
-        <h1 className={styles.h1}>No clients found.</h1>
-        <Link to="/add-client" className={styles.addButton}>
-          Add Client
-        </Link>
+        <div className={styles.emptyState}>
+          <h1 className={styles.h1}>No clients found</h1>
+          <p>Start building your client base by adding your first client.</p>
+          <Link to="/add-client" className={styles.addButton}>
+            Add Your First Client
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>Customer List</h1>
+      <h1 className={styles.h1}>Client Directory</h1>
       <div className={styles.toolbar}>
         <input
           type="text"
-          placeholder="Search by name..."
+          placeholder="Search clients by name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className={styles.searchInput}
@@ -175,8 +186,8 @@ export default function ClientsList() {
                 <label className={styles.checkboxLabel}>
                   <input
                     type="checkbox"
-                    name="hascard"
-                    checked={editedClientData.hascard}
+                    name="hasCard"
+                    checked={editedClientData.hasCard}
                     onChange={handleInputChange}
                   />
                   Has Card
@@ -192,7 +203,7 @@ export default function ClientsList() {
                     className={styles.saveButton}
                     onClick={() => handleSave(client.id)}
                   >
-                    Save
+                    Save Changes
                   </button>
                   <button
                     className={styles.cancelButton}
@@ -209,34 +220,41 @@ export default function ClientsList() {
                 </span>
                 <div className={styles.clientDetails}>
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Email: </span>
+                    <span className={styles.detailLabel}>Email:</span>
                     {client.email}
                   </div>
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Phone: </span>
+                    <span className={styles.detailLabel}>Phone:</span>
                     {client.phone}
                   </div>
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Date of Birth: </span>
+                    <span className={styles.detailLabel}>Birth:</span>
                     {new Date(client.dateOfBirth).toLocaleDateString()}
                   </div>
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Gender: </span>
+                    <span className={styles.detailLabel}>Gender:</span>
                     {client.gender}
                   </div>
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Card: </span>
-                    {client.hasCard ? "Yes" : "No"}
+                    <span className={styles.detailLabel}>Card:</span>
+                    <span
+                      style={{
+                        color: client.hasCard ? "#10b981" : "#ef4444",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {client.hasCard ? "✓ Yes" : "✗ No"}
+                    </span>
                   </div>
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Joined: </span>
+                    <span className={styles.detailLabel}>Joined:</span>
                     {new Date(client.createdAt).toLocaleDateString()}
                   </div>
                 </div>
                 {client.notes && (
-                  <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Notes: </span>
-                    {client.notes}
+                  <div className={styles.notesContainer}>
+                    <span className={styles.detailLabel}>Notes:</span>
+                    <div className={styles.notesContent}>{client.notes}</div>
                   </div>
                 )}
                 <div className={styles.actions}>

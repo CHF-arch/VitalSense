@@ -1,13 +1,13 @@
-
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import SideBar from './SideBar';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import SideBar from "./SideBar";
+import styles from "../styles/RootLayout.module.css";
 
 const RootLayout = () => {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <div className={styles.rootLayout}>
       <SideBar />
-      <main style={{ flexGrow: 1, padding: '20px' }}>
+      <main className={styles.mainContent}>
         <Outlet />
       </main>
     </div>
