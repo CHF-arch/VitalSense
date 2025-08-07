@@ -6,21 +6,7 @@ import React from "react";
 import "./App.css";
 
 function App() {
-  return (
-    <div>
-      <BroswerRoter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/meal" element={<TodayMeal />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/clients" element={<ClientsListPage />} />
-          <Route path="/add-client" element={<AddClientPage />} />
-          <Route path="/:id" element={<CustomerPage />} />
-        </Routes>
-      </BroswerRoter>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;

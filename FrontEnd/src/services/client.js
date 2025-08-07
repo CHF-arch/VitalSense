@@ -55,3 +55,41 @@ export async function createClient(clientData) {
     throw error;
   }
 }
+export async function updateClient(clientId, clientData) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/clients/${clientId}`, {
+      method: "PUT",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(clientData),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to update client with ID ${clientId}`);
+    }
+    if (response.status === 204) {
+      return null; // No content to parse
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating client:", error);
+    throw error;
+  }
+}
+
+export async function deleteClient(clientId) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/clients/${clientId}`, {
+      method: "DELETE",
+      headers: getAuthHeaders(),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to delete client with ID ${clientId}`);
+    }
+    if (response.status === 204) {
+      return null; // No content to parse
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error deleting client:", error);
+    throw error;
+  }
+}

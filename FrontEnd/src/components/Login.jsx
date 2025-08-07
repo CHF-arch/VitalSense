@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/Login.module.css";
 import { loginUser, signUpUser } from "../services/auth.js"; // Assuming these functions are defined in authService.js
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -8,6 +9,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
@@ -21,6 +23,7 @@ export default function Login() {
     await loginUser(loginData.username, loginData.password);
     setUsername("");
     setPassword("");
+    navigate("/clients");
   };
   const handleSubmitSignUp = (e) => {
     e.preventDefault();
@@ -44,6 +47,7 @@ export default function Login() {
     setUsername("");
     setPassword("");
     setConfirmPassword("");
+    navigate("/clients");
   };
   return (
     <div className={styles.loginContainer}>

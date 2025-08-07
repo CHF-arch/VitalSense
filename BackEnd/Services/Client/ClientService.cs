@@ -32,6 +32,12 @@ public class ClientService : IClientService
         client.FirstName = updatedClient.FirstName;
         client.LastName = updatedClient.LastName;
         client.Email = updatedClient.Email;
+        client.Phone = updatedClient.Phone;
+        client.DateOfBirth = updatedClient.DateOfBirth;
+        client.Gender = updatedClient.Gender;
+        client.HasCard = updatedClient.HasCard;
+        client.Notes = updatedClient.Notes;
+        client.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
         return client;
