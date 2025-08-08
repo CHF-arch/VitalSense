@@ -1,9 +1,11 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "../styles/SideBar.module.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function SideBar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
   const dieticianName = localStorage.getItem("dieticianName") || "Dietician";
 
   const handleLogout = () => {
@@ -37,9 +39,14 @@ export default function SideBar() {
           Clients
         </Link>
 
-        <button onClick={handleLogout} className={styles.logoutButton}>
-          Logout
-        </button>
+        <div className={styles.buttonGroup}>
+          <button onClick={toggleTheme} className={styles.themeToggleButton}>
+            {theme === "light" ? "Dark Mode" : "Light Mode"}
+          </button>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            Logout
+          </button>
+        </div>
       </nav>
     </div>
   );

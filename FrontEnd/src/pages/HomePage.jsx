@@ -1,8 +1,8 @@
+import Dashboard from "../components/Dashboard/Dashboard";
 function HomePage() {
   return (
     <div>
-      <h1>Αρχική Σελίδα</h1>
-      <p>Καλώς ήρθες στην εφαρμογή μου!</p>
+      <Dashboard />
     </div>
   );
 }

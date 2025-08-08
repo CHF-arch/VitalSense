@@ -9,52 +9,54 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
+    setError(null);
   };
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
-    const loginData = {
-      username: username,
-      password: password,
-    };
-    await loginUser(loginData.username, loginData.password);
-    setUsername("");
-    setPassword("");
-    navigate("/clients");
+    try {
+      const data = await loginUser(username, password);
+      if (data.accessToken) {
+        setUsername("");
+        setPassword("");
+        navigate("/clients");
+      } else {
+        throw new Error(data.message || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
-  const handleSubmitSignUp = (e) => {
+  const handleSubmitSignUp = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
-    const signUpData = {
-      username: username,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-    signUpUser(
-      signUpData.username,
-      signUpData.email,
-      signUpData.password,
-      signUpData.confirmPassword
-    );
-    setEmail("");
-    setUsername("");
-    setPassword("");
-    setConfirmPassword("");
-    navigate("/clients");
+    try {
+      await signUpUser(username, email, password, confirmPassword);
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setConfirmPassword("");
+      setIsSignUp(false);
+      setError(null);
+    } catch (error) {
+      setError(error.message);
+    }
   };
+
   return (
     <div className={styles.loginContainer}>
       {isSignUp ? (
         <div className={styles.form}>
           <h2 className={styles.h2}>Sign Up</h2>
           <form onSubmit={handleSubmitSignUp}>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <label className={styles.label}>
               Email:
               <input
@@ -122,6 +124,7 @@ export default function Login() {
         <div className={styles.form}>
           <h2 className={styles.h2}>Login</h2>
           <form onSubmit={handleSubmitLogin}>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <label className={styles.label}>
               UserName :
               <input

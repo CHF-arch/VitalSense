@@ -1,0 +1,105 @@
+.card {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-color-light);
+  padding: 25px;
+  margin-bottom: 30px;
+  border: 1px solid var(--card-border);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color-primary);
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: var(--status-no-background);
+  color: var(--status-yes-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+}
+
+.hasCard {
+  background-color: var(--status-yes-background);
+  color: var(--status-yes-color);
+}
+
+.editButton {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  border: none;
+  cursor: pointer;
+}
+
+.editButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  min-width: 80px;
+}
+
+.value {
+  color: var(--text-color-primary);
+}
+
+.footer {
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color-light);
+}
+
+.notes {
+  font-style: italic;
+  color: var(--text-color-secondary);
+  margin: 0;
+  line-height: 1.5;
+}

@@ -9,9 +9,12 @@ import LoginPage from "./pages/LoginPage.jsx";
 import TodayMeal from "./pages/TodayMealPage.jsx";
 import ClientsListPage from "./pages/ClientsListPage.jsx";
 import AddClientPage from "./pages/AddClientPage.jsx";
+import MakeMealPage from "./pages/MakeMealsPage.jsx";
 import RootLayout from "./components/RootLayout.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 import "./index.css";
+import "./styles/themes.css"; // Import the new themes.css
 
 const router = createBrowserRouter([
   {
@@ -30,7 +33,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/meal",
+        path: "/meal/:clientId",
         element: <TodayMeal />,
       },
       {
@@ -41,9 +44,15 @@ const router = createBrowserRouter([
         path: "/add-client",
         element: <AddClientPage />,
       },
+      {
+        path: "/make-meals/:clientId",
+        element: <MakeMealPage />,
+      },
     ],
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <ThemeProvider>
+    <RouterProvider router={router} />
+  </ThemeProvider>
 );

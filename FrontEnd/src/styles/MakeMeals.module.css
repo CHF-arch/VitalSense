@@ -1,0 +1,337 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 48px;
+  background: linear-gradient(
+    135deg,
+    var(--background-color-primary) 0%,
+    var(--background-color-secondary) 100%
+  );
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  box-sizing: border-box;
+}
+
+.h1 {
+  text-align: left;
+  color: var(--text-color-primary);
+  margin-bottom: 40px;
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 50%,
+    var(--gradient-cyan-start) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.planDetails {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.planDetails label {
+  color: var(--text-color-primary); /* Ensure labels are readable */
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  width: 100%; /* Make labels take full width */
+  text-align: left;
+}
+
+.input {
+  padding: 16px 24px;
+  border: 1px solid var(--input-border);
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  background: var(--input-background);
+  color: var(--text-color-primary); /* Ensure input text is readable */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+  flex-grow: 1;
+  color: var(--text-color-primary); /* Ensure input text is readable */
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.addMealButton {
+  padding: 16px 32px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  border: none;
+  cursor: pointer;
+}
+
+.mealsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mealCard {
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mealCard label {
+  color: var(--text-color-primary); /* Ensure labels are readable */
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+  text-align: left;
+}
+
+.mealInput {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: 400;
+  background: var(--input-background);
+  color: var(--text-color-primary); /* Ensure input text is readable */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px var(--shadow-color-light);
+  font-family: inherit;
+  margin-top: 0.1rem;
+}
+
+.nutritionRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+}
+
+.nutritionRow label {
+  color: var(--text-color-primary); /* Ensure labels are readable */
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+  text-align: left;
+}
+
+.daysSelection p {
+  margin: 0 0 0.5rem 0;
+  font-weight: bold;
+  color: var(--text-color-primary); /* Ensure text is readable */
+}
+
+.mealDayCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-color-secondary); /* Ensure checkbox labels are readable */
+}
+
+.saveMealPlanButton {
+  padding: 16px 32px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-green-start) 0%,
+    var(--gradient-green-end) 100%
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  border: none;
+  cursor: pointer;
+  margin-top: 2rem;
+  align-self: center;
+}
+
+/* Styles for client edit form */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  background: var(--background-color-primary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color-medium);
+}
+
+.formRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  padding: 16px;
+  background: var(--card-background);
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 1px 2px var(--shadow-color-light);
+  margin-bottom: 16px;
+  gap: 80px;
+}
+/* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+} */
+
+.editForm label {
+  color: var(--text-color-primary); /* Ensure labels are readable */
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+  text-align: left;
+}
+
+.inputField,
+.textareaField {
+  padding: 14px 16px;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 400;
+  background: var(--input-background);
+  color: var(--text-color-primary); /* Ensure input text is readable */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px var(--shadow-color-light);
+  font-family: inherit;
+  margin-top: 0.1rem;
+}
+
+.inputField:focus,
+.textareaField:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-shadow-focus),
+    0 4px 12px var(--shadow-color-medium);
+  transform: translateY(-1px);
+}
+
+.textareaField {
+  min-height: 100px;
+  resize: vertical;
+  grid-column: 1 / -1;
+}
+.checkboxGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-color-secondary);
+  padding: 16px;
+  background: var(--card-background);
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkboxLabel:hover {
+  border-color: var(--input-focus-border);
+  background: var(--input-shadow-focus);
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--link-color);
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color-medium);
+}
+
+.saveButton,
+.cancelButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.saveButton {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-green-start) 0%,
+    var(--gradient-green-end) 100%
+  );
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+}
+
+.saveButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
+.cancelButton {
+  background: linear-gradient(
+    135deg,
+    var(--text-color-secondary) 0%,
+    var(--text-color-primary) 100%
+  );
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+}
+
+.cancelButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}

@@ -1,79 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
 .loginContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #ffffff; /* A very light green */
+  width: 100vw;
+  height: 100vh; /* Use height instead of min-height for perfect centering */
+  background: linear-gradient(135deg, var(--background-color-primary) 0%, var(--background-color-secondary) 100%);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0; /* Ensure no default margins */
 }
 
 .form {
-  background-color: #ffffff; /* A slightly darker, soft green */
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  background: var(--card-background);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px var(--shadow-color-medium);
+  width: 100%;
+  max-width: 400px;
   text-align: center;
+  border: 1px solid var(--border-color-light);
+  backdrop-filter: blur(10px);
 }
 
 .h2 {
-  color: #3b5d3b; /* A darker green for text */
-  margin-bottom: 1.5rem;
+  color: var(--text-color-primary);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 50%, var(--gradient-cyan-start) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .label {
   display: block;
-  margin-bottom: 1rem;
-  color: #3b5d3b;
-  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: var(--text-color-secondary);
+  font-size: 0.95rem;
   text-align: left;
+  font-weight: 500;
 }
 
 .input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #c8e6c9; /* A light green border */
-  border-radius: 4px;
+  padding: 14px 18px;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
   box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: 400;
+  background: var(--input-background);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px var(--shadow-color-light);
 }
 
 .input:focus {
   outline: none;
-  border-color: #81c784; /* A more vibrant green on focus */
-  box-shadow: 0 0 5px rgba(129, 199, 132, 0.5);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 4px var(--input-shadow-focus), 0 8px 16px var(--shadow-color-medium);
+  transform: translateY(-1px);
 }
 
 .button {
   width: 100%;
-  padding: 0.75rem;
+  padding: 15px;
   border: none;
-  border-radius: 4px;
-  background-color: #66bb6a; /* A pleasant medium green */
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
   color: white;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  letter-spacing: 0.02em;
+  margin-top: 20px;
 }
 
 .button:hover {
-  background-color: #4caf50; /* A slightly darker green on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
 
 .p {
-  margin-top: 1rem;
+  margin-top: 25px;
   font-size: 0.9rem;
-  color: #3b5d3b;
+  color: var(--text-color-secondary);
 }
 
 .toggleButton {
   background: none;
   border: none;
-  color: #4caf50;
+  color: var(--link-color);
   cursor: pointer;
   font-size: 0.9rem;
   padding: 0;
   text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .toggleButton:hover {
-  color: #388e3c;
+  color: var(--link-hover-color);
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 30px 20px;
+    margin: 0 15px;
+  }
+
+  .h2 {
+    font-size: 1.75rem;
+  }
+
+  .input {
+    padding: 12px 15px;
+  }
+
+  .button {
+    padding: 13px;
+    font-size: 1rem;
+  }
 }
