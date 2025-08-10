@@ -11,9 +11,18 @@ using DietManagement.Api.Validators.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add database
+// Add database: use real SQL Server normally, but InMemory for tests
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    if (builder.Environment.IsEnvironment("Testing"))
+    {
+        options.UseInMemoryDatabase("TestDb");
+    }
+    else
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    }
+});
 
 // Add services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -109,7 +118,15 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
-        await context.Database.MigrateAsync();
+        // In tests we may use the InMemory provider which doesn't support migrations
+        if (context.Database.IsRelational())
+        {
+            await context.Database.MigrateAsync();
+        }
+        else
+        {
+            await context.Database.EnsureCreatedAsync();
+        }
     }
     catch (Exception ex)
     {
@@ -127,7 +144,11 @@ if (app.Environment.IsDevelopment())
 
 app.MapHealthChecks("/health");
 
-app.UseHttpsRedirection();
+// Avoid HTTPS redirection during integration tests to prevent 307 redirects in TestServer
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -135,3 +156,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Expose Program for WebApplicationFactory integration testing
+public partial class Program { }
