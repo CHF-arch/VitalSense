@@ -43,4 +43,15 @@ public class MealPlanController : ControllerBase
         var mealPlans = await _mealPlanService.GetAllAsync(clientId);
         return Ok(mealPlans);
     }
+
+    [HttpGet(ApiEndpoints.MealPlans.GetActiveByClientId)]
+        [ProducesResponseType(typeof(MealPlanResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetActiveMealPlan([FromRoute] Guid clientId)
+        {
+            var mealPlan = await _mealPlanService.GetActiveMealPlanAsync(clientId);
+            if (mealPlan == null)
+                return NotFound();
+            return Ok(mealPlan);
+        }
 }

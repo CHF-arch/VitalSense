@@ -32,4 +32,12 @@ public class MealPlan
     public Guid ClientId { get; set; }
 
     public ICollection<MealDay> Days { get; set; } = new List<MealDay>();
+
+    [Required]
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
+
+    [Required]
+    [Column("updated_at")]
+    public DateTime UpdatedAt { get; set; }
 }

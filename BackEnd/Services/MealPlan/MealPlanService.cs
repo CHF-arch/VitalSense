@@ -16,6 +16,7 @@ public class MealPlanService : IMealPlanService
 
     public async Task<MealPlanResponse> CreateAsync(CreateMealPlanRequest request)
     {
+        var now = DateTime.UtcNow;
         var mealPlan = new MealPlan
         {
             Id = Guid.NewGuid(),
@@ -39,7 +40,9 @@ public class MealPlanService : IMealPlanService
                     Fats = meal.Fats,
                     Calories = meal.Calories
                 }).ToList()
-            }).ToList()
+            }).ToList(),
+            CreatedAt = now,
+            UpdatedAt = now
         };
 
         _context.MealPlans.Add(mealPlan);
@@ -142,4 +145,43 @@ public class MealPlanService : IMealPlanService
             }).ToList()
         }).ToList();
     }
+
+        public async Task<MealPlanResponse?> GetActiveMealPlanAsync(Guid clientId)
+        {
+            var now = DateTime.UtcNow.Date;
+            var latestMealPlan = await _context.MealPlans
+                .Where(mp => mp.ClientId == clientId && mp.StartDate.Date <= now && mp.EndDate.Date >= now)
+                .OrderByDescending(mp => mp.UpdatedAt)
+                .Include(mp => mp.Days)
+                    .ThenInclude(d => d.Meals)
+                .FirstOrDefaultAsync();
+
+            if (latestMealPlan == null) return null;
+
+            return new MealPlanResponse
+            {
+                Id = latestMealPlan.Id,
+                Title = latestMealPlan.Title,
+                StartDate = latestMealPlan.StartDate,
+                EndDate = latestMealPlan.EndDate,
+                DieticianId = latestMealPlan.DieticianId,
+                ClientId = latestMealPlan.ClientId,
+                Days = latestMealPlan.Days.Select(d => new MealDayResponse
+                {
+                    Id = d.Id,
+                    Title = d.Title,
+                    Meals = d.Meals.Select(m => new MealResponse
+                    {
+                        Id = m.Id,
+                        Title = m.Title,
+                        Time = m.Time,
+                        Description = m.Description,
+                        Protein = m.Protein,
+                        Carbs = m.Carbs,
+                        Fats = m.Fats,
+                        Calories = m.Calories
+                    }).ToList()
+                }).ToList()
+            };
+        }
 }
