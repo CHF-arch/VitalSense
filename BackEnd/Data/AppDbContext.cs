@@ -12,5 +12,6 @@ namespace DietManagement.Api.Data
         public DbSet<MealPlan> MealPlans { get; set; }
         public DbSet<MealDay> MealDays { get; set; }
         public DbSet<Meal> Meals { get; set; }
+    public DbSet<TaskItem> Tasks { get; set; }
     }
 }

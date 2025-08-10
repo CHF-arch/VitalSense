@@ -32,6 +32,16 @@ public static class ApiEndpoints
     public const string GetByClientId = $"{Base}/client/{{clientId}}";
     public const string GetActiveByClientId = $"{Base}/{{clientId}}/active";
     }
+    
+    public static class Tasks
+    {
+        private const string Base = $"{ApiBase}/tasks";
+        public const string Create = $"{Base}";
+        public const string GetAll = $"{Base}";
+        public const string GetById = $"{Base}/{{taskId}}";
+        public const string ToggleComplete = $"{Base}/{{taskId}}/toggle";
+        public const string Delete = $"{Base}/{{taskId}}";
+    }
 
     public static class Health
     {

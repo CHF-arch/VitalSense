@@ -30,6 +30,7 @@ builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IMealPlanService, MealPlanService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 // Add controllers
 builder.Services.AddControllers();
