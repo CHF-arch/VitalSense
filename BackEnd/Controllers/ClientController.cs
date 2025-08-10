@@ -33,7 +33,7 @@ public class ClientController : ControllerBase
     [ProducesResponseType(typeof(ClientResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> GetById([FromRoute] Guid id)
+    public async Task<IActionResult> GetById([FromRoute] Guid clientId)
     {
         var dieticianIdClaim = User.FindFirst("userid")?.Value;
         if (string.IsNullOrEmpty(dieticianIdClaim) || !Guid.TryParse(dieticianIdClaim, out var dieticianId))
@@ -41,7 +41,7 @@ public class ClientController : ControllerBase
             return Unauthorized();
         }
 
-        var client = await _clientService.GetByIdAsync(id);
+        var client = await _clientService.GetByIdAsync(clientId);
         if (client == null) return NotFound();
 
         if (client.DieticianId != dieticianId)
@@ -98,9 +98,9 @@ public class ClientController : ControllerBase
     [HttpPut(ApiEndpoints.Clients.Edit)]
     [ProducesResponseType(typeof(ClientResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] Client client)
+    public async Task<IActionResult> Update([FromRoute] Guid clientId, [FromBody] Client client)
     {
-        var updated = await _clientService.UpdateAsync(id, client);
+        var updated = await _clientService.UpdateAsync(clientId, client);
         if (updated == null) return NotFound();
         return Ok(updated);
     }
@@ -108,9 +108,9 @@ public class ClientController : ControllerBase
     [HttpDelete(ApiEndpoints.Clients.Delete)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    public async Task<IActionResult> Delete([FromRoute] Guid clientId)
     {
-        var deleted = await _clientService.DeleteAsync(id);
+        var deleted = await _clientService.DeleteAsync(clientId);
         if (!deleted) return NotFound();
         return NoContent();
     }

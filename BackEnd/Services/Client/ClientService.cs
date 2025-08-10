@@ -13,8 +13,8 @@ public class ClientService : IClientService
         _context = context;
     }
 
-    public async Task<Client?> GetByIdAsync(Guid id)
-        => await _context.Clients.FindAsync(id);
+    public async Task<Client?> GetByIdAsync(Guid clientId)
+        => await _context.Clients.FindAsync(clientId);
 
     public async Task<Client> CreateAsync(Client client)
     {
@@ -24,9 +24,9 @@ public class ClientService : IClientService
         return client;
     }
 
-    public async Task<Client?> UpdateAsync(Guid id, Client updatedClient)
+    public async Task<Client?> UpdateAsync(Guid clientId, Client updatedClient)
     {
-        var client = await _context.Clients.FindAsync(id);
+        var client = await _context.Clients.FindAsync(clientId);
         if (client == null) return null;
 
         client.FirstName = updatedClient.FirstName;
@@ -43,9 +43,9 @@ public class ClientService : IClientService
         return client;
     }
 
-    public async Task<bool> DeleteAsync(Guid id)
+    public async Task<bool> DeleteAsync(Guid clientId)
     {
-        var client = await _context.Clients.FindAsync(id);
+        var client = await _context.Clients.FindAsync(clientId);
         if (client == null) return false;
 
         _context.Clients.Remove(client);

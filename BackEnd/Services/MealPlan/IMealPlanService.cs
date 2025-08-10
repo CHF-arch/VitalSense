@@ -4,6 +4,7 @@ namespace DietManagement.Api.Services;
 
 public interface IMealPlanService
 {
+    Task<List<MealPlanResponse>> GetAllAsync(Guid clientId);
     Task<MealPlanResponse> CreateAsync(CreateMealPlanRequest request);
-    Task<MealPlanResponse?> GetByIdAsync(Guid id);
+    Task<MealPlanResponse?> GetByIdAsync(Guid mealPlanId);
 }

@@ -28,11 +28,19 @@ public class MealPlanController : ControllerBase
     [HttpGet(ApiEndpoints.MealPlans.GetById)]
     [ProducesResponseType(typeof(MealPlanResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById([FromRoute] Guid id)
+    public async Task<IActionResult> GetById([FromRoute] Guid mealPlanId)
     {
-        var mealPlan = await _mealPlanService.GetByIdAsync(id);
+        var mealPlan = await _mealPlanService.GetByIdAsync(mealPlanId);
         if (mealPlan == null)
             return NotFound();
         return Ok(mealPlan);
+    }
+
+    [HttpGet(ApiEndpoints.MealPlans.GetByClientId)]
+    [ProducesResponseType(typeof(List<MealPlanResponse>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetMealPlansByClientId([FromRoute] Guid clientId)
+    {
+        var mealPlans = await _mealPlanService.GetAllAsync(clientId);
+        return Ok(mealPlans);
     }
 }

@@ -72,12 +72,12 @@ public class MealPlanService : IMealPlanService
         };
     }
 
-    public async Task<MealPlanResponse?> GetByIdAsync(Guid id)
+    public async Task<MealPlanResponse?> GetByIdAsync(Guid mealPlanId)
     {
         var mealPlan = await _context.MealPlans
             .Include(mp => mp.Days)
                 .ThenInclude(d => d.Meals)
-            .FirstOrDefaultAsync(mp => mp.Id == id);
+            .FirstOrDefaultAsync(mp => mp.Id == mealPlanId);
 
         if (mealPlan == null) return null;
 
@@ -106,5 +106,40 @@ public class MealPlanService : IMealPlanService
                 }).ToList()
             }).ToList()
         };
+    }
+
+    public async Task<List<MealPlanResponse>> GetAllAsync(Guid clientId)
+    {
+        var mealPlans = await _context.MealPlans
+            .Where(mp => mp.ClientId == clientId)
+            .Include(mp => mp.Days)
+                .ThenInclude(d => d.Meals)
+            .ToListAsync();
+
+        return mealPlans.Select(mealPlan => new MealPlanResponse
+        {
+            Id = mealPlan.Id,
+            Title = mealPlan.Title,
+            StartDate = mealPlan.StartDate,
+            EndDate = mealPlan.EndDate,
+            DieticianId = mealPlan.DieticianId,
+            ClientId = mealPlan.ClientId,
+            Days = mealPlan.Days.Select(d => new MealDayResponse
+            {
+                Id = d.Id,
+                Title = d.Title,
+                Meals = d.Meals.Select(m => new MealResponse
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Time = m.Time,
+                    Description = m.Description,
+                    Protein = m.Protein,
+                    Carbs = m.Carbs,
+                    Fats = m.Fats,
+                    Calories = m.Calories
+                }).ToList()
+            }).ToList()
+        }).ToList();
     }
 }
