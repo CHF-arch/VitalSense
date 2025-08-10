@@ -22,7 +22,7 @@ public class MealPlanController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreateMealPlanRequest request)
     {
         var result = await _mealPlanService.CreateAsync(request);
-        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        return CreatedAtAction(nameof(GetById), new { mealPlanId = result.Id }, result);
     }
 
     [HttpGet(ApiEndpoints.MealPlans.GetById)]

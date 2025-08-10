@@ -92,7 +92,7 @@ public class ClientController : ControllerBase
             UpdatedAt = created.UpdatedAt
         };
 
-        return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+    return CreatedAtAction(nameof(GetById), new { clientId = response.Id }, response);
     }
 
     [HttpPut(ApiEndpoints.Clients.Edit)]
