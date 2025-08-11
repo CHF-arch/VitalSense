@@ -6,7 +6,7 @@
   width: 280px;
   height: 100vh;
   max-height: 100vh;
-  background: var(--sidebar-background); /* Use CSS variable */
+  background: var(--sidebar-background);
   padding: 24px 20px;
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -17,7 +17,12 @@
   border-radius: 0;
   margin: 0;
   flex-shrink: 0;
-  border-right: 1px solid var(--sidebar-border); /* Use CSS variable */
+  border-right: 1px solid var(--sidebar-border);
+  transition: transform 0.3s ease-in-out;
+}
+
+.hamburgerButton {
+  display: none;
 }
 
 .sidebar::before {
@@ -27,7 +32,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: none; /* Remove previous overlay */
+  background: none;
   pointer-events: none;
 }
 
@@ -43,7 +48,7 @@
 
 .navItem {
   padding: 16px 20px;
-  color: var(--sidebar-nav-item-color); /* Use CSS variable */
+  color: var(--sidebar-nav-item-color);
   text-decoration: none;
   border-radius: 14px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -57,36 +62,36 @@
 }
 
 .navItem:hover {
-  background: var(--sidebar-nav-item-hover-background); /* Use CSS variable */
-  color: var(--sidebar-nav-item-hover-color); /* Use CSS variable */
+  background: var(--sidebar-nav-item-hover-background);
+  color: var(--sidebar-nav-item-hover-color);
 }
 
 .navItem.active {
   background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
   color: white;
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
-  border: none; /* Remove border */
+  border: none;
 }
 
 .dieticianNameBox {
-  background: var(--sidebar-dietician-box-background); /* Use CSS variable */
+  background: var(--sidebar-dietician-box-background);
   padding: 20px;
   border-radius: 16px;
   text-align: center;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--sidebar-dietician-box-color); /* Use CSS variable */
-  border: 1px solid var(--sidebar-dietician-box-border); /* Use CSS variable */
-  box-shadow: 0 4px 16px var(--shadow-color-light); /* Use CSS variable */
+  color: var(--sidebar-dietician-box-color);
+  border: 1px solid var(--sidebar-dietician-box-border);
+  box-shadow: 0 4px 16px var(--shadow-color-light);
   position: relative;
 }
 
 .logoutButton {
   width: 100%;
-  padding: 16px 32px; /* Match ClientsList button padding */
+  padding: 16px 32px;
   border: none;
-  border-radius: 14px; /* Match ClientsList button border-radius */
-  background: linear-gradient(135deg, var(--gradient-red-start) 0%, var(--gradient-red-end) 100%); /* Red gradient */
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gradient-red-start) 0%, var(--gradient-red-end) 100%);
   color: white;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -99,20 +104,19 @@
   justify-content: center;
   gap: 8px;
   font-family: inherit;
-  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25); /* Red shadow */
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
 }
 
 .logoutButton:hover {
-  transform: translateY(-3px); /* Match ClientsList button hover */
-  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.35); /* Red shadow on hover */
-  background: linear-gradient(135deg, var(--gradient-red-end) 0%, #b91c1c 100%); /* Darker red on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.35);
+  background: linear-gradient(135deg, var(--gradient-red-end) 0%, #b91c1c 100%);
 }
 
 .logoutButton:active {
   transform: translateY(0);
 }
 
-/* Brand section */
 .brandSection {
   margin-bottom: 32px;
   text-align: center;
@@ -121,14 +125,14 @@
 .brandTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--sidebar-brand-title-color); /* Use CSS variable */
+  color: var(--sidebar-brand-title-color);
   margin-bottom: 8px;
   letter-spacing: -0.02em;
 }
 
 .brandSubtitle {
   font-size: 0.9rem;
-  color: var(--sidebar-brand-subtitle-color); /* Use CSS variable */
+  color: var(--sidebar-brand-subtitle-color);
   font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -142,43 +146,31 @@
   border-top: 1px solid var(--sidebar-border);
 }
 
-.themeToggleButton {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--gradient-blue-start);
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
 
-.themeToggleButton:hover {
-  background-color: var(--gradient-blue-end);
-}
 
-.themeToggleButton {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--gradient-blue-start);
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.themeToggleButton:hover {
-  background-color: var(--gradient-blue-end);
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
   .sidebar {
-    width: 240px;
-    margin: 0;
-    padding: 20px 16px;
-    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .hamburgerButton {
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background: var(--card-background);
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
   }
 
   .dieticianNameBox {

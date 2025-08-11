@@ -1,14 +1,62 @@
 .container {
   padding: 2rem;
   background-color: var(--background-color-primary);
-  max-width: 800px;
-  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .h1 {
-  text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   color: var(--text-color-primary);
+}
+
+.toggleButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  letter-spacing: 0.02em;
+}
+
+.toggleButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
+.buttonGroupColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust as needed for spacing between buttons */
+}
+
+.daySection {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.daySection:last-child {
+  border-bottom: none;
+}
+
+.dayTitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--text-color-primary);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gradient-cyan-start);
 }
 
 .mealCard {
@@ -52,4 +100,22 @@
 
 .nutritionLabel {
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .h1 {
+    font-size: 1.5rem;
+  }
+
+  .dayTitle {
+    font-size: 1.5rem;
+  }
+
+  .mealTitle {
+    font-size: 1.2rem;
+  }
 }

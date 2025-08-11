@@ -115,3 +115,17 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
+
+@media (max-width: 768px) {
+  .form {
+    padding: 20px;
+  }
+
+  .h2 {
+    font-size: 1.5rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+  }
+}

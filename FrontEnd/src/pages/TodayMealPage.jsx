@@ -1,10 +1,9 @@
 import React from "react";
-import Days from "../components/Days";
+import Days from "../components/Days/Days.jsx";
 
 export default function TodayMeal() {
   return (
     <div>
-      Today's Meal
       <Days />
     </div>
   );

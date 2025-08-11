@@ -36,7 +36,7 @@
   font-weight: 600;
   text-transform: uppercase;
   background-color: var(--status-no-background);
-  color: var(--status-yes-color);
+  color: var(--status-no-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
@@ -102,4 +102,10 @@
   color: var(--text-color-secondary);
   margin: 0;
   line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
 }

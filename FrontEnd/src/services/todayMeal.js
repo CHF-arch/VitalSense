@@ -3,11 +3,14 @@ import { API_BASE_URL } from "../config/api";
 export const getTodayMeal = async (clientId) => {
   const token = localStorage.getItem("token");
   try {
-    const response = await fetch(`${API_BASE_URL}/meal-plans/${clientId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/meal-plans/client/${clientId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();

@@ -1,0 +1,14 @@
+.themeToggleButton {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--gradient-blue-start);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.themeToggleButton:hover {
+  background-color: var(--gradient-blue-end);
+}

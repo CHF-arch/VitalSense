@@ -1,4 +1,4 @@
-import AddClient from "../components/AddClient.jsx";
+import AddClient from "../components/AddClient/AddClient.jsx";
 
 export default function AddClientPage() {
   return (

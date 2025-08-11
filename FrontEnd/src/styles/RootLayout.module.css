@@ -16,3 +16,17 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
+
+@media (max-width: 768px) {
+  .rootLayout {
+    display: block;
+    position: static;
+    height: auto;
+  }
+
+  .mainContent {
+    height: auto;
+    overflow: visible;
+    padding-top: 60px;
+  }
+}

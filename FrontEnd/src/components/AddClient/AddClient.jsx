@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "../styles/AddClient.module.css";
-import { createClient } from "../services/client";
+import styles from "../../styles/AddClient.module.css";
+import { createClient } from "../../services/client";
 
 export default function AddClient() {
   const [firstName, setFirstName] = useState("");
@@ -11,9 +11,7 @@ export default function AddClient() {
   const [gender, setGender] = useState("");
   const [hasCard, setHasCard] = useState(false);
   const [notes, setNotes] = useState("");
-  const [createdAt, setCreatedAt] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+  const createdAt = new Date().toISOString().split("T")[0];
 
   const handleSubmit = async (e) => {
     e.preventDefault();

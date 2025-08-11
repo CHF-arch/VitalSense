@@ -335,3 +335,14 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

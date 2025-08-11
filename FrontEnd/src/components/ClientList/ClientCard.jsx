@@ -86,10 +86,7 @@ export default function ClientCard({
             >
               Save Changes
             </button>
-            <button
-              className={styles.cancelButton}
-              onClick={handleCancel}
-            >
+            <button className={styles.cancelButton} onClick={handleCancel}>
               Cancel
             </button>
           </div>
@@ -240,11 +237,8 @@ export default function ClientCard({
             >
               Create Meal Plan
             </Link>
-            <Link
-              to={`/meal/${client.id}}`}
-              className={styles.TodayMealButton}
-            >
-              Today's Meal
+            <Link to={`/meal/${client.id}}`} className={styles.TodayMealButton}>
+              Meal plans
             </Link>
           </div>
         </>

@@ -57,3 +57,22 @@
   flex-shrink: 0;
   box-sizing: border-box;
 }
+
+@media (max-width: 768px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .mainContentWrapper {
+    padding: 10px;
+  }
+
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

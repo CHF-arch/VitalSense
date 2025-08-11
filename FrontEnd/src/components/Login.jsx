@@ -2,6 +2,8 @@ import { useState } from "react";
 import styles from "../styles/Login.module.css";
 import { loginUser, signUpUser } from "../services/auth.js"; // Assuming these functions are defined in authService.js
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
+// import commonStyles from "../styles/common.module.css";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -11,6 +13,7 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
@@ -52,6 +55,11 @@ export default function Login() {
 
   return (
     <div className={styles.loginContainer}>
+      <div className={styles.themeButtonWrapper}>
+        <button onClick={toggleTheme} className={styles.button}>
+          {theme === "light" ? "Dark Mode" : "Light Mode"}
+        </button>
+      </div>
       {isSignUp ? (
         <div className={styles.form}>
           <h2 className={styles.h2}>Sign Up</h2>
