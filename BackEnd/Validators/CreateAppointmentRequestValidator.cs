@@ -1,0 +1,29 @@
+using DietManagement.Api.Models;
+using FluentValidation;
+
+namespace DietManagement.Api.Validators.Appointments;
+
+public class CreateAppointmentRequestValidator : AbstractValidator<CreateAppointmentRequest>
+{
+    public CreateAppointmentRequestValidator()
+    {
+        RuleFor(x => x.Title)
+            .NotEmpty().WithMessage("Title is required.")
+            .MaximumLength(200).WithMessage("Title cannot exceed 200 characters.");
+
+        RuleFor(x => x.Start)
+            .NotEmpty().WithMessage("Start time is required.");
+
+        RuleFor(x => x.End)
+            .NotEmpty().WithMessage("End time is required.")
+            .GreaterThan(x => x.Start).WithMessage("End must be after Start.");
+
+        RuleFor(x => x.AllDay)
+            .NotNull();
+
+        RuleFor(x => x.ClientId)
+            .NotEmpty().WithMessage("ClientId is required.");
+
+        // DieticianId comes from the authenticated user; ignore any value sent.
+    }
+}

@@ -1,0 +1,12 @@
+using DietManagement.Api.Data.Entities;
+
+namespace DietManagement.Api.Services;
+
+public interface IAppointmentService
+{
+    Task<Appointment?> GetByIdAsync(Guid appointmentId);
+    Task<Appointment> CreateAsync(Appointment appointment);
+    Task<Appointment?> UpdateAsync(Guid appointmentId, Appointment appointment);
+    Task<bool> DeleteAsync(Guid appointmentId);
+    Task<IEnumerable<Appointment>> GetAllByDieticianAsync(Guid dieticianId);
+}

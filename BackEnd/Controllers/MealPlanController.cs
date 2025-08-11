@@ -15,8 +15,8 @@ public class MealPlanController : ControllerBase
         _mealPlanService = mealPlanService;
     }
 
-    [HttpPost(ApiEndpoints.MealPlans.Create)]
     [Authorize]
+    [HttpPost(ApiEndpoints.MealPlans.Create)]
     [ProducesResponseType(typeof(MealPlanResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateMealPlanRequest request)
@@ -25,6 +25,7 @@ public class MealPlanController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { mealPlanId = result.Id }, result);
     }
 
+    [Authorize]
     [HttpGet(ApiEndpoints.MealPlans.GetById)]
     [ProducesResponseType(typeof(MealPlanResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -36,6 +37,7 @@ public class MealPlanController : ControllerBase
         return Ok(mealPlan);
     }
 
+    [Authorize]
     [HttpGet(ApiEndpoints.MealPlans.GetByClientId)]
     [ProducesResponseType(typeof(List<MealPlanResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetMealPlansByClientId([FromRoute] Guid clientId)
@@ -45,13 +47,13 @@ public class MealPlanController : ControllerBase
     }
 
     [HttpGet(ApiEndpoints.MealPlans.GetActiveByClientId)]
-        [ProducesResponseType(typeof(MealPlanResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetActiveMealPlan([FromRoute] Guid clientId)
-        {
-            var mealPlan = await _mealPlanService.GetActiveMealPlanAsync(clientId);
-            if (mealPlan == null)
-                return NotFound();
-            return Ok(mealPlan);
-        }
+    [ProducesResponseType(typeof(MealPlanResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetActiveMealPlan([FromRoute] Guid clientId)
+    {
+        var mealPlan = await _mealPlanService.GetActiveMealPlanAsync(clientId);
+        if (mealPlan == null)
+            return NotFound();
+        return Ok(mealPlan);
+    }
 }

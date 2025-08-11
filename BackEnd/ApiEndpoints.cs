@@ -43,6 +43,16 @@ public static class ApiEndpoints
         public const string Delete = $"{Base}/{{taskId}}";
     }
 
+    public static class Appointments
+    {
+        private const string Base = $"{ApiBase}/appointments";
+        public const string Create = $"{Base}";
+        public const string GetAll = $"{Base}";
+        public const string GetById = $"{Base}/{{appointmentId}}";
+        public const string Edit = $"{Base}/{{appointmentId}}";
+        public const string Delete = $"{Base}/{{appointmentId}}";
+    }
+
     public static class Health
     {
         private const string Base = $"{ApiBase}/health";
