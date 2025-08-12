@@ -22,6 +22,7 @@ public static class ApiEndpoints
         public const string GetById = $"{Base}/{{clientId}}";
         public const string Edit = $"{Base}/{{clientId}}";
         public const string Delete = $"{Base}/{{clientId}}";
+    public const string Search = $"{Base}/search"; // query via ?q=
     }
 
     public static class MealPlans
@@ -51,7 +52,7 @@ public static class ApiEndpoints
         public const string GetById = $"{Base}/{{appointmentId}}";
         public const string Edit = $"{Base}/{{appointmentId}}";
         public const string Delete = $"{Base}/{{appointmentId}}";
-        public const string GetByDate = $"{Base}/date/{{date}}"; // date in ISO (YYYY-MM-DD) or any parsable format
+        public const string GetByDate = $"{Base}/date/{{date}}";
     }
 
     public static class Health

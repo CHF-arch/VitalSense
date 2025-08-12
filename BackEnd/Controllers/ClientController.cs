@@ -29,6 +29,33 @@ public class ClientController : ControllerBase
         return Ok(clients);
     }
 
+    [HttpGet(ApiEndpoints.Clients.Search)]
+    [ProducesResponseType(typeof(IEnumerable<ClientResponse>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Search([FromQuery] string q, [FromQuery] int limit = 20)
+    {
+        var dieticianIdClaim = User.FindFirst("userid")?.Value;
+        if (string.IsNullOrEmpty(dieticianIdClaim) || !Guid.TryParse(dieticianIdClaim, out var dieticianId))
+        {
+            return Unauthorized();
+        }
+        if (limit <= 0 || limit > 100) limit = 20;
+        var clients = await _clientService.SearchAsync(dieticianId, q, limit);
+        return Ok(clients.Select(c => new ClientResponse
+        {
+            Id = c.Id,
+            FirstName = c.FirstName,
+            LastName = c.LastName,
+            Email = c.Email,
+            Phone = c.Phone,
+            DateOfBirth = c.DateOfBirth,
+            Gender = c.Gender,
+            HasCard = c.HasCard,
+            Notes = c.Notes,
+            CreatedAt = c.CreatedAt,
+            UpdatedAt = c.UpdatedAt
+        }));
+    }
+
     [HttpGet(ApiEndpoints.Clients.GetById)]
     [ProducesResponseType(typeof(ClientResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

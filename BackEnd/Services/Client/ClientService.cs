@@ -57,4 +57,26 @@ public class ClientService : IClientService
     {
         return await _context.Clients.Where(c => c.DieticianId == dieticianId).ToListAsync();
     }
+
+    public async Task<IEnumerable<Client>> SearchAsync(Guid dieticianId, string query, int limit = 20)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return Enumerable.Empty<Client>();
+        }
+
+        query = query.Trim();
+        var lowered = query.ToLowerInvariant();
+        return await _context.Clients
+            .Where(c => c.DieticianId == dieticianId && (
+                c.FirstName.ToLower().Contains(lowered) ||
+                c.LastName.ToLower().Contains(lowered) ||
+                c.Email.ToLower().Contains(lowered) ||
+                c.Phone.ToLower().Contains(lowered)
+            ))
+            .OrderBy(c => c.FirstName)
+            .ThenBy(c => c.LastName)
+            .Take(limit)
+            .ToListAsync();
+    }
 }
