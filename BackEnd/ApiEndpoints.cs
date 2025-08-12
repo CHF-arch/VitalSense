@@ -53,6 +53,7 @@ public static class ApiEndpoints
         public const string Edit = $"{Base}/{{appointmentId}}";
         public const string Delete = $"{Base}/{{appointmentId}}";
         public const string GetByDate = $"{Base}/date/{{date}}";
+        public const string GetByRange = $"{Base}/date-range/{{from}}/{{to}}";
     }
 
     public static class Health

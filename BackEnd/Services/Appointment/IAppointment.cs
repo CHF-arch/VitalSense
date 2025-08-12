@@ -10,4 +10,5 @@ public interface IAppointmentService
     Task<bool> DeleteAsync(Guid appointmentId);
     Task<IEnumerable<Appointment>> GetAllByDieticianAsync(Guid dieticianId);
     Task<IEnumerable<Appointment>> GetAllByDieticianAndDateAsync(Guid dieticianId, DateOnly date);
+    Task<IEnumerable<Appointment>> GetAllByDieticianAndRangeAsync(Guid dieticianId, DateOnly from, DateOnly to);
 }

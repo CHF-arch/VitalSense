@@ -69,5 +69,17 @@ public class AppointmentService : IAppointmentService
 			.OrderBy(a => a.Start)
 			.ToListAsync();
 	}
+
+	public async Task<IEnumerable<Appointment>> GetAllByDieticianAndRangeAsync(Guid dieticianId, DateOnly from, DateOnly to)
+	{
+		// Inclusive of 'from' day start, inclusive of 'to' day end
+		if (to < from) (from, to) = (to, from);
+		var rangeStart = from.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
+		var rangeEndExclusive = to.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc).AddDays(1);
+		return await _context.Appointments
+			.Where(a => a.DieticianId == dieticianId && a.Start >= rangeStart && a.Start < rangeEndExclusive)
+			.OrderBy(a => a.Start)
+			.ToListAsync();
+	}
 }
 

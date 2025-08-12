@@ -68,6 +68,20 @@ public class AppointmentController : ControllerBase
 		return Ok(appts.Select(ToResponse));
 	}
 
+	[HttpGet(ApiEndpoints.Appointments.GetByRange)]
+	[Authorize]
+	[ProducesResponseType(typeof(IEnumerable<AppointmentResponse>), StatusCodes.Status200OK)]
+	public async Task<IActionResult> GetByRange([FromRoute] string from, [FromRoute] string to)
+	{
+		if (!TryGetDieticianId(out var dieticianId)) return Unauthorized();
+		if (!DateOnly.TryParse(from, out var fromDate) || !DateOnly.TryParse(to, out var toDate))
+		{
+			return BadRequest(new { error = "Invalid date format. Use YYYY-MM-DD for both from and to." });
+		}
+		var appts = await _appointmentService.GetAllByDieticianAndRangeAsync(dieticianId, fromDate, toDate);
+		return Ok(appts.Select(ToResponse));
+	}
+
 	[HttpGet(ApiEndpoints.Appointments.GetById)]
 	[Authorize]
 	[ProducesResponseType(typeof(AppointmentResponse), StatusCodes.Status200OK)]
