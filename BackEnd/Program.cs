@@ -32,6 +32,7 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IMealPlanService, MealPlanService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // Add controllers
 builder.Services.AddControllers();

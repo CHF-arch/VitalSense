@@ -53,12 +53,18 @@ public static class ApiEndpoints
         public const string Edit = $"{Base}/{{appointmentId}}";
         public const string Delete = $"{Base}/{{appointmentId}}";
         public const string GetByDate = $"{Base}/date/{{date}}";
-        public const string GetByRange = $"{Base}/date-range/{{from}}/{{to}}";
+        public const string GetByRange = $"{Base}/range/{{from}}/{{to}}"; // NOTE: keep in sync with tests
     }
 
     public static class Health
     {
         private const string Base = $"{ApiBase}/health";
         public const string Get = $"{Base}";
+    }
+
+    public static class Dashboard
+    {
+        private const string Base = $"{ApiBase}/dashboard";
+        public const string Metrics = $"{Base}/metrics";
     }
 }
