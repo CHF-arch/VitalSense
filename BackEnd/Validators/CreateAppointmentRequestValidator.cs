@@ -23,7 +23,5 @@ public class CreateAppointmentRequestValidator : AbstractValidator<CreateAppoint
 
         RuleFor(x => x.ClientId)
             .NotEmpty().WithMessage("ClientId is required.");
-
-        // DieticianId comes from the authenticated user; ignore any value sent.
     }
 }

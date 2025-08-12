@@ -29,7 +29,6 @@ public class AppointmentController : ControllerBase
 	{
 		if (!TryGetDieticianId(out var dieticianId)) return Unauthorized();
 
-		// Ensure request ties to calling dietician
 		var appt = new Appointment
 		{
 			Title = request.Title,
@@ -52,6 +51,20 @@ public class AppointmentController : ControllerBase
 	{
 		if (!TryGetDieticianId(out var dieticianId)) return Unauthorized();
 		var appts = await _appointmentService.GetAllByDieticianAsync(dieticianId);
+		return Ok(appts.Select(ToResponse));
+	}
+
+	[HttpGet(ApiEndpoints.Appointments.GetByDate)]
+	[Authorize]
+	[ProducesResponseType(typeof(IEnumerable<AppointmentResponse>), StatusCodes.Status200OK)]
+	public async Task<IActionResult> GetByDate([FromRoute] string date)
+	{
+		if (!TryGetDieticianId(out var dieticianId)) return Unauthorized();
+		if (!DateOnly.TryParse(date, out var dateOnly))
+		{
+			return BadRequest(new { error = "Invalid date format. Use YYYY-MM-DD." });
+		}
+		var appts = await _appointmentService.GetAllByDieticianAndDateAsync(dieticianId, dateOnly);
 		return Ok(appts.Select(ToResponse));
 	}
 

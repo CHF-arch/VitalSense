@@ -51,6 +51,7 @@ public static class ApiEndpoints
         public const string GetById = $"{Base}/{{appointmentId}}";
         public const string Edit = $"{Base}/{{appointmentId}}";
         public const string Delete = $"{Base}/{{appointmentId}}";
+        public const string GetByDate = $"{Base}/date/{{date}}"; // date in ISO (YYYY-MM-DD) or any parsable format
     }
 
     public static class Health

@@ -9,4 +9,5 @@ public interface IAppointmentService
     Task<Appointment?> UpdateAsync(Guid appointmentId, Appointment appointment);
     Task<bool> DeleteAsync(Guid appointmentId);
     Task<IEnumerable<Appointment>> GetAllByDieticianAsync(Guid dieticianId);
+    Task<IEnumerable<Appointment>> GetAllByDieticianAndDateAsync(Guid dieticianId, DateOnly date);
 }

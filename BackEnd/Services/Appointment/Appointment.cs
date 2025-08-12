@@ -38,7 +38,6 @@ public class AppointmentService : IAppointmentService
 		existing.End = updated.End;
 		existing.AllDay = updated.AllDay;
 		existing.ClientId = updated.ClientId;
-		// DieticianId should remain as originally set for security; controller checks ownership.
 
 		await _context.SaveChangesAsync();
 		return existing;
@@ -57,6 +56,16 @@ public class AppointmentService : IAppointmentService
 	{
 		return await _context.Appointments
 			.Where(a => a.DieticianId == dieticianId)
+			.OrderBy(a => a.Start)
+			.ToListAsync();
+	}
+
+	public async Task<IEnumerable<Appointment>> GetAllByDieticianAndDateAsync(Guid dieticianId, DateOnly date)
+	{
+		var start = date.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
+		var endExclusive = start.AddDays(1);
+		return await _context.Appointments
+			.Where(a => a.DieticianId == dieticianId && a.Start >= start && a.Start < endExclusive)
 			.OrderBy(a => a.Start)
 			.ToListAsync();
 	}
