@@ -1,0 +1,114 @@
+.tableContainer {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.mealTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: var(--card-background);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+}
+
+.mealTable th,
+.mealTable td {
+  padding: 12px 15px;
+  border: 1px solid var(--border-color-light);
+  text-align: left;
+  color: var(--text-color-primary);
+  vertical-align: top; /* Align content to top */
+}
+
+.mealTable th {
+  background-color: var(--background-color-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  color: var(--text-color-secondary);
+}
+
+.dayTitle {
+  font-weight: 700;
+  color: var(--link-color);
+  white-space: nowrap;
+}
+
+.mealCardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Spacing between meal cards */
+}
+
+.mealCard {
+  background-color: var(--background-color-primary);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+  border: 1px solid var(--card-border);
+}
+
+.mealTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--text-color-primary);
+}
+
+.mealTime {
+  font-style: italic;
+  color: var(--text-color-secondary);
+  margin-bottom: 1rem;
+}
+
+.mealDescription {
+  margin-bottom: 1rem;
+  color: var(--text-color-primary);
+}
+
+.nutritionInfo {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color-light);
+}
+
+.nutritionItem {
+  text-align: center;
+  color: var(--text-color-primary);
+}
+
+.nutritionLabel {
+  font-weight: bold;
+}
+
+.noMeals,
+.noMealsForDay {
+  color: var(--text-color-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mealTable th,
+  .mealTable td {
+    padding: 8px 10px;
+  }
+
+  .dayTitle {
+    font-size: 0.9em;
+  }
+
+  .mealTitle {
+    font-size: 0.9em;
+  }
+
+  .mealDescription,
+  .mealMacros {
+    font-size: 0.75em;
+  }
+}

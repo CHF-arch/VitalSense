@@ -1,10 +1,136 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
 body {
   font-family: "Nunito Sans", sans-serif;
+  min-height: 100vh; /* Use min-height to ensure it covers the viewport */
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease; /* Smooth transition for theme change */
+}
+
+body[data-theme="light"] {
+  background-color: var(--background-color-primary);
+}
+
+body[data-theme="dark"] {
+  background-color: var(--background-color-primary);
+}
+
+.light-theme {
+  background-color: var(
+    --background-color-primary
+  ); /* Using primary for overall background */
+  color: var(--text-color-primary);
+}
+
+.dark-theme {
+  background-color: var(
+    --background-color-primary
+  ); /* Using primary for overall background */
+  color: var(--text-color-primary);
+}
+
+/* Styles for react-big-calendar based on theme */
+.rbc-calendar {
+  background-color: var(
+    --background-color-secondary
+  ); /* Using secondary for calendar background */
+  border: 1px solid var(--border-color-medium);
+}
+
+.rbc-header {
+  color: var(--text-color-primary);
+}
+
+.rbc-day-bg {
+  background-color: var(--background-color-secondary);
+}
+
+.rbc-off-range-bg {
+  background-color: var(
+    --background-color-primary
+  ); /* Off-range days might use primary background */
+}
+
+.rbc-event {
+  background-color: var(
+    --gradient-blue-start
+  ); /* Using a gradient color for events */
+  color: white;
+}
+
+.rbc-today {
+  background-color: var(
+    --status-yes-background
+  ); /* Using a status color for today */
+}
+
+/* Adjustments specifically for dark theme */
+body[data-theme='dark'] {
+  /* Ensure the overall calendar background is distinct */
+  .rbc-calendar {
+    background-color: var(--background-color-secondary); /* #2d3748 */
+    border-color: var(--border-color-light); /* #4a5568 */
+  }
+
+  .rbc-header {
+    color: var(--text-color-primary); /* #e2e8f0 */
+  }
+
+  .rbc-day-bg {
+    background-color: var(--background-color-secondary); /* #2d3748 */
+  }
+
+  .rbc-off-range-bg {
+    background-color: var(--background-color-primary); /* #1a202c - darker for off-range */
+  }
+
+  .rbc-event {
+    background-color: var(--gradient-blue-start); /* #63b3ed */
+    color: white !important; /* Ensure event text is white */
+  }
+
+  .rbc-today {
+    background-color: var(--status-yes-background); /* #2f855a - green for today */
+  }
+
+  /* Ensure all text elements are visible */
+  .rbc-header,
+  .rbc-month-view,
+  .rbc-day-bg,
+  .rbc-date-cell,
+  .rbc-toolbar button,
+  .rbc-toolbar-label,
+  .rbc-event,
+  .rbc-event-label,
+  .rbc-event-content,
+  .rbc-time-slot,
+  .rbc-time-header-content,
+  .rbc-time-view {
+    color: var(--text-color-primary) !important; /* #e2e8f0 */
+  }
+
+  /* Hover effects */
+  .rbc-event:hover {
+    background-color: var(--gradient-blue-end) !important; /* #4299e1 */
+    opacity: 0.9;
+  }
+
+  .rbc-day-bg:hover {
+    background-color: var(--border-color-medium); /* #64748b */
+  }
+
+  .rbc-toolbar button:hover {
+    background-color: var(--border-color-medium); /* #64748b */
+    color: var(--text-color-primary); /* #e2e8f0 */
+  }
+
+  /* Active effects */
+  .rbc-toolbar button.rbc-active {
+    background-color: var(--gradient-blue-end) !important; /* #4299e1 */
+    border-color: var(--gradient-blue-end) !important;
+  }
+
+  .rbc-day-bg.rbc-selected,
+  .rbc-date-cell.rbc-selected {
+    background-color: var(--gradient-blue-end) !important; /* #4299e1 */
+  }
 }

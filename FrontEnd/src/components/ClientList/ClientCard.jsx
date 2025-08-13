@@ -237,7 +237,7 @@ export default function ClientCard({
             >
               Create Meal Plan
             </Link>
-            <Link to={`/meal/${client.id}}`} className={styles.TodayMealButton}>
+            <Link to={`/meal-plans/${client.id}`} className={styles.TodayMealButton}>
               Meal plans
             </Link>
           </div>

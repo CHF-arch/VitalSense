@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import SideBar from "./SideBar";
 import styles from "../styles/RootLayout.module.css";
-import commonStyles from "../styles/common.module.css";
+// import commonStyles from "../styles/common.module.css";
 import { useTheme } from "../hooks/useTheme";
 
 const RootLayout = () => {

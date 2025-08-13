@@ -1,0 +1,183 @@
+.container {
+  padding: 20px;
+  background: var(--card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+  margin-top: 20px;
+}
+
+.title {
+  color: var(--text-color-primary);
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.addTaskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+.clientSearchContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Changed to column */
+  gap: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+.clientSearchInput {
+  flex-grow: 1;
+}
+
+.clientList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--background-color-secondary);
+  border: 1px solid var(--border-color-medium);
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  z-index: 1001;
+}
+
+.clientList li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color-light);
+  color: var(--text-color-primary);
+}
+
+.clientList li:hover {
+  background-color: var(--background-color-tertiary);
+}
+
+.selectedClient {
+  margin-top: 10px;
+  color: var(--text-color-secondary);
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--input-background);
+  padding: 10px;
+  border: 1px solid var(--border-color-light);
+  border-radius: 5px;
+  box-shadow: 0 1px 2px var(--shadow-color-light);
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.taskInput {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--border-color-light);
+  border-radius: 5px;
+  font-size: 1rem;
+  background: var(--input-background);
+  color: var(--text-color-primary);
+}
+
+.taskInput::placeholder {
+  color: var(--text-color-secondary);
+}
+
+.addButton {
+  display: inline-block;
+  padding: 16px 32px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  border: none;
+  cursor: pointer;
+  max-width: 100%;
+  width: 100%;
+}
+
+.addButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
+.taskList {
+  list-style: none;
+  padding: 0;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color-light);
+  color: var(--text-color-primary);
+}
+
+.taskItem:last-child {
+  border-bottom: none;
+}
+
+.deleteButton {
+  background: var(--gradient-red-start);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.deleteButton:hover {
+  background: var(--gradient-red-end);
+}
+
+.noTasks {
+  text-align: center;
+  color: var(--text-color-secondary);
+  font-style: italic;
+}
+
+.error {
+  color: var(--status-no-color);
+  text-align: center;
+}
+.toggleButton {
+  background: var(--gradient-green-start);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.taskActions {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .clientSearchContainer {
+    flex-direction: column;
+  }
+}

@@ -26,7 +26,7 @@ export default function Login() {
       if (data.accessToken) {
         setUsername("");
         setPassword("");
-        navigate("/clients");
+        navigate("/dashboard");
       } else {
         throw new Error(data.message || "Login failed. Please try again.");
       }

@@ -39,6 +39,15 @@ export default function SideBar({ isOpen, setIsOpen }) {
             Dashboard
           </Link>
           <Link
+            to="/appointments"
+            className={`${styles.navItem} ${
+              location.pathname === "/appointments" ? styles.active : ""
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Appointments
+          </Link>
+          <Link
             to="/clients"
             className={`${styles.navItem} ${
               location.pathname === "/clients" ? styles.active : ""
@@ -47,9 +56,20 @@ export default function SideBar({ isOpen, setIsOpen }) {
           >
             Clients
           </Link>
-
+          <Link
+            to="/settings"
+            className={`${styles.navItem} ${
+              location.pathname === "/settings" ? styles.active : ""
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            Settings
+          </Link>
           <div className={styles.buttonGroup}>
-            <button onClick={toggleTheme} className={commonStyles.themeToggleButton}>
+            <button
+              onClick={toggleTheme}
+              className={commonStyles.themeToggleButton}
+            >
               {theme === "light" ? "Dark Mode" : "Light Mode"}
             </button>
             <button onClick={handleLogout} className={styles.logoutButton}>

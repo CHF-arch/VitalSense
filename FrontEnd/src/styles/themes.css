@@ -16,6 +16,8 @@
   --gradient-red-end: #dc2626;
   --gradient-cyan-start: #06b6d4;
   --gradient-cyan-end: #0891b2;
+  --gradient-purple-start: #8b5cf6;
+  --gradient-purple-end: #6d28d9;
   --input-background: #ffffff;
   --input-border: #e2e8f0;
   --input-focus-border: #3b82f6;
@@ -44,49 +46,63 @@
   --sidebar-brand-title-color: #1e293b;
   --sidebar-brand-subtitle-color: #64748b;
 }
-
 body[data-theme="dark"] {
-  --background-color-primary: #1a202c;
-  --background-color-secondary: #2d3748;
-  --text-color-primary: #e2e8f0;
-  --text-color-secondary: #a0aec0;
-  --border-color-light: #4a5568;
-  --border-color-medium: #64748b;
-  --shadow-color-light: rgba(0, 0, 0, 0.2);
-  --shadow-color-medium: rgba(0, 0, 0, 0.4);
-  --gradient-blue-start: #63b3ed;
-  --gradient-blue-end: #4299e1;
-  --gradient-green-start: #48bb78;
-  --gradient-green-end: #38a169;
-  --gradient-red-start: #fc8181;
-  --gradient-red-end: #e53e3e;
-  --gradient-cyan-start: #4fd1c5;
-  --gradient-cyan-end: #38b2ac;
-  --input-background: #2d3748;
-  --input-border: #4a5568;
-  --input-focus-border: #63b3ed;
-  --input-shadow-focus: rgba(99, 179, 237, 0.2);
-  --card-background: #2d3748;
-  --card-border: #4a5568;
-  --card-shadow: rgba(0, 0, 0, 0.2);
-  --card-hover-shadow: rgba(0, 0, 0, 0.3);
-  --status-yes-background: #2f855a;
-  --status-yes-color: #e6fffa;
-  --status-no-background: #c53030;
-  --status-no-color: #fed7d7;
-  --link-color: #63b3ed;
-  --link-hover-color: #4299e1;
-  --sidebar-background: #2d3748;
-  --sidebar-border: #4a5568;
-  --sidebar-nav-item-color: #a0aec0;
-  --sidebar-nav-item-hover-background: #4a5568;
-  --sidebar-nav-item-hover-color: #e2e8f0;
-  --sidebar-nav-item-active-background: rgba(99, 179, 237, 0.2);
-  --sidebar-nav-item-active-color: #63b3ed;
-  --sidebar-dietician-box-background: #4a5568;
-  --sidebar-dietician-box-border: #64748b;
-  --sidebar-dietician-box-shadow: rgba(0, 0, 0, 0.2);
-  --sidebar-dietician-box-color: #e2e8f0;
-  --sidebar-brand-title-color: #e2e8f0;
-  --sidebar-brand-subtitle-color: #a0aec0;
+  --background-color-primary: #0f172a;
+
+  --background-color-secondary: #1e293b;
+
+  --text-color-primary: #f1f5f9;
+
+  --text-color-secondary: #94a3b8;
+
+  --border-color-light: #334155;
+  --border-color-medium: #475569;
+
+  --shadow-color-light: rgba(0, 0, 0, 0.15);
+  --shadow-color-medium: rgba(0, 0, 0, 0.25);
+
+  --gradient-blue-start: #38bdf8;
+  --gradient-blue-end: #3b82f6;
+  --gradient-green-start: #4ade80;
+  --gradient-green-end: #16a34a;
+  --gradient-red-start: #f87171;
+  --gradient-red-end: #ef4444;
+  --gradient-cyan-start: #22d3ee;
+  --gradient-cyan-end: #06b6d4;
+  --gradient-gray-start: #6b7280;
+  --gradient-gray-end: #6b7280;
+  --gradient-purple-start: #a78bfa;
+  --gradient-purple-end: #7c3aed;
+
+  --input-background: #1e293b;
+  --input-border: #475569;
+  --input-focus-border: #3b82f6;
+  --input-shadow-focus: rgba(59, 130, 246, 0.2);
+
+  --card-background: #1e293b;
+  --card-border: #334155;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-hover-shadow: rgba(0, 0, 0, 0.2);
+
+  --status-yes-background: rgba(22, 163, 74, 0.2);
+  --status-yes-color: #4ade80;
+  --status-no-background: rgba(220, 38, 38, 0.2);
+  --status-no-color: #f87171;
+
+  --link-color: #38bdf8;
+  --link-hover-color: #7dd3fc;
+
+  --sidebar-background: #1f283b;
+  --sidebar-border: #1e293b;
+  --sidebar-nav-item-color: #94a3b8;
+  --sidebar-nav-item-hover-background: #1e293b;
+  --sidebar-nav-item-hover-color: #f1f5f9;
+  --sidebar-nav-item-active-background: rgba(59, 130, 246, 0.15);
+  --sidebar-nav-item-active-color: #38bdf8;
+  --sidebar-dietician-box-background: #1e293b;
+  --sidebar-dietician-box-border: #334155;
+  --sidebar-dietician-box-shadow: rgba(0, 0, 0, 0.15);
+  --sidebar-dietician-box-color: #f1f5f9;
+  --sidebar-brand-title-color: #f1f5f9;
+  --sidebar-brand-subtitle-color: #94a3b8;
 }

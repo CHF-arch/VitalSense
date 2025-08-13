@@ -19,7 +19,11 @@
   padding: 10px 20px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
   color: white;
   font-size: 1rem;
   font-weight: 600;

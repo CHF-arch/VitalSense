@@ -132,6 +132,33 @@ export default function MakeMeals() {
     XLSX.writeFile(wb, `${planTitle || "MealPlan"}.xlsx`);
   };
 
+  const handleImportFromExcel = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 }); // Get data as array of arrays
+
+        // Assuming the first row is headers, and subsequent rows are data
+        // This is where the user's desired JSON schema becomes critical.
+        // For now, I'll just log the raw JSON and ask the user for the schema.
+        console.log("Imported Excel data (raw JSON):", json);
+
+        // TODO: Process 'json' to populate meals, planTitle, startDate, endDate
+        // For demonstration, let's assume a simple structure for now
+        // and just populate meals with dummy data or the raw parsed data.
+        // This part needs user input on the expected Excel format and desired JSON output.
+
+        alert("Excel file imported. Check console for raw data. Please provide the desired JSON schema for meal plans.");
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -261,6 +288,21 @@ export default function MakeMeals() {
             className={styles.addMealButton}
           >
             Add Meal
+          </button>
+          {/* New Import Button */}
+          <input
+            type="file"
+            id="excelFileInput"
+            accept=".xlsx, .xls"
+            style={{ display: "none" }}
+            onChange={handleImportFromExcel}
+          />
+          <button
+            type="button"
+            onClick={() => document.getElementById("excelFileInput").click()}
+            className={styles.importButton}
+          >
+            Import from Excel
           </button>
         </div>
 

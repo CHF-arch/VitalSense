@@ -25,6 +25,7 @@ export async function getAllClients() {
     throw error;
   }
 }
+
 export async function getClientById(clientId) {
   try {
     const response = await fetch(`${API_BASE_URL}/clients/${clientId}`, {
@@ -39,6 +40,7 @@ export async function getClientById(clientId) {
     throw error;
   }
 }
+
 export async function createClient(clientData) {
   try {
     const response = await fetch(`${API_BASE_URL}/clients`, {
@@ -55,6 +57,7 @@ export async function createClient(clientData) {
     throw error;
   }
 }
+
 export async function updateClient(clientId, clientData) {
   try {
     const response = await fetch(`${API_BASE_URL}/clients/${clientId}`, {
@@ -90,6 +93,25 @@ export async function deleteClient(clientId) {
     return await response.json();
   } catch (error) {
     console.error("Error deleting client:", error);
+    throw error;
+  }
+}
+
+// New function to search clients
+export async function searchClients(searchTerm) {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/clients/search?q=${encodeURIComponent(searchTerm)}`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to search clients");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error searching clients:", error);
     throw error;
   }
 }

@@ -1,7 +1,12 @@
-import React from 'react';
-import styles from '../../styles/MakeMeals.module.css';
+import React from "react";
+import styles from "../../styles/MakeMeals.module.css";
 
-const ClientEditForm = ({ editedClientData, onInputChange, onSave, onCancel }) => {
+const ClientEditForm = ({
+  editedClientData,
+  onInputChange,
+  onSave,
+  onCancel,
+}) => {
   return (
     <div className={styles.editForm}>
       <div className={styles.formRow}>
@@ -63,7 +68,6 @@ const ClientEditForm = ({ editedClientData, onInputChange, onSave, onCancel }) =
           <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="other">Other</option>
         </select>
         <label htmlFor="editHasCard" className={styles.checkboxLabel}>
           <input
@@ -85,11 +89,7 @@ const ClientEditForm = ({ editedClientData, onInputChange, onSave, onCancel }) =
         className={styles.textareaField}
       />
       <div className={styles.actions}>
-        <button
-          type="button"
-          className={styles.saveButton}
-          onClick={onSave}
-        >
+        <button type="button" className={styles.saveButton} onClick={onSave}>
           Save Client
         </button>
         <button

@@ -1,13 +1,13 @@
 import { API_BASE_URL } from "../config/api";
 
 export const getTodayMeal = async (clientId) => {
-  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
-      `${API_BASE_URL}/meal-plans/client/${clientId}`,
+      `${API_BASE_URL}/meal-plans/${clientId}/active`,
       {
+        method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       }
     );

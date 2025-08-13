@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useMealPlanData } from "../../hooks/useMealPlanData";
+import { getActiveMealPlanByClientId } from "../../services/mealPlan";
 import TodayMealsDisplay from "./TodayMealsDisplay";
 import FullWeekMealsDisplay from "./FullWeekMealsDisplay";
 import styles from "../../styles/TodayMealPage.module.css";
 import { useTheme } from "../../hooks/useTheme";
-// import commonStyles from "../../styles/common.module.css";
 
 export default function Days() {
   const { clientId } = useParams();
-  const { mealPlan, loading, error } = useMealPlanData(clientId);
+  const [activeMealPlan, setActiveMealPlan] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showFullWeek, setShowFullWeek] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    const fetchActiveMealPlan = async () => {
+      try {
+        setLoading(true);
+        const data = await getActiveMealPlanByClientId(clientId);
+        setActiveMealPlan(data);
+      } catch (err) {
+        setError(err);
+        console.error("Error fetching active meal plan:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (clientId) {
+      fetchActiveMealPlan();
+    }
+  }, [clientId]);
 
   if (loading) {
     return <div className={styles.container}>Loading...</div>;
@@ -21,10 +41,14 @@ export default function Days() {
     return <div className={styles.container}>Error: {error.message}</div>;
   }
 
+  if (!activeMealPlan) {
+    return <div className={styles.container}>No active meal plan found for this client.</div>;
+  }
+
   // Sorting logic for today's meals
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
   const todayMeals =
-    mealPlan?.days?.find((day) => day.title === today)?.meals || [];
+    activeMealPlan?.days?.find((day) => day.title === today)?.meals || [];
   const sortedTodayMeals = [...todayMeals].sort((a, b) =>
     a.time.localeCompare(b.time)
   );
@@ -39,8 +63,8 @@ export default function Days() {
     "Saturday",
     "Sunday",
   ];
-  const sortedDays = mealPlan?.days
-    ? [...mealPlan.days]
+  const sortedDays = activeMealPlan?.days
+    ? [...activeMealPlan.days]
         .sort((a, b) => dayOrder.indexOf(a.title) - dayOrder.indexOf(b.title))
         .map((day) => ({
           ...day,
