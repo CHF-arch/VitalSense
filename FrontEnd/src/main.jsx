@@ -8,7 +8,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import App from "./App.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import TodayMeal from "./pages/TodayMealPage.jsx";

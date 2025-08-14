@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/TodayMealPage.module.css";
+// import styles from "../../styles/TodayMealPage.module.css";
 import MealCard from "./MealCard";
 import { useTranslation } from "react-i18next";
 
