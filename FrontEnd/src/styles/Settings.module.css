@@ -58,3 +58,27 @@
   display: flex;
   gap: 10px;
 }
+
+.languageSelect {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color-medium);
+  background-color: var(--input-background);
+  color: var(--text-color-primary);
+  cursor: pointer;
+  font-size: 16px;
+  appearance: none; /* Remove default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23var(--text-color-primary-encoded)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  width: 200px; /* Adjust as needed */
+}
+
+/* For options within the select */
+.languageSelect option {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-primary);
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/MakeMeals.module.css";
+import { useTranslation } from "react-i18next";
 
 const ClientEditForm = ({
   editedClientData,
@@ -7,10 +8,11 @@ const ClientEditForm = ({
   onSave,
   onCancel,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.editForm}>
       <div className={styles.formRow}>
-        <label htmlFor="editFirstName">First Name</label>
+        <label htmlFor="editFirstName">{t("make_meals.first_name")}</label>
         <input
           id="editFirstName"
           type="text"
@@ -19,7 +21,7 @@ const ClientEditForm = ({
           onChange={onInputChange}
           className={styles.inputField}
         />
-        <label htmlFor="editLastName">Last Name</label>
+        <label htmlFor="editLastName">{t("make_meals.last_name")}</label>
         <input
           id="editLastName"
           type="text"
@@ -28,7 +30,7 @@ const ClientEditForm = ({
           onChange={onInputChange}
           className={styles.inputField}
         />
-        <label htmlFor="editEmail">Email</label>
+        <label htmlFor="editEmail">{t("make_meals.email")}</label>
         <input
           id="editEmail"
           type="email"
@@ -39,7 +41,7 @@ const ClientEditForm = ({
         />
       </div>
       <div className={styles.formRow}>
-        <label htmlFor="editPhone">Phone</label>
+        <label htmlFor="editPhone">{t("make_meals.phone")}</label>
         <input
           id="editPhone"
           type="text"
@@ -48,7 +50,7 @@ const ClientEditForm = ({
           onChange={onInputChange}
           className={styles.inputField}
         />
-        <label htmlFor="editDateOfBirth">Date of Birth</label>
+        <label htmlFor="editDateOfBirth">{t("make_meals.date_of_birth")}</label>
         <input
           id="editDateOfBirth"
           type="date"
@@ -57,7 +59,7 @@ const ClientEditForm = ({
           onChange={onInputChange}
           className={styles.inputField}
         />
-        <label htmlFor="editGender">Gender</label>
+        <label htmlFor="editGender">{t("make_meals.gender")}</label>
         <select
           id="editGender"
           name="gender"
@@ -65,9 +67,9 @@ const ClientEditForm = ({
           onChange={onInputChange}
           className={styles.inputField}
         >
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+          <option value="">{t("make_meals.select_gender")}</option>
+          <option value="male">{t("make_meals.male")}</option>
+          <option value="female">{t("make_meals.female")}</option>
         </select>
         <label htmlFor="editHasCard" className={styles.checkboxLabel}>
           <input
@@ -77,10 +79,10 @@ const ClientEditForm = ({
             checked={editedClientData.hasCard}
             onChange={onInputChange}
           />
-          Has Card
+          {t("make_meals.has_card")}
         </label>
       </div>
-      <label htmlFor="editNotes">Notes</label>
+      <label htmlFor="editNotes">{t("make_meals.notes")}</label>
       <textarea
         id="editNotes"
         name="notes"
@@ -90,14 +92,14 @@ const ClientEditForm = ({
       />
       <div className={styles.actions}>
         <button type="button" className={styles.saveButton} onClick={onSave}>
-          Save Client
+          {t("make_meals.save_client")}
         </button>
         <button
           type="button"
           className={styles.cancelButton}
           onClick={onCancel}
         >
-          Cancel
+          {t("make_meals.cancel")}
         </button>
       </div>
     </div>

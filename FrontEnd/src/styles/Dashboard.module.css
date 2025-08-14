@@ -14,7 +14,7 @@
 }
 
 .topDiv {
-  max-height: 35vh;
+  max-height: 30vh;
   height: 100%;
   background: var(--card-background);
   padding: 20px;
@@ -47,14 +47,17 @@
   box-shadow: 0 4px 16px var(--card-shadow);
   color: var(--text-color-primary);
   margin-bottom: 20px;
-  max-height: 35vh;
+  max-height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: left;
 }
 .changeChartContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   padding: 20px;
 }
 
@@ -74,6 +77,8 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  margin-top: 20px;
+  margin-left: -40px;
 }
 
 .metricCard {
@@ -126,13 +131,13 @@
     var(--gradient-purple-start),
     var(--gradient-purple-end)
   );
+  padding: 0;
+  margin: 0;
   max-width: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  margin: 50px 0 50px 0;
 }
 
 .metricValue {

@@ -7,6 +7,7 @@ import {
 } from "../../services/task";
 import { searchClients } from "../../services/client";
 import styles from "../../styles/TodoApp.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function TodoApp() {
   const [tasks, setTasks] = useState([]);
@@ -20,6 +21,7 @@ export default function TodoApp() {
   const [selectedClient, setSelectedClient] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchTasksAndClients();
@@ -122,7 +124,7 @@ export default function TodoApp() {
   };
 
   if (loading) {
-    return <div className={styles.container}>Loading tasks...</div>;
+    return <div className={styles.container}>{t("todo.loading_tasks")}</div>;
   }
 
   if (error) {
@@ -135,20 +137,20 @@ export default function TodoApp() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>My Tasks</h2>
+      <h2 className={styles.title}>{t("todo.my_tasks")}</h2>
       <div className={styles.inputContainer}>
         <div className={styles.addTaskContainer}>
           <input
             type="text"
             value={newTaskTitle}
             onChange={(e) => setNewTaskTitle(e.target.value)}
-            placeholder="Add a new task title"
+            placeholder={t("todo.add_new_task_title")}
             className={styles.taskInput}
           />
           <textarea
             value={newTaskDescription}
             onChange={(e) => setNewTaskDescription(e.target.value)}
-            placeholder="Add a description (optional)"
+            placeholder={t("todo.add_new_task_description")}
             className={styles.taskInput}
             rows="3"
           ></textarea>
@@ -162,7 +164,7 @@ export default function TodoApp() {
               setSelectedClient(null);
               setNewClientId("");
             }}
-            placeholder="Search for a client..."
+            placeholder={t("todo.search_client")}
             className={`${styles.taskInput} ${styles.clientSearchInput}`}
           />
           {filteredClients.length > 0 && (
@@ -176,7 +178,8 @@ export default function TodoApp() {
           )}
           {selectedClient && (
             <div className={styles.selectedClient}>
-              Selected: {selectedClient.firstName} {selectedClient.lastName}
+              {t("todo.selected_client")}: {selectedClient.firstName}{" "}
+              {selectedClient.lastName}
             </div>
           )}
         </div>
@@ -187,11 +190,11 @@ export default function TodoApp() {
           className={styles.taskInput}
         />
         <button onClick={handleAddTask} className={styles.addButton}>
-          Add Task
+          {t("todo.add_task")}
         </button>
       </div>
       {tasks.length === 0 ? (
-        <p className={styles.noTasks}>No tasks yet. Add one!</p>
+        <p className={styles.noTasks}>{t("todo.no_tasks")}</p>
       ) : (
         <ul className={styles.taskList}>
           {tasks.map((task) => (

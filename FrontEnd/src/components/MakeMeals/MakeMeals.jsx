@@ -8,16 +8,7 @@ import ClientEditForm from "./ClientEditForm";
 import PlanDetails from "./PlanDetails";
 import MealCard from "./MealCard";
 import styles from "../../styles/MakeMeals.module.css";
-
-const weekDays = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
+import { useTranslation } from "react-i18next";
 
 const initialMealState = {
   title: "",
@@ -27,7 +18,7 @@ const initialMealState = {
   carbs: 0,
   fats: 0,
   calories: 0,
-  days: [], // Array to hold the days this meal applies to
+  days: [],
 };
 
 export default function MakeMeals() {
@@ -39,6 +30,16 @@ export default function MakeMeals() {
   const [meals, setMeals] = useState([]);
   const [isEditingClient, setIsEditingClient] = useState(false);
   const [editedClientData, setEditedClientData] = useState({});
+  const { t } = useTranslation();
+  const weekDays = [
+    t("days.monday"),
+    t("days.tuesday"),
+    t("days.wednesday"),
+    t("days.thursday"),
+    t("days.friday"),
+    t("days.saturday"),
+    t("days.sunday"),
+  ];
 
   useEffect(() => {
     const fetchClient = async () => {
@@ -53,7 +54,7 @@ export default function MakeMeals() {
   }, [clientId]);
 
   const handleAddMeal = () => {
-    setMeals([...meals, { ...initialMealState, id: Date.now() }]); // Add a temporary unique id
+    setMeals([...meals, { ...initialMealState, id: Date.now() }]);
   };
 
   const handleMealChange = (mealIndex, e) => {
@@ -64,12 +65,11 @@ export default function MakeMeals() {
   };
 
   const handleDayToggle = (mealIndex, day) => {
-    const newMeals = JSON.parse(JSON.stringify(meals)); // Deep copy to avoid state mutation issues
+    const newMeals = JSON.parse(JSON.stringify(meals));
     const currentMeal = newMeals[mealIndex];
     const dayIndexInCurrentMeal = currentMeal.days.indexOf(day);
 
     if (dayIndexInCurrentMeal === -1) {
-      // Check for conflicts before adding
       const mealOnSameDay = newMeals.find(
         (meal, index) =>
           index !== mealIndex &&
@@ -80,7 +80,9 @@ export default function MakeMeals() {
 
       if (mealOnSameDay) {
         alert(
-          `A meal with the title "${currentMeal.title}" already exists on ${day}.`
+          `"${t("make_meals.a_meal_with_the_title")}" "${
+            currentMeal.title
+          }" "${t("make_meals.already_exist")}" ${day}.`
         );
         return;
       }
@@ -95,21 +97,14 @@ export default function MakeMeals() {
   const handleExportToExcel = () => {
     const wb = XLSX.utils.book_new();
     const wsData = [];
-
-    // Get unique meal titles
     const mealTitles = [...new Set(meals.map((meal) => meal.title))];
 
-    // Header Row
     const header = ["Time", "Meal", ...weekDays];
     wsData.push(header);
-
-    // Group meals by title
     const groupedMeals = mealTitles.reduce((acc, title) => {
       acc[title] = meals.filter((meal) => meal.title === title);
       return acc;
     }, {});
-
-    // Create a row for each meal title
     for (const title in groupedMeals) {
       const mealsByTitle = groupedMeals[title];
       const row = [mealsByTitle[0].time, title];
@@ -127,8 +122,6 @@ export default function MakeMeals() {
 
     const ws = XLSX.utils.aoa_to_sheet(wsData);
     XLSX.utils.book_append_sheet(wb, ws, "Meal Plan");
-
-    // Generate Excel file and trigger download
     XLSX.writeFile(wb, `${planTitle || "MealPlan"}.xlsx`);
   };
 
@@ -141,19 +134,13 @@ export default function MakeMeals() {
         const workbook = XLSX.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 }); // Get data as array of arrays
+        const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-        // Assuming the first row is headers, and subsequent rows are data
-        // This is where the user's desired JSON schema becomes critical.
-        // For now, I'll just log the raw JSON and ask the user for the schema.
         console.log("Imported Excel data (raw JSON):", json);
 
-        // TODO: Process 'json' to populate meals, planTitle, startDate, endDate
-        // For demonstration, let's assume a simple structure for now
-        // and just populate meals with dummy data or the raw parsed data.
-        // This part needs user input on the expected Excel format and desired JSON output.
-
-        alert("Excel file imported. Check console for raw data. Please provide the desired JSON schema for meal plans.");
+        alert(
+          "Excel file imported. Check console for raw data. Please provide the desired JSON schema for meal plans."
+        );
       };
       reader.readAsArrayBuffer(file);
     }
@@ -170,7 +157,7 @@ export default function MakeMeals() {
     }));
 
     meals.forEach((meal) => {
-      const { days, ...mealDetails } = meal; // Exclude the temporary id
+      const { days, ...mealDetails } = meal;
       days.forEach((day) => {
         const dayObject = daysData.find((d) => d.title === day);
         if (dayObject) {
@@ -178,16 +165,14 @@ export default function MakeMeals() {
         }
       });
     });
-
-    // TODO: Replace with actual dieticianId from auth context
     const dieticianId = "3fa85f64-5717-4562-b3fc-2c963f66afa6";
     const mealPlanData = {
       title: planTitle,
       startDate,
       endDate,
       dieticianId,
-      clientId: clientId, // Ensure clientId is passed correctly
-      days: daysData.filter((day) => day.meals.length > 0), // Only send days that have meals
+      clientId: clientId,
+      days: daysData.filter((day) => day.meals.length > 0),
     };
 
     try {
@@ -245,7 +230,7 @@ export default function MakeMeals() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>Create a New Meal Plan</h1>
+      <h1 className={styles.h1}>{t("make_meals.create_new_meal_plan")}</h1>
       {client && !isEditingClient ? (
         <ClientInfoCard client={client} onEditClick={handleEditClient} />
       ) : client && isEditingClient ? (
@@ -256,7 +241,7 @@ export default function MakeMeals() {
           onCancel={handleCancelEdit}
         />
       ) : (
-        <p>Loading client info...</p>
+        <p>{t("make_meals.loading_client_info")}</p>
       )}
 
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -287,7 +272,7 @@ export default function MakeMeals() {
             onClick={handleAddMeal}
             className={styles.addMealButton}
           >
-            Add Meal
+            {t("make_meals.add_meal")}
           </button>
           {/* New Import Button */}
           <input
@@ -302,12 +287,12 @@ export default function MakeMeals() {
             onClick={() => document.getElementById("excelFileInput").click()}
             className={styles.importButton}
           >
-            Import from Excel
+            {t("make_meals.import_from_excel")}
           </button>
         </div>
 
         <button type="submit" className={styles.saveMealPlanButton}>
-          Save Meal Plan
+          {t("make_meals.save_meal_plan")}
         </button>
       </form>
     </div>

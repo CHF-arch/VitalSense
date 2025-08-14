@@ -1,0 +1,26 @@
+.modeSwitcherContainer {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modeButton {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modeButton:first-of-type {
+  margin-right: 10px;
+}
+
+.modeButtonActive {
+  background-color: var(--gradient-blue-start);
+  color: white;
+}
+
+.modeButtonInactive {
+  background-color: var(--border-color-medium);
+  color: var(--text-color-primary);
+}

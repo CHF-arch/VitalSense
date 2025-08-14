@@ -1,12 +1,22 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import React from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { useTranslation } from "react-i18next";
 const ClientChangeChart = ({ data }) => {
+  const { t } = useTranslation();
   const chartData = [
     {
-      name: 'Clients',
-      'New Clients This Month': data.newClientsThisMonth,
-      'New Clients Last Month': data.newClientsLastMonth,
+      name: t("dashboard.clients"),
+      [t("dashboard.new_clients_this_month")]: data.newClientsThisMonth,
+      [t("dashboard.new_clients_last_month")]: data.newClientsLastMonth,
     },
   ];
 
@@ -18,8 +28,8 @@ const ClientChangeChart = ({ data }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="New Clients This Month" fill="#8884d8" />
-        <Bar dataKey="New Clients Last Month" fill="#82ca9d" />
+        <Bar dataKey={t("dashboard.new_clients_this_month")} fill="#8884d8" />
+        <Bar dataKey={t("dashboard.new_clients_last_month")} fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../styles/AddClient.module.css";
 import { createClient } from "../../services/client";
+import { useTranslation } from "react-i18next";
 
 export default function AddClient() {
   const [firstName, setFirstName] = useState("");
@@ -12,6 +13,7 @@ export default function AddClient() {
   const [hasCard, setHasCard] = useState(false);
   const [notes, setNotes] = useState("");
   const createdAt = new Date().toISOString().split("T")[0];
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,11 +40,11 @@ export default function AddClient() {
   return (
     <div className={styles.addClientContainer}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2 className={styles.h2}>Add New Client</h2>
+        <h2 className={styles.h2}>{t("add_client.title")}</h2>
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              First Name:
+              {t("add_client.first_name")}:
               <input
                 className={styles.input}
                 type="text"
@@ -55,7 +57,7 @@ export default function AddClient() {
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Last Name:
+              {t("add_client.last_name")}:
               <input
                 className={styles.input}
                 type="text"
@@ -70,7 +72,7 @@ export default function AddClient() {
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Email:
+              {t("add_client.email")}:
               <input
                 className={styles.input}
                 type="email"
@@ -83,7 +85,7 @@ export default function AddClient() {
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Phone:
+              {t("add_client.phone")}:
               <input
                 className={styles.input}
                 type="tel"
@@ -98,7 +100,7 @@ export default function AddClient() {
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Date of Birth:
+              {t("add_client.date_of_birth")}:
               <input
                 className={styles.input}
                 type="date"
@@ -111,7 +113,7 @@ export default function AddClient() {
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Gender:
+              {t("add_client.gender")}:
               <select
                 className={styles.input}
                 name="gender"
@@ -119,9 +121,9 @@ export default function AddClient() {
                 onChange={(e) => setGender(e.target.value)}
                 required
               >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="">{t("add_client.select_gender")}</option>
+                <option value="male">{t("add_client.male")}</option>
+                <option value="female">{t("add_client.female")}</option>
               </select>
             </label>
           </div>
@@ -136,24 +138,24 @@ export default function AddClient() {
                 checked={hasCard}
                 onChange={(e) => setHasCard(e.target.checked)}
               />
-              Has Card
+              {t("add_client.has_card")}
             </label>
           </div>
         </div>
         <div className={styles.formGroup}>
           <label className={styles.label}>
-            Notes:
+            {t("add_client.notes")}:
             <textarea
               className={styles.textarea}
               name="notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Add any relevant notes about the client..."
+              placeholder={t("add_client.add_any_relevant")}
             />
           </label>
         </div>
         <button className={styles.button} type="submit">
-          Add Client
+          {t("add_client.submit")}
         </button>
       </form>
     </div>

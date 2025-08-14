@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "../../styles/TodayMealPage.module.css";
 import MealCard from "./MealCard";
+import { useTranslation } from "react-i18next";
 
 export default function TodayMealsDisplay({ sortedTodayMeals }) {
+  const { t } = useTranslation();
   return (
     <>
       {sortedTodayMeals.length > 0 ? (
@@ -10,7 +12,7 @@ export default function TodayMealsDisplay({ sortedTodayMeals }) {
           <MealCard key={index} meal={meal} />
         ))
       ) : (
-        <p>No meals scheduled for today.</p>
+        <p>{t("days.no_meals")}</p>
       )}
     </>
   );

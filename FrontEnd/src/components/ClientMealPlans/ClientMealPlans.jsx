@@ -4,6 +4,7 @@ import { getMealPlansByClientId } from "../../services/mealPlan";
 import { getClientById } from "../../services/client";
 import { useTheme } from "../../hooks/useTheme";
 import styles from "../../styles/ClientMealPlans.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function ClientMealPlans() {
   const { clientId } = useParams();
@@ -12,6 +13,7 @@ export default function ClientMealPlans() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,24 +54,25 @@ export default function ClientMealPlans() {
 
   return (
     <div className={`${styles.container} ${styles[theme]}`}>
-      <h1 className={styles.title}>Meal Plans for {clientName}</h1>
+      <h1 className={styles.title}>
+        {t("client_meal_plans.title")} {clientName}
+      </h1>
       {mealPlans.length === 0 ? (
-        <p className={styles.noMealPlans}>
-          No meal plans found for this client.
-        </p>
+        <p className={styles.noMealPlans}>{t("client_meal_plans.no_meals")}</p>
       ) : (
         <ul className={styles.clientGrid}>
           {mealPlans.map((plan) => (
             <li key={plan.id} className={styles.clientCard}>
               <div className={styles.cardHeader}>
                 <h3 className={styles.mealPlanName}>
-                  {plan.name || `Meal Plan ${plan.title}`}
+                  {plan.name ||
+                    `${t("client_meal_plans.meal_plan")} : ${plan.title}`}
                 </h3>
                 <div className={styles.cardActions}>
                   <Link
                     to={`/meal-plan-details/${plan.id}`}
                     className={styles.viewDetailsButton}
-                    title="View Meal Plan Details"
+                    title={t("client_meal_plans.view_meal_plan")}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -91,13 +94,17 @@ export default function ClientMealPlans() {
               </div>
               <div className={styles.mealPlanInfo}>
                 <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>Start Date:</span>
+                  <span className={styles.infoLabel}>
+                    {t("client_meal_plans.start_date")}:
+                  </span>
                   <span className={styles.infoText}>
                     {new Date(plan.startDate).toLocaleDateString()}
                   </span>
                 </div>
                 <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>End Date:</span>
+                  <span className={styles.infoLabel}>
+                    {t("client_meal_plans.end_date")}:
+                  </span>
                   <span className={styles.infoText}>
                     {new Date(plan.endDate).toLocaleDateString()}
                   </span>

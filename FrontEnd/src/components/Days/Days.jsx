@@ -5,6 +5,7 @@ import TodayMealsDisplay from "./TodayMealsDisplay";
 import FullWeekMealsDisplay from "./FullWeekMealsDisplay";
 import styles from "../../styles/TodayMealPage.module.css";
 import { useTheme } from "../../hooks/useTheme";
+import { t } from "i18next";
 
 export default function Days() {
   const { clientId } = useParams();
@@ -42,7 +43,11 @@ export default function Days() {
   }
 
   if (!activeMealPlan) {
-    return <div className={styles.container}>No active meal plan found for this client.</div>;
+    return (
+      <div className={styles.container}>
+        No active meal plan found for this client.
+      </div>
+    );
   }
 
   // Sorting logic for today's meals
@@ -55,13 +60,13 @@ export default function Days() {
 
   // Sorting logic for weekly view
   const dayOrder = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    t("days.monday"),
+    t("days.tuesday"),
+    t("days.wednesday"),
+    t("days.thursday"),
+    t("days.friday"),
+    t("days.saturday"),
+    t("days.sunday"),
   ];
   const sortedDays = activeMealPlan?.days
     ? [...activeMealPlan.days]

@@ -1,12 +1,13 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "../styles/SideBar.module.css";
-import commonStyles from "../styles/common.module.css";
 import { useTheme } from "../hooks/useTheme.js";
+import { useTranslation } from "react-i18next";
 
 export default function SideBar({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -24,8 +25,10 @@ export default function SideBar({ isOpen, setIsOpen }) {
       </button>
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.brandSection}>
-          <div className={styles.brandTitle}>Nutritionist</div>
-          <div className={styles.brandSubtitle}>Management System</div>
+          <div className={styles.brandTitle}>Vital Sense</div>
+          <div className={styles.brandSubtitle}>
+            {t("sidebar.management_system")}
+          </div>
         </div>
 
         <nav className={styles.nav}>
@@ -36,7 +39,7 @@ export default function SideBar({ isOpen, setIsOpen }) {
             }`}
             onClick={() => setIsOpen(false)}
           >
-            Dashboard
+            {t("sidebar.dashboard")}
           </Link>
           <Link
             to="/appointments"
@@ -45,7 +48,7 @@ export default function SideBar({ isOpen, setIsOpen }) {
             }`}
             onClick={() => setIsOpen(false)}
           >
-            Appointments
+            {t("sidebar.appointments")}
           </Link>
           <Link
             to="/clients"
@@ -54,7 +57,7 @@ export default function SideBar({ isOpen, setIsOpen }) {
             }`}
             onClick={() => setIsOpen(false)}
           >
-            Clients
+            {t("sidebar.clients")}
           </Link>
           <Link
             to="/settings"
@@ -63,17 +66,11 @@ export default function SideBar({ isOpen, setIsOpen }) {
             }`}
             onClick={() => setIsOpen(false)}
           >
-            Settings
+            {t("sidebar.settings")}
           </Link>
           <div className={styles.buttonGroup}>
-            <button
-              onClick={toggleTheme}
-              className={commonStyles.themeToggleButton}
-            >
-              {theme === "light" ? "Dark Mode" : "Light Mode"}
-            </button>
             <button onClick={handleLogout} className={styles.logoutButton}>
-              Logout
+              {t("sidebar.logout")}
             </button>
           </div>
         </nav>

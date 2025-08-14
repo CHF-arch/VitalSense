@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../../styles/ClientsList.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function ClientCard({
   client,
@@ -11,6 +12,7 @@ export default function ClientCard({
   handleSave,
   handleCancel,
 }) {
+  const { t } = useTranslation();
   return (
     <div key={client.id} className={styles.clientCard}>
       {editingClientId === client.id ? (
@@ -59,9 +61,9 @@ export default function ClientCard({
               onChange={handleInputChange}
               className={styles.inputField}
             >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="">{t("clientlist.select_gender")}</option>
+              <option value="male">{t("clientlist.male")}</option>
+              <option value="female">{t("clientlist.female")}</option>
             </select>
             <label className={styles.checkboxLabel}>
               <input
@@ -70,7 +72,7 @@ export default function ClientCard({
                 checked={editedClientData.hasCard}
                 onChange={handleInputChange}
               />
-              Has Card
+              {t("clientlist.has_card")}
             </label>
           </div>
           <textarea
@@ -84,10 +86,10 @@ export default function ClientCard({
               className={styles.saveButton}
               onClick={() => handleSave(client.id)}
             >
-              Save Changes
+              {t("clientlist.save_changes")}
             </button>
             <button className={styles.cancelButton} onClick={handleCancel}>
-              Cancel
+              {t("clientlist.cancel")}
             </button>
           </div>
         </div>
@@ -235,10 +237,13 @@ export default function ClientCard({
               to={`/make-meals/${client.id}`}
               className={styles.createMealButton}
             >
-              Create Meal Plan
+              {t("clientlist.create_meal_plan")}
             </Link>
-            <Link to={`/meal-plans/${client.id}`} className={styles.TodayMealButton}>
-              Meal plans
+            <Link
+              to={`/meal-plans/${client.id}`}
+              className={styles.TodayMealButton}
+            >
+              {t("clientlist.meal_plans")}
             </Link>
           </div>
         </>

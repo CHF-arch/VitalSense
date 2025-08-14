@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "../../styles/WeeklyMealPlanTable.module.css";
 import MealCard from "../Days/MealCard";
+import { useTranslation } from "react-i18next";
 
 export default function WeeklyMealPlanTable({ mealPlan }) {
+  const { t } = useTranslation();
   if (!mealPlan || !mealPlan.days || mealPlan.days.length === 0) {
     return (
       <p className={styles.noMeals}>No meal days found for this meal plan.</p>
@@ -13,13 +15,13 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
   // A more robust solution would involve a predefined order or a 'dayOfWeek' property
   const sortedDays = [...mealPlan.days].sort((a, b) => {
     const daysOrder = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
+      t("weekly_meal_plan_table.monday"),
+      t("weekly_meal_plan_table.tuesday"),
+      t("weekly_meal_plan_table.wednesday"),
+      t("weekly_meal_plan_table.thursday"),
+      t("weekly_meal_plan_table.friday"),
+      t("weekly_meal_plan_table.saturday"),
+      t("weekly_meal_plan_table.sunday"),
     ];
     return daysOrder.indexOf(a.title) - daysOrder.indexOf(b.title);
   });
@@ -29,8 +31,8 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
       <table className={styles.mealTable}>
         <thead>
           <tr>
-            <th>Day</th>
-            <th>Meals</th>
+            <th>{t("weekly_meal_plan_table.day")}</th>
+            <th>{t("weekly_meal_plan_table.meals")}</th>
           </tr>
         </thead>
         <tbody>
@@ -49,7 +51,7 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
                   </div>
                 ) : (
                   <p className={styles.noMealsForDay}>
-                    No meals planned for this day.
+                    {t("weekly_meal_plan_table.no_meals")}
                   </p>
                 )}
               </td>

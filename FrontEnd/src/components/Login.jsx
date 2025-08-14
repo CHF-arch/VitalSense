@@ -3,7 +3,7 @@ import styles from "../styles/Login.module.css";
 import { loginUser, signUpUser } from "../services/auth.js"; // Assuming these functions are defined in authService.js
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
-// import commonStyles from "../styles/common.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -14,6 +14,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
@@ -57,20 +58,20 @@ export default function Login() {
     <div className={styles.loginContainer}>
       <div className={styles.themeButtonWrapper}>
         <button onClick={toggleTheme} className={styles.button}>
-          {theme === "light" ? "Dark Mode" : "Light Mode"}
+          {theme === "light" ? t("login.dark_mode") : t("login.light_mode")}
         </button>
       </div>
       {isSignUp ? (
         <div className={styles.form}>
-          <h2 className={styles.h2}>Sign Up</h2>
+          <h2 className={styles.h2}>{t("login.sign_up")}</h2>
           <form onSubmit={handleSubmitSignUp}>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <label className={styles.label}>
-              Email:
+              {t("login.email")}:
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={t("login.email")}
                 className={styles.input}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -78,11 +79,11 @@ export default function Login() {
             </label>
 
             <label className={styles.label}>
-              Username:
+              {t("login.username")}:
               <input
                 type="text"
                 name="username"
-                placeholder="Username"
+                placeholder={t("login.username")}
                 className={styles.input}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -90,11 +91,11 @@ export default function Login() {
             </label>
 
             <label className={styles.label}>
-              Password:
+              {t("login.password")}:
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder={t("login.password")}
                 className={styles.input}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -102,11 +103,11 @@ export default function Login() {
             </label>
 
             <label className={styles.label}>
-              Confirm Password:
+              {t("login.confirm_password")}:
               <input
                 type="password"
                 name="confirmPassword"
-                placeholder="Confirm Password"
+                placeholder={t("login.confirm_password")}
                 className={styles.input}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -114,31 +115,31 @@ export default function Login() {
             </label>
 
             <button type="submit" className={styles.button}>
-              Sign Up
+              {t("login.sign_up")}
             </button>
           </form>
           <p className={styles.p}>
-            Already have an account?{" "}
+            {t("login.already_have_an_account")}{" "}
             <button
               type="button"
               onClick={handleToggleForm}
               className={styles.toggleButton}
             >
-              Login
+              {t("login.login")}
             </button>
           </p>
         </div>
       ) : (
         <div className={styles.form}>
-          <h2 className={styles.h2}>Login</h2>
+          <h2 className={styles.h2}>{t("login.login")}</h2>
           <form onSubmit={handleSubmitLogin}>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <label className={styles.label}>
-              UserName :
+              {t("login.username")} :
               <input
                 type="username"
                 name="username"
-                placeholder="Username"
+                placeholder={t("login.username")}
                 className={styles.input}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -146,11 +147,11 @@ export default function Login() {
             </label>
 
             <label className={styles.label}>
-              Password:
+              {t("login.password")}:
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder={t("login.password")}
                 className={styles.input}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -158,17 +159,17 @@ export default function Login() {
             </label>
 
             <button type="submit" className={styles.button}>
-              Login
+              {t("login.login")}
             </button>
           </form>
           <p className={styles.p}>
-            Don't have an account?{" "}
+            {t("login.dont_have_an_account")}{" "}
             <button
               type="button"
               onClick={handleToggleForm}
               className={styles.toggleButton}
             >
-              Sign Up
+              {t("login.sign_up")}
             </button>
           </p>
         </div>

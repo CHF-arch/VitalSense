@@ -9,6 +9,7 @@ import * as XLSX from "xlsx";
 import Toolbar from "./Toolbar";
 import ClientCard from "./ClientCard";
 import EmptyState from "./EmptyState";
+import { useTranslation } from "react-i18next";
 
 export default function ClientsList() {
   const [clients, setClients] = useState([]);
@@ -17,6 +18,7 @@ export default function ClientsList() {
   const [editingClientId, setEditingClientId] = useState(null);
   const [editedClientData, setEditedClientData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -116,7 +118,7 @@ export default function ClientsList() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>Client Directory</h1>
+      <h1 className={styles.h1}>{t("clientlist.client_directory")}</h1>
       <Toolbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

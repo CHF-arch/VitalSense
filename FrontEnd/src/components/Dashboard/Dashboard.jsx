@@ -6,6 +6,7 @@ import { getDashboardData } from "../../services/dashboard";
 import { getClientById } from "../../services/client"; // Import getClientById
 import moment from "moment";
 import ClientChangeChart from "./ClientChangeChart";
+import { useTranslation } from "react-i18next";
 
 // Helper function to get client's display name
 const getDisplayNameForClient = (client) => {
@@ -74,6 +75,7 @@ export default function Dashboard() {
     fetchTodayAppointments();
     dashboardData();
   }, []);
+  const { t } = useTranslation();
 
   return (
     <div className={styles.dashboardContainer}>
@@ -85,25 +87,33 @@ export default function Dashboard() {
                 <div className={styles.metricValue}>
                   {dashboardMetrics.totalClients}
                 </div>
-                <div className={styles.metricLabel}>Total Clients</div>
+                <div className={styles.metricLabel}>
+                  {t("dashboard.total_clients")}
+                </div>
               </div>
               <div className={`${styles.metricCard} ${styles.metricCard2}`}>
                 <div className={styles.metricValue}>
                   {dashboardMetrics.activeClients}
                 </div>
-                <div className={styles.metricLabel}>Active Clients</div>
+                <div className={styles.metricLabel}>
+                  {t("dashboard.active_clients")}
+                </div>
               </div>
               <div className={`${styles.metricCard} ${styles.metricCard3}`}>
                 <div className={styles.metricValue}>
                   {dashboardMetrics.newClientsThisMonth}
                 </div>
-                <div className={styles.metricLabel}>New this Month</div>
+                <div className={styles.metricLabel}>
+                  {t("dashboard.new_this_month")}
+                </div>
               </div>
               <div className={`${styles.metricCard} ${styles.metricCard4}`}>
                 <div className={styles.metricValue}>
                   {dashboardMetrics.newClientsLastMonth}
                 </div>
-                <div className={styles.metricLabel}>New last Month</div>
+                <div className={styles.metricLabel}>
+                  {t("dashboard.new_last_month")}
+                </div>
               </div>
             </div>
           </div>
@@ -113,7 +123,6 @@ export default function Dashboard() {
             <div className={`${styles.metricCard} ${styles.metricCard5}`}>
               <div className={styles.metricValue}>
                 {dashboardMetrics.newClientsChangePercentFormatted}
-                <div className={styles.metricLabel}>New Clients Change</div>
               </div>
             </div>
             <div className={styles.chartContainer}>
@@ -122,7 +131,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className={styles.topDiv}>
-          <h2>Today's Appointments</h2>
+          <h2>{t("dashboard.today_appointments")}</h2>
           {todayAppointments.length > 0 ? (
             <ul className={styles.listContainer}>
               {todayAppointments.map((appointment) => (
@@ -133,7 +142,7 @@ export default function Dashboard() {
               ))}
             </ul>
           ) : (
-            <p>No appointments for today.</p>
+            <p>{t("dashboard.no_appointments")}</p>
           )}
         </div>
       </div>

@@ -1,3 +1,18 @@
+.calendarContainer {
+  height: 750px;
+}
+
+.calendar {
+  margin: 50px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.buttonContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .button {
   display: inline-block;
   padding: 16px 32px;

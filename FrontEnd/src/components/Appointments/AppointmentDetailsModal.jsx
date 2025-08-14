@@ -2,35 +2,8 @@ import React, { useState, useEffect } from "react";
 import { searchClients } from "../../services/client"; // Needed for client search in edit mode
 import moment from "moment"; // Import moment for date formatting
 import styles from "../../styles/AppointmentDetailsModal.module.css"; // Import styles
-
-// Helper function to get client's display name
-const getDisplayNameForClient = (client) => {
-  if (!client) {
-    return "N/A";
-  }
-
-  const firstName =
-    typeof client.firstName === "string" ? client.firstName.trim() : "";
-  const lastName =
-    typeof client.lastName === "string" ? client.lastName.trim() : "";
-
-  if (firstName && lastName) {
-    return `${firstName} ${lastName}`;
-  }
-  if (firstName) {
-    return firstName;
-  }
-  if (lastName) {
-    return lastName;
-  }
-
-  // Fallback to fullName if firstName/lastName are not sufficient
-  if (typeof client.fullName === "string" && client.fullName.trim() !== "") {
-    return client.fullName;
-  }
-
-  return "N/A";
-};
+import { useTranslation } from "react-i18next";
+import { getDisplayNameForClient } from "./ClientUtils";
 
 const AppointmentDetailsModal = ({
   appointment,
@@ -40,6 +13,7 @@ const AppointmentDetailsModal = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(appointment.title || "");
+  const { t } = useTranslation();
   const [start, setStart] = useState(
     appointment.start
       ? moment(appointment.start).format("YYYY-MM-DDTHH:mm")
@@ -60,7 +34,8 @@ const AppointmentDetailsModal = ({
 
   // Debounced search for clients (only in edit mode)
   useEffect(() => {
-    if (!isEditing) { // If not in edit mode, clear search results
+    if (!isEditing) {
+      // If not in edit mode, clear search results
       setFilteredClients([]);
       return;
     }
@@ -80,7 +55,8 @@ const AppointmentDetailsModal = ({
       return () => {
         clearTimeout(handler);
       };
-    } else { // If clientSearchTerm is empty, clear search results
+    } else {
+      // If clientSearchTerm is empty, clear search results
       setFilteredClients([]);
     }
   }, [clientSearchTerm, isEditing]);
@@ -116,163 +92,98 @@ const AppointmentDetailsModal = ({
   };
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "var(--background-color-secondary)",
-          padding: "30px",
-          borderRadius: "10px",
-          width: "450px",
-          maxHeight: "80vh",
-          overflowY: "auto",
-          boxShadow: "var(--shadow-color-medium)",
-          color: "var(--text-color-primary)",
-        }}
-      >
-        <h2
-          style={{
-            marginBottom: "20px",
-            textAlign: "center",
-            color: "var(--text-color-primary)",
-          }}
-        >
-          {isEditing ? "Edit Appointment" : "Appointment Details"}
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <h2 className={styles.modalTitle}>
+          {isEditing
+            ? t("appointments.edit_appointment")
+            : t("appointments.appointment_details")}
         </h2>
 
         {!isEditing ? (
           <div>
-            <p>
-              <strong>Title:</strong> {appointment.title}
+            <p className={styles.detailText}>
+              <strong>{t("appointments.title")}:</strong> {appointment.title}
             </p>
-            <p>
-              <strong>Start:</strong> {moment(appointment.start).format("LLL")}
+            <p className={styles.detailText}>
+              <strong>{t("appointments.start")}:</strong>{" "}
+              {moment(appointment.start).format("LLL")}
             </p>
-            <p>
-              <strong>End:</strong> {moment(appointment.end).format("LLL")}
+            <p className={styles.detailText}>
+              <strong>{t("appointments.end")}:</strong>{" "}
+              {moment(appointment.end).format("LLL")}
             </p>
-            <p>
-              <strong>Client:</strong>{" "}
+            <p className={styles.detailText}>
+              <strong>{t("appointments.client")}:</strong>{" "}
               {getDisplayNameForClient(appointment.client)}
             </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "20px",
-              }}
-            >
+            <div className={styles.buttonContainer}>
               <button
                 type="button"
                 onClick={onClose}
                 className={styles.closeButton}
               >
-                Close
+                {t("appointments.close")}
               </button>
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}
                 className={styles.editButton}
               >
-                Edit
+                {t("appointments.edit")}
               </button>
               <button
                 type="button"
                 onClick={handleDeleteClick}
                 className={styles.deleteButton}
               >
-                Delete
+                {t("appointments.delete")}
               </button>
             </div>
           </div>
         ) : (
           <form onSubmit={handleUpdateSubmit}>
-            <div style={{ marginBottom: "15px" }}>
-              <label
-                htmlFor="editTitle"
-                style={{ display: "block", marginBottom: "5px" }}
-              >
-                Title:
+            <div className={styles.formGroup}>
+              <label htmlFor="editTitle" className={styles.inputLabel}>
+                {t("appointments.title")}:
               </label>
               <input
                 type="text"
                 id="editTitle"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "1px solid var(--border-color-medium)",
-                  backgroundColor: "var(--input-background)",
-                  color: "var(--text-color-primary)",
-                }}
+                className={styles.textInput}
               />
             </div>
-            <div style={{ marginBottom: "15px" }}>
-              <label
-                htmlFor="editStart"
-                style={{ display: "block", marginBottom: "5px" }}
-              >
-                Start Time:
+            <div className={styles.formGroup}>
+              <label htmlFor="editStart" className={styles.inputLabel}>
+                {t("appointments.start_time")}:
               </label>
               <input
                 type="datetime-local"
                 id="editStart"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "1px solid var(--border-color-medium)",
-                  backgroundColor: "var(--input-background)",
-                  color: "var(--text-color-primary)",
-                }}
+                className={styles.textInput}
               />
             </div>
-            <div style={{ marginBottom: "20px" }}>
-              <label
-                htmlFor="editEnd"
-                style={{ display: "block", marginBottom: "5px" }}
-              >
-                End Time:
+            <div className={styles.formGroup}>
+              <label htmlFor="editEnd" className={styles.inputLabel}>
+                {t("appointments.end_time")}:
               </label>
               <input
                 type="datetime-local"
                 id="editEnd"
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "1px solid var(--border-color-medium)",
-                  backgroundColor: "var(--input-background)",
-                  color: "var(--text-color-primary)",
-                }}
+                className={styles.textInput}
               />
             </div>
 
             {/* Client Search Input for Edit Mode */}
-            <div style={{ marginBottom: "20px", position: "relative" }}>
-              <label
-                htmlFor="editClientSearch"
-                style={{ display: "block", marginBottom: "5px" }}
-              >
-                Search Client (Name or Phone):
+            <div className={`${styles.formGroup} ${styles.relativePosition}`}>
+              <label htmlFor="editClientSearch" className={styles.inputLabel}>
+                {t("appointments.search_client")}:
               </label>
               <input
                 type="text"
@@ -282,44 +193,16 @@ const AppointmentDetailsModal = ({
                   setClientSearchTerm(e.target.value);
                   setSelectedClient(null); // Clear selected client on new search
                 }}
-                placeholder="Enter client name or phone number"
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "1px solid var(--border-color-medium)",
-                  backgroundColor: "var(--input-background)",
-                  color: "var(--text-color-primary)",
-                }}
+                placeholder={t("appointments.search_client")}
+                className={styles.textInput}
               />
               {filteredClients.length > 0 && (
-                <ul
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    right: 0,
-                    backgroundColor: "var(--background-color-secondary)",
-                    border: "1px solid var(--border-color-medium)",
-                    borderRadius: "5px",
-                    maxHeight: "150px",
-                    overflowY: "auto",
-                    listStyle: "none",
-                    padding: "0",
-                    margin: "5px 0 0 0",
-                    zIndex: 1001,
-                  }}
-                >
+                <ul className={styles.searchResultList}>
                   {filteredClients.map((client) => (
                     <li
                       key={client.id}
                       onClick={() => handleClientSelect(client)}
-                      style={{
-                        padding: "10px",
-                        cursor: "pointer",
-                        borderBottom: "1px solid var(--border-color-light)",
-                        color: "var(--text-color-primary)",
-                      }}
+                      className={styles.searchResultItem}
                     >
                       {getDisplayNameForClient(client)} -{" "}
                       {client.phoneNumber || "N/A"}
@@ -328,55 +211,23 @@ const AppointmentDetailsModal = ({
                 </ul>
               )}
               {selectedClient && (
-                <p
-                  style={{
-                    marginTop: "10px",
-                    color: "var(--text-color-secondary)",
-                  }}
-                >
-                  Selected Client:{" "}
+                <p className={styles.selectedClientText}>
+                  {t("appointments.selected_client")}:{" "}
                   <strong>{getDisplayNameForClient(selectedClient)}</strong>
                 </p>
               )}
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "20px",
-              }}
-            >
+            <div className={styles.buttonContainer}>
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                style={{
-                  padding: "10px 20px",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                  backgroundColor: "var(--border-color-medium)",
-                  color: "var(--text-color-primary)",
-                  border: "none",
-                  borderRadius: "5px",
-                  transition: "background-color 0.3s ease",
-                }}
+                className={styles.cancelButton}
               >
-                Cancel
+                {t("appointments.cancel")}
               </button>
-              <button
-                type="submit"
-                style={{
-                  padding: "10px 20px",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                  backgroundColor: "var(--gradient-blue-start)",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "5px",
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                Save Changes
+              <button type="submit" className={styles.saveButton}>
+                {t("appointments.save_changes")}
               </button>
             </div>
           </form>

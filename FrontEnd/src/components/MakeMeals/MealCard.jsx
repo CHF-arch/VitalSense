@@ -1,30 +1,31 @@
-import React from 'react';
-import styles from '../../styles/MakeMeals.module.css';
-
-const weekDays = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
+import React from "react";
+import styles from "../../styles/MakeMeals.module.css";
+import { useTranslation } from "react-i18next";
 
 const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
+  const { t } = useTranslation();
+  const weekDays = [
+    t("days.monday"),
+    t("days.tuesday"),
+    t("days.wednesday"),
+    t("days.thursday"),
+    t("days.friday"),
+    t("days.saturday"),
+    t("days.sunday"),
+  ];
   return (
     <div key={meal.id} className={styles.mealCard}>
-      <label htmlFor={`mealTitle-${mealIndex}`}>Meal Title</label>
+      <label htmlFor={`mealTitle-${mealIndex}`}>{t("make_meals.title")}</label>
       <input
         id={`mealTitle-${mealIndex}`}
         type="text"
         name="title"
-        placeholder="Meal Title (e.g., Breakfast)"
+        placeholder={t("make_meals.meal_title")}
         value={meal.title}
         onChange={(e) => onMealChange(mealIndex, e)}
         className={styles.mealInput}
       />
-      <label htmlFor={`mealTime-${mealIndex}`}>Time</label>
+      <label htmlFor={`mealTime-${mealIndex}`}>{t("make_meals.time")}</label>
       <input
         id={`mealTime-${mealIndex}`}
         type="time"
@@ -34,60 +35,68 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
         className={styles.mealInput}
       />
       <label htmlFor={`mealDescription-${mealIndex}`}>
-        Description
+        {t("make_meals.description")}
       </label>
       <textarea
         id={`mealDescription-${mealIndex}`}
         name="description"
-        placeholder="Description"
+        placeholder={t("make_meals.description")}
         value={meal.description}
         onChange={(e) => onMealChange(mealIndex, e)}
         className={styles.mealInput}
       />
       <div className={styles.nutritionRow}>
         <div>
-          <label htmlFor={`protein-${mealIndex}`}>Protein (g)</label>
+          <label htmlFor={`protein-${mealIndex}`}>
+            {t("make_meals.protein")} (g)
+          </label>
           <input
             id={`protein-${mealIndex}`}
             type="number"
             name="protein"
-            placeholder="Protein (g)"
+            placeholder={t("make_meals.protein")}
             value={meal.protein}
             onChange={(e) => onMealChange(mealIndex, e)}
             className={styles.mealInput}
           />
         </div>
         <div>
-          <label htmlFor={`carbs-${mealIndex}`}>Carbs (g)</label>
+          <label htmlFor={`carbs-${mealIndex}`}>
+            {t("make_meals.carbs")} (g)
+          </label>
           <input
             id={`carbs-${mealIndex}`}
             type="number"
             name="carbs"
-            placeholder="Carbs (g)"
+            placeholder={t("make_meals.carbs")}
             value={meal.carbs}
             onChange={(e) => onMealChange(mealIndex, e)}
             className={styles.mealInput}
           />
         </div>
         <div>
-          <label htmlFor={`fats-${mealIndex}`}>Fats (g)</label>
+          <label htmlFor={`fats-${mealIndex}`}>
+            {t("make_meals.fats")} (g)
+          </label>
           <input
             id={`fats-${mealIndex}`}
             type="number"
             name="fats"
-            placeholder="Fats (g)"
+            placeholder={t("make_meals.fats")}
             value={meal.fats}
             onChange={(e) => onMealChange(mealIndex, e)}
             className={styles.mealInput}
           />
         </div>
         <div>
-          <label htmlFor={`calories-${mealIndex}`}>Calories</label>
+          <label htmlFor={`calories-${mealIndex}`}>
+            {t("make_meals.calories")}
+          </label>
           <input
             id={`calories-${mealIndex}`}
             type="number"
             name="calories"
-            placeholder="Calories"
+            placeholder={t("make_meals.calories")}
             value={meal.calories}
             onChange={(e) => onMealChange(mealIndex, e)}
             className={styles.mealInput}
@@ -95,7 +104,7 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
         </div>
       </div>
       <div className={styles.daysSelection}>
-        <p>Select days for this meal:</p>
+        <p>{t("make_meals.select_days")}:</p>
         <div className={styles.checkboxGroup}>
           {weekDays.map((day) => (
             <label key={day} className={styles.checkboxLabel}>

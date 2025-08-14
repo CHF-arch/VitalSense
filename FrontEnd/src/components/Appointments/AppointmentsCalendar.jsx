@@ -12,20 +12,11 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useTheme } from "../../hooks/useTheme";
 import NewAppointmentModal from "./NewAppointmentModal";
 import AppointmentDetailsModal from "./AppointmentDetailsModal";
-import styles from "../../styles/AppointmentsCalendar.module.css"; // Import styles
+import styles from "../../styles/AppointmentsCalendar.module.css";
+import { useTranslation } from "react-i18next";
+import { getDisplayNameForClient } from "./ClientUtils";
 
 const localizer = momentLocalizer(moment);
-
-// Helper function to get client's display name
-const getDisplayNameForClient = (client) => {
-  if (!client) return "N/A";
-  if (client.fullName) return client.fullName;
-  if (client.firstName && client.lastName)
-    return `${client.firstName} ${client.lastName}`;
-  if (client.firstName) return client.firstName;
-  if (client.lastName) return client.lastName;
-  return "N/A";
-};
 
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
@@ -33,6 +24,7 @@ const AppointmentsCalendar = () => {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const fetchAppointments = async () => {
     try {
@@ -195,23 +187,24 @@ const AppointmentsCalendar = () => {
 
   return (
     <div
-      className={theme === "dark" ? "dark-theme" : "light-theme"}
-      style={{ height: "750px" }}
+      className={`${theme === "dark" ? "dark-theme" : "light-theme"} ${
+        styles.calendarContainer
+      }`}
     >
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ margin: "50px", padding: "20px", borderRadius: "10px" }}
+        className={styles.calendar}
         onSelectEvent={handleSelectEvent}
       />
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <div className={styles.buttonContainer}>
         <button
           onClick={handleOpenNewAppointmentModal}
           className={styles.button}
         >
-          New Appointment
+          {t("appointments.new_appointment")}
         </button>
       </div>
 

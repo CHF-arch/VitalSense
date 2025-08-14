@@ -20,7 +20,7 @@ import MealPlanDetailsPage from "./pages/MealPlanDetailsPage.jsx";
 import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
-
+import "./i18n.js";
 import "./index.css";
 import "./styles/themes.css"; // Import the new themes.css
 import MealPlansPage from "./pages/MealPlansPage.jsx";

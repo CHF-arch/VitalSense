@@ -1,3 +1,40 @@
+/* styles/NewAppointmentModal.module.css */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: var(--background-color-secondary);
+  padding: 30px;
+  border-radius: 10px;
+  width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-color-medium);
+  color: var(--text-color-primary);
+}
+
+.modalTitle {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--text-color-primary);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 .button {
   display: inline-block;
   padding: 16px 32px;
@@ -33,7 +70,7 @@
     var(--gradient-gray-start) 0%,
     var(--gradient-gray-end) 100%
   );
-  color: white;
+  color: var(--text-color-primary);
   text-decoration: none;
   border-radius: 14px;
   text-align: center;
