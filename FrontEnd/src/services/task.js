@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../config/api";
 
 const getAuthHeaders = () => {
-  const accessToken = localStorage.getItem("token");
+  const accessToken = sessionStorage.getItem("token");
   const headers = new Headers({
     "Content-Type": "application/json",
   });

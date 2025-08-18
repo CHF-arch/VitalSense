@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../config/api";
 
 const getAuthHeaders = () => {
-  const accessToken = localStorage.getItem("token");
+  const accessToken = sessionStorage.getItem("token");
   const headers = new Headers({
     "Content-Type": "application/json",
   });
@@ -46,10 +46,13 @@ export const createAppointment = async (appointmentData) => {
 
 export const deleteAppointment = async (appointmentId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/appointments/${appointmentId}`, {
-      method: "DELETE",
-      headers: getAuthHeaders(),
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/appointments/${appointmentId}`,
+      {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      }
+    );
     if (!response.ok) {
       throw new Error(`Failed to delete appointment with ID ${appointmentId}`);
     }
@@ -63,14 +66,20 @@ export const deleteAppointment = async (appointmentId) => {
 // New function to update an appointment
 export const updateAppointment = async (appointmentId, appointmentData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/appointments/${appointmentId}`, {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(appointmentData),
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/appointments/${appointmentId}`,
+      {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(appointmentData),
+      }
+    );
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || `Failed to update appointment with ID ${appointmentId}`);
+      throw new Error(
+        errorData.message ||
+          `Failed to update appointment with ID ${appointmentId}`
+      );
     }
     return await response.json();
   } catch (error) {

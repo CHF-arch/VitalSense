@@ -1,0 +1,8 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:frontend": "cd FrontEnd && npm run dev"
+  }
+}

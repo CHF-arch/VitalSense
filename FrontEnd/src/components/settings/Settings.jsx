@@ -1,26 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import styles from "../../styles/Settings.module.css";
 import { useTranslation } from "react-i18next";
-import { authorizeUrl } from "../../services/google";
+import {
+  authorizeUrl,
+  getGoogleConnectionStatus,
+  disconnectGoogle,
+} from "../../services/google";
+import googleIcon from "../../assets/google-icon.svg";
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme();
   const { t, i18n } = useTranslation();
+  const [isGoogleConnected, setIsGoogleConnected] = useState(false);
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        const status = await getGoogleConnectionStatus();
+        setIsGoogleConnected(status.isConnected);
+      } catch (error) {
+        console.error("Error checking Google connection status:", error);
+      }
+    };
+    checkStatus();
+  }, []);
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
   const handleGoogleSignIn = async () => {
     try {
-      const response = authorizeUrl();
-      const data = await response.json();
-      if (data) {
+      const data = await authorizeUrl();
+      if (data && data.authUrl) {
         window.location.href = data.authUrl;
       }
     } catch (error) {
       console.error("Error during Google Sign-In:", error);
     }
   };
+
+  const handleGoogleDisconnect = async () => {
+    try {
+      await disconnectGoogle();
+      setIsGoogleConnected(false);
+    } catch (error) {
+      console.error("Error disconnecting Google account:", error);
+    }
+  };
+
   return (
     <div className={styles.settingsContainer}>
       <h1 className={styles.title}>{t("settings.title")}</h1>
@@ -53,8 +82,22 @@ export default function Settings() {
         <h2 className={styles.sectionTitle}>
           {t("settings.account_section_title")}
         </h2>
-        <button onClick={handleGoogleSignIn} className={styles.button}>
-          {t("settings.sign_in_with_google")}
+        <button
+          onClick={
+            isGoogleConnected ? handleGoogleDisconnect : handleGoogleSignIn
+          }
+          className={isGoogleConnected ? styles.button : styles.googleButton}
+        >
+          {!isGoogleConnected && (
+            <img
+              src={googleIcon}
+              alt="Google icon"
+              className={styles.googleIcon}
+            />
+          )}
+          {isGoogleConnected
+            ? t("settings.disconnect_google")
+            : t("settings.sign_in_with_google")}
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../config/api";
 
 export async function getDashboardData() {
-  const accessToken = localStorage.getItem("token");
+  const accessToken = sessionStorage.getItem("token");
   try {
     const response = await fetch(`${API_BASE_URL}/dashboard/metrics`, {
       headers: {
