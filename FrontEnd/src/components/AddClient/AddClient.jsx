@@ -85,7 +85,7 @@ export default function AddClient() {
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              {t("add_client.phone")}:
+              {t("add_client.phone_number")}:
               <input
                 className={styles.input}
                 type="tel"

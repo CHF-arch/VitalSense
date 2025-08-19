@@ -1,14 +1,12 @@
 import { API_BASE_URL } from "../config/api";
+import { fetchWithAuth } from "./api";
 
 export const getTodayMeal = async (clientId) => {
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       `${API_BASE_URL}/meal-plans/${clientId}/active`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
 
@@ -23,3 +21,4 @@ export const getTodayMeal = async (clientId) => {
     throw error;
   }
 };
+

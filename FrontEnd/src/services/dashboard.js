@@ -1,14 +1,9 @@
 import { API_BASE_URL } from "../config/api";
+import { fetchWithAuth } from "./api";
 
 export async function getDashboardData() {
-  const accessToken = sessionStorage.getItem("token");
   try {
-    const response = await fetch(`${API_BASE_URL}/dashboard/metrics`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await fetchWithAuth(`${API_BASE_URL}/dashboard/metrics`);
     if (!response.ok) {
       throw new Error("Failed to fetch dashboard data");
     }

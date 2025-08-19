@@ -1,5 +1,9 @@
-// import { data } from "react-router";
 import { API_BASE_URL } from "../config/api";
+
+export async function logoutUser() {
+  sessionStorage.removeItem("token");
+  window.location.href = "/login";
+}
 
 export async function loginUser(username, password) {
   try {

@@ -1,15 +1,11 @@
 import { API_BASE_URL } from "../config/api";
+import { fetchWithAuth } from "./api";
 
 export async function authorizeUrl() {
-  const accessToken = sessionStorage.getItem("token");
-  const response = await fetch(
+  const response = await fetchWithAuth(
     `${API_BASE_URL}/integrations/google/authorize`,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
     }
   );
 
@@ -22,13 +18,8 @@ export async function authorizeUrl() {
 }
 
 export async function getGoogleConnectionStatus() {
-  const accessToken = sessionStorage.getItem("token");
-  const response = await fetch(`${API_BASE_URL}/integrations/google/status`, {
+  const response = await fetchWithAuth(`${API_BASE_URL}/integrations/google/status`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
   });
 
   if (!response.ok) {
@@ -39,15 +30,10 @@ export async function getGoogleConnectionStatus() {
 }
 
 export async function disconnectGoogle() {
-  const accessToken = sessionStorage.getItem("token");
-  const response = await fetch(
+  const response = await fetchWithAuth(
     `${API_BASE_URL}/integrations/google/disconnect`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
     }
   );
 

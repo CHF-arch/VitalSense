@@ -1,21 +1,9 @@
 import { API_BASE_URL } from "../config/api";
-
-const getAuthHeaders = () => {
-  const accessToken = sessionStorage.getItem("token");
-  const headers = new Headers({
-    "Content-Type": "application/json",
-  });
-  if (accessToken) {
-    headers.set("Authorization", `Bearer ${accessToken}`);
-  }
-  return headers;
-};
+import { fetchWithAuth } from "./api";
 
 export const getAppointments = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/appointments`, {
-      headers: getAuthHeaders(),
-    });
+    const response = await fetchWithAuth(`${API_BASE_URL}/appointments`);
     if (!response.ok) {
       throw new Error("Failed to fetch appointments");
     }
@@ -28,9 +16,8 @@ export const getAppointments = async () => {
 
 export const createAppointment = async (appointmentData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/appointments`, {
+    const response = await fetchWithAuth(`${API_BASE_URL}/appointments`, {
       method: "POST",
-      headers: getAuthHeaders(),
       body: JSON.stringify(appointmentData),
     });
     if (!response.ok) {
@@ -46,11 +33,10 @@ export const createAppointment = async (appointmentData) => {
 
 export const deleteAppointment = async (appointmentId) => {
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       `${API_BASE_URL}/appointments/${appointmentId}`,
       {
         method: "DELETE",
-        headers: getAuthHeaders(),
       }
     );
     if (!response.ok) {
@@ -66,11 +52,10 @@ export const deleteAppointment = async (appointmentId) => {
 // New function to update an appointment
 export const updateAppointment = async (appointmentId, appointmentData) => {
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       `${API_BASE_URL}/appointments/${appointmentId}`,
       {
         method: "PUT",
-        headers: getAuthHeaders(),
         body: JSON.stringify(appointmentData),
       }
     );
@@ -90,9 +75,7 @@ export const updateAppointment = async (appointmentId, appointmentData) => {
 
 export const getAppointmentsByDate = async (date) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/appointments/date/${date}`, {
-      headers: getAuthHeaders(),
-    });
+    const response = await fetchWithAuth(`${API_BASE_URL}/appointments/date/${date}`);
     if (!response.ok) {
       throw new Error("Failed to fetch appointments for date");
     }

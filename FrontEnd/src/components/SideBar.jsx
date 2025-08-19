@@ -1,18 +1,14 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "../styles/SideBar.module.css";
-// import { useTheme } from "../hooks/useTheme.js";
 import { useTranslation } from "react-i18next";
+import { logoutUser } from "../services/auth";
 
 export default function SideBar({ isOpen, setIsOpen }) {
-  const navigate = useNavigate();
   const location = useLocation();
-  // const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("dieticianName");
-    navigate("/login");
+    logoutUser();
   };
 
   return (

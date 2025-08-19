@@ -1,14 +1,10 @@
 import { API_BASE_URL } from "../config/api";
+import { fetchWithAuth } from "./api";
 
 export const createMealPlan = async (mealPlanData) => {
-  const token = sessionStorage.getItem("token");
   try {
-    const response = await fetch(`${API_BASE_URL}/meal-plans`, {
+    const response = await fetchWithAuth(`${API_BASE_URL}/meal-plans`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
       body: JSON.stringify(mealPlanData),
     });
 
@@ -25,16 +21,11 @@ export const createMealPlan = async (mealPlanData) => {
 };
 
 export const getMealPlansByClientId = async (clientId) => {
-  const token = sessionStorage.getItem("token");
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       `${API_BASE_URL}/meal-plans/client/${clientId}`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
       }
     );
 
@@ -51,15 +42,13 @@ export const getMealPlansByClientId = async (clientId) => {
 };
 
 export const getMealPlanById = async (mealPlanId) => {
-  const token = localStorage.getItem("token");
   try {
-    const response = await fetch(`${API_BASE_URL}/meal-plans/${mealPlanId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/meal-plans/${mealPlanId}`,
+      {
+        method: "GET",
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -76,16 +65,11 @@ export const getMealPlanById = async (mealPlanId) => {
 };
 
 export const getActiveMealPlanByClientId = async (clientId) => {
-  const token = sessionStorage.getItem("token");
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       `${API_BASE_URL}/meal-plans/${clientId}/active`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
       }
     );
 
