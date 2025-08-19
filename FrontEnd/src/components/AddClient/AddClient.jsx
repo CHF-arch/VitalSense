@@ -155,7 +155,7 @@ export default function AddClient() {
           </label>
         </div>
         <button className={styles.button} type="submit">
-          {t("add_client.submit")}
+          {t("add_client.submit_button")}
         </button>
       </form>
     </div>
