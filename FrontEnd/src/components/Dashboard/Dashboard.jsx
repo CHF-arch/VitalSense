@@ -129,21 +129,21 @@ export default function Dashboard() {
               <ClientChangeChart data={dashboardMetrics} />
             </div>
           </div>
-        </div>
-        <div className={styles.topDiv}>
-          <h2>{t("dashboard.today_appointments")}</h2>
-          {todayAppointments.length > 0 ? (
-            <ul className={styles.listContainer}>
-              {todayAppointments.map((appointment) => (
-                <li key={appointment.id} className={styles.listItem}>
-                  {appointment.title} at{" "}
-                  {moment(appointment.start).format("HH:mm")}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>{t("dashboard.no_appointments")}</p>
-          )}
+          <div className={styles.topDiv}>
+            <h2>{t("dashboard.today_appointments")}</h2>
+            {todayAppointments.length > 0 ? (
+              <ul className={styles.listContainer}>
+                {todayAppointments.map((appointment) => (
+                  <li key={appointment.id} className={styles.listItem}>
+                    {appointment.title} at{" "}
+                    {moment(appointment.start).format("HH:mm")}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>{t("dashboard.no_appointments")}</p>
+            )}
+          </div>
         </div>
       </div>
       <div className={styles.sidebar}>
