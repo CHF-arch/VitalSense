@@ -119,17 +119,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className={styles.contentBox3}>
-          <div className={styles.changeChartContainer}>
-            <div className={`${styles.metricCard} ${styles.metricCard5}`}>
-              <div className={styles.metricValue}>
-                {dashboardMetrics.newClientsChangePercentFormatted}
-              </div>
-            </div>
-            <div className={styles.chartContainer}>
-              <ClientChangeChart data={dashboardMetrics} />
-            </div>
-          </div>
-          <div className={styles.topDiv}>
+          <div className={styles.leftDiv}>
             <h2>{t("dashboard.today_appointments")}</h2>
             {todayAppointments.length > 0 ? (
               <ul className={styles.listContainer}>
@@ -143,6 +133,18 @@ export default function Dashboard() {
             ) : (
               <p>{t("dashboard.no_appointments")}</p>
             )}
+          </div>
+          <div className={styles.rightContentBox}>
+            <div className={styles.changeChartContainer}>
+              <div className={`${styles.metricCard} ${styles.metricCard5}`}>
+                <div className={styles.metricValue}>
+                  {dashboardMetrics.newClientsChangePercentFormatted}
+                </div>
+              </div>
+              <div className={styles.chartContainer}>
+                <ClientChangeChart data={dashboardMetrics} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
