@@ -3,7 +3,7 @@
 }
 
 .calendar {
-  margin: 50px;
+  margin: 20px;
   padding: 20px;
   border-radius: 10px;
 }
@@ -39,4 +39,9 @@
 .button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+@media (max-width: 768px) {
+  .calendar {
+    height: 600px;
+  }
 }

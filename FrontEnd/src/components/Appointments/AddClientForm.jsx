@@ -107,7 +107,11 @@ const AddClientForm = ({
         </select>
       </div>
       <div className={styles.formGroup}>
-        <label htmlFor="newClientHasCard" className={styles.inputLabel}>
+        <label
+          htmlFor="newClientHasCard"
+          className={styles.hasCardCheckboxLabel}
+        >
+          {t("appointments.has_card")}
           <input
             type="checkbox"
             id="newClientHasCard"
@@ -115,7 +119,6 @@ const AddClientForm = ({
             onChange={(e) => setNewClientHasCard(e.target.checked)}
             className={styles.checkboxInput}
           />
-          {t("appointments.has_card")}
         </label>
       </div>
       <div className={styles.formGroup}>

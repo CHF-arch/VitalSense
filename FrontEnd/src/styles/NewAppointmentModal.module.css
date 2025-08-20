@@ -89,3 +89,73 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
+
+@media (max-width: 768px) {
+  .modalContent {
+    width: 90%;
+    max-width: 400px; /* Ensure it doesn't get too wide on tablets */
+    padding: 20px;
+  }
+
+  /* Styles for inputs within the modal (copied from AddClient.module.css) */
+  .modalContent input,
+  .modalContent textarea,
+  .modalContent select {
+    /* width: 100%; */
+    padding: 14px 18px;
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 400;
+    background: var(--input-background);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px var(--shadow-color-light);
+    font-family: inherit;
+    color: var(--text-color-primary);
+    margin-bottom: 15px; /* Keep margin-bottom for spacing between inputs */
+  }
+
+  .modalContent input:focus,
+  .modalContent textarea:focus,
+  .modalContent select:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 4px var(--input-shadow-focus),
+      0 8px 16px var(--shadow-color-medium);
+    transform: translateY(-1px);
+  }
+
+  .modalContent textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* Styles for checkboxes within the modal (copied from MakeMeals.module.css) */
+  .modalContent .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    padding: 16px;
+    background: var(--card-background);
+    border-radius: 12px;
+    border: 1px solid var(--input-border);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .modalContent .checkboxLabel:hover {
+    border-color: var(--input-focus-border);
+    background: var(--input-shadow-focus);
+  }
+
+  .modalContent .checkboxLabel input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--link-color);
+    cursor: pointer;
+  }
+}

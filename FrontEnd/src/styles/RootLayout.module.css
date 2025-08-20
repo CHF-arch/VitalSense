@@ -27,5 +27,6 @@
   .mainContent {
     height: auto;
     overflow: visible;
+    padding-bottom: 100px; /* Add space for the fixed bottom navigation bar */
   }
 }

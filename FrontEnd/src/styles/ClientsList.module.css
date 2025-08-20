@@ -4,7 +4,11 @@
   width: 100%;
   min-height: 100vh;
   padding: 40px 48px;
-  background: linear-gradient(135deg, var(--background-color-primary) 0%, var(--background-color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--background-color-primary) 0%,
+    var(--background-color-secondary) 100%
+  );
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   box-sizing: border-box;
@@ -20,7 +24,12 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 50%, var(--gradient-cyan-start) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 50%,
+    var(--gradient-cyan-start) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -55,7 +64,8 @@
 .searchInput:focus {
   outline: none;
   border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 4px var(--input-shadow-focus), 0 8px 16px var(--shadow-color-medium);
+  box-shadow: 0 0 0 4px var(--input-shadow-focus),
+    0 8px 16px var(--shadow-color-medium);
   transform: translateY(-1px);
 }
 
@@ -68,7 +78,11 @@
   padding: 16px 28px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--gradient-green-start) 0%, var(--gradient-green-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-green-start) 0%,
+    var(--gradient-green-end) 100%
+  );
   color: white;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -86,7 +100,11 @@
 .button {
   display: inline-block;
   padding: 16px 32px;
-  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
   color: white;
   text-decoration: none;
   border-radius: 14px;
@@ -101,7 +119,11 @@
 .createMealButton {
   display: inline-block;
   padding: 15px;
-  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
   color: white;
   text-decoration: none;
   border-radius: 14px;
@@ -348,7 +370,12 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, var(--gradient-blue-start), var(--gradient-green-start), var(--gradient-cyan-start));
+  background: linear-gradient(
+    90deg,
+    var(--gradient-blue-start),
+    var(--gradient-green-start),
+    var(--gradient-cyan-start)
+  );
   border-radius: 24px 24px 0 0;
 }
 
@@ -398,7 +425,11 @@
 .notesContent {
   margin-top: 12px;
   padding: 20px;
-  background: linear-gradient(135deg, var(--background-color-primary) 0%, var(--background-color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--background-color-primary) 0%,
+    var(--background-color-secondary) 100%
+  );
   border-radius: 16px;
   border: 1px solid var(--border-color-light);
   color: var(--text-color-secondary);
@@ -433,7 +464,11 @@
 }
 
 .editButton {
-  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
   box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
 
@@ -443,7 +478,11 @@
 }
 
 .deleteButton {
-  background: linear-gradient(135deg, var(--gradient-red-start) 0%, var(--gradient-red-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-red-start) 0%,
+    var(--gradient-red-end) 100%
+  );
   box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
 
@@ -453,7 +492,11 @@
 }
 
 .saveButton {
-  background: linear-gradient(135deg, var(--gradient-green-start) 0%, var(--gradient-green-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-green-start) 0%,
+    var(--gradient-green-end) 100%
+  );
   box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
 
@@ -463,7 +506,11 @@
 }
 
 .cancelButton {
-  background: linear-gradient(135deg, var(--text-color-secondary) 0%, var(--text-color-primary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text-color-secondary) 0%,
+    var(--text-color-primary) 100%
+  );
   box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
 
@@ -499,13 +546,15 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 1px 2px var(--shadow-color-light);
   font-family: inherit;
+  color: var(--text-color-primary);
 }
 
 .inputField:focus,
 .textareaField:focus {
   outline: none;
   border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 3px var(--input-shadow-focus), 0 4px 12px var(--shadow-color-medium);
+  box-shadow: 0 0 0 3px var(--input-shadow-focus),
+    0 4px 12px var(--shadow-color-medium);
   transform: translateY(-1px);
 }
 

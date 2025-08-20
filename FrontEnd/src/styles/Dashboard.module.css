@@ -5,7 +5,7 @@
   width: 100%;
   box-sizing: border-box;
   background-color: var(--background-color-primary);
-  /* Αφαιρέθηκε το overflow-x: hidden για να το διαχειριστούμε τοπικά αν χρειαστεί */
+  overflow-x: hidden;
 }
 
 .mainContentWrapper {
@@ -13,84 +13,7 @@
   flex-direction: column;
   flex: 1;
   padding: 20px;
-  /* Προστέθηκε για να αποφευχθεί η υπερχείλιση σε μικρότερες οθόνες */
-  overflow: auto;
-  min-width: 0;
 }
-
-.mainContent {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  gap: 20px;
-  /* Αφαιρέθηκε το max-height για να επιτρέψουμε στο flexbox να διαχειριστεί το ύψος */
-  margin-bottom: 10px;
-  min-height: 0; /* Σημαντικό για σωστή λειτουργία του flexbox σε ύψος */
-}
-
-/* ==========================================================================
-   ΔΙΟΡΘΩΣΕΙΣ ΓΙΑ ΤΟ ΓΡΑΦΗΜΑ ΚΑΙ ΤΟΝ ΠΕΡΙΕΚΤΗ ΤΟΥ
-   ========================================================================== */
-
-/*
- * ΑΛΛΑΓΗ #1: Τροποποιήθηκε το .contentBox3 για να στοιχίζει τα παιδιά του
- * (τον αριθμό και το γράφημα) κάθετα και να τα κάνει να γεμίζουν τον χώρο.
- */
-.contentBox3 {
-  background: var(--card-background);
-  border-radius: 14px;
-  box-shadow: 0 4px 16px var(--card-shadow);
-  color: var(--text-color-primary);
-  display: flex;
-  flex-direction: column; /* Αλλαγή σε column για στοίχιση πάνω-κάτω */
-  flex: 1;
-  padding: 20px; /* Προσθήκη padding για εσωτερική απόσταση */
-  overflow: hidden; /* Αποτρέπει οτιδήποτε να "βγει" έξω από το πλαίσιο */
-  min-height: 0; /* Εξασφαλίζει ότι το flex item μπορεί να συρρικνωθεί σωστά */
-}
-
-/*
- * ΑΛΛΑΓΗ #2: Αυτός ο περιέκτης τώρα απλά ομαδοποιεί τον αριθμό και το γράφημα.
- * Διασφαλίζουμε ότι θα γεμίσει τον γονέα του (.contentBox3).
- */
-.changeChartContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Στοίχιση από την αρχή */
-  align-items: center; /* Ο αριθμός θα είναι στο κέντρο οριζόντια */
-  flex: 1; /* Να πιάνει όλο τον διαθέσιμο χώρο */
-  width: 100%;
-  min-height: 0; /* Σημαντικό για να αποφευχθεί η υπερχείλιση */
-}
-
-/*
- * ΑΛΛΑΓΗ #3: Ο περιέκτης του γραφήματος πρέπει να είναι ευέλικτος (flex: 1)
- * για να καταλάβει τον υπόλοιπο χώρο μετά τον αριθμό.
- * Το position: relative είναι κλειδί για να κρατήσει το canvas μέσα του.
- */
-.chartContainer {
-  width: 100%;
-  flex: 1; /* Κάνει το div να μεγαλώσει και να γεμίσει τον υπόλοιπο χώρο */
-  position: relative; /* Απαραίτητο για τοποθέτηση του canvas */
-  min-height: 0; /* Επιτρέπει τη συρρίκνωση του container */
-}
-
-/*
- * ΑΛΛΑΓΗ #4: Νέος κανόνας! Στοχεύει το <canvas> (ή το <svg>) του γραφήματος.
- * Το κάνει να έχει πάντα το 100% του μεγέθους του γονέα του (.chartContainer).
- * Έτσι, δεν ξεχειλίζει ποτέ.
- */
-.chartContainer > canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* ==========================================================================
-   Υπόλοιπες Κλάσεις (Παραμένουν ως έχουν ή με μικρές προσαρμογές)
-   ========================================================================== */
 
 .leftDiv {
   max-height: 60vh;
@@ -105,11 +28,41 @@
   margin: 10px;
 }
 
+.mainContent {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  gap: 20px;
+  max-height: 20vh;
+  margin-bottom: 10px;
+}
+
 .contentBox1 {
   flex: 1;
   text-align: center;
   border-radius: 10px;
   color: var(--text-color-primary);
+}
+.contentBox3 {
+  background: var(--card-background);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  color: var(--text-color-primary);
+  max-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+}
+.changeChartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  height: 100%;
+  margin-right: 10px;
 }
 
 .metricsContainer {
@@ -120,6 +73,12 @@
   align-items: stretch;
   height: 100%;
   padding: 0 10px;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 }
 
 .metricCard {
@@ -188,7 +147,6 @@
   font-size: 2rem;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.9);
-  padding-bottom: 1rem; /* Προσθήκη απόστασης μεταξύ αριθμού και γραφήματος */
 }
 
 .metricLabel {
@@ -208,7 +166,7 @@
 }
 
 .listContainer {
-  list-style: none;
+  list-style: none; /* Remove bullet points */
   padding: 0;
   margin: 0;
 }
@@ -219,7 +177,7 @@
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  text-align: left; /* Align text to left for list items */
 }
 
 .sidebar {
@@ -235,11 +193,7 @@
   overflow-y: auto;
 }
 
-/* ==========================================================================
-   Responsive Styles για Κινητά
-   ========================================================================== */
-
-@media (max-width: 768px) {
+@media (max-width: 786px) {
   .dashboardContainer {
     flex-direction: column;
     height: auto;
@@ -265,20 +219,25 @@
 
   .contentBox3 {
     padding: 15px;
-    height: 350px; /* Δίνουμε ένα σταθερό ύψος για το γράφημα στα κινητά */
+    height: 350px;
+    flex-direction: column;
   }
 
   .metricsContainer {
-    flex-wrap: wrap;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     padding: 5px;
-    justify-content: space-between;
   }
 
   .metricCard {
-    flex: 1 1 calc(50% - 8px); /* Προσαρμογή για καλύτερη στοίχιση */
+    /* flex properties are no longer needed with display: grid on parent */
     min-width: 0;
     padding: 12px;
+    max-width: 40vw;
+    width: auto;
+    justify-content: center;
+    align-items: center;
   }
   .metricCard5 {
     justify-content: center;

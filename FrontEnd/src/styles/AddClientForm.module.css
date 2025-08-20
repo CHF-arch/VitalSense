@@ -25,6 +25,9 @@
 
 .checkboxInput {
   margin-right: 5px;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
 }
 
 .textareaInput {
@@ -34,4 +37,33 @@
   border: 1px solid var(--border-color-medium);
   background-color: var(--input-background);
   color: var(--text-color-primary);
+}
+
+.hasCardCheckboxLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-color-secondary);
+  padding: 16px;
+  background: var(--card-background);
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hasCardCheckboxLabel:hover {
+  border-color: var(--input-focus-border);
+  background: var(--input-shadow-focus);
+}
+
+/* Update checkboxInput to match the style from MakeMeals.module.css */
+.checkboxInput {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--link-color);
+  cursor: pointer;
 }
