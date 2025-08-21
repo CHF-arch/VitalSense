@@ -77,7 +77,8 @@
     "add_first_client": "Add your first client",
     "export_to_excel": "Export to Excel",
     "add_client": "Add Client",
-    "search_clients": "Search Clients... (Name)"
+    "search_clients": "Search Clients... (Name)",
+    "set_card": "Set Card"
   },
   "client_meal_plans": {
     "title": "Meal Plans for",
@@ -209,5 +210,27 @@
     "clients": "Clients",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "setcard": {
+    "how_to_set_card": "How to Set Up an NFC Card for a Client",
+    "step_1": "Step 1: Scan the QR Code",
+    "scan": "Scan the QR code below to open the client's meal plan page.",
+    "if_phone": "If you are on your phone, you can copy the link from here:",
+    "step_2": "Step 2: Follow these steps on your phone",
+    "open_nfc_tools": "Open the NFC Tools app",
+    "select_write": "Select 'Write'",
+    "select_add": "Select 'Add a Record'",
+    "select_url": "Select 'URL/URI'",
+    "paste_url": "Paste the URL you copied",
+    "press_ok": "Then, press OK.",
+    "select_write_byte": "Select 'Write' (the one with the down arrow)",
+    "write_card": "Now, hold a card to the back of your phone.",
+    "check": "If you see this screen, the card has been set up successfully.",
+    "step_3": "Step 3: Enable NFC on your phone",
+    "nfc_instructions": "To write to the NFC card, you need to enable NFC on your phone. Here's how:",
+    "android": "Android:",
+    "android_instructions": "Go to Settings > Connected devices > Connection preferences > NFC and turn on NFC.",
+    "ios": "iOS (iPhone 7 and newer):",
+    "ios_instructions": "NFC is always on. You don't need to turn it on."
   }
 }

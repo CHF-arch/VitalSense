@@ -231,20 +231,29 @@ export default function ClientCard({
               <div className={styles.notesContent}>{client.notes}</div>
             </div>
           )}
-
-          <div className={styles.mealButtons}>
-            <Link
-              to={`/make-meals/${client.id}`}
-              className={styles.createMealButton}
-            >
-              {t("clientlist.create_meal_plan")}
-            </Link>
-            <Link
-              to={`/meal-plans/${client.id}`}
-              className={styles.TodayMealButton}
-            >
-              {t("clientlist.meal_plans")}
-            </Link>
+          <div className={styles.buttonsContainer}>
+            <div className={styles.mealButtons}>
+              <Link
+                to={`/make-meals/${client.id}`}
+                className={styles.createMealButton}
+              >
+                {t("clientlist.create_meal_plan")}
+              </Link>
+              <Link
+                to={`/meal-plans/${client.id}`}
+                className={styles.TodayMealButton}
+              >
+                {t("clientlist.meal_plans")}
+              </Link>
+            </div>
+            <div className={styles.setCardDiv}>
+              <Link
+                to={`/set-card/${client.id}`}
+                className={styles.setCardButton}
+              >
+                {t("clientlist.set_card")}
+              </Link>
+            </div>
           </div>
         </>
       )}

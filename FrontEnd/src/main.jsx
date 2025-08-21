@@ -18,6 +18,7 @@ import RootLayout from "./components/RootLayout.jsx";
 import MealPlanDetailsPage from "./pages/MealPlanDetailsPage.jsx";
 import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
+import SetCardPage from "./pages/SetCardPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import "./i18n.js";
 import "./index.css";
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
           {
             path: "/settings",
             element: <SettingsPage />,
+          },
+          {
+            path: "set-card/:clientId",
+            element: <SetCardPage />,
           },
         ],
       },

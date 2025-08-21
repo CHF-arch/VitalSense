@@ -1,0 +1,109 @@
+.container {
+  padding: 20px;
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-primary);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+  margin: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--text-color-primary);
+  text-align: center;
+}
+
+.step {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid var(--border-color-light);
+  border-radius: 6px;
+  background-color: var(--background-color-primary);
+}
+
+.stepTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--text-color-secondary);
+  text-align: center;
+}
+
+.stepContent {
+  font-size: 16px;
+  color: var(--text-color-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.qrCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  max-width: 20vw;
+}
+
+.copyButton {
+  background-color: var(--gradient-blue-start);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.copyButton:hover {
+  background-color: var(--gradient-blue-end);
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.photoPlaceholder {
+  width: 100px;
+  height: 200px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.instructionBoxesContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.instructionBox {
+  border: 1px solid var(--border-color-light);
+  border-radius: 6px;
+  padding: 15px;
+  margin-top: 15px;
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  .photoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .instructionBoxesContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .instructionBox {
+    width: 100%;
+  }
+}
