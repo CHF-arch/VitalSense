@@ -3,6 +3,15 @@ import { useTheme } from "../../hooks/useTheme";
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import nfc_tools_1 from "../../images/nfc_tools_1.jpg";
+import nfc_tools_2 from "../../images/nfc_tools_2.jpg";
+import nfc_tools_3 from "../../images/nfc_tools_3.jpg";
+import nfc_tools_4 from "../../images/nfc_tools_4.jpg";
+import nfc_tools_5 from "../../images/nfc_tools_5.jpg";
+import nfc_tools_6 from "../../images/nfc_tools_6.jpg";
+import nfc_tools_7 from "../../images/nfc_tools_7.jpg";
+import nfc_tools_8 from "../../images/nfc_tools_8.jpg";
+import nfc_tools_9 from "../../images/nfc_tools_9.jpg";
 
 export default function SetCard({ clientId }) {
   // By using useTheme, the component will re-render when the theme changes.
@@ -20,6 +29,45 @@ export default function SetCard({ clientId }) {
       }, 2000);
     });
   };
+
+  const nfcSteps = [
+    {
+      text: t("setcard.open_nfc_tools"),
+      image: nfc_tools_1,
+    },
+    {
+      text: t("setcard.select_write"),
+      image: nfc_tools_2,
+    },
+    {
+      text: t("setcard.select_add"),
+      image: nfc_tools_3,
+    },
+    {
+      text: t("setcard.select_url"),
+      image: nfc_tools_4,
+    },
+    {
+      text: t("setcard.paste_url"),
+      image: nfc_tools_5,
+    },
+    {
+      text: t("setcard.press_ok"),
+      image: nfc_tools_6,
+    },
+    {
+      text: t("setcard.select_write_byte"),
+      image: nfc_tools_7,
+    },
+    {
+      text: t("setcard.write_card"),
+      image: nfc_tools_8,
+    },
+    {
+      text: t("setcard.check"),
+      image: nfc_tools_9,
+    },
+  ];
 
   return (
     <div className={styles.container}>
@@ -41,31 +89,16 @@ export default function SetCard({ clientId }) {
         <div className={styles.stepTitle}>{t("setcard.step_2")}</div>
         <div className={styles.stepContent}>
           <div className={styles.photoGrid}>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.open_nfc_tools")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.select_write")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.select_add")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.select_url")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.paste_url")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.press_ok")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.select_write_byte")}
-            </div>
-            <div className={styles.photoPlaceholder}>
-              {t("setcard.write_card")}
-            </div>
-            <div className={styles.photoPlaceholder}>{t("setcard.check")}</div>
+            {nfcSteps.map((step, index) => (
+              <div key={index} className={styles.photoContainer}>
+                <img
+                  src={step.image}
+                  alt={step.text}
+                  className={styles.photo}
+                />
+                <p>{step.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -83,6 +116,7 @@ export default function SetCard({ clientId }) {
               <p>{t("setcard.ios_instructions")}</p>
             </div>
           </div>
+          <p className={styles.nfcNote}>{t("setcard.nfc_note")}</p>
         </div>
       </div>
     </div>

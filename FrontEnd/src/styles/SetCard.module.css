@@ -69,10 +69,17 @@
   margin-top: 15px;
 }
 
-.photoPlaceholder {
-  width: 100px;
-  height: 200px;
-  background-color: #e0e0e0;
+.photoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.photo {
+  width: 150px;
+  height: 300px;
+  object-fit: contain;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -91,6 +98,12 @@
   padding: 15px;
   margin-top: 15px;
   width: 50%;
+}
+
+.nfcNote {
+  margin-top: 15px;
+  font-style: italic;
+  color: var(--text-color-secondary);
 }
 
 @media (max-width: 768px) {

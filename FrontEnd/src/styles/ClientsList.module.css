@@ -115,9 +115,17 @@
   letter-spacing: 0.02em;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
-.TodayMealButton,
-.createMealButton,
-.setCardButton {
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color-light);
+}
+
+.cardButton {
   display: inline-block;
   padding: 15px;
   background: linear-gradient(
@@ -134,6 +142,7 @@
   font-size: 14px;
   letter-spacing: 0.02em;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
+  width: 80%;
 }
 
 .button:hover {
