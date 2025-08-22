@@ -5,7 +5,7 @@ import TodayMealsDisplay from "./TodayMealsDisplay";
 import FullWeekMealsDisplay from "./FullWeekMealsDisplay";
 import styles from "../../styles/TodayMealPage.module.css";
 import { useTheme } from "../../hooks/useTheme";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Days() {
   const { clientId } = useParams();
@@ -14,6 +14,11 @@ export default function Days() {
   const [error, setError] = useState(null);
   const [showFullWeek, setShowFullWeek] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   useEffect(() => {
     const fetchActiveMealPlan = async () => {
@@ -35,17 +40,17 @@ export default function Days() {
   }, [clientId]);
 
   if (loading) {
-    return <div className={styles.container}>Loading...</div>;
+    return <div className={styles.container}>{t("loading")}</div>;
   }
 
   if (error) {
-    return <div className={styles.container}>Error: {error.message}</div>;
+    return <div className={styles.container}>{t("error", { message: error.message })}</div>;
   }
 
   if (!activeMealPlan) {
     return (
       <div className={styles.container}>
-        No active meal plan found for this client.
+        {t("no_active_meal_plan")}
       </div>
     );
   }
@@ -81,18 +86,22 @@ export default function Days() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.h1}>
-          {showFullWeek ? "Full Week Meal Plan" : "Today's Meals"}
+          {showFullWeek ? t("full_week_meal_plan") : t("todays_meals")}
         </h1>
         <div className={styles.buttonGroupColumn}>
           <button
             onClick={() => setShowFullWeek(!showFullWeek)}
             className={styles.toggleButton}
           >
-            {showFullWeek ? "Show Today" : "Show Full Week"}
+            {showFullWeek ? t("show_today") : t("show_full_week")}
           </button>
           <button onClick={toggleTheme} className={styles.toggleButton}>
-            {theme === "light" ? "Dark Mode" : "Light Mode"}
+            {theme === "light" ? t("dark_mode") : t("light_mode")}
           </button>
+          <select onChange={(e) => changeLanguage(e.target.value)} defaultValue={i18n.language}>
+            <option value="en">English</option>
+            <option value="el">Ελληνικά</option>
+          </select>
         </div>
       </div>
 

@@ -97,22 +97,36 @@ export default function MakeMeals() {
   const handleExportToExcel = () => {
     const wb = XLSX.utils.book_new();
     const wsData = [];
-    const mealTitles = [...new Set(meals.map((meal) => meal.title))];
 
     const header = ["Time", "Meal", ...weekDays];
     wsData.push(header);
-    const groupedMeals = mealTitles.reduce((acc, title) => {
-      acc[title] = meals.filter((meal) => meal.title === title);
+
+    // Create a composite key for grouping: `time-title`
+    const groupedMeals = meals.reduce((acc, meal) => {
+      const key = `${meal.time}-${meal.title}`;
+      if (!acc[key]) {
+        acc[key] = {
+          time: meal.time,
+          title: meal.title,
+          days: {},
+        };
+      }
+      meal.days.forEach((day) => {
+        if (!acc[key].days[day]) {
+          acc[key].days[day] = [];
+        }
+        acc[key].days[day].push(meal.description);
+      });
       return acc;
     }, {});
-    for (const title in groupedMeals) {
-      const mealsByTitle = groupedMeals[title];
-      const row = [mealsByTitle[0].time, title];
+
+    for (const key in groupedMeals) {
+      const mealGroup = groupedMeals[key];
+      const row = [mealGroup.time, mealGroup.title];
 
       weekDays.forEach((day) => {
-        const mealForDay = mealsByTitle.find((meal) => meal.days.includes(day));
-        if (mealForDay) {
-          row.push(mealForDay.description);
+        if (mealGroup.days[day]) {
+          row.push(mealGroup.days[day].join(", "));
         } else {
           row.push("");
         }

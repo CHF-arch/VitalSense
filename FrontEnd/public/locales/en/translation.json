@@ -119,7 +119,12 @@
     "carbs": "Carbs",
     "fat": "Fat",
     "calories": "Calories",
-    "grams": "g"
+    "grams": "g",
+    "loading": "Loading...",
+    "error": "Error: {{message}}",
+    "no_active_meal_plan": "No active meal plan found for this client.",
+    "full_week_meal_plan": "Full Week Meal Plan",
+    "todays_meals": "Today's Meals"
   },
   "make_meals": {
     "first_name": "First Name",
@@ -181,8 +186,21 @@
     "saturday": "Saturday",
     "sunday": "Sunday",
     "day": "Day",
-    "meal": "Meals",
-    "no_meals": "No meals scheduled for this day."
+    "meals": "Meals",
+    "no_meals": "No meals scheduled for this day.",
+    "export_to_excel": "Export to Excel"
+  },
+  "meal_plan_details": {
+    "loading_details": "Loading meal plan details...",
+    "failed_to_fetch": "Failed to fetch details.",
+    "not_found": "Meal plan not found.",
+    "meal_plan_title": "Meal Plan",
+    "id": "ID",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "client": "Client",
+    "loading_client": "Loading...",
+    "weekly_overview": "Weekly Overview"
   },
   "client_info_card": {
     "edit_client": "Edit Client",
