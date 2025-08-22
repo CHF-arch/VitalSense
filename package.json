@@ -4,5 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev:frontend": "cd FrontEnd && npm run dev"
+  },
+  "dependencies": {
+    "moment-timezone": "^0.6.0"
   }
 }

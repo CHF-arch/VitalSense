@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { searchClients } from "../../services/client"; // Needed for client search in edit mode
-import moment from "moment"; // Import moment for date formatting
 import styles from "../../styles/AppointmentDetailsModal.module.css"; // Import styles
 import { useTranslation } from "react-i18next";
 import { getDisplayNameForClient } from "./ClientUtils";
+import moment from "moment";
 
 const AppointmentDetailsModal = ({
   appointment,
@@ -16,11 +16,11 @@ const AppointmentDetailsModal = ({
   const { t } = useTranslation();
   const [start, setStart] = useState(
     appointment.start
-      ? moment(appointment.start).format("YYYY-MM-DDTHH:mm")
+      ? moment.utc(appointment.start).format("YYYY-MM-DDTHH:mm")
       : ""
   );
   const [end, setEnd] = useState(
-    appointment.end ? moment(appointment.end).format("YYYY-MM-DDTHH:mm") : ""
+    appointment.end ? moment.utc(appointment.end).format("YYYY-MM-DDTHH:mm") : ""
   );
 
   // For client search/selection in edit mode
@@ -107,11 +107,11 @@ const AppointmentDetailsModal = ({
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.start")}:</strong>{" "}
-              {moment(appointment.start).format("LLL")}
+              {moment.utc(appointment.start).format("LLL")}
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.end")}:</strong>{" "}
-              {moment(appointment.end).format("LLL")}
+              {moment.utc(appointment.end).format("LLL")}
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.client")}:</strong>{" "}

@@ -86,6 +86,7 @@ export default function Dashboard() {
               <div className={`${styles.metricCard} ${styles.metricCard1}`}>
                 <div className={styles.metricValue}>
                   {dashboardMetrics.totalClients}
+                  hello
                 </div>
                 <div className={styles.metricLabel}>
                   {t("dashboard.total_clients")}

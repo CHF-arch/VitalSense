@@ -90,11 +90,23 @@ export default function ClientsList() {
     XLSX.writeFile(workbook, "clients.xlsx");
   };
 
-  const filteredClients = clients.filter((client) =>
-    `${client.firstName} ${client.lastName}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
+  const filteredClients = clients.filter((client) => {
+    const fullName = `${client.firstName} ${client.lastName}`.toLowerCase();
+    const searchTermLower = searchTerm.toLowerCase();
+
+    // Normalize phone numbers by removing non-numeric characters
+    const normalizedClientPhone = String(client.phone || "").replace(/\D/g, "");
+    const normalizedSearchTerm = searchTerm.replace(/\D/g, "");
+
+    // Check if the search term is purely numeric
+    const isNumericSearch = /^\d+$/.test(searchTerm);
+
+    if (isNumericSearch) {
+      return normalizedClientPhone.includes(normalizedSearchTerm);
+    } else {
+      return fullName.includes(searchTermLower);
+    }
+  });
 
   if (loading) {
     return (
