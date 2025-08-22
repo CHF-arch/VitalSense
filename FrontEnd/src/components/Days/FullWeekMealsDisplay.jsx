@@ -9,7 +9,7 @@ export default function FullWeekMealsDisplay({ sortedDays }) {
     <>
       {sortedDays.map((day) => (
         <div key={day.id} className={styles.daySection}>
-          <h2 className={styles.dayTitle}>{day.title}</h2>
+          <h2 className={styles.dayTitle}>{t(`days.${day.title.toLowerCase()}`)}</h2>
           {day.meals.length > 0 ? (
             day.meals.map((meal, index) => <MealCard key={index} meal={meal} />)
           ) : (

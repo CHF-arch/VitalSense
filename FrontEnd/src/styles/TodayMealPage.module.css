@@ -5,7 +5,7 @@
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
 }
@@ -13,6 +13,7 @@
 .h1 {
   margin-bottom: 0;
   color: var(--text-color-primary);
+  text-align: center;
 }
 
 .toggleButton {
@@ -38,10 +39,11 @@
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
 
-.buttonGroupColumn {
+.buttonGroup {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adjust as needed for spacing between buttons */
+  gap: 10px;
+  margin-top: 1rem;
 }
 
 .daySection {
@@ -92,7 +94,9 @@
 
 .nutritionInfo {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-color-light);
 }
@@ -100,6 +104,13 @@
 .nutritionItem {
   text-align: center;
   color: var(--text-color-primary);
+  background-color: var(--background-color-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+  border: 1px solid var(--card-border);
+  flex-grow: 1;
+  flex-basis: auto;
 }
 
 .nutritionLabel {
@@ -122,4 +133,25 @@
   .mealTitle {
     font-size: 1.2rem;
   }
+}
+.languageSelect {
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color-light);
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  letter-spacing: 0.02em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4" fill="%23555"><path d="M287 69.4a17.6 17.6 0 00-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 000 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.9 5.4s9.3-1.8 12.9-5.4L287 95c3.6-3.6 5.4-7.8 5.4-12.9-.1-5-1.9-9.2-5.5-12.7z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 0.65em auto;
+  padding-right: 30px;
 }

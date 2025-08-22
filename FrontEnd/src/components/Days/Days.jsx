@@ -40,18 +40,20 @@ export default function Days() {
   }, [clientId]);
 
   if (loading) {
-    return <div className={styles.container}>{t("loading")}</div>;
+    return <div className={styles.container}>{t("days.loading")}</div>;
   }
 
   if (error) {
-    return <div className={styles.container}>{t("error", { message: error.message })}</div>;
+    return (
+      <div className={styles.container}>
+        {t("days.error", { message: error.message })}
+      </div>
+    );
   }
 
   if (!activeMealPlan) {
     return (
-      <div className={styles.container}>
-        {t("no_active_meal_plan")}
-      </div>
+      <div className={styles.container}>{t("days.no_active_meal_plan")}</div>
     );
   }
 
@@ -65,13 +67,13 @@ export default function Days() {
 
   // Sorting logic for weekly view
   const dayOrder = [
-    t("days.monday"),
-    t("days.tuesday"),
-    t("days.wednesday"),
-    t("days.thursday"),
-    t("days.friday"),
-    t("days.saturday"),
-    t("days.sunday"),
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
   ];
   const sortedDays = activeMealPlan?.days
     ? [...activeMealPlan.days]
@@ -86,21 +88,27 @@ export default function Days() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.h1}>
-          {showFullWeek ? t("full_week_meal_plan") : t("todays_meals")}
+          {showFullWeek
+            ? t("days.full_week_meal_plan")
+            : t("days.todays_meals")}
         </h1>
-        <div className={styles.buttonGroupColumn}>
+        <div className={styles.buttonGroup}>
           <button
             onClick={() => setShowFullWeek(!showFullWeek)}
             className={styles.toggleButton}
           >
-            {showFullWeek ? t("show_today") : t("show_full_week")}
+            {showFullWeek ? t("days.show_today") : t("days.show_full_week")}
           </button>
           <button onClick={toggleTheme} className={styles.toggleButton}>
-            {theme === "light" ? t("dark_mode") : t("light_mode")}
+            {theme === "light" ? t("days.dark_mode") : t("days.light_mode")}
           </button>
-          <select onChange={(e) => changeLanguage(e.target.value)} defaultValue={i18n.language}>
-            <option value="en">English</option>
-            <option value="el">Ελληνικά</option>
+          <select
+            onChange={(e) => changeLanguage(e.target.value)}
+            defaultValue={i18n.language}
+            className={styles.languageSelect}
+          >
+            <option value="en">{t("settings.english")}</option>
+            <option value="el">{t("settings.greek")}</option>
           </select>
         </div>
       </div>
