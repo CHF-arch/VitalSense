@@ -2,6 +2,9 @@
 import React from "react";
 import styles from "../../styles/AppointmentForm.module.css";
 import { useTranslation } from "react-i18next";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
   const { t } = useTranslation();
@@ -23,11 +26,14 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
         <label htmlFor="start" className={styles.inputLabel}>
           {t("appointments.start")}:
         </label>
-        <input
-          type="datetime-local"
-          id="start"
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
+        <DatePicker
+          selected={start ? moment(start).toDate() : null}
+          onChange={(date) => setStart(moment(date).format("YYYY-MM-DDTHH:mm"))}
+          showTimeSelect
+          dateFormat="yyyy-MM-dd HH:mm"
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          timeCaption={t("appointments.time")}
           className={styles.textInput}
         />
       </div>
@@ -35,11 +41,14 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
         <label htmlFor="end" className={styles.inputLabel}>
           {t("appointments.end")}:
         </label>
-        <input
-          type="datetime-local"
-          id="end"
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
+        <DatePicker
+          selected={end ? moment(end).toDate() : null}
+          onChange={(date) => setEnd(moment(date).format("YYYY-MM-DDTHH:mm"))}
+          showTimeSelect
+          dateFormat="yyyy-MM-dd HH:mm"
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          timeCaption={t("appointments.time")}
           className={styles.textInput}
         />
       </div>

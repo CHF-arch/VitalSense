@@ -14,7 +14,6 @@ import NewAppointmentModal from "./NewAppointmentModal";
 import AppointmentDetailsModal from "./AppointmentDetailsModal";
 import styles from "../../styles/AppointmentsCalendar.module.css";
 import { useTranslation } from "react-i18next";
-import { getDisplayNameForClient } from "./ClientUtils";
 
 const localizer = momentLocalizer(moment);
 
@@ -25,6 +24,23 @@ const AppointmentsCalendar = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { theme } = useTheme();
   const { t } = useTranslation();
+
+  // Define messages for react-big-calendar
+  const messages = {
+    today: t("calendar.today"),
+    previous: t("calendar.previous"),
+    next: t("calendar.next"),
+    month: t("calendar.month"),
+    week: t("calendar.week"),
+    day: t("calendar.day"),
+    agenda: t("calendar.agenda"),
+    date: t("calendar.date"),
+    time: t("calendar.time"),
+    event: t("calendar.event"),
+    allDay: t("calendar.allDay"),
+    noEventsInRange: t("calendar.noEventsInRange"),
+    showMore: t("calendar.showMore"),
+  };
 
   const fetchAppointments = async () => {
     try {
@@ -45,16 +61,9 @@ const AppointmentsCalendar = () => {
             }
           }
 
-          // Construct the title to include client's full name using helper
-          const clientDisplayName = getDisplayNameForClient(clientDetails);
-          const eventTitle =
-            clientDisplayName !== "N/A"
-              ? `${clientDisplayName} - ${appointment.title}`
-              : appointment.title;
-
           return {
             ...appointment,
-            title: eventTitle, // Use the new title
+            title: appointment.title, // Use the title as is
             start: new Date(appointment.start),
             end: new Date(appointment.end),
             client: clientDetails, // Ensure client details are attached
@@ -98,13 +107,6 @@ const AppointmentsCalendar = () => {
         client: clientDetails,
       };
 
-      // Construct the title to include client's full name for the new event using helper
-      const clientDisplayName = getDisplayNameForClient(clientDetails);
-      eventWithClient.title =
-        clientDisplayName !== "N/A"
-          ? `${eventWithClient.title} - ${clientDisplayName}`
-          : eventWithClient.title;
-
       // Update events state with the new appointment including client details
       setEvents((prevEvents) => [...prevEvents, eventWithClient]);
       handleCloseNewAppointmentModal();
@@ -146,16 +148,9 @@ const AppointmentsCalendar = () => {
       setEvents((prevEvents) =>
         prevEvents.map((event) => {
           if (event.id === appointmentId) {
-            // Construct the title to include client's full name for the updated event
-            const clientDisplayName = getDisplayNameForClient(clientDetails);
-            const updatedEventTitle =
-              clientDisplayName !== "N/A"
-                ? `${updatedAppointment.title} - ${clientDisplayName}`
-                : updatedAppointment.title;
-
             return {
               ...updatedAppointment,
-              title: updatedEventTitle, // Use the new title
+              title: updatedAppointment.title, // Use the title as is
               start: new Date(updatedAppointment.start),
               end: new Date(updatedAppointment.end),
               client: clientDetails,
@@ -198,6 +193,7 @@ const AppointmentsCalendar = () => {
         endAccessor="end"
         className={styles.calendar}
         onSelectEvent={handleSelectEvent}
+        messages={messages}
       />
       <div className={styles.buttonContainer}>
         <button

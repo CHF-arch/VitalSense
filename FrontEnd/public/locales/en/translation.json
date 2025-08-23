@@ -251,5 +251,20 @@
     "ios": "iOS (iPhone 7 and newer):",
     "ios_instructions": "NFC is always on. You don't need to turn it on.",
     "nfc_note": "If the client has NFC enabled, all they need to do is be on the main screen of their mobile and the phone must be unlocked."
+  },
+  "calendar": {
+    "today": "Today",
+    "previous": "Previous",
+    "next": "Next",
+    "month": "Month",
+    "week": "Week",
+    "day": "Day",
+    "agenda": "Agenda",
+    "date": "Date",
+    "time": "Time",
+    "event": "Event",
+    "allDay": "All Day",
+    "noEventsInRange": "No Events",
+    "showMore": "Show more"
   }
 }

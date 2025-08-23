@@ -4,6 +4,8 @@ import styles from "../../styles/AppointmentDetailsModal.module.css"; // Import 
 import { useTranslation } from "react-i18next";
 import { getDisplayNameForClient } from "./ClientUtils";
 import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AppointmentDetailsModal = ({
   appointment,
@@ -12,15 +14,27 @@ const AppointmentDetailsModal = ({
   onDelete,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(appointment.title || "");
+  const [title, setTitle] = useState(() => {
+    if (appointment.title && appointment.client) {
+      const clientDisplayName = getDisplayNameForClient(appointment.client);
+      // Attempt to remove the appended client name for editing
+      const regex = new RegExp(` - ${clientDisplayName}`);
+      if (regex.test(appointment.title)) {
+        return appointment.title.replace(regex, "");
+      }
+    }
+    return appointment.title || "";
+  });
   const { t } = useTranslation();
   const [start, setStart] = useState(
     appointment.start
-      ? moment.utc(appointment.start).format("YYYY-MM-DDTHH:mm")
+      ? moment.utc(appointment.start).local().format("YYYY-MM-DDTHH:mm")
       : ""
   );
   const [end, setEnd] = useState(
-    appointment.end ? moment.utc(appointment.end).format("YYYY-MM-DDTHH:mm") : ""
+    appointment.end
+      ? moment.utc(appointment.end).local().format("YYYY-MM-DDTHH:mm")
+      : ""
   );
 
   // For client search/selection in edit mode
@@ -64,18 +78,22 @@ const AppointmentDetailsModal = ({
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     if (!title || !start || !end || !selectedClient) {
-      alert("Please fill in all fields and select a client.");
+      // Removed alert as per user request
       return;
     }
 
     const updatedData = {
       ...appointment, // Keep existing properties
       title,
-      start: new Date(start).toISOString(),
-      end: new Date(end).toISOString(),
+      start: moment(start, "YYYY-MM-DDTHH:mm")
+        .add(3, "hours")
+        .utc()
+        .toISOString(),
+      end: moment(end, "YYYY-MM-DDTHH:mm").add(3, "hours").utc().toISOString(),
       clientId: selectedClient.id,
     };
-    onUpdate(appointment.id, updatedData);
+    await onUpdate(appointment.id, updatedData);
+    window.location.reload();
   };
 
   const handleDeleteClick = () => {
@@ -107,11 +125,14 @@ const AppointmentDetailsModal = ({
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.start")}:</strong>{" "}
-              {moment.utc(appointment.start).format("LLL")}
+              {moment
+                .utc(appointment.start)
+                .local()
+                .format("YYYY-MM-DD hh:mm A")}
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.end")}:</strong>{" "}
-              {moment.utc(appointment.end).format("LLL")}
+              {moment.utc(appointment.end).local().format("YYYY-MM-DD hh:mm A")}
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.client")}:</strong>{" "}
@@ -157,25 +178,35 @@ const AppointmentDetailsModal = ({
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="editStart" className={styles.inputLabel}>
-                {t("appointments.start_time")}:
+                {t("appointments.start")}:
               </label>
-              <input
-                type="datetime-local"
-                id="editStart"
-                value={start}
-                onChange={(e) => setStart(e.target.value)}
+              <DatePicker
+                selected={start ? moment(start).toDate() : null}
+                onChange={(date) =>
+                  setStart(moment(date).format("YYYY-MM-DDTHH:mm"))
+                }
+                showTimeSelect
+                dateFormat="yyyy-MM-dd HH:mm"
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                timeCaption={t("appointments.time")}
                 className={styles.textInput}
               />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="editEnd" className={styles.inputLabel}>
-                {t("appointments.end_time")}:
+                {t("appointments.end")}:
               </label>
-              <input
-                type="datetime-local"
-                id="editEnd"
-                value={end}
-                onChange={(e) => setEnd(e.target.value)}
+              <DatePicker
+                selected={end ? moment(end).toDate() : null}
+                onChange={(date) =>
+                  setEnd(moment(date).format("YYYY-MM-DDTHH:mm"))
+                }
+                showTimeSelect
+                dateFormat="yyyy-MM-dd HH:mm"
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                timeCaption={t("appointments.time")}
                 className={styles.textInput}
               />
             </div>

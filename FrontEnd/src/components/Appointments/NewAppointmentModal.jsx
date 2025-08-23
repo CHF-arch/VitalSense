@@ -7,6 +7,7 @@ import AppointmentForm from "./AppointmentForm";
 import ClientSearch from "./ClientSearch";
 import AddClientForm from "./AddClientForm";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
 
 const NewAppointmentModal = ({ onClose, onSubmit }) => {
   const [title, setTitle] = useState("");
@@ -60,7 +61,7 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
 
     if (mode === "add") {
       if (!newClientFirstName || !newClientLastName || !newClientPhoneNumber) {
-        alert("Full Name and Phone Number are required for new client.");
+        // Removed alert as per user request
         return;
       }
 
@@ -78,7 +79,7 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
           createdAt: createdAt,
         };
         const createdClient = await createClient(newClientData);
-        alert("New client created successfully!");
+        // Removed alert as per user request
         finalClientId = createdClient.id;
 
         setSelectedClient(createdClient);
@@ -86,30 +87,32 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
         setMode("search");
       } catch (error) {
         console.error("Error creating new client:", error);
-        alert("Failed to create new client. Please try again.");
+        // Removed alert as per user request
         return;
       }
     } else {
       if (!selectedClient) {
-        alert("Please select an existing client.");
+        // Removed alert as per user request
         return;
       }
       finalClientId = selectedClient.id;
     }
 
     if (!title || !start || !end || !finalClientId) {
-      alert(
-        "Please fill in all appointment details and select/create a client."
-      );
+      // Removed alert as per user request
       return;
     }
 
-    onSubmit({
+        await onSubmit({
       title,
-      start,
-      end,
+      start: moment(start, "YYYY-MM-DDTHH:mm")
+        .add(3, "hours")
+        .utc()
+        .toISOString(),
+      end: moment(end, "YYYY-MM-DDTHH:mm").add(3, "hours").utc().toISOString(),
       clientId: finalClientId,
     });
+    window.location.reload();
   };
 
   const handleClientSelect = (client) => {
