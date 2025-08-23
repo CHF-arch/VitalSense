@@ -60,7 +60,8 @@
     "search_existing_client": "Search Existing Client",
     "add_new_client": "Add New Client",
     "create_appointment": "Create Appointment",
-    "create_client_appointment": "Create Client & Appointment"
+    "create_client_appointment": "Create Client & Appointment",
+    "time": "Time"
   },
   "clientlist": {
     "select_gender": "Select Gender",
@@ -147,13 +148,6 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday",
-    "a_meal_with_the_title": "A meal with the title",
-    "already_exist": "already exists on",
-    "create_new_meal_plan": "Create a New Meal Plan",
-    "loading_client_info": "Loading Client Info...",
-    "add_meal": "Add Meal",
-    "import_from_excel": "Import from Excel",
-    "save_meal_plan": "Save Meal Plan",
     "title": "Meal Title",
     "time": "Time",
     "description": "Description",
@@ -178,13 +172,6 @@
     "no_tasks": "No tasks"
   },
   "weekly_meal_plan_table": {
-    "monday": "Monday",
-    "tuesday": "Tuesday",
-    "wednesday": "Wednesday",
-    "thursday": "Thursday",
-    "friday": "Friday",
-    "saturday": "Saturday",
-    "sunday": "Sunday",
     "day": "Day",
     "meals": "Meals",
     "no_meals": "No meals scheduled for this day.",
@@ -192,13 +179,13 @@
   },
   "meal_plan_details": {
     "loading_details": "Loading meal plan details...",
-    "failed_to_fetch": "Failed to fetch details.",
-    "not_found": "Meal plan not found.",
-    "meal_plan_title": "Meal Plan",
-    "id": "ID",
-    "start_date": "Start Date",
-    "end_date": "End Date",
-    "client": "Client",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
     "loading_client": "Loading...",
     "weekly_overview": "Weekly Overview"
   },
@@ -265,6 +252,13 @@
     "event": "Event",
     "allDay": "All Day",
     "noEventsInRange": "No Events",
-    "showMore": "Show more"
+    "showMore": "Show more",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   }
 }

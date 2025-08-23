@@ -60,7 +60,8 @@
     "search_existing_client": "Αναζήτηση Υπάρχων Πελάτη",
     "add_new_client": "Προσθήκη Νέου Πελάτη",
     "create_appointment": "Δημιουργία Ραντεβού",
-    "create_client_appointment": "Δημιουργία Πελάτη και Ραντεβού"
+    "create_client_appointment": "Δημιουργία Πελάτη και Ραντεβού",
+    "time": "Ώρα"
   },
   "clientlist": {
     "select_gender": "Επιλέξτε Φύλο",
@@ -147,13 +148,6 @@
     "friday": "Παρασκευή",
     "saturday": "Σάββατο",
     "sunday": "Κυριακή",
-    "a_meal_with_the_title": "Ένα γεύμα με το τίτλο",
-    "already_exist": "Υπάρχει ήδη στη μέρα",
-    "create_new_meal_plan": "Δημιουργία Νέου Διατροφικού Πλάνου",
-    "loading_client_info": "Φόρτωση Λεπτομέριων Πελάτη...",
-    "add_meal": "Προσθήκη Γεύματος",
-    "import_from_excel": "Εισαγωγή από Excel",
-    "save_meal_plan": "Αποθήκευση Διατροφικού Πλάνου",
     "title": "Τίτλος Γεύματος",
     "time": "Ώρα",
     "description": "Περιγραφή",
@@ -178,13 +172,6 @@
     "no_tasks": "Δεν υπάρχουν εργασίες"
   },
   "weekly_meal_plan_table": {
-    "monday": "Δευτέρα",
-    "tuesday": "Τρίτη",
-    "wednesday": "Τετάρτη",
-    "thursday": "Πέμπτη",
-    "friday": "Παρασκευή",
-    "saturday": "Σάββατο",
-    "sunday": "Κυριακή",
     "day": "Ημέρα",
     "meals": "Γεύματα",
     "no_meals": "Δεν υπάρχουν γεύματα για αυτήν την ημέρα.",
@@ -192,13 +179,13 @@
   },
   "meal_plan_details": {
     "loading_details": "Φόρτωση λεπτομερειών διατροφικού πλάνου...",
-    "failed_to_fetch": "Αποτυχία ανάκτησης λεπτομερειών.",
-    "not_found": "Διατροφικό πλάνο δεν βρέθηκε.",
-    "meal_plan_title": "Διατροφικό Πλάνο",
-    "id": "ID",
-    "start_date": "Ημερομηνία Έναρξης",
-    "end_date": "Ημερομηνία Λήξης",
-    "client": "Πελάτης",
+    "monday": "Δευτέρα",
+    "tuesday": "Τρίτη",
+    "wednesday": "Τετάρτη",
+    "thursday": "Πέμπτη",
+    "friday": "Παρασκευή",
+    "saturday": "Σάββατο",
+    "sunday": "Κυριακή",
     "loading_client": "Φόρτωση...",
     "weekly_overview": "Εβδομαδιαία Επισκόπηση"
   },
@@ -265,6 +252,13 @@
     "event": "Γεγονός",
     "allDay": "Ολοήμερο",
     "noEventsInRange": "Δεν υπάρχουν Γεγονότα",
-    "showMore": "Δείξε περισσότερα"
+    "showMore": "Δείξε περισσότερα",
+    "monday": "Δευτέρα",
+    "tuesday": "Τρίτη",
+    "wednesday": "Τετάρτη",
+    "thursday": "Πέμπτη",
+    "friday": "Παρασκευή",
+    "saturday": "Σάββατο",
+    "sunday": "Κυριακή"
   }
 }

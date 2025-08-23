@@ -20,6 +20,7 @@ import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SetCardPage from "./pages/SetCardPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import "react-datepicker/dist/react-datepicker.css";
 import "./i18n.js";
 import "./index.css";
 import "./styles/themes.css"; // Import the new themes.css

@@ -4,8 +4,13 @@ import styles from "../../styles/AppointmentDetailsModal.module.css"; // Import 
 import { useTranslation } from "react-i18next";
 import { getDisplayNameForClient } from "./ClientUtils";
 import moment from "moment";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker, { registerLocale } from "react-datepicker";
+import { el } from "date-fns/locale/el";
+import { enUS } from "date-fns/locale/en-US";
+
+// Register locales for react-datepicker
+registerLocale("el", el);
+registerLocale("en", enUS);
 
 const AppointmentDetailsModal = ({
   appointment,
@@ -25,7 +30,7 @@ const AppointmentDetailsModal = ({
     }
     return appointment.title || "";
   });
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [start, setStart] = useState(
     appointment.start
       ? moment.utc(appointment.start).local().format("YYYY-MM-DDTHH:mm")
@@ -191,6 +196,7 @@ const AppointmentDetailsModal = ({
                 timeIntervals={15}
                 timeCaption={t("appointments.time")}
                 className={styles.textInput}
+                locale={i18n.language}
               />
             </div>
             <div className={styles.formGroup}>
@@ -208,6 +214,7 @@ const AppointmentDetailsModal = ({
                 timeIntervals={15}
                 timeCaption={t("appointments.time")}
                 className={styles.textInput}
+                locale={i18n.language}
               />
             </div>
 

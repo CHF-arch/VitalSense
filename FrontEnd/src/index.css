@@ -132,7 +132,7 @@ body[data-theme="dark"] {
 }
 
 /* Adjustments specifically for dark theme */
-body[data-theme='dark'] {
+body[data-theme="dark"] {
   /* Ensure the overall calendar background is distinct */
   .rbc-calendar {
     background-color: var(--background-color-secondary); /* #2d3748 */
@@ -148,7 +148,9 @@ body[data-theme='dark'] {
   }
 
   .rbc-off-range-bg {
-    background-color: var(--background-color-primary); /* #1a202c - darker for off-range */
+    background-color: var(
+      --background-color-primary
+    ); /* #1a202c - darker for off-range */
   }
 
   .rbc-event {
@@ -157,7 +159,9 @@ body[data-theme='dark'] {
   }
 
   .rbc-today {
-    background-color: var(--status-yes-background); /* #2f855a - green for today */
+    background-color: var(
+      --status-yes-background
+    ); /* #2f855a - green for today */
   }
 
   /* Ensure all text elements are visible */
@@ -203,9 +207,17 @@ body[data-theme='dark'] {
   }
 
   /* Dark theme specific override for selected time item */
-  .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--selected {
     background-color: #4a5568 !important; /* A darker shade for background */
     color: #e2e8f0 !important; /* A light text color */
+  }
+
+  .react-datepicker__time-caption {
+    color: var(--text-color-primary) !important;
   }
 }
 /* React Datepicker Overrides */
@@ -226,12 +238,16 @@ body[data-theme='dark'] {
   font-family: inherit; /* Use the project's font */
   border: 1px solid var(--border-color-medium);
   border-radius: 5px;
-  background-color: var(--background-color-secondary); /* Match project background */
+  background-color: var(
+    --background-color-secondary
+  ); /* Match project background */
   color: var(--text-color-primary);
 }
 
 .react-datepicker__header {
-  background-color: var(--background-color-tertiary); /* Match project header/accent */
+  background-color: var(
+    --background-color-tertiary
+  ); /* Match project header/accent */
   border-bottom: 1px solid var(--border-color-medium);
 }
 
@@ -255,19 +271,41 @@ body[data-theme='dark'] {
   background-color: var(--background-color-secondary);
 }
 
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
-  background-color: var(--background-color-secondary); /* Set default background */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  background-color: var(
+    --background-color-secondary
+  ); /* Set default background */
   color: var(--text-color-primary);
   padding: 8px 10px; /* Add some padding for better click area */
 }
 
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
-  background-color: var(--border-color-medium) !important; /* Subtle hover effect */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:hover {
+  background-color: var(
+    --border-color-medium
+  ) !important; /* Subtle hover effect */
   cursor: pointer;
 }
 
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
-  background-color: var(--accent-color) !important; /* Keep accent color for selected */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
+  background-color: var(
+    --accent-color
+  ) !important; /* Keep accent color for selected */
   color: var(--text-color-inverted) !important;
   font-weight: bold; /* Make selected item stand out */
+}
+
+.react-datepicker-time__header {
+  color: var(--text-color-primary);
 }

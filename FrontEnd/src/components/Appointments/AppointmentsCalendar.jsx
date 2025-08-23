@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import "moment/locale/el"; // Import Greek locale for moment
 import {
   createAppointment,
   getAppointments,
@@ -15,32 +16,45 @@ import AppointmentDetailsModal from "./AppointmentDetailsModal";
 import styles from "../../styles/AppointmentsCalendar.module.css";
 import { useTranslation } from "react-i18next";
 
-const localizer = momentLocalizer(moment);
-
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showNewAppointmentModal, setShowNewAppointmentModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { theme } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  // Define messages for react-big-calendar
-  const messages = {
-    today: t("calendar.today"),
-    previous: t("calendar.previous"),
-    next: t("calendar.next"),
-    month: t("calendar.month"),
-    week: t("calendar.week"),
-    day: t("calendar.day"),
-    agenda: t("calendar.agenda"),
-    date: t("calendar.date"),
-    time: t("calendar.time"),
-    event: t("calendar.event"),
-    allDay: t("calendar.allDay"),
-    noEventsInRange: t("calendar.noEventsInRange"),
-    showMore: t("calendar.showMore"),
-  };
+  // Memoize the localizer and other locale-dependent props to ensure they update
+  // when the language changes. This is the key to solving the localization issue.
+  const { localizer, messages, formats } = useMemo(() => {
+    // Set the locale for moment before creating the localizer
+    moment.locale(i18n.language);
+    console.log("Current moment locale:", moment.locale());
+    console.log("Available moment locales:", moment.locales());
+    return {
+      localizer: momentLocalizer(moment),
+      messages: {
+        today: t("calendar.today"),
+        previous: t("calendar.previous"),
+        next: t("calendar.next"),
+        month: t("calendar.month"),
+        week: t("calendar.week"),
+        day: t("calendar.day"),
+        agenda: t("calendar.agenda"),
+        date: t("calendar.date"),
+        time: t("calendar.time"),
+        event: t("calendar.event"),
+        allDay: t("calendar.allDay"),
+        noEventsInRange: t("calendar.noEventsInRange"),
+        showMore: (total) => `+${total} ${t("calendar.showMore")}`,
+      },
+      formats: {
+        weekdayFormat: "ddd",
+        monthHeaderFormat: (date, culture, localizer) =>
+          localizer.format(date, "MMMM YYYY", culture),
+      },
+    };
+  }, [i18n.language, t]);
 
   const fetchAppointments = async () => {
     try {
@@ -193,7 +207,10 @@ const AppointmentsCalendar = () => {
         endAccessor="end"
         className={styles.calendar}
         onSelectEvent={handleSelectEvent}
+        key={i18n.language} // Force a full re-render on language change
+        culture={i18n.language} // Explicitly set the culture
         messages={messages}
+        formats={formats}
       />
       <div className={styles.buttonContainer}>
         <button

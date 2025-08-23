@@ -2,12 +2,17 @@
 import React from "react";
 import styles from "../../styles/AppointmentForm.module.css";
 import { useTranslation } from "react-i18next";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker, { registerLocale } from "react-datepicker";
 import moment from "moment";
+import { el } from "date-fns/locale/el";
+import { enUS } from "date-fns/locale/en-US";
+
+// Register locales for react-datepicker
+registerLocale("el", el);
+registerLocale("en", enUS);
 
 const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className={styles.formGroup}>
@@ -35,6 +40,7 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
           timeIntervals={15}
           timeCaption={t("appointments.time")}
           className={styles.textInput}
+          locale={i18n.language}
         />
       </div>
       <div className={styles.lastFormGroup}>
@@ -50,6 +56,7 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
           timeIntervals={15}
           timeCaption={t("appointments.time")}
           className={styles.textInput}
+          locale={i18n.language}
         />
       </div>
     </>
