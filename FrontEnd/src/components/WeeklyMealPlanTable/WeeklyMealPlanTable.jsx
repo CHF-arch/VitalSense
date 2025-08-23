@@ -24,8 +24,8 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
     wsData.push(header);
 
     // Flatten all meals from all days into a single array for easier processing
-    const allMeals = mealPlan.days.flatMap(day =>
-      day.meals.map(meal => ({ ...meal, originalDay: day.title }))
+    const allMeals = mealPlan.days.flatMap((day) =>
+      day.meals.map((meal) => ({ ...meal, originalDay: day.title }))
     );
 
     // Create a composite key for grouping: `time-title`
@@ -38,37 +38,33 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
           days: {},
         };
       }
-      // Translate meal.originalDay (e.g., "Tuesday") to its Greek equivalent (e.g., "Τρίτη")
-      // to match the keys in weekDays array.
-      const translatedDayName = t(`days.${meal.originalDay.toLowerCase()}`);
-      
-      if (weekDays.includes(translatedDayName)) {
-        if (!acc[key].days[translatedDayName]) {
-          acc[key].days[translatedDayName] = [];
-        }
-        acc[key].days[translatedDayName].push(meal.description);
+      const dayKey = getDayKey(meal.originalDay); // Get the English key (e.g., "monday")
+
+      if (!acc[key].days[dayKey]) { // Use the English key as the internal identifier
+        acc[key].days[dayKey] = [];
       }
+      acc[key].days[dayKey].push(meal.description);
       return acc;
     }, {});
 
     // Sort the keys to ensure consistent row order (e.g., by time, then by meal title)
     const sortedKeys = Object.keys(groupedMeals).sort((a, b) => {
-      const [timeA, titleA] = a.split('-');
-      const [timeB, titleB] = b.split('-');
+      const [timeA, titleA] = a.split("-");
+      const [timeB, titleB] = b.split("-");
       if (timeA !== timeB) {
         return timeA.localeCompare(timeB);
       }
       return titleA.localeCompare(titleB);
     });
 
-
     for (const key of sortedKeys) {
       const mealGroup = groupedMeals[key];
       const row = [mealGroup.time, mealGroup.title];
 
       weekDays.forEach((day) => {
-        if (mealGroup.days[day]) {
-          row.push(mealGroup.days[day].join(", "));
+        const currentDayKey = getDayKey(day);
+        if (mealGroup.days[currentDayKey]) {
+          row.push(mealGroup.days[currentDayKey].join(", "));
         } else {
           row.push("");
         }
@@ -79,7 +75,9 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
     const ws = XLSX.utils.aoa_to_sheet(wsData);
 
     XLSX.utils.book_append_sheet(wb, ws, "Meal Plan");
-    const fileName = mealPlan.title ? `${mealPlan.title}.xlsx` : "MealPlan.xlsx";
+    const fileName = mealPlan.title
+      ? `${mealPlan.title}.xlsx`
+      : "MealPlan.xlsx";
     XLSX.writeFile(wb, fileName);
   };
 
@@ -89,21 +87,40 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
     );
   }
 
-  // Sort days by their title (assuming titles are like "Monday", "Tuesday", etc.)
-  // A more robust solution would involve a predefined order or a 'dayOfWeek' property
+  const dayTranslationKeyMap = {
+    "Δευτέρα": "monday",
+    "Τρίτη": "tuesday",
+    "Τετάρτη": "wednesday",
+    "Πέμπτη": "thursday",
+    "Παρασκευή": "friday",
+    "Σάββατο": "saturday",
+    "Κυριακή": "sunday",
+    Monday: "monday",
+    Tuesday: "tuesday",
+    Wednesday: "wednesday",
+    Thursday: "thursday",
+    Friday: "friday",
+    Saturday: "saturday",
+    Sunday: "sunday",
+  };
+
+  const getDayKey = (dayTitle) =>
+    dayTranslationKeyMap[dayTitle] || dayTitle.toLowerCase();
+
+  // Sort days based on a consistent order
   const sortedDays = [...mealPlan.days].sort((a, b) => {
-    // Use untranslated English day names for sorting order
     const daysOrder = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday",
     ];
-    // Compare the English day names directly
-    return daysOrder.indexOf(a.title) - daysOrder.indexOf(b.title);
+    const dayA = getDayKey(a.title);
+    const dayB = getDayKey(b.title);
+    return daysOrder.indexOf(dayA) - daysOrder.indexOf(dayB);
   });
 
   return (
@@ -115,14 +132,15 @@ export default function WeeklyMealPlanTable({ mealPlan }) {
         <thead>
           <tr>
             <th>{t("weekly_meal_plan_table.day")}</th>
-            <th>{t("weekly_meal_plan_table.meals")}
-            </th>
+            <th>{t("weekly_meal_plan_table.meals")}</th>
           </tr>
         </thead>
         <tbody>
           {sortedDays.map((day) => (
             <tr key={day.id}>
-              <td className={styles.dayTitle}>{t('days.' + day.title.toLowerCase())}</td>
+              <td className={styles.dayTitle}>
+                {t(`days.${getDayKey(day.title)}`)}
+              </td>
               <td>
                 {day.meals && day.meals.length > 0 ? (
                   <div className={styles.mealCardsContainer}>

@@ -68,7 +68,8 @@ export default function MealPlanDetailsPage() {
   return (
     <div className={`${styles.container} ${styles[theme]}`}>
       <h1 className={styles.title}>
-        {t("meal_plan_details.meal_plan_title")}: {mealPlan.title || t("meal_plan_details.id") + `: ${mealPlan.id}`}
+        {t("meal_plan_details.meal_plan_title")}:{" "}
+        {mealPlan.title || t("meal_plan_details.id") + `: ${mealPlan.id}`}
       </h1>
       <p className={styles.clientInfo}>
         <strong>{t("meal_plan_details.start_date")}:</strong>{" "}
@@ -79,10 +80,13 @@ export default function MealPlanDetailsPage() {
         {new Date(mealPlan.endDate).toLocaleDateString()}
       </p>
       <p className={styles.clientInfo}>
-        <strong>{t("meal_plan_details.client")}:</strong> {clientName || t("meal_plan_details.loading_client")}
+        <strong>{t("meal_plan_details.client")}:</strong>{" "}
+        {clientName || t("meal_plan_details.loading_client")}
       </p>
 
-      <h2 className={styles.sectionTitle}>{t("meal_plan_details.weekly_overview")}</h2>
+      <h2 className={styles.sectionTitle}>
+        {t("meal_plan_details.weekly_overview")}
+      </h2>
       <WeeklyMealPlanTable mealPlan={mealPlan} />
     </div>
   );

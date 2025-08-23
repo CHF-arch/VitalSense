@@ -20,6 +20,26 @@ export default function Days() {
     i18n.changeLanguage(lng);
   };
 
+  const dayTranslationKeyMap = {
+    "Δευτέρα": "monday",
+    "Τρίτη": "tuesday",
+    "Τετάρτη": "wednesday",
+    "Πέμπτη": "thursday",
+    "Παρασκευή": "friday",
+    "Σάββατο": "saturday",
+    "Κυριακή": "sunday",
+    Monday: "monday",
+    Tuesday: "tuesday",
+    Wednesday: "wednesday",
+    Thursday: "thursday",
+    Friday: "friday",
+    Saturday: "saturday",
+    Sunday: "sunday",
+  };
+
+  const getDayKey = (dayTitle) =>
+    dayTranslationKeyMap[dayTitle] || dayTitle.toLowerCase();
+
   useEffect(() => {
     const fetchActiveMealPlan = async () => {
       try {
@@ -58,26 +78,26 @@ export default function Days() {
   }
 
   // Sorting logic for today's meals
-  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
   const todayMeals =
-    activeMealPlan?.days?.find((day) => day.title === today)?.meals || [];
+    activeMealPlan?.days?.find((day) => getDayKey(day.title) === today)?.meals || [];
   const sortedTodayMeals = [...todayMeals].sort((a, b) =>
     a.time.localeCompare(b.time)
   );
 
   // Sorting logic for weekly view
   const dayOrder = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
   ];
   const sortedDays = activeMealPlan?.days
     ? [...activeMealPlan.days]
-        .sort((a, b) => dayOrder.indexOf(a.title) - dayOrder.indexOf(b.title))
+        .sort((a, b) => dayOrder.indexOf(getDayKey(a.title)) - dayOrder.indexOf(getDayKey(b.title)))
         .map((day) => ({
           ...day,
           meals: [...day.meals].sort((a, b) => a.time.localeCompare(b.time)),

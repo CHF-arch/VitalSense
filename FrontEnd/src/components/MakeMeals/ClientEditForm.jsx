@@ -41,7 +41,7 @@ const ClientEditForm = ({
         />
       </div>
       <div className={styles.formRow}>
-        <label htmlFor="editPhone">{t("make_meals.phone")}</label>
+        <label htmlFor="editPhone">{t("make_meals.phone_number")}</label>
         <input
           id="editPhone"
           type="text"

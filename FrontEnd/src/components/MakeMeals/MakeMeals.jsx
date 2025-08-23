@@ -31,14 +31,14 @@ export default function MakeMeals() {
   const [isEditingClient, setIsEditingClient] = useState(false);
   const [editedClientData, setEditedClientData] = useState({});
   const { t } = useTranslation();
-  const weekDays = [
-    t("days.monday"),
-    t("days.tuesday"),
-    t("days.wednesday"),
-    t("days.thursday"),
-    t("days.friday"),
-    t("days.saturday"),
-    t("days.sunday"),
+  const weekDayKeys = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
   ];
 
   useEffect(() => {
@@ -64,16 +64,16 @@ export default function MakeMeals() {
     setMeals(newMeals);
   };
 
-  const handleDayToggle = (mealIndex, day) => {
+  const handleDayToggle = (mealIndex, dayKey) => {
     const newMeals = JSON.parse(JSON.stringify(meals));
     const currentMeal = newMeals[mealIndex];
-    const dayIndexInCurrentMeal = currentMeal.days.indexOf(day);
+    const dayIndexInCurrentMeal = currentMeal.days.indexOf(dayKey);
 
     if (dayIndexInCurrentMeal === -1) {
       const mealOnSameDay = newMeals.find(
         (meal, index) =>
           index !== mealIndex &&
-          meal.days.includes(day) &&
+          meal.days.includes(dayKey) &&
           meal.title.toLowerCase() === currentMeal.title.toLowerCase() &&
           currentMeal.title.trim() !== ""
       );
@@ -82,11 +82,11 @@ export default function MakeMeals() {
         alert(
           `"${t("make_meals.a_meal_with_the_title")}" "${
             currentMeal.title
-          }" "${t("make_meals.already_exist")}" ${day}.`
+          }" "${t("make_meals.already_exist")}" ${t(`days.${dayKey}`)}.`
         );
         return;
       }
-      currentMeal.days.push(day);
+      currentMeal.days.push(dayKey);
     } else {
       currentMeal.days.splice(dayIndexInCurrentMeal, 1);
     }
@@ -98,7 +98,7 @@ export default function MakeMeals() {
     const wb = XLSX.utils.book_new();
     const wsData = [];
 
-    const header = ["Time", "Meal", ...weekDays];
+    const header = ["Time", "Meal", ...weekDayKeys.map((key) => t(`days.${key}`))];
     wsData.push(header);
 
     // Create a composite key for grouping: `time-title`
@@ -111,11 +111,11 @@ export default function MakeMeals() {
           days: {},
         };
       }
-      meal.days.forEach((day) => {
-        if (!acc[key].days[day]) {
-          acc[key].days[day] = [];
+      meal.days.forEach((dayKey) => {
+        if (!acc[key].days[t(`days.${dayKey}`)]) {
+          acc[key].days[t(`days.${dayKey}`)] = [];
         }
-        acc[key].days[day].push(meal.description);
+        acc[key].days[t(`days.${dayKey}`)].push(meal.description);
       });
       return acc;
     }, {});
@@ -124,7 +124,7 @@ export default function MakeMeals() {
       const mealGroup = groupedMeals[key];
       const row = [mealGroup.time, mealGroup.title];
 
-      weekDays.forEach((day) => {
+      weekDayKeys.map((key) => t(`days.${key}`)).forEach((day) => {
         if (mealGroup.days[day]) {
           row.push(mealGroup.days[day].join(", "));
         } else {
@@ -165,15 +165,15 @@ export default function MakeMeals() {
 
     handleExportToExcel();
 
-    const daysData = weekDays.map((day) => ({
-      title: day,
+    const daysData = weekDayKeys.map((dayKey) => ({
+      title: dayKey.charAt(0).toUpperCase() + dayKey.slice(1),
       meals: [],
     }));
 
     meals.forEach((meal) => {
       const { days, ...mealDetails } = meal;
-      days.forEach((day) => {
-        const dayObject = daysData.find((d) => d.title === day);
+      days.forEach((dayKey) => {
+        const dayObject = daysData.find((d) => d.title.toLowerCase() === dayKey);
         if (dayObject) {
           dayObject.meals.push(mealDetails);
         }

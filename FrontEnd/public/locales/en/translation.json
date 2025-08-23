@@ -159,7 +159,11 @@
     "plan_title": "Meal Plan Title",
     "start_date": "Start Date",
     "end_date": "End Date",
-    "meal_title": "Meal Title (e.g., Breakfast)"
+    "meal_title": "Meal Title (e.g., Breakfast)",
+    "add_meal": "Add Meal",
+    "import_from_excel": "Import from Excel",
+    "save_meal_plan": "Save Meal Plan",
+    "create_new_meal_plan": "Create New Meal Plan"
   },
   "todo": {
     "my_tasks": "My Tasks",
@@ -179,6 +183,10 @@
   },
   "meal_plan_details": {
     "loading_details": "Loading meal plan details...",
+    "meal_plan_title": "Meal Plan Title",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "client": "Client",
     "monday": "Monday",
     "tuesday": "Tuesday",
     "wednesday": "Wednesday",

@@ -4,14 +4,14 @@ import { useTranslation } from "react-i18next";
 
 const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
   const { t } = useTranslation();
-  const weekDays = [
-    t("days.monday"),
-    t("days.tuesday"),
-    t("days.wednesday"),
-    t("days.thursday"),
-    t("days.friday"),
-    t("days.saturday"),
-    t("days.sunday"),
+  const weekDayKeys = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
   ];
   return (
     <div key={meal.id} className={styles.mealCard}>
@@ -106,14 +106,14 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
       <div className={styles.daysSelection}>
         <p>{t("make_meals.select_days")}:</p>
         <div className={styles.checkboxGroup}>
-          {weekDays.map((day) => (
-            <label key={day} className={styles.checkboxLabel}>
+          {weekDayKeys.map((dayKey) => (
+            <label key={dayKey} className={styles.checkboxLabel}>
               <input
                 type="checkbox"
-                checked={meal.days.includes(day)}
-                onChange={() => onDayToggle(mealIndex, day)}
+                checked={meal.days.includes(dayKey)}
+                onChange={() => onDayToggle(mealIndex, dayKey)}
               />
-              {day.substring(0, 3)}
+              {t(`days.${dayKey}`).substring(0, 3)}
             </label>
           ))}
         </div>
