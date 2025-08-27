@@ -78,8 +78,10 @@
     "add_first_client": "Add your first client",
     "export_to_excel": "Export to Excel",
     "add_client": "Add Client",
-    "search_clients": "Search Clients... (Name)",
-    "set_card": "Set Card"
+    "search_clients": "Search Clients... (Name or Phone)",
+    "set_card": "Set Card",
+    "add_quick_client": "Add Quick Client",
+    "add_quick_client_title": "Add Quick Client"
   },
   "client_meal_plans": {
     "title": "Meal Plans for",

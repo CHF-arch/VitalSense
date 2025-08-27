@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/AddClient.module.css";
 import { createClient } from "../../services/client";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export default function AddClient() {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +15,7 @@ export default function AddClient() {
   const [notes, setNotes] = useState("");
   const createdAt = new Date().toISOString().split("T")[0];
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +38,7 @@ export default function AddClient() {
     setGender("");
     setHasCard(false);
     setNotes("");
+    navigate("/clients");
   };
   return (
     <div className={styles.addClientContainer}>

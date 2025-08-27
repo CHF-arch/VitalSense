@@ -6,6 +6,7 @@ import {
   authorizeUrl,
   getGoogleConnectionStatus,
   disconnectGoogle,
+  sendGoogleCallback,
 } from "../../services/google";
 import googleIcon from "../../assets/google-icon.svg";
 
@@ -24,6 +25,28 @@ export default function Settings() {
       }
     };
     checkStatus();
+  }, []);
+
+  useEffect(() => {
+    const handleCallback = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+      const state = urlParams.get("state");
+
+      if (code && state) {
+        try {
+          await sendGoogleCallback(code, state);
+          const status = await getGoogleConnectionStatus();
+          setIsGoogleConnected(status.isConnected);
+          // Clean up the URL
+          window.history.replaceState({}, document.title, "/settings");
+        } catch (error) {
+          console.error("Error handling Google callback:", error);
+        }
+      }
+    };
+
+    handleCallback();
   }, []);
 
   const changeLanguage = (lng) => {

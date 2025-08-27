@@ -78,8 +78,10 @@
     "add_first_client": "Προσθήκη του πρώτου πελάτη σου",
     "export_to_excel": "Εξαγωγή σε Excel",
     "add_client": "Προσθήκη Πελάτη",
-    "search_clients": "Αναζήτηση Πελατών... (Όνομα)",
-    "set_card": "Φτιάξτε κάρτα"
+    "search_clients": "Αναζήτηση Πελατών... (Όνομα ή Τηλέφωνο)",
+    "set_card": "Φτιάξτε κάρτα",
+    "add_quick_client": "Γρήγορη Προσθήκη Πελάτη",
+    "add_quick_client_title": "Γρήγορη Προσθήκη Πελάτη"
   },
   "client_meal_plans": {
     "title": "Διατροφικά Πλάνα για",

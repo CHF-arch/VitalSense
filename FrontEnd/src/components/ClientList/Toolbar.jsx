@@ -19,6 +19,9 @@ export default function Toolbar({ searchTerm, setSearchTerm, handleExport }) {
       <Link to="/add-client" className={styles.button}>
         {t("clientlist.add_client")}
       </Link>
+      <Link to="/add-quick-client" className={styles.button}>
+        {t("clientlist.add_quick_client")}
+      </Link>
     </div>
   );
 }

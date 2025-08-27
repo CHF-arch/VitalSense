@@ -19,6 +19,7 @@ import MealPlanDetailsPage from "./pages/MealPlanDetailsPage.jsx";
 import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SetCardPage from "./pages/SetCardPage.jsx";
+import AddQuickClientPage from "./pages/AddQuickClientPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import "./i18n.js";
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: "add-client",
             element: <AddClientPage />,
+          },
+          {
+            path: "add-quick-client",
+            element: <AddQuickClientPage />,
           },
           {
             path: "make-meals/:clientId",
