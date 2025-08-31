@@ -1,6 +1,5 @@
 import {
   getAllClients,
-  updateClient,
   deleteClient,
 } from "../../services/client";
 import { useEffect, useState } from "react";
@@ -15,8 +14,6 @@ export default function ClientsList() {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [editingClientId, setEditingClientId] = useState(null);
-  const [editedClientData, setEditedClientData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation();
 
@@ -41,46 +38,6 @@ export default function ClientsList() {
     } catch (error) {
       console.error("Error deleting client:", error);
     }
-  };
-
-  const handleEdit = (client) => {
-    setEditingClientId(client.id);
-    setEditedClientData({
-      firstName: client.firstName,
-      lastName: client.lastName,
-      email: client.email,
-      phone: client.phone,
-      dateOfBirth: client.dateOfBirth.split("T")[0],
-      gender: client.gender,
-      hasCard: client.hasCard,
-      notes: client.notes,
-    });
-  };
-
-  const handleCancel = () => {
-    setEditingClientId(null);
-  };
-
-  const handleSave = async (clientId) => {
-    try {
-      const clientToUpdate = clients.find((client) => client.id === clientId);
-      const updatedData = { ...clientToUpdate, ...editedClientData };
-      await updateClient(clientId, updatedData);
-      setClients(
-        clients.map((client) => (client.id === clientId ? updatedData : client))
-      );
-      setEditingClientId(null);
-    } catch (error) {
-      console.error("Error updating client:", error);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setEditedClientData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
   };
 
   const handleExport = () => {
@@ -141,13 +98,7 @@ export default function ClientsList() {
           <ClientCard
             key={client.id}
             client={client}
-            editingClientId={editingClientId}
-            editedClientData={editedClientData}
-            handleEdit={handleEdit}
             handleDelete={handleDelete}
-            handleInputChange={handleInputChange}
-            handleSave={handleSave}
-            handleCancel={handleCancel}
           />
         ))}
       </div>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { createMealPlan } from "../../services/mealPlan";
-import { getClientById, updateClient } from "../../services/client";
+import { getClientById } from "../../services/client";
 import ClientInfoCard from "../ClientInfoCard";
-import ClientEditForm from "./ClientEditForm";
 import PlanDetails from "./PlanDetails";
 import MealCard from "./MealCard";
 import styles from "../../styles/MakeMeals.module.css";
@@ -28,8 +27,6 @@ export default function MakeMeals() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [meals, setMeals] = useState([]);
-  const [isEditingClient, setIsEditingClient] = useState(false);
-  const [editedClientData, setEditedClientData] = useState({});
   const { t } = useTranslation();
   const weekDayKeys = [
     "monday",
@@ -98,7 +95,11 @@ export default function MakeMeals() {
     const wb = XLSX.utils.book_new();
     const wsData = [];
 
-    const header = ["Time", "Meal", ...weekDayKeys.map((key) => t(`days.${key}`))];
+    const header = [
+      "Time",
+      "Meal",
+      ...weekDayKeys.map((key) => t(`days.${key}`)),
+    ];
     wsData.push(header);
 
     // Create a composite key for grouping: `time-title`
@@ -124,13 +125,15 @@ export default function MakeMeals() {
       const mealGroup = groupedMeals[key];
       const row = [mealGroup.time, mealGroup.title];
 
-      weekDayKeys.map((key) => t(`days.${key}`)).forEach((day) => {
-        if (mealGroup.days[day]) {
-          row.push(mealGroup.days[day].join(", "));
-        } else {
-          row.push("");
-        }
-      });
+      weekDayKeys
+        .map((key) => t(`days.${key}`))
+        .forEach((day) => {
+          if (mealGroup.days[day]) {
+            row.push(mealGroup.days[day].join(", "));
+          } else {
+            row.push("");
+          }
+        });
       wsData.push(row);
     }
 
@@ -173,7 +176,9 @@ export default function MakeMeals() {
     meals.forEach((meal) => {
       const { days, ...mealDetails } = meal;
       days.forEach((dayKey) => {
-        const dayObject = daysData.find((d) => d.title.toLowerCase() === dayKey);
+        const dayObject = daysData.find(
+          (d) => d.title.toLowerCase() === dayKey
+        );
         if (dayObject) {
           dayObject.meals.push(mealDetails);
         }
@@ -202,58 +207,11 @@ export default function MakeMeals() {
     }
   };
 
-  const handleEditClient = () => {
-    setIsEditingClient(true);
-    setEditedClientData({
-      firstName: client.firstName,
-      lastName: client.lastName,
-      email: client.email,
-      phone: client.phone,
-      dateOfBirth: client.dateOfBirth.split("T")[0],
-      gender: client.gender,
-      hasCard: client.hasCard,
-      notes: client.notes,
-    });
-  };
-
-  const handleCancelEdit = () => {
-    setIsEditingClient(false);
-    setEditedClientData({});
-  };
-
-  const handleClientInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setEditedClientData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSaveClient = async () => {
-    try {
-      const updatedClient = { ...client, ...editedClientData };
-      await updateClient(clientId, updatedClient);
-      setClient(updatedClient);
-      setIsEditingClient(false);
-      alert("Client updated successfully!");
-    } catch (error) {
-      console.error("Error updating client:", error);
-      alert("Failed to update client.");
-    }
-  };
-
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>{t("make_meals.create_new_meal_plan")}</h1>
-      {client && !isEditingClient ? (
-        <ClientInfoCard client={client} onEditClick={handleEditClient} />
-      ) : client && isEditingClient ? (
-        <ClientEditForm
-          editedClientData={editedClientData}
-          onInputChange={handleClientInputChange}
-          onSave={handleSaveClient}
-          onCancel={handleCancelEdit}
-        />
+      {client ? (
+        <ClientInfoCard client={client} />
       ) : (
         <p>{t("make_meals.loading_client_info")}</p>
       )}

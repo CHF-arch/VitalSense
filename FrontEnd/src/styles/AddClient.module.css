@@ -104,6 +104,49 @@
   gap: 10px;
   font-size: 1.5rem;
   color: var(--text-color-secondary);
+  background: var(--input-background);
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 1px 2px var(--shadow-color-light);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.checkboxLabel:hover {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 4px var(--input-shadow-focus),
+    0 8px 16px var(--shadow-color-medium);
+  transform: translateY(-1px);
+}
+
+.checkboxInput {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--input-border);
+  border-radius: 6px;
+  background-color: var(--input-background);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.checkboxInput:checked {
+  background-color: var(--gradient-green-start);
+  border-color: var(--gradient-green-end);
+}
+
+.checkboxInput:checked::after {
+  content: "✔";
+  font-size: 18px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .button {

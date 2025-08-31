@@ -75,6 +75,7 @@ export default function AddQuickClient() {
           id="phone"
           name="phone"
           required
+          maxLength="15"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />

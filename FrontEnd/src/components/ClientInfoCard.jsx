@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/ClientInfoCard.module.css";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function ClientInfoCard({ client, onEditClick }) {
   const { t } = useTranslation();
@@ -22,9 +23,11 @@ export default function ClientInfoCard({ client, onEditClick }) {
           >
             {client.hasCard ? "Card Holder" : "No Card"}
           </span>
-          <button onClick={onEditClick} className={styles.editButton}>
-            {t("client_info_card.edit_client")}
-          </button>
+          <Link to={`/edit-client/${client.id}`}>
+            <button onClick={onEditClick} className={styles.editButton}>
+              {t("client_info_card.edit_client")}
+            </button>
+          </Link>
         </div>
       </div>
       <div className={styles.body}>

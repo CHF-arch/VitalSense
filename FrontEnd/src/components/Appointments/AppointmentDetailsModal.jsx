@@ -90,11 +90,8 @@ const AppointmentDetailsModal = ({
     const updatedData = {
       ...appointment, // Keep existing properties
       title,
-      start: moment(start, "YYYY-MM-DDTHH:mm")
-        .add(3, "hours")
-        .utc()
-        .toISOString(),
-      end: moment(end, "YYYY-MM-DDTHH:mm").add(3, "hours").utc().toISOString(),
+      start: moment(start, "YYYY-MM-DDTHH:mm").utc().toISOString(),
+      end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
       clientId: selectedClient.id,
     };
     await onUpdate(appointment.id, updatedData);

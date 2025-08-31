@@ -20,6 +20,7 @@ import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SetCardPage from "./pages/SetCardPage.jsx";
 import AddQuickClientPage from "./pages/AddQuickClientPage.jsx";
+import EditClientPage from "./pages/EditClientPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import "./i18n.js";
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
           {
             path: "set-card/:clientId",
             element: <SetCardPage />,
+          },
+          {
+            path: "edit-client/:clientId",
+            element: <EditClientPage />,
           },
         ],
       },

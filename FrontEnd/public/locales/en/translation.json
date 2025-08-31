@@ -1,6 +1,7 @@
 {
   "common": {
-    "meal": "Meal"
+    "meal": "Meal",
+    "back": "Back"
   },
   "settings": {
     "title": "Settings",
@@ -29,6 +30,10 @@
     "notes": "Notes",
     "submit_button": "Add Client",
     "add_any_relevant": "Add any relevant notes about the client..."
+  },
+  "edit_client": {
+    "title": "Edit Client",
+    "submit_button": "Save Changes"
   },
   "appointments": {
     "appointment_details": "Appointment Details",

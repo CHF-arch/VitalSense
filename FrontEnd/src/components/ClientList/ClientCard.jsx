@@ -4,107 +4,18 @@ import { useTranslation } from "react-i18next";
 
 export default function ClientCard({
   client,
-  editingClientId,
-  editedClientData,
-  handleEdit,
   handleDelete,
-  handleInputChange,
-  handleSave,
-  handleCancel,
 }) {
   const { t } = useTranslation();
   return (
     <div key={client.id} className={styles.clientCard}>
-      {editingClientId === client.id ? (
-        <div className={styles.editForm}>
-          <div className={styles.formRow}>
-            <input
-              type="text"
-              name="firstName"
-              value={editedClientData.firstName}
-              onChange={handleInputChange}
-              className={styles.inputField}
-            />
-            <input
-              type="text"
-              name="lastName"
-              value={editedClientData.lastName}
-              onChange={handleInputChange}
-              className={styles.inputField}
-            />
-            <input
-              type="email"
-              name="email"
-              value={editedClientData.email}
-              onChange={handleInputChange}
-              className={styles.inputField}
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="text"
-              name="phone"
-              value={editedClientData.phone}
-              onChange={handleInputChange}
-              className={styles.inputField}
-            />
-            <input
-              type="date"
-              name="dateOfBirth"
-              value={editedClientData.dateOfBirth}
-              onChange={handleInputChange}
-              className={styles.inputField}
-            />
-            <select
-              name="gender"
-              value={editedClientData.gender}
-              onChange={handleInputChange}
-              className={styles.inputField}
-            >
-              <option value="">{t("clientlist.select_gender")}</option>
-              <option value="male">{t("clientlist.male")}</option>
-              <option value="female">{t("clientlist.female")}</option>
-            </select>
-            <label className={styles.checkboxLabel}>
-              <input
-                type="checkbox"
-                name="hasCard"
-                checked={editedClientData.hasCard}
-                onChange={handleInputChange}
-              />
-              {t("clientlist.has_card")}
-            </label>
-          </div>
-          <textarea
-            name="notes"
-            value={editedClientData.notes}
-            onChange={handleInputChange}
-            className={styles.textareaField}
-          />
-          <div className={styles.actions}>
-            <button
-              className={styles.saveButton}
-              onClick={() => handleSave(client.id)}
-            >
-              {t("clientlist.save_changes")}
-            </button>
-            <button className={styles.cancelButton} onClick={handleCancel}>
-              {t("clientlist.cancel")}
-            </button>
-          </div>
-        </div>
-      ) : (
         <>
           <div className={styles.cardHeader}>
             <h3 className={styles.clientName}>
               {client.firstName} {client.lastName}
             </h3>
             <div className={styles.cardActions}>
-              <button
-                className={styles.editIcon}
-                onClick={() => handleEdit(client)}
-                title="Edit client"
-              >
+              <Link to={`/edit-client/${client.id}`} className={styles.editIcon} title="Edit client">
                 <svg
                   width="16"
                   height="16"
@@ -116,7 +27,7 @@ export default function ClientCard({
                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                   <path d="m18.5 2.5 a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                 </svg>
-              </button>
+              </Link>
               <button
                 className={styles.deleteIcon}
                 onClick={() => handleDelete(client.id)}
@@ -232,27 +143,17 @@ export default function ClientCard({
             </div>
           )}
           <div className={styles.buttonsContainer}>
-            <Link
-              to={`/make-meals/${client.id}`}
-              className={styles.cardButton}
-            >
+            <Link to={`/make-meals/${client.id}`} className={styles.cardButton}>
               {t("clientlist.create_meal_plan")}
             </Link>
-            <Link
-              to={`/meal-plans/${client.id}`}
-              className={styles.cardButton}
-            >
+            <Link to={`/meal-plans/${client.id}`} className={styles.cardButton}>
               {t("clientlist.meal_plans")}
             </Link>
-            <Link
-              to={`/set-card/${client.id}`}
-              className={styles.cardButton}
-            >
+            <Link to={`/set-card/${client.id}`} className={styles.cardButton}>
               {t("clientlist.set_card")}
             </Link>
           </div>
         </>
-      )}
     </div>
   );
 }

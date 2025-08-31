@@ -1,49 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getClientById, updateClient } from "../../services/client";
 import styles from "../../styles/AddClient.module.css";
-import { createClient } from "../../services/client";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
-export default function AddClient() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [hasCard, setHasCard] = useState(false);
-  const [notes, setNotes] = useState("");
-  const createdAt = new Date().toISOString().split("T")[0];
+export default function EditClient() {
+  const { clientId } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const [clientData, setClientData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    dateOfBirth: "",
+    gender: "",
+    hasCard: false,
+    notes: "",
+  });
+
+  useEffect(() => {
+    const fetchClient = async () => {
+      try {
+        const client = await getClientById(clientId);
+        setClientData({
+          ...client,
+          dateOfBirth: client.dateOfBirth ? client.dateOfBirth.split("T")[0] : "",
+        });
+      } catch (error) {
+        console.error("Error fetching client:", error);
+      }
+    };
+
+    fetchClient();
+  }, [clientId]);
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setClientData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createClient({
-      firstName,
-      lastName,
-      email,
-      phone,
-      dateOfBirth,
-      gender,
-      hasCard,
-      notes,
-      createdAt,
-    });
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPhone("");
-    setDateOfBirth("");
-    setGender("");
-    setHasCard(false);
-    setNotes("");
-    navigate("/clients");
+    try {
+      await updateClient(clientId, clientData);
+      navigate(-1); // Navigate back after successful update
+    } catch (error) {
+      console.error("Error updating client:", error);
+    }
   };
+
   return (
     <div className={styles.addClientContainer}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2 className={styles.h2}>{t("add_client.title")}</h2>
+        <h2 className={styles.h2}>{t("edit_client.title")}</h2>
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label className={styles.label}>
@@ -52,8 +66,8 @@ export default function AddClient() {
                 className={styles.input}
                 type="text"
                 name="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={clientData.firstName}
+                onChange={handleInputChange}
                 required
               />
             </label>
@@ -65,8 +79,8 @@ export default function AddClient() {
                 className={styles.input}
                 type="text"
                 name="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={clientData.lastName}
+                onChange={handleInputChange}
                 required
               />
             </label>
@@ -80,8 +94,8 @@ export default function AddClient() {
                 className={styles.input}
                 type="email"
                 name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={clientData.email}
+                onChange={handleInputChange}
                 required
               />
             </label>
@@ -93,8 +107,8 @@ export default function AddClient() {
                 className={styles.input}
                 type="tel"
                 name="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={clientData.phone}
+                onChange={handleInputChange}
                 maxLength="15"
                 required
               />
@@ -109,8 +123,8 @@ export default function AddClient() {
                 className={styles.input}
                 type="date"
                 name="dateOfBirth"
-                value={dateOfBirth}
-                onChange={(e) => setDateOfBirth(e.target.value)}
+                value={clientData.dateOfBirth}
+                onChange={handleInputChange}
                 required
               />
             </label>
@@ -121,8 +135,8 @@ export default function AddClient() {
               <select
                 className={styles.input}
                 name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                value={clientData.gender}
+                onChange={handleInputChange}
                 required
               >
                 <option value="">{t("add_client.select_gender")}</option>
@@ -139,8 +153,8 @@ export default function AddClient() {
                 className={styles.checkboxInput}
                 type="checkbox"
                 name="hasCard"
-                checked={hasCard}
-                onChange={(e) => setHasCard(e.target.checked)}
+                checked={clientData.hasCard}
+                onChange={handleInputChange}
               />
               {t("add_client.has_card")}
             </label>
@@ -152,14 +166,14 @@ export default function AddClient() {
             <textarea
               className={styles.textarea}
               name="notes"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              value={clientData.notes}
+              onChange={handleInputChange}
               placeholder={t("add_client.add_any_relevant")}
             />
           </label>
         </div>
         <button className={styles.button} type="submit">
-          {t("add_client.submit_button")}
+          {t("edit_client.submit_button")}
         </button>
       </form>
     </div>

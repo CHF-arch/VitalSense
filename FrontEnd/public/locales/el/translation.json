@@ -1,6 +1,7 @@
 {
   "common": {
-    "meal": "Γεύμα"
+    "meal": "Γεύμα",
+    "back": "Πίσω"
   },
   "settings": {
     "title": "Ρυθμίσεις",
@@ -29,6 +30,10 @@
     "notes": "Σημειώσεις",
     "submit_button": "Προσθήκη Πελάτη",
     "add_any_relevant": "Προσθέστε σχετικές σημειώσεις σχετικά με τον πελάτη..."
+  },
+  "edit_client": {
+    "title": "Επεξεργασία Πελάτη",
+    "submit_button": "Αποθήκευση Αλλαγών"
   },
   "appointments": {
     "appointment_details": "Λεπτομέρειες Ραντεβού",

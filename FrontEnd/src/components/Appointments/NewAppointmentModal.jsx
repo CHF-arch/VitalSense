@@ -26,11 +26,6 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
   const [newClientLastName, setNewClientLastName] = useState("");
   const [newClientEmail, setNewClientEmail] = useState("");
   const [newClientPhoneNumber, setNewClientPhoneNumber] = useState("");
-  const [newClientDateOfBirth, setNewClientDateOfBirth] = useState("");
-  const [newClientGender, setNewClientGender] = useState("");
-  const [newClientHasCard, setNewClientHasCard] = useState(false);
-  const [newClientNotes, setNewClientNotes] = useState("");
-
   // Debounced search for clients
   useEffect(() => {
     if (mode === "search") {
@@ -72,10 +67,6 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
           lastName: newClientLastName,
           email: newClientEmail,
           phone: newClientPhoneNumber,
-          dateOfBirth: newClientDateOfBirth,
-          gender: newClientGender,
-          hasCard: newClientHasCard,
-          notes: newClientNotes,
           createdAt: createdAt,
         };
         const createdClient = await createClient(newClientData);
@@ -103,13 +94,10 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
       return;
     }
 
-        await onSubmit({
+    await onSubmit({
       title,
-      start: moment(start, "YYYY-MM-DDTHH:mm")
-        .add(3, "hours")
-        .utc()
-        .toISOString(),
-      end: moment(end, "YYYY-MM-DDTHH:mm").add(3, "hours").utc().toISOString(),
+      start: moment(start, "YYYY-MM-DDTHH:mm").utc().toISOString(),
+      end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
       clientId: finalClientId,
     });
     window.location.reload();
@@ -157,14 +145,6 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
               setNewClientEmail={setNewClientEmail}
               newClientPhoneNumber={newClientPhoneNumber}
               setNewClientPhoneNumber={setNewClientPhoneNumber}
-              newClientDateOfBirth={newClientDateOfBirth}
-              setNewClientDateOfBirth={setNewClientDateOfBirth}
-              newClientGender={newClientGender}
-              setNewClientGender={setNewClientGender}
-              newClientHasCard={newClientHasCard}
-              setNewClientHasCard={setNewClientHasCard}
-              newClientNotes={newClientNotes}
-              setNewClientNotes={setNewClientNotes}
             />
           )}
 

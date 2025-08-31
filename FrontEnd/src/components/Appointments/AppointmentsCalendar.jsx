@@ -78,8 +78,8 @@ const AppointmentsCalendar = () => {
           return {
             ...appointment,
             title: appointment.title, // Use the title as is
-            start: new Date(appointment.start),
-            end: new Date(appointment.end),
+            start: moment.utc(appointment.start).local().toDate(),
+            end: moment.utc(appointment.end).local().toDate(),
             client: clientDetails, // Ensure client details are attached
           };
         })
@@ -116,8 +116,8 @@ const AppointmentsCalendar = () => {
       // Add the client details to the created appointment object
       const eventWithClient = {
         ...createdAppointment,
-        start: new Date(createdAppointment.start),
-        end: new Date(createdAppointment.end),
+        start: moment.utc(createdAppointment.start).local().toDate(),
+        end: moment.utc(createdAppointment.end).local().toDate(),
         client: clientDetails,
       };
 
@@ -165,8 +165,8 @@ const AppointmentsCalendar = () => {
             return {
               ...updatedAppointment,
               title: updatedAppointment.title, // Use the title as is
-              start: new Date(updatedAppointment.start),
-              end: new Date(updatedAppointment.end),
+              start: moment.utc(updatedAppointment.start).local().toDate(),
+              end: moment.utc(updatedAppointment.end).local().toDate(),
               client: clientDetails,
             };
           }

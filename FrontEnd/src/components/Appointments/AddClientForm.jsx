@@ -11,14 +11,6 @@ const AddClientForm = ({
   setNewClientEmail,
   newClientPhoneNumber,
   setNewClientPhoneNumber,
-  newClientDateOfBirth,
-  setNewClientDateOfBirth,
-  newClientGender,
-  setNewClientGender,
-  newClientHasCard,
-  setNewClientHasCard,
-  newClientNotes,
-  setNewClientNotes,
 }) => {
   const { t } = useTranslation();
 
@@ -63,6 +55,7 @@ const AddClientForm = ({
           value={newClientPhoneNumber}
           onChange={(e) => setNewClientPhoneNumber(e.target.value)}
           className={styles.textInput}
+          maxLength="15"
           required
         />
       </div>
@@ -76,61 +69,6 @@ const AddClientForm = ({
           value={newClientEmail}
           onChange={(e) => setNewClientEmail(e.target.value)}
           className={styles.textInput}
-        />
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="newClientDateOfBirth" className={styles.inputLabel}>
-          {t("appointments.date_of_birth")}:
-        </label>
-        <input
-          type="date"
-          n
-          id="newClientDateOfBirth"
-          value={newClientDateOfBirth || ""}
-          onChange={(e) => setNewClientDateOfBirth(e.target.value)}
-          className={styles.textInput}
-        />
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="newClientGender" className={styles.inputLabel}>
-          {t("appointments.gender")}:
-        </label>
-        <select
-          id="newClientGender"
-          value={newClientGender}
-          onChange={(e) => setNewClientGender(e.target.value)}
-          className={styles.textInput}
-        >
-          <option value="">{t("appointments.select_gender")}</option>
-          <option value="male">{t("appointments.male")}</option>
-          <option value="female">{t("appointments.female")}</option>
-        </select>
-      </div>
-      <div className={styles.formGroup}>
-        <label
-          htmlFor="newClientHasCard"
-          className={styles.hasCardCheckboxLabel}
-        >
-          {t("appointments.has_card")}
-          <input
-            type="checkbox"
-            id="newClientHasCard"
-            checked={newClientHasCard}
-            onChange={(e) => setNewClientHasCard(e.target.checked)}
-            className={styles.checkboxInput}
-          />
-        </label>
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="newClientNotes" className={styles.inputLabel}>
-          {t("appointments.notes")}
-        </label>
-        <textarea
-          id="newClientNotes"
-          value={newClientNotes}
-          onChange={(e) => setNewClientNotes(e.target.value)}
-          className={styles.textareaInput}
-          rows="3"
         />
       </div>
     </div>
