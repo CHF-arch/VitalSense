@@ -75,13 +75,30 @@ export const updateAppointment = async (appointmentId, appointmentData) => {
 
 export const getAppointmentsByDate = async (date) => {
   try {
-    const response = await fetchWithAuth(`${API_BASE_URL}/appointments/date/${date}`);
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/appointments/date/${date}`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch appointments for date");
     }
     return await response.json();
   } catch (error) {
     console.error(`Error fetching appointments for date ${date}:`, error);
+    throw error;
+  }
+};
+
+export const getAppointmentsFrom = async (from, to) => {
+  try {
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/appointments/range/${from}/${to}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch appointments from date");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`Error fetching appointments from date ${from}:`, error);
     throw error;
   }
 };

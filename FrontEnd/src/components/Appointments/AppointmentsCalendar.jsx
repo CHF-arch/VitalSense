@@ -4,9 +4,9 @@ import moment from "moment";
 import "moment/locale/el"; // Import Greek locale for moment
 import {
   createAppointment,
-  getAppointments,
   updateAppointment,
   deleteAppointment,
+  getAppointmentsFrom,
 } from "../../services/appointment";
 import { getClientById } from "../../services/client"; // Import getClientById
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -56,13 +56,13 @@ const AppointmentsCalendar = () => {
     };
   }, [i18n.language, t]);
 
-  const fetchAppointments = async () => {
+  
+  const fetchAppointmentsFrom = async (from, to) => {
     try {
-      const appointments = await getAppointments();
+      const appointments = await getAppointmentsFrom(from, to);
       const formattedEvents = await Promise.all(
         appointments.map(async (appointment) => {
           let clientDetails = appointment.client;
-          // If client details are not embedded, fetch them
           if (!clientDetails && appointment.clientId) {
             try {
               clientDetails = await getClientById(appointment.clientId);
@@ -74,7 +74,6 @@ const AppointmentsCalendar = () => {
               clientDetails = null; // Set to null if fetching fails
             }
           }
-
           return {
             ...appointment,
             title: appointment.title, // Use the title as is
@@ -91,7 +90,9 @@ const AppointmentsCalendar = () => {
   };
 
   useEffect(() => {
-    fetchAppointments();
+    const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
+    const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
+    fetchAppointmentsFrom(startOfMonth, endOfMonth);
   }, []);
 
   const handleOpenNewAppointmentModal = () => setShowNewAppointmentModal(true);
@@ -193,6 +194,11 @@ const AppointmentsCalendar = () => {
       alert("Failed to delete appointment. Please try again.");
     }
   };
+  const handleNavigate = (date) => {
+    const startOfMonth = moment(date).startOf("month").format("YYYY-MM-DD");
+    const endOfMonth = moment(date).endOf("month").format("YYYY-MM-DD");
+    fetchAppointmentsFrom(startOfMonth, endOfMonth);
+  };
 
   return (
     <div
@@ -211,6 +217,7 @@ const AppointmentsCalendar = () => {
         culture={i18n.language} // Explicitly set the culture
         messages={messages}
         formats={formats}
+        onNavigate={handleNavigate}
       />
       <div className={styles.buttonContainer}>
         <button

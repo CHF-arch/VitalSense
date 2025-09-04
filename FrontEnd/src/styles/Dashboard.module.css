@@ -193,7 +193,45 @@
   overflow-y: auto;
 }
 
-@media (max-width: 786px) {
+@media (max-width: 1440px) {
+  .dashboardContainer {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .mainContentWrapper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-height: none;
+    margin: 10px 0;
+    box-sizing: border-box;
+  }
+
+  .contentBox3 {
+    flex-direction: column;
+    height: 75vh; /* Taller height for larger screens */
+    padding: 15px;
+  }
+
+  .leftDiv {
+    width: 100vh;
+    max-height: 35vh; /* Assign a portion of the height */
+    overflow-y: auto; /* Add scroll for appointments */
+    margin: 0 0 15px 0;
+  }
+
+  .rightContentBox {
+    width: 100%;
+    max-height: none;
+    margin: 0;
+  }
+}
+
+@media (max-width: 1024px) {
   .dashboardContainer {
     flex-direction: column;
     height: auto;
