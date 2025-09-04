@@ -158,10 +158,10 @@
     "title": "Meal Title",
     "time": "Time",
     "description": "Description",
-    "protein": "Protein",
-    "carbs": "Carbs",
-    "fat": "Fat",
-    "calories": "Calories",
+    "protein": "Protein (g)",
+    "carbs": "Carbs (g)",
+    "calories": "Calories (g)",
+    "fats": "Fats (g)",
     "select_days": "Select days for this meal",
     "plan_title": "Meal Plan Title",
     "start_date": "Start Date",
@@ -170,7 +170,8 @@
     "add_meal": "Add Meal",
     "import_from_excel": "Import from Excel",
     "save_meal_plan": "Save Meal Plan",
-    "create_new_meal_plan": "Create New Meal Plan"
+    "create_new_meal_plan": "Create New Meal Plan",
+    "loading": "Processing your meal plan..."
   },
   "todo": {
     "my_tasks": "My Tasks",
@@ -209,7 +210,11 @@
     "email": "Email",
     "phone_number": "Phone Number",
     "date_of_birth": "Date of Birth",
-    "gender": "Gender"
+    "gender": "Gender",
+    "card_holder": "Card Holder",
+    "no_card": "No Card",
+    "male": "Male",
+    "female": "Female"
   },
   "login": {
     "dark_mode": "Dark Mode",

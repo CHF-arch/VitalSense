@@ -21,7 +21,9 @@ export default function ClientInfoCard({ client, onEditClick }) {
               client.hasCard ? styles.hasCard : ""
             }`}
           >
-            {client.hasCard ? "Card Holder" : "No Card"}
+            {client.hasCard
+              ? t("client_info_card.card_holder")
+              : t("client_info_card.no_card")}
           </span>
           <Link to={`/edit-client/${client.id}`}>
             <button onClick={onEditClick} className={styles.editButton}>
@@ -51,7 +53,11 @@ export default function ClientInfoCard({ client, onEditClick }) {
         </div>
         <div className={styles.infoRow}>
           <span className={styles.label}>{t("client_info_card.gender")}:</span>
-          <span className={styles.value}>{client.gender}</span>
+          <span className={styles.value}>
+            {client.gender === "male"
+              ? t("client_info_card.male")
+              : t("client_info_card.female")}
+          </span>
         </div>
       </div>
       {client.notes && (

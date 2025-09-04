@@ -48,7 +48,7 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
       <div className={styles.nutritionRow}>
         <div>
           <label htmlFor={`protein-${mealIndex}`}>
-            {t("make_meals.protein")} (g)
+            {t("make_meals.protein")}
           </label>
           <input
             id={`protein-${mealIndex}`}
@@ -61,9 +61,7 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
           />
         </div>
         <div>
-          <label htmlFor={`carbs-${mealIndex}`}>
-            {t("make_meals.carbs")} (g)
-          </label>
+          <label htmlFor={`carbs-${mealIndex}`}>{t("make_meals.carbs")}</label>
           <input
             id={`carbs-${mealIndex}`}
             type="number"
@@ -75,9 +73,7 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
           />
         </div>
         <div>
-          <label htmlFor={`fats-${mealIndex}`}>
-            {t("make_meals.fats")} (g)
-          </label>
+          <label htmlFor={`fats-${mealIndex}`}>{t("make_meals.fats")}</label>
           <input
             id={`fats-${mealIndex}`}
             type="number"

@@ -8,6 +8,7 @@ import PlanDetails from "./PlanDetails";
 import MealCard from "./MealCard";
 import styles from "../../styles/MakeMeals.module.css";
 import { useTranslation } from "react-i18next";
+import { postMealPlanAI } from "../../services/mealPlanAI";
 
 const initialMealState = {
   title: "",
@@ -27,6 +28,7 @@ export default function MakeMeals() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const weekDayKeys = [
     "monday",
@@ -112,11 +114,11 @@ export default function MakeMeals() {
           days: {},
         };
       }
-      meal.days.forEach((dayKey) => {
-        if (!acc[key].days[t(`days.${dayKey}`)]) {
-          acc[key].days[t(`days.${dayKey}`)] = [];
+      meal.days.forEach(() => {
+        if (!acc[key].days[t(`days.${key}`)]) {
+          acc[key].days[t(`days.${key}`)] = [];
         }
-        acc[key].days[t(`days.${dayKey}`)].push(meal.description);
+        acc[key].days[t(`days.${key}`)].push(meal.description);
       });
       return acc;
     }, {});
@@ -142,24 +144,42 @@ export default function MakeMeals() {
     XLSX.writeFile(wb, `${planTitle || "MealPlan"}.xlsx`);
   };
 
-  const handleImportFromExcel = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: "array" });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+  const handleImportFromExcel = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-        console.log("Imported Excel data (raw JSON):", json);
+    if (!client || !client.dieticianId) {
+      alert("Client data is not loaded yet, or dietician ID is missing.");
+      return;
+    }
 
-        alert(
-          "Excel file imported. Check console for raw data. Please provide the desired JSON schema for meal plans."
-        );
-      };
-      reader.readAsArrayBuffer(file);
+    setIsLoading(true);
+    try {
+      const response = await postMealPlanAI(file, clientId, client.dieticianId);
+      if (response && response.days && Array.isArray(response.days)) {
+        const importedMeals = response.days
+          .flatMap((day) => day.meals)
+          .map((meal) => ({
+            ...initialMealState,
+            id: Date.now() + Math.random(),
+            title: meal.title || "",
+            time: meal.time || "",
+            description: meal.description || "",
+            protein: meal.protein || 0,
+            carbs: meal.carbs || 0,
+            fats: meal.fats || 0,
+            calories: meal.calories || 0,
+            days: [],
+          }));
+        setMeals((prevMeals) => [...prevMeals, ...importedMeals]);
+      } else {
+        alert(t("make_meals.invalid_file_format"));
+      }
+    } catch (error) {
+      console.error("Error importing meal plan:", error);
+      alert(t("make_meals.error_importing_file"));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -184,12 +204,12 @@ export default function MakeMeals() {
         }
       });
     });
-    const dieticianId = "3fa85f64-5717-4562-b3fc-2c963f66afa6";
+
     const mealPlanData = {
       title: planTitle,
       startDate,
       endDate,
-      dieticianId,
+      dieticianId: client?.dieticianId,
       clientId: clientId,
       days: daysData.filter((day) => day.meals.length > 0),
     };
@@ -209,6 +229,12 @@ export default function MakeMeals() {
 
   return (
     <div className={styles.container}>
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingSpinner}></div>
+          <p>{t("make_meals.loading", "Processing your meal plan...")}</p>
+        </div>
+      )}
       <h1 className={styles.h1}>{t("make_meals.create_new_meal_plan")}</h1>
       {client ? (
         <ClientInfoCard client={client} />

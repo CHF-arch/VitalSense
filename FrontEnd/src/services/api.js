@@ -26,3 +26,26 @@ export const fetchWithAuth = async (url, options = {}) => {
 
   return response;
 };
+
+export const fetchWithAuthForFormData = async (url, options = {}) => {
+  const accessToken = sessionStorage.getItem("token");
+  const headers = new Headers(options.headers);
+
+  if (accessToken) {
+    headers.set("Authorization", `Bearer ${accessToken}`);
+  }
+
+  const config = {
+    ...options,
+    headers,
+  };
+
+  const response = await fetch(url, config);
+
+  if (response.status === 401) {
+    logoutUser();
+    throw new Error("Session expired. Please log in again.");
+  }
+
+  return response;
+};

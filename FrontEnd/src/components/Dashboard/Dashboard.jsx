@@ -126,7 +126,7 @@ export default function Dashboard() {
                 {todayAppointments.map((appointment) => (
                   <li key={appointment.id} className={styles.listItem}>
                     {appointment.title} at{" "}
-                    {moment(appointment.start).format("HH:mm")}
+                    {moment.utc(appointment.start).local().format("HH:mm")}
                   </li>
                 ))}
               </ul>
