@@ -1,88 +1,79 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .container {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 12px 32px var(--shadow-color-medium);
-  background: var(--card-background);
-  border: 1px solid var(--border-color-light);
-  backdrop-filter: blur(10px);
+  /* This container is now inside the modalContent from Modal.module.css */
 }
 
 .title {
-  text-align: center;
-  margin-bottom: 30px;
+  margin-top: 0;
   color: var(--text-color-primary);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-blue-start) 0%,
-    var(--gradient-blue-end) 50%,
-    var(--gradient-cyan-start) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .label {
   display: block;
-  margin-bottom: 15px;
-  color: var(--text-color-secondary);
-  font-size: 0.95rem;
+  margin-bottom: 0;
+  color: var(--text-color-primary);
+  font-size: 1rem;
   text-align: left;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 .input {
-  padding: 14px 18px;
-  border: 1px solid var(--input-border);
-  border-radius: 12px;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color-medium);
+  border-radius: 4px;
   font-size: 1rem;
   width: 100%;
   box-sizing: border-box;
   background: var(--input-background);
   color: var(--text-color-primary);
   font-weight: 400;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 2px var(--shadow-color-light);
-  font-family: inherit;
+  box-shadow: none;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 4px var(--input-shadow-focus),
-    0 8px 16px var(--shadow-color-medium);
-  transform: translateY(-1px);
+  box-shadow: none;
+  transform: none;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .button {
-  width: 100%;
-  padding: 15px;
+  flex: 1;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 14px;
-  background: linear-gradient(
-    135deg,
-    var(--gradient-blue-start) 0%,
-    var(--gradient-blue-end) 100%
-  );
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--gradient-green-start), var(--gradient-green-end));
   color: white;
-  font-size: 1.05rem;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 20px;
-  font-weight: 600;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
-  letter-spacing: 0.02em;
 }
 
 .button:hover {
@@ -90,13 +81,27 @@
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-    margin: 1rem;
-  }
+.cancelButton {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--text-color-secondary), var(--text-color-primary));
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+}
 
+.cancelButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
+@media (max-width: 768px) {
   .title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 }

@@ -19,9 +19,10 @@ import MealPlanDetailsPage from "./pages/MealPlanDetailsPage.jsx";
 import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SetCardPage from "./pages/SetCardPage.jsx";
-import AddQuickClientPage from "./pages/AddQuickClientPage.jsx";
+
 import EditClientPage from "./pages/EditClientPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { ModalProvider } from "./context/ModalContext.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import "./i18n.js";
 import "./index.css";
@@ -56,10 +57,7 @@ const router = createBrowserRouter([
             path: "add-client",
             element: <AddClientPage />,
           },
-          {
-            path: "add-quick-client",
-            element: <AddQuickClientPage />,
-          },
+          
           {
             path: "make-meals/:clientId",
             element: <MakeMealPage />,
@@ -99,6 +97,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider>
-    <RouterProvider router={router} />
+    <ModalProvider>
+      <RouterProvider router={router} />
+    </ModalProvider>
   </ThemeProvider>
 );

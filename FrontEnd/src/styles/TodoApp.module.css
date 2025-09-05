@@ -123,6 +123,8 @@
 .taskList {
   list-style: none;
   padding: 0;
+  max-height: 350px; /* Adjust as needed */
+  overflow-y: auto;
 }
 
 .taskItem {

@@ -1,7 +1,8 @@
 {
   "common": {
     "meal": "Γεύμα",
-    "back": "Πίσω"
+    "back": "Πίσω",
+    "cancel": "Ακύρωση"
   },
   "settings": {
     "title": "Ρυθμίσεις",
@@ -105,7 +106,8 @@
     "new_this_month": "Νέοι Αυτόν τον Μήνα",
     "new_last_month": "Νέοι τον Προηγούμενο Μήνα",
     "today_appointments": "Σημερινά Ραντεβού",
-    "no_appointments": "Κανένα Ραντεβού Σήμερα"
+    "no_appointments": "Κανένα Ραντεβού Σήμερα",
+    "quick_actions": "Γρήγορες Ενέργειες"
   },
   "days": {
     "monday": "Δευτέρα",

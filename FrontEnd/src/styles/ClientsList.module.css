@@ -115,6 +115,7 @@
   font-size: 15px;
   letter-spacing: 0.02em;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
+  border: none;
 }
 .buttonsContainer {
   display: flex;
@@ -149,6 +150,7 @@
 .button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
+  cursor: pointer;
 }
 
 .clientList {
@@ -474,27 +476,9 @@
   overflow: hidden;
 }
 
-.editButton {
-  background: linear-gradient(
-    135deg,
-    var(--gradient-blue-start) 0%,
-    var(--gradient-blue-end) 100%
-  );
-  box-shadow: 0 6px 16px var(--shadow-color-medium);
-}
-
 .editButton:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
-}
-
-.deleteButton {
-  background: linear-gradient(
-    135deg,
-    var(--gradient-red-start) 0%,
-    var(--gradient-red-end) 100%
-  );
-  box-shadow: 0 6px 16px var(--shadow-color-medium);
 }
 
 .deleteButton:hover {

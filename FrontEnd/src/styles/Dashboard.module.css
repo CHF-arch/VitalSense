@@ -5,7 +5,7 @@
   width: 100%;
   box-sizing: border-box;
   background-color: var(--background-color-primary);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .mainContentWrapper {
@@ -26,6 +26,8 @@
   box-shadow: 0 4px 16px var(--card-shadow);
   color: var(--text-color-primary);
   margin: 10px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .mainContent {
@@ -34,7 +36,9 @@
   flex: 1;
   gap: 20px;
   max-height: 20vh;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .contentBox1 {
@@ -66,13 +70,16 @@
 }
 
 .metricsContainer {
+  background: var(--card-background);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  color: var(--text-color-primary);
+  max-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 1rem;
-  align-items: stretch;
-  height: 100%;
-  padding: 0 10px;
+  align-items: center;
+  flex: 1;
 }
 
 .chartContainer {
@@ -179,18 +186,58 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left; /* Align text to left for list items */
 }
+.metricsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  align-items: stretch;
+  height: 100%;
+  padding: 0 10px;
+  background-color: var(--background-color-primary);
+}
 
-.sidebar {
-  width: 600px;
+.TodoDiv {
   background: var(--card-background);
   border-radius: 14px;
   box-shadow: 0 4px 16px var(--card-shadow);
   color: var(--text-color-primary);
   padding: 20px;
-  margin: 20px 10px 20px 0;
   flex-shrink: 0;
   box-sizing: border-box;
-  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.sideContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0.4;
+  padding: 20px 20px 20px 0;
+  box-sizing: border-box;
+}
+
+.quickActionsContainer {
+  flex: 1;
+  background: var(--card-background);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  color: var(--text-color-primary);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.quickActionsButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 @media (max-width: 1440px) {
@@ -198,15 +245,18 @@
     flex-direction: column;
     height: auto;
   }
+  .sideContentWrapper {
+    padding: 0 20px 20px 20px;
+    gap: 10px;
+  }
 
   .mainContentWrapper {
     width: 100%;
     box-sizing: border-box;
   }
 
-  .sidebar {
+  .TodoDiv {
     width: 100%;
-    max-height: none;
     margin: 10px 0;
     box-sizing: border-box;
   }
@@ -257,7 +307,8 @@
 
   .contentBox3 {
     padding: 15px;
-    height: 350px;
+    max-height: fit-content;
+    height: 100%;
     flex-direction: column;
   }
 
@@ -265,17 +316,13 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    padding: 5px;
+    margin-top: 20px;
   }
 
   .metricCard {
     /* flex properties are no longer needed with display: grid on parent */
     min-width: 0;
     padding: 12px;
-    max-width: 40vw;
-    width: auto;
-    justify-content: center;
-    align-items: center;
   }
   .metricCard5 {
     justify-content: center;
@@ -297,16 +344,22 @@
 
   .leftDiv,
   .rightContentBox,
-  .sidebar {
+  .TodoDiv {
     width: 100%;
-    max-height: none;
     margin: 10px 0;
     box-sizing: border-box;
+    overflow-y: auto;
   }
 
   .chartContainer {
     height: 100%;
     margin-top: 10px;
     margin-left: -40px;
+    max-height: 100vh;
+  }
+
+  .listContainer {
+    max-height: 20vh; /* Adjust as needed */
+    overflow-y: auto;
   }
 }

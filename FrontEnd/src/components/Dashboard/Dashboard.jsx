@@ -7,6 +7,8 @@ import { getClientById } from "../../services/client"; // Import getClientById
 import moment from "moment";
 import ClientChangeChart from "./ClientChangeChart";
 import { useTranslation } from "react-i18next";
+import AddQuickClientButton from "../ClientList/AddQuickClientButton";
+import NewAppointmentButton from "../Appointments/NewAppointmentButton";
 
 // Helper function to get client's display name
 const getDisplayNameForClient = (client) => {
@@ -80,6 +82,35 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.mainContentWrapper}>
+        <div className={styles.contentBox3}>
+          <div className={styles.leftDiv}>
+            <h2>{t("dashboard.today_appointments")}</h2>
+            {todayAppointments.length > 0 ? (
+              <ul className={styles.listContainer}>
+                {todayAppointments.map((appointment) => (
+                  <li key={appointment.id} className={styles.listItem}>
+                    {appointment.title} at{" "}
+                    {moment.utc(appointment.start).local().format("HH:mm")}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>{t("dashboard.no_appointments")}</p>
+            )}
+          </div>
+          <div className={styles.rightContentBox}>
+            <div className={styles.changeChartContainer}>
+              <div className={`${styles.metricCard} ${styles.metricCard5}`}>
+                <div className={styles.metricValue}>
+                  {dashboardMetrics.newClientsChangePercentFormatted}
+                </div>
+              </div>
+              <div className={styles.chartContainer}>
+                <ClientChangeChart data={dashboardMetrics} />
+              </div>
+            </div>
+          </div>
+        </div>
         <div className={styles.mainContent}>
           <div className={styles.contentBox1}>
             <div className={styles.metricsContainer}>
@@ -118,38 +149,18 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className={styles.contentBox3}>
-          <div className={styles.leftDiv}>
-            <h2>{t("dashboard.today_appointments")}</h2>
-            {todayAppointments.length > 0 ? (
-              <ul className={styles.listContainer}>
-                {todayAppointments.map((appointment) => (
-                  <li key={appointment.id} className={styles.listItem}>
-                    {appointment.title} at{" "}
-                    {moment.utc(appointment.start).local().format("HH:mm")}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>{t("dashboard.no_appointments")}</p>
-            )}
-          </div>
-          <div className={styles.rightContentBox}>
-            <div className={styles.changeChartContainer}>
-              <div className={`${styles.metricCard} ${styles.metricCard5}`}>
-                <div className={styles.metricValue}>
-                  {dashboardMetrics.newClientsChangePercentFormatted}
-                </div>
-              </div>
-              <div className={styles.chartContainer}>
-                <ClientChangeChart data={dashboardMetrics} />
-              </div>
-            </div>
+      </div>
+      <div className={styles.sideContentWrapper}>
+        <div className={styles.quickActionsContainer}>
+          <h2>{t("dashboard.quick_actions")}</h2>
+          <div className={styles.quickActionsButtons}>
+            <AddQuickClientButton />
+            <NewAppointmentButton />
           </div>
         </div>
-      </div>
-      <div className={styles.sidebar}>
-        <TodoApp />
+        <div className={styles.TodoDiv}>
+          <TodoApp />
+        </div>
       </div>
     </div>
   );

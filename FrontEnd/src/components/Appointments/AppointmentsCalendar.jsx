@@ -15,6 +15,7 @@ import NewAppointmentModal from "./NewAppointmentModal";
 import AppointmentDetailsModal from "./AppointmentDetailsModal";
 import styles from "../../styles/AppointmentsCalendar.module.css";
 import { useTranslation } from "react-i18next";
+import NewAppointmentButton from "./NewAppointmentButton";
 
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
@@ -56,7 +57,6 @@ const AppointmentsCalendar = () => {
     };
   }, [i18n.language, t]);
 
-  
   const fetchAppointmentsFrom = async (from, to) => {
     try {
       const appointments = await getAppointmentsFrom(from, to);
@@ -220,12 +220,7 @@ const AppointmentsCalendar = () => {
         onNavigate={handleNavigate}
       />
       <div className={styles.buttonContainer}>
-        <button
-          onClick={handleOpenNewAppointmentModal}
-          className={styles.button}
-        >
-          {t("appointments.new_appointment")}
-        </button>
+        <NewAppointmentButton onClick={handleOpenNewAppointmentModal} />
       </div>
 
       {showNewAppointmentModal && (

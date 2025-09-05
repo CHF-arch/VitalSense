@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { searchClients, createClient } from "../../services/client";
 import styles from "../../styles/NewAppointmentModal.module.css";
+import modalStyles from "../../styles/Modal.module.css"; // Import common modal styles
 import { getDisplayNameForClient } from "./ClientUtils";
 import ModeSwitcher from "./ModeSwitcher";
 import AppointmentForm from "./AppointmentForm";
@@ -9,7 +10,7 @@ import AddClientForm from "./AddClientForm";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-const NewAppointmentModal = ({ onClose, onSubmit }) => {
+const NewAppointmentModal = ({ isOpen, onClose, onSubmit }) => {
   const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -100,7 +101,7 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
       end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
       clientId: finalClientId,
     });
-    window.location.reload();
+    onClose(); // Close the modal after submission
   };
 
   const handleClientSelect = (client) => {
@@ -109,9 +110,14 @@ const NewAppointmentModal = ({ onClose, onSubmit }) => {
     setFilteredClients([]);
   };
 
+  if (!isOpen) return null; // Conditionally render
+
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
+    <div className={modalStyles.modalOverlay}>
+      <div className={modalStyles.modalContent}>
+        <button className={modalStyles.closeButton} onClick={onClose}>
+          &times;
+        </button>
         <h2 className={styles.modalTitle}>New Appointment</h2>
 
         <ModeSwitcher mode={mode} setMode={setMode} />

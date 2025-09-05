@@ -17,17 +17,18 @@ export default function ClientsList() {
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation();
 
+  const fetchClients = async () => {
+    try {
+      const data = await getAllClients();
+      setClients(data);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const data = await getAllClients();
-        setClients(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
     fetchClients();
   }, []);
 
@@ -92,6 +93,7 @@ export default function ClientsList() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         handleExport={handleExport}
+        onClientAdded={fetchClients}
       />
       <div className={styles.clientGrid}>
         {filteredClients.map((client) => (
