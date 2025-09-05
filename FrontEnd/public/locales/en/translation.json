@@ -177,12 +177,17 @@
     "my_tasks": "My Tasks",
     "add_new_task_title": "Task Title",
     "add_new_task_description": "Task Description",
+    "add_new_task": "Add New Task",
     "search_client": "Search Client...",
     "selected_client": "Selected Client",
     "add_task": "Add Task",
     "loading_tasks": "Loading Tasks...",
-    "no_tasks": "No tasks"
+    "no_tasks": "No tasks",
+    "all_tasks": "All Tasks",
+    "active_tasks": "Active Tasks",
+    "completed_tasks": "Completed Tasks"
   },
+  "cancel": "Cancel",
   "weekly_meal_plan_table": {
     "day": "Day",
     "meals": "Meals",
@@ -282,3 +287,4 @@
     "sunday": "Sunday"
   }
 }
+

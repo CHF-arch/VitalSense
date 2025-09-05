@@ -12,7 +12,7 @@ i18n
 .use(initReactI18next)
   .init({
     supportedLngs: ["en", "el"],
-    fallbackLng: "en",
+    fallbackLng: "el",
     detection: {
       order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"],
       caches: ["cookie"],

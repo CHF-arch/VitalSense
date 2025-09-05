@@ -181,7 +181,10 @@
     "selected_client": "Επιλεγμένος Πελάτης",
     "add_task": "Προσθήκη Εργασίας",
     "loading_tasks": "Φόρτωση Εργασιών...",
-    "no_tasks": "Δεν υπάρχουν εργασίες"
+    "no_tasks": "Δεν υπάρχουν εργασίες",
+    "all_tasks": "Όλες οι εργασίες",
+    "active_tasks": "Ενεργές εργασίες",
+    "completed_tasks": "Ολοκληρωμένες εργασίες"
   },
   "weekly_meal_plan_table": {
     "day": "Ημέρα",

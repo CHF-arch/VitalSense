@@ -138,6 +138,11 @@
   border-bottom: none;
 }
 
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
 .deleteButton {
   background: var(--gradient-red-start);
   color: white;
@@ -174,6 +179,35 @@
 .taskActions {
   display: flex;
   gap: 10px;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filterContainer button {
+  background: none;
+  border: 1px solid var(--border-color-medium);
+  color: var(--text-color-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.filterContainer button:hover {
+  background-color: var(--sidebar-nav-item-hover-background);
+  color: var(--text-color-primary);
+}
+
+.activeFilter {
+  background-color: var(--gradient-blue-start) !important;
+  color: white !important;
+  border-color: var(--gradient-blue-start) !important;
 }
 
 @media (max-width: 768px) {

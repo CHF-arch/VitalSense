@@ -5,54 +5,30 @@ import {
   deleteTask,
   toggleTaskCompletion,
 } from "../../services/task";
-import { searchClients } from "../../services/client";
+import { getAllClients } from "../../services/client";
 import styles from "../../styles/TodoApp.module.css";
 import { useTranslation } from "react-i18next";
+import AddTaskModal from "./AddTaskModal";
 
 export default function TodoApp() {
   const [tasks, setTasks] = useState([]);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [newTaskDescription, setNewTaskDescription] = useState("");
-  const [newClientId, setNewClientId] = useState("");
-  const [newDueDate, setNewDueDate] = useState("");
   const [clients, setClients] = useState([]);
-  const [clientSearchTerm, setClientSearchTerm] = useState("");
-  const [filteredClients, setFilteredClients] = useState([]);
-  const [selectedClient, setSelectedClient] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filter, setFilter] = useState("all"); // "all", "active", "completed"
   const { t } = useTranslation();
 
   useEffect(() => {
     fetchTasksAndClients();
   }, []);
 
-  useEffect(() => {
-    const handler = setTimeout(async () => {
-      if (clientSearchTerm) {
-        try {
-          const results = await searchClients(clientSearchTerm);
-          setFilteredClients(results);
-        } catch (error) {
-          console.error("Error searching clients:", error);
-          setFilteredClients([]);
-        }
-      } else {
-        setFilteredClients([]);
-      }
-    }, 300); // 300ms debounce
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [clientSearchTerm]);
-
   const fetchTasksAndClients = async () => {
     try {
       setLoading(true);
       const [tasksData, clientsData] = await Promise.all([
         getTasks(),
-        searchClients(""), // Initially load all or recent clients if desired
+        getAllClients(),
       ]);
       setTasks(tasksData);
       setClients(clientsData);
@@ -64,25 +40,10 @@ export default function TodoApp() {
     }
   };
 
-  const handleAddTask = async () => {
-    if (newTaskTitle.trim() === "") return;
-
-    const taskData = {
-      title: newTaskTitle,
-      description: newTaskDescription,
-      clientId: newClientId || null,
-      dueDate: newDueDate ? new Date(newDueDate).toISOString() : null,
-    };
-
+  const handleAddTask = async (taskData) => {
     try {
-      const createdTask = await createTask(taskData);
-      setTasks((prevTasks) => [...prevTasks, createdTask]);
-      setNewTaskTitle("");
-      setNewTaskDescription("");
-      setNewClientId("");
-      setNewDueDate("");
-      setClientSearchTerm("");
-      setSelectedClient(null);
+      await createTask(taskData);
+      fetchTasksAndClients(); // Refetch all data
     } catch (err) {
       setError("Failed to add task.");
       console.error("Error adding task:", err);
@@ -112,15 +73,8 @@ export default function TodoApp() {
   };
 
   const getClientName = (clientId) => {
-    const client = clients.find((c) => c.id === clientId);
+    const client = clients.find((c) => String(c.id) === String(clientId));
     return client ? `${client.firstName} ${client.lastName}` : "N/A";
-  };
-
-  const handleClientSelect = (client) => {
-    setSelectedClient(client);
-    setNewClientId(client.id);
-    setClientSearchTerm("");
-    setFilteredClients([]);
   };
 
   if (loading) {
@@ -135,69 +89,53 @@ export default function TodoApp() {
     );
   }
 
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "active") {
+      return !task.isCompleted;
+    }
+    if (filter === "completed") {
+      return task.isCompleted;
+    }
+    return true; // "all"
+  });
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{t("todo.my_tasks")}</h2>
-      <div className={styles.inputContainer}>
-        <div className={styles.addTaskContainer}>
-          <input
-            type="text"
-            value={newTaskTitle}
-            onChange={(e) => setNewTaskTitle(e.target.value)}
-            placeholder={t("todo.add_new_task_title")}
-            className={styles.taskInput}
-          />
-          <textarea
-            value={newTaskDescription}
-            onChange={(e) => setNewTaskDescription(e.target.value)}
-            placeholder={t("todo.add_new_task_description")}
-            className={styles.taskInput}
-            rows="3"
-          ></textarea>
-        </div>
-        <div className={styles.clientSearchContainer}>
-          <input
-            type="text"
-            value={clientSearchTerm}
-            onChange={(e) => {
-              setClientSearchTerm(e.target.value);
-              setSelectedClient(null);
-              setNewClientId("");
-            }}
-            placeholder={t("todo.search_client")}
-            className={`${styles.taskInput} ${styles.clientSearchInput}`}
-          />
-          {filteredClients.length > 0 && (
-            <ul className={styles.clientList}>
-              {filteredClients.map((client) => (
-                <li key={client.id} onClick={() => handleClientSelect(client)}>
-                  {client.firstName} {client.lastName}
-                </li>
-              ))}
-            </ul>
-          )}
-          {selectedClient && (
-            <div className={styles.selectedClient}>
-              {t("todo.selected_client")}: {selectedClient.firstName}{" "}
-              {selectedClient.lastName}
-            </div>
-          )}
-        </div>
-        <input
-          type="date"
-          value={newDueDate}
-          onChange={(e) => setNewDueDate(e.target.value)}
-          className={styles.taskInput}
+      <button onClick={() => setIsModalOpen(true)} className={styles.addButton}>
+        {t("todo.add_task")}
+      </button>
+      {isModalOpen && (
+        <AddTaskModal
+          onAddTask={handleAddTask}
+          onClose={() => setIsModalOpen(false)}
         />
-        <button onClick={handleAddTask} className={styles.addButton}>
-          {t("todo.add_task")}
+      )}
+      <div className={styles.filterContainer}>
+        <button
+          onClick={() => setFilter("all")}
+          className={filter === "all" ? styles.activeFilter : ""}
+        >
+          {t("todo.all_tasks")}
+        </button>
+        <button
+          onClick={() => setFilter("active")}
+          className={filter === "active" ? styles.activeFilter : ""}
+        >
+          {t("todo.active_tasks")}
+        </button>
+        <button
+          onClick={() => setFilter("completed")}
+          className={filter === "completed" ? styles.activeFilter : ""}
+        >
+          {t("todo.completed_tasks")}
         </button>
       </div>
-      {tasks.length === 0 ? (
+      {filteredTasks.length === 0 ? (
         <p className={styles.noTasks}>{t("todo.no_tasks")}</p>
       ) : (
         <ul className={styles.taskList}>
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <li
               key={task.id}
               className={`${styles.taskItem} ${
@@ -216,9 +154,11 @@ export default function TodoApp() {
                     </span>
                   )}
                   {task.dueDate && (
-                    <span className={styles.taskDueDate}>
-                      Due: {new Date(task.dueDate).toLocaleDateString()}
-                    </span>
+                    <div>
+                      <span className={styles.taskDueDate}>
+                        Due: {new Date(task.dueDate).toLocaleDateString()}
+                      </span>
+                    </div>
                   )}
                 </div>
               </div>

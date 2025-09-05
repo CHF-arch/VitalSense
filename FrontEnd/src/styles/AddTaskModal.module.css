@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--background-color-secondary);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-color-medium);
+  width: 90%;
+  max-width: 500px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.title {
+  margin-top: 0;
+  color: var(--text-color-primary);
+  text-align: center;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.addTaskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.taskInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color-medium);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--input-background);
+  color: var(--text-color-primary);
+}
+
+.clientSearchContainer {
+  position: relative;
+}
+
+.clientSearchInput {
+  width: 100%;
+}
+
+.clientList {
+  position: absolute;
+  background: var(--background-color-secondary);
+  border: 1px solid var(--border-color-medium);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1001;
+}
+
+.clientList li {
+  padding: 0.75rem;
+  cursor: pointer;
+  color: var(--text-color-primary);
+}
+
+.clientList li:hover {
+  background-color: var(--sidebar-nav-item-hover-background);
+}
+
+.taskInput:disabled {
+  background-color: var(--input-background);
+  cursor: not-allowed;
+}
+
+.selectedClient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--status-yes-background);
+  color: var(--status-yes-color);
+  border-radius: 4px;
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: var(--status-yes-color);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.addButton,
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.addButton {
+  background-image: linear-gradient(to right, var(--gradient-green-start), var(--gradient-green-end));
+}
+
+.cancelButton {
+  background-image: linear-gradient(to right, var(--gradient-red-start), var(--gradient-red-end));
+}
