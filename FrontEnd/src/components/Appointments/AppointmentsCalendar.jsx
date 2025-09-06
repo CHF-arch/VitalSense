@@ -3,7 +3,6 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/el"; // Import Greek locale for moment
 import {
-  createAppointment,
   updateAppointment,
   deleteAppointment,
   getAppointmentsFrom,
@@ -19,7 +18,6 @@ import NewAppointmentButton from "./NewAppointmentButton";
 
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
-  const [showNewAppointmentModal, setShowNewAppointmentModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { theme } = useTheme();
@@ -95,40 +93,14 @@ const AppointmentsCalendar = () => {
     fetchAppointmentsFrom(startOfMonth, endOfMonth);
   }, []);
 
-  const handleOpenNewAppointmentModal = () => setShowNewAppointmentModal(true);
-  const handleCloseNewAppointmentModal = () =>
-    setShowNewAppointmentModal(false);
-
-  const handleNewAppointment = async (newAppointmentData) => {
-    try {
-      const createdAppointment = await createAppointment(newAppointmentData);
-      // After creation, fetch the full client details for the newly created appointment
-      let clientDetails = null;
-      if (createdAppointment.clientId) {
-        try {
-          clientDetails = await getClientById(createdAppointment.clientId);
-        } catch (clientError) {
-          console.error(
-            `Error fetching client ${createdAppointment.clientId} after creation:`,
-            clientError
-          );
-        }
-      }
-      // Add the client details to the created appointment object
-      const eventWithClient = {
-        ...createdAppointment,
-        start: moment.utc(createdAppointment.start).local().toDate(),
-        end: moment.utc(createdAppointment.end).local().toDate(),
-        client: clientDetails,
-      };
-
-      // Update events state with the new appointment including client details
-      setEvents((prevEvents) => [...prevEvents, eventWithClient]);
-      handleCloseNewAppointmentModal();
-    } catch (error) {
-      console.error("Error creating appointment:", error);
-      alert("Failed to create appointment. Please try again.");
-    }
+  const handleNewAppointment = (createdAppointment) => {
+    // Add the new appointment to the events state
+    const eventWithClient = {
+      ...createdAppointment,
+      start: moment.utc(createdAppointment.start).local().toDate(),
+      end: moment.utc(createdAppointment.end).local().toDate(),
+    };
+    setEvents((prevEvents) => [...prevEvents, eventWithClient]);
   };
 
   const handleSelectEvent = (event) => {
@@ -220,15 +192,8 @@ const AppointmentsCalendar = () => {
         onNavigate={handleNavigate}
       />
       <div className={styles.buttonContainer}>
-        <NewAppointmentButton onClick={handleOpenNewAppointmentModal} />
+        <NewAppointmentButton onSuccess={handleNewAppointment} />
       </div>
-
-      {showNewAppointmentModal && (
-        <NewAppointmentModal
-          onClose={handleCloseNewAppointmentModal}
-          onSubmit={handleNewAppointment}
-        />
-      )}
 
       {showDetailsModal && selectedEvent && (
         <AppointmentDetailsModal

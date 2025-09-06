@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { searchClients, createClient } from "../../services/client";
 import styles from "../../styles/NewAppointmentModal.module.css";
 import modalStyles from "../../styles/Modal.module.css"; // Import common modal styles
+import { useModal } from "../../context/useModal";
 import { getDisplayNameForClient } from "./ClientUtils";
 import ModeSwitcher from "./ModeSwitcher";
 import AppointmentForm from "./AppointmentForm";
@@ -10,7 +11,12 @@ import AddClientForm from "./AddClientForm";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-const NewAppointmentModal = ({ isOpen, onClose, onSubmit }) => {
+export default function NewAppointmentModal() {
+  const {
+    isNewAppointmentModalOpen: isOpen,
+    closeNewAppointmentModal: onClose,
+    handleNewAppointment: onSubmit,
+  } = useModal();
   const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -51,13 +57,14 @@ const NewAppointmentModal = ({ isOpen, onClose, onSubmit }) => {
   }, [clientSearchTerm, mode]);
 
   const handleSubmit = async (e) => {
+    console.log("handleSubmit called!");
     e.preventDefault();
 
     let finalClientId = null;
 
     if (mode === "add") {
       if (!newClientFirstName || !newClientLastName || !newClientPhoneNumber) {
-        // Removed alert as per user request
+        console.log("Returning: Missing new client info");
         return;
       }
 
@@ -79,30 +86,66 @@ const NewAppointmentModal = ({ isOpen, onClose, onSubmit }) => {
         setMode("search");
       } catch (error) {
         console.error("Error creating new client:", error);
-        // Removed alert as per user request
+        console.log("Returning: Error creating new client");
         return;
       }
     } else {
+      // mode === "search"
       if (!selectedClient) {
-        // Removed alert as per user request
+        console.log("Returning: No client selected");
         return;
       }
       finalClientId = selectedClient.id;
     }
 
     if (!title || !start || !end || !finalClientId) {
-      // Removed alert as per user request
+      console.log("Returning: Missing appointment details or finalClientId");
       return;
     }
 
-    await onSubmit({
-      title,
-      start: moment(start, "YYYY-MM-DDTHH:mm").utc().toISOString(),
-      end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
-      clientId: finalClientId,
-    });
-    onClose(); // Close the modal after submission
+    console.log("Attempting to call onSubmit...");
+    if (onSubmit && typeof onSubmit === "function") {
+      try {
+        await onSubmit({
+          title,
+          start: moment(start, "YYYY-MM-DDTHH:mm").utc().toISOString(),
+          end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
+          clientId: finalClientId,
+        });
+        console.log("onSubmit called successfully.");
+        resetForm(); // Reset the form after successful submission
+        onClose(); // Close the modal after successful submission
+      } catch (error) {
+        console.error("Error creating appointment:", error);
+        alert(t("appointments.creation_failed")); // Show error to user
+      }
+    } else {
+      console.warn(
+        "onSubmit prop is not a function or is missing. Appointment will not be created."
+      );
+    }
   };
+
+  const resetForm = () => {
+    setTitle("");
+    setStart("");
+    setEnd("");
+    setMode("search");
+    setClientSearchTerm("");
+    setFilteredClients([]);
+    setSelectedClient(null);
+    setNewClientFirstName("");
+    setNewClientLastName("");
+    setNewClientEmail("");
+    setNewClientPhoneNumber("");
+  };
+
+  // Reset form when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   const handleClientSelect = (client) => {
     setSelectedClient(client);
@@ -172,6 +215,4 @@ const NewAppointmentModal = ({ isOpen, onClose, onSubmit }) => {
       </div>
     </div>
   );
-};
-
-export default NewAppointmentModal;
+}

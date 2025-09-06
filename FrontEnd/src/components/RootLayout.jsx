@@ -3,19 +3,15 @@ import { Outlet, useLocation } from "react-router-dom";
 import SideBar from "./SideBar";
 import BottomNavBar from "./BottomNavBar";
 import AddQuickClient from "./AddQuickClient/AddQuickClient";
-import NewAppointmentModal from "./Appointments/NewAppointmentModal"; // Import NewAppointmentModal
-import { useModal } from "../context/ModalContext";
+import NewAppointmentModal from "./Appointments/NewAppointmentModal";
+import { useModal } from "../context/useModal";
 import styles from "../styles/RootLayout.module.css";
+import NewAppointmentButton from "./Appointments/NewAppointmentButton";
 
 const RootLayout = () => {
   const location = useLocation();
   const isTodayMealsPage = location.pathname.startsWith("/today-meal/client/");
-  const {
-    isAddQuickClientModalOpen,
-    closeAddQuickClientModal,
-    isNewAppointmentModalOpen,
-    closeNewAppointmentModal,
-  } = useModal();
+  const { isAddQuickClientModalOpen, closeAddQuickClientModal } = useModal();
 
   return (
     <div className={styles.rootLayout}>
@@ -28,10 +24,7 @@ const RootLayout = () => {
         isOpen={isAddQuickClientModalOpen}
         onClose={closeAddQuickClientModal}
       />
-      <NewAppointmentModal // Render the new appointment modal
-        isOpen={isNewAppointmentModalOpen}
-        onClose={closeNewAppointmentModal}
-      />
+      <NewAppointmentModal />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/ClientsList.module.css";
 import { useTranslation } from "react-i18next";
-import { useModal } from "../../context/ModalContext"; // Import useModal
+import { useModal } from "../../context/useModal"; // Import useModal
 
 export default function AddQuickClientButton() {
   const { t } = useTranslation();
