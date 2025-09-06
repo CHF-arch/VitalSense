@@ -107,7 +107,8 @@
     "new_last_month": "New Last Month",
     "today_appointments": "Today's Appointments",
     "no_appointments": "No Appointments Today",
-    "quick_actions": "Quick Actions"
+    "quick_actions": "Quick Actions",
+    "at": "at"
   },
   "days": {
     "monday": "Monday",
@@ -187,7 +188,8 @@
     "no_tasks": "No tasks",
     "all_tasks": "All Tasks",
     "active_tasks": "Active Tasks",
-    "completed_tasks": "Completed Tasks"
+    "completed_tasks": "Completed Tasks",
+    "cancel": "Cancel"
   },
   "cancel": "Cancel",
   "weekly_meal_plan_table": {

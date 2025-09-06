@@ -127,6 +127,23 @@
   overflow-y: auto;
 }
 
+.taskList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.taskList::-webkit-scrollbar-track {
+  background: var(--background-color-secondary);
+}
+
+.taskList::-webkit-scrollbar-thumb {
+  background: var(--text-color-primary);
+  border-radius: 4px;
+}
+
+.taskList::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color-secondary);
+}
+
 .taskItem {
   display: flex;
   justify-content: space-between;

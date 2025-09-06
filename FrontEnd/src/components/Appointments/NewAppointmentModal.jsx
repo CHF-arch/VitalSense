@@ -124,6 +124,7 @@ export default function NewAppointmentModal() {
         "onSubmit prop is not a function or is missing. Appointment will not be created."
       );
     }
+    window.location.reload();
   };
 
   const resetForm = () => {

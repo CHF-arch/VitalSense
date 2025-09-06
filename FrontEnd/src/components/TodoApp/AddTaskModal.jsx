@@ -130,7 +130,7 @@ export default function AddTaskModal({ onAddTask, onClose }) {
             {t("todo.add_task")}
           </button>
           <button onClick={onClose} className={styles.cancelButton}>
-            {t("cancel")}
+            {t("todo.cancel")}
           </button>
         </div>
       </div>

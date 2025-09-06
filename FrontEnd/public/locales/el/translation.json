@@ -107,7 +107,8 @@
     "new_last_month": "Νέοι τον Προηγούμενο Μήνα",
     "today_appointments": "Σημερινά Ραντεβού",
     "no_appointments": "Κανένα Ραντεβού Σήμερα",
-    "quick_actions": "Γρήγορες Ενέργειες"
+    "quick_actions": "Γρήγορες Ενέργειες",
+    "at": "στις"
   },
   "days": {
     "monday": "Δευτέρα",
@@ -186,7 +187,9 @@
     "no_tasks": "Δεν υπάρχουν εργασίες",
     "all_tasks": "Όλες οι εργασίες",
     "active_tasks": "Ενεργές εργασίες",
-    "completed_tasks": "Ολοκληρωμένες εργασίες"
+    "completed_tasks": "Ολοκληρωμένες εργασίες",
+    "add_new_task": "Προσθήκη Νέας Εργασίας",
+    "cancel": "Ακύρωση"
   },
   "weekly_meal_plan_table": {
     "day": "Ημέρα",

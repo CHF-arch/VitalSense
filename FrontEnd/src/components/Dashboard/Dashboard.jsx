@@ -9,6 +9,7 @@ import ClientChangeChart from "./ClientChangeChart";
 import { useTranslation } from "react-i18next";
 import AddQuickClientButton from "../ClientList/AddQuickClientButton";
 import NewAppointmentButton from "../Appointments/NewAppointmentButton";
+import { FaRegClock, FaRegCalendarAlt } from "react-icons/fa";
 
 // Helper function to get client's display name
 const getDisplayNameForClient = (client) => {
@@ -88,9 +89,18 @@ export default function Dashboard() {
             {todayAppointments.length > 0 ? (
               <ul className={styles.listContainer}>
                 {todayAppointments.map((appointment) => (
-                  <li key={appointment.id} className={styles.listItem}>
-                    {appointment.title} at{" "}
-                    {moment.utc(appointment.start).local().format("HH:mm")}
+                  <li
+                    key={appointment.id}
+                    className={`${styles.listItem} ${
+                      moment.utc(appointment.end).isBefore(moment())
+                        ? styles.appointmentPast
+                        : styles.appointmentUpcoming
+                    }`}
+                  >
+                    <FaRegCalendarAlt /> {appointment.title} {t("dashboard.at")}{" "}
+                    <FaRegClock />{" "}
+                    {moment.utc(appointment.start).local().format("HH:mm")}-
+                    {moment.utc(appointment.end).local().format("HH:mm")}
                   </li>
                 ))}
               </ul>
