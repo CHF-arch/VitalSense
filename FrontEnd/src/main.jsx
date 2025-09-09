@@ -19,6 +19,10 @@ import MealPlanDetailsPage from "./pages/MealPlanDetailsPage.jsx";
 import AppointmentsPage from "./pages/AppointmentsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SetCardPage from "./pages/SetCardPage.jsx";
+import QuestionnaireTemplatePage from "./pages/QuestionnaireTemplatePage.jsx";
+import EditClientMealPlansPage from "./pages/EditClientMealPlansPage.jsx";
+
+import QuestionnaireTemplateEditPage from "./pages/QuestionnaireTemplateEditPage.jsx";
 
 import EditClientPage from "./pages/EditClientPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
@@ -57,7 +61,7 @@ const router = createBrowserRouter([
             path: "add-client",
             element: <AddClientPage />,
           },
-          
+
           {
             path: "make-meals/:clientId",
             element: <MakeMealPage />,
@@ -85,6 +89,19 @@ const router = createBrowserRouter([
           {
             path: "edit-client/:clientId",
             element: <EditClientPage />,
+          },
+          {
+            path: "questionnaire-templates",
+            element: <QuestionnaireTemplatePage />,
+          },
+
+          {
+            path: "questionnaire-templates/edit/:id",
+            element: <QuestionnaireTemplateEditPage />,
+          },
+          {
+            path: "edit-meal-plan/:mealPlanId",
+            element: <EditClientMealPlansPage />,
           },
         ],
       },

@@ -1,0 +1,540 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 48px;
+  background: var(--background-color-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  box-sizing: border-box;
+}
+
+.h1 {
+  text-align: left;
+  color: var(--text-color-primary);
+  margin-bottom: 48px;
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 50%,
+    var(--gradient-cyan-start) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.templateList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.templateItem {
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.templateItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+h2,
+h3 {
+  color: var(--text-color-primary);
+}
+
+.templateItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--gradient-blue-start),
+    var(--gradient-green-start),
+    var(--gradient-cyan-start)
+  );
+  border-radius: 12px 12px 0 0;
+}
+
+.headerWithButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.templateHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.templateActions {
+  display: flex;
+  gap: 10px;
+}
+
+.actionButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.actionButton:hover {
+  background-color: var(--background-color-secondary);
+  transform: translateY(-2px);
+}
+
+.actionButton.viewButton:hover {
+  color: var(--status-yes-color);
+}
+
+.actionButton.editButton:hover {
+  color: var(--link-color);
+}
+
+.actionButton.deleteButton:hover {
+  color: var(--status-no-color);
+}
+
+.description {
+  margin-bottom: 20px;
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color-light);
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--background-color-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  max-height: 120px;
+  overflow: auto;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dateInfo {
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.divider {
+  border-bottom: 1px solid var(--border-color-light);
+  margin: 15px 0;
+}
+
+.questionsContainer {
+  margin-top: 30px;
+}
+
+.questionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.questionItem {
+  background: var(--background-color-secondary);
+  border: 1px solid var(--border-color-light);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.questionText {
+  font-weight: 600;
+  color: var(--text-color-primary);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.questionType {
+  font-style: italic;
+  color: var(--text-color-secondary);
+  font-size: 0.95rem;
+}
+
+.dragHandle {
+  cursor: grab;
+  margin-right: 12px;
+  color: var(--text-color-secondary);
+  font-size: 1.2em;
+}
+
+.questionEditItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  background: var(--card-background);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.questionInput {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color-light);
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-primary);
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.questionInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-color-light-translucent);
+}
+
+.addQuestionButton,
+.removeQuestionButton,
+.submitButton,
+.backButton {
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.05em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.addQuestionButton:hover,
+.removeQuestionButton:hover,
+.submitButton:hover,
+.backButton:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.addQuestionButton {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start),
+    var(--gradient-blue-end)
+  );
+  color: white;
+}
+
+.removeQuestionButton {
+  background: linear-gradient(
+    135deg,
+    var(--status-no-color),
+    var(--status-no-color-dark)
+  );
+  color: white;
+}
+
+.backButton {
+  background: var(--card-background);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color-medium);
+}
+
+.backButton:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color-secondary);
+  padding: 18px;
+  background: var(--card-background);
+  border-radius: 10px;
+  border: 1px solid var(--input-border);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.checkboxLabel:hover {
+  border-color: var(--input-focus-border);
+  background: var(--input-shadow-focus);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--link-color);
+  cursor: pointer;
+}
+
+.submitButton {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-cyan-start),
+    var(--gradient-blue-end)
+  );
+  color: white;
+  font-size: 1.1em;
+}
+
+.form {
+  background-color: var(--card-background);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.formGroup {
+  margin-bottom: 25px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  font-size: 1.05rem;
+}
+.questionsLabel {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  font-size: 1.05rem;
+}
+
+.input,
+.textarea {
+  font-size: 1rem;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color-light);
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-primary);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--primary-color-light-translucent);
+}
+
+.formButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.questionsContainer h4 {
+  color: var(--text-color-primary);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .templateList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 40px 32px;
+  }
+
+  .h1 {
+    font-size: 2.8rem;
+    margin-bottom: 32px;
+  }
+
+  .templateList {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .templateItem {
+    padding: 20px;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .templateItem h3 {
+    font-size: 1.3rem;
+    color: var(--text-color-primary);
+    margin-bottom: 5px;
+  }
+
+  .templateItem p {
+    font-size: 0.95rem;
+    color: var(--text-color-secondary);
+  }
+
+  .headerWithButton {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .form {
+    padding: 20px;
+  }
+
+  .formGroup {
+    margin-bottom: 20px;
+  }
+
+  .formGroup label,
+  .questionsLabel {
+    font-size: 1rem;
+  }
+
+  .input,
+.textarea {
+    padding: 12px;
+  }
+
+  .addQuestionButton,
+  .removeQuestionButton,
+  .submitButton,
+  .backButton {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+
+  .questionEditItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .questionInput {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .checkboxLabel {
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  .checkboxLabel input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 25px 15px;
+  }
+
+  .h1 {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+  }
+
+  .templateItem {
+    padding: 18px;
+    gap: 10px;
+  }
+
+  .description {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .dateInfo {
+    font-size: 0.8rem;
+  }
+
+  .form {
+    padding: 15px;
+  }
+
+  .formGroup label,
+  .questionsLabel {
+    font-size: 0.95rem;
+  }
+
+  .input,
+  .textarea {
+    padding: 10px;
+  }
+
+  .addQuestionButton,
+  .removeQuestionButton,
+  .submitButton,
+  .backButton {
+    padding: 10px 18px;
+    font-size: 0.9em;
+  }
+
+  .questionEditItem {
+    padding: 10px;
+  }
+
+  .questionInput {
+    font-size: 0.95rem;
+  }
+
+  .checkboxLabel {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .checkboxLabel input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+}

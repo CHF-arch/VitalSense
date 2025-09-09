@@ -9,6 +9,7 @@ import ClientChangeChart from "./ClientChangeChart";
 import { useTranslation } from "react-i18next";
 import AddQuickClientButton from "../ClientList/AddQuickClientButton";
 import NewAppointmentButton from "../Appointments/NewAppointmentButton";
+import CreateQuestionnaireTemplateButton from "../QuestionnaireTemplate/createQuestionnaireTemplateButton";
 import { FaRegClock, FaRegCalendarAlt } from "react-icons/fa";
 
 // Helper function to get client's display name
@@ -166,6 +167,7 @@ export default function Dashboard() {
           <div className={styles.quickActionsButtons}>
             <AddQuickClientButton />
             <NewAppointmentButton />
+            <CreateQuestionnaireTemplateButton />
           </div>
         </div>
         <div className={styles.TodoDiv}>

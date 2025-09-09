@@ -46,6 +46,14 @@ export default function SideBar() {
           {t("sidebar.clients")}
         </Link>
         <Link
+          to="/questionnaire-templates"
+          className={`${styles.navItem} ${
+            location.pathname === "/questionnaire-templates" ? styles.active : ""
+          }`}
+        >
+          {t("sidebar.questionnaire_templates")}
+        </Link>
+        <Link
           to="/settings"
           className={`${styles.navItem} ${
             location.pathname === "/settings" ? styles.active : ""

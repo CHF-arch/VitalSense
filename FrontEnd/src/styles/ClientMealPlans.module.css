@@ -127,6 +127,26 @@
   color: var(--link-color);
 }
 
+.editButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--text-color-secondary);
+}
+
+.editButton:hover {
+  background: var(--border-color-light);
+  color: var(--link-color);
+}
+
 .mealPlanInfo {
   display: flex;
   flex-direction: column;

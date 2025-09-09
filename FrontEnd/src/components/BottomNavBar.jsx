@@ -8,6 +8,7 @@ import {
   MdPeople,
   MdSettings,
   MdLogout,
+  MdDescription,
 } from "react-icons/md";
 import { logoutUser } from "../services/auth";
 
@@ -37,6 +38,12 @@ export default function BottomNavBar() {
       path: "/clients",
       icon: <MdPeople size={24} />,
       label: t("sidebar.clients"),
+    },
+    {
+      type: "link",
+      path: "/questionnaire-templates",
+      icon: <MdDescription size={24} />,
+      label: t("sidebar.questionnaire_templates"),
     },
     {
       type: "link",

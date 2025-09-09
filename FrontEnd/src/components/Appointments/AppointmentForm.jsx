@@ -35,7 +35,7 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
           selected={start ? moment(start).toDate() : null}
           onChange={(date) => setStart(moment(date).format("YYYY-MM-DDTHH:mm"))}
           showTimeSelect
-          dateFormat="yyyy-MM-dd HH:mm"
+          dateFormat="dd-MM-yyyy HH:mm"
           timeFormat="HH:mm"
           timeIntervals={15}
           timeCaption={t("appointments.time")}
@@ -51,7 +51,7 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
           selected={end ? moment(end).toDate() : null}
           onChange={(date) => setEnd(moment(date).format("YYYY-MM-DDTHH:mm"))}
           showTimeSelect
-          dateFormat="yyyy-MM-dd HH:mm"
+          dateFormat="dd-MM-yyyy HH:mm"
           timeFormat="HH:mm"
           timeIntervals={15}
           timeCaption={t("appointments.time")}

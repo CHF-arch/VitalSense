@@ -9,6 +9,7 @@ import MealCard from "./MealCard";
 import styles from "../../styles/MakeMeals.module.css";
 import { useTranslation } from "react-i18next";
 import { postMealPlanAI } from "../../services/mealPlanAI";
+import { useNavigate } from "react-router-dom";
 
 const initialMealState = {
   title: "",
@@ -40,6 +41,26 @@ export default function MakeMeals() {
     "sunday",
   ];
 
+  const dayTranslationKeyMap = {
+    Δευτέρα: "monday",
+    Τρίτη: "tuesday",
+    Τετάρτη: "wednesday",
+    Πέμπτη: "thursday",
+    Παρασκευή: "friday",
+    Σάββατο: "saturday",
+    Κυριακή: "sunday",
+    Monday: "monday",
+    Tuesday: "tuesday",
+    Wednesday: "wednesday",
+    Thursday: "thursday",
+    Friday: "friday",
+    Saturday: "saturday",
+    Sunday: "sunday",
+  };
+
+  const getDayKey = (dayTitle) =>
+    dayTranslationKeyMap[dayTitle] || dayTitle.toLowerCase();
+
   useEffect(() => {
     const fetchClient = async () => {
       try {
@@ -51,7 +72,7 @@ export default function MakeMeals() {
     };
     fetchClient();
   }, [clientId]);
-
+  const navigate = useNavigate();
   const handleAddMeal = () => {
     setMeals([...meals, { ...initialMealState, id: Date.now() }]);
   };
@@ -93,57 +114,6 @@ export default function MakeMeals() {
     setMeals(newMeals);
   };
 
-  const handleExportToExcel = () => {
-    const wb = XLSX.utils.book_new();
-    const wsData = [];
-
-    const header = [
-      "Time",
-      "Meal",
-      ...weekDayKeys.map((key) => t(`days.${key}`)),
-    ];
-    wsData.push(header);
-
-    // Create a composite key for grouping: `time-title`
-    const groupedMeals = meals.reduce((acc, meal) => {
-      const key = `${meal.time}-${meal.title}`;
-      if (!acc[key]) {
-        acc[key] = {
-          time: meal.time,
-          title: meal.title,
-          days: {},
-        };
-      }
-      meal.days.forEach(() => {
-        if (!acc[key].days[t(`days.${key}`)]) {
-          acc[key].days[t(`days.${key}`)] = [];
-        }
-        acc[key].days[t(`days.${key}`)].push(meal.description);
-      });
-      return acc;
-    }, {});
-
-    for (const key in groupedMeals) {
-      const mealGroup = groupedMeals[key];
-      const row = [mealGroup.time, mealGroup.title];
-
-      weekDayKeys
-        .map((key) => t(`days.${key}`))
-        .forEach((day) => {
-          if (mealGroup.days[day]) {
-            row.push(mealGroup.days[day].join(", "));
-          } else {
-            row.push("");
-          }
-        });
-      wsData.push(row);
-    }
-
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-    XLSX.utils.book_append_sheet(wb, ws, "Meal Plan");
-    XLSX.writeFile(wb, `${planTitle || "MealPlan"}.xlsx`);
-  };
-
   const handleImportFromExcel = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -157,21 +127,32 @@ export default function MakeMeals() {
     try {
       const response = await postMealPlanAI(file, clientId, client.dieticianId);
       if (response && response.days && Array.isArray(response.days)) {
-        const importedMeals = response.days
-          .flatMap((day) => day.meals)
-          .map((meal) => ({
-            ...initialMealState,
-            id: Date.now() + Math.random(),
-            title: meal.title || "",
-            time: meal.time || "",
-            description: meal.description || "",
-            protein: meal.protein || 0,
-            carbs: meal.carbs || 0,
-            fats: meal.fats || 0,
-            calories: meal.calories || 0,
-            days: [],
-          }));
-        setMeals((prevMeals) => [...prevMeals, ...importedMeals]);
+        const mealsWithDays = response.days.flatMap((day) =>
+          day.meals.map((meal) => ({
+            ...meal,
+            days: [getDayKey(day.title)],
+          }))
+        );
+
+        const groupedMeals = mealsWithDays.reduce((acc, meal) => {
+          const existingMeal = acc.find(
+            (m) => m.description === meal.description
+          );
+          if (existingMeal) {
+            if (!existingMeal.days.includes(meal.days[0])) {
+              existingMeal.days.push(meal.days[0]);
+            }
+          } else {
+            acc.push({
+              ...initialMealState,
+              ...meal,
+              id: Date.now() + Math.random(),
+            });
+          }
+          return acc;
+        }, []);
+
+        setMeals((prevMeals) => [...prevMeals, ...groupedMeals]);
       } else {
         alert(t("make_meals.invalid_file_format"));
       }
@@ -185,8 +166,6 @@ export default function MakeMeals() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    handleExportToExcel();
 
     const daysData = weekDayKeys.map((dayKey) => ({
       title: dayKey.charAt(0).toUpperCase() + dayKey.slice(1),
@@ -215,8 +194,9 @@ export default function MakeMeals() {
     };
 
     try {
-      await createMealPlan(mealPlanData);
+      const createdMealPlan = await createMealPlan(mealPlanData);
       alert("Meal plan created successfully!");
+      navigate(`/meal-plan-details/${createdMealPlan.id}`);
     } catch (error) {
       const errorData = JSON.parse(error.message);
       if (errorData.errors && errorData.errors["$.clientId"]) {
@@ -251,6 +231,9 @@ export default function MakeMeals() {
           endDate={endDate}
           setEndDate={setEndDate}
         />
+        <button type="submit" className={styles.saveMealPlanButton}>
+          {t("make_meals.save_meal_plan")}
+        </button>
 
         <div className={styles.mealsContainer}>
           {meals.map((meal, mealIndex) => (

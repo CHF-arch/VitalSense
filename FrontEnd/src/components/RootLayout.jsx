@@ -3,15 +3,20 @@ import { Outlet, useLocation } from "react-router-dom";
 import SideBar from "./SideBar";
 import BottomNavBar from "./BottomNavBar";
 import AddQuickClient from "./AddQuickClient/AddQuickClient";
+import CreateQuestionnaireTemplateModal from "./QuestionnaireTemplate/CreateQuestionnaireTemplateModal";
 import NewAppointmentModal from "./Appointments/NewAppointmentModal";
 import { useModal } from "../context/useModal";
 import styles from "../styles/RootLayout.module.css";
-import NewAppointmentButton from "./Appointments/NewAppointmentButton";
 
 const RootLayout = () => {
   const location = useLocation();
   const isTodayMealsPage = location.pathname.startsWith("/today-meal/client/");
-  const { isAddQuickClientModalOpen, closeAddQuickClientModal } = useModal();
+  const { 
+    isAddQuickClientModalOpen, 
+    closeAddQuickClientModal, 
+    isCreateQuestionnaireTemplateModalOpen, 
+    closeCreateQuestionnaireTemplateModal 
+  } = useModal();
 
   return (
     <div className={styles.rootLayout}>
@@ -25,6 +30,9 @@ const RootLayout = () => {
         onClose={closeAddQuickClientModal}
       />
       <NewAppointmentModal />
+      {isCreateQuestionnaireTemplateModalOpen && (
+        <CreateQuestionnaireTemplateModal closeModal={closeCreateQuestionnaireTemplateModal} />
+      )}
     </div>
   );
 };

@@ -2,7 +2,8 @@
   "common": {
     "meal": "Meal",
     "back": "Back",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "create": "Create"
   },
   "settings": {
     "title": "Settings",
@@ -94,6 +95,7 @@
     "no_meals": "There are no meals for this day.",
     "meal_plan": "Meal Plan",
     "view_meal_plan": "View Meal Plan Details",
+    "edit_meal_plan": "Edit Meal Plan",
     "start_date": "Start Date",
     "end_date": "End Date"
   },
@@ -243,7 +245,8 @@
     "appointments": "Appointments",
     "clients": "Clients",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "questionnaire_templates": "Questionnaires"
   },
   "setcard": {
     "how_to_set_card": "How to Set Up an NFC Card for a Client",
@@ -289,5 +292,31 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday"
+  },
+  "questionnaire_template": {
+    "title": "Questionnaire Templates",
+    "title_input": "Title",
+    "see_all": "See All Questionnaire Templates",
+    "create_new": "Create New Questionnaire Template",
+    "description": "Description",
+    "questions": "Questions",
+    "question_text": "Question Text",
+    "is_required": "Is Required",
+    "add_question": "Add Question",
+    "save_changes": "Save Changes",
+    "back": "Back",
+    "remove": "Remove",
+    "create": "Create :",
+    "last": "Last Updated :"
+  },
+  "edit_meal_plan": {
+    "title": "Edit Meal Plan",
+    "loading": "Loading meal plan...",
+    "not_found": "Meal plan not found.",
+    "meal_plan_name": "Meal Plan Name",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "save_changes": "Save Changes",
+    "success_message": "Meal plan updated successfully!"
   }
 }

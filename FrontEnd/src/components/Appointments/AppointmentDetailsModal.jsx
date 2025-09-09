@@ -130,11 +130,11 @@ const AppointmentDetailsModal = ({
               {moment
                 .utc(appointment.start)
                 .local()
-                .format("YYYY-MM-DD hh:mm A")}
+                .format("DD-MM-YYYY hh:mm A")}
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.end")}:</strong>{" "}
-              {moment.utc(appointment.end).local().format("YYYY-MM-DD hh:mm A")}
+              {moment.utc(appointment.end).local().format("DD-MM-YYYY hh:mm A")}
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.client")}:</strong>{" "}
@@ -188,7 +188,7 @@ const AppointmentDetailsModal = ({
                   setStart(moment(date).format("YYYY-MM-DDTHH:mm"))
                 }
                 showTimeSelect
-                dateFormat="yyyy-MM-dd HH:mm"
+                dateFormat="dd-MM-yyyy HH:mm"
                 timeFormat="HH:mm"
                 timeIntervals={15}
                 timeCaption={t("appointments.time")}
@@ -206,7 +206,7 @@ const AppointmentDetailsModal = ({
                   setEnd(moment(date).format("YYYY-MM-DDTHH:mm"))
                 }
                 showTimeSelect
-                dateFormat="yyyy-MM-dd HH:mm"
+                dateFormat="dd-MM-yyyy HH:mm"
                 timeFormat="HH:mm"
                 timeIntervals={15}
                 timeCaption={t("appointments.time")}

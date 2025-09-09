@@ -33,6 +33,12 @@
   --status-no-color: #991b1b;
   --link-color: #3b82f6;
   --link-hover-color: #1d4ed8;
+  --button-primary-background: var(--link-color);
+  --button-primary-text: #ffffff;
+  --button-primary-hover-background: var(--link-hover-color);
+  --button-secondary-background: var(--border-color-medium);
+  --button-secondary-text: var(--text-color-secondary);
+  --button-secondary-hover-background: var(--border-color-light);
   --sidebar-background: #f8fafc;
   --sidebar-border: #e2e8f0;
   --sidebar-nav-item-color: #475569;
@@ -92,6 +98,13 @@ body[data-theme="dark"] {
 
   --link-color: #38bdf8;
   --link-hover-color: #7dd3fc;
+
+  --button-primary-background: var(--link-color);
+  --button-primary-text: #ffffff;
+  --button-primary-hover-background: var(--link-hover-color);
+  --button-secondary-background: var(--border-color-medium);
+  --button-secondary-text: var(--text-color-secondary);
+  --button-secondary-hover-background: var(--border-color-light);
 
   --sidebar-background: #1f283b;
   --sidebar-border: #1e293b;
