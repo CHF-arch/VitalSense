@@ -213,7 +213,7 @@ const AppointmentsCalendar = () => {
       <div className={styles.buttonContainer}>
         <NewAppointmentButton onSuccess={handleNewAppointment} />
         <button
-          className={styles.button}
+          className={styles.buttonSync}
           onClick={SyncAppointments}
           disabled={isSyncing}
         >

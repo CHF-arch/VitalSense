@@ -264,22 +264,26 @@ h3 {
 .removeQuestionButton {
   background: linear-gradient(
     135deg,
-    var(--status-no-color),
-    var(--status-no-color-dark)
+    var(--gradient-red-start),
+    var(--gradient-red-end)
   );
   color: white;
 }
 
 .backButton {
-  background: var(--card-background);
-  color: var(--text-color-primary);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start),
+    var(--gradient-blue-end)
+  );
+  color: white;
   border: 1px solid var(--border-color-medium);
 }
 
 .backButton:hover {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: #fff;
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .checkboxLabel {
@@ -439,7 +443,7 @@ h3 {
   }
 
   .input,
-.textarea {
+  .textarea {
     padding: 12px;
   }
 
