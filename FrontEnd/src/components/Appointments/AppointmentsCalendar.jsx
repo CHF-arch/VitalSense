@@ -16,6 +16,8 @@ import styles from "../../styles/AppointmentsCalendar.module.css";
 import { useTranslation } from "react-i18next";
 import NewAppointmentButton from "./NewAppointmentButton";
 import { SyncAllFeaturesAppointments } from "../../services/google";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -149,7 +151,7 @@ const AppointmentsCalendar = () => {
       handleCloseDetailsModal();
     } catch (error) {
       console.error("Error updating appointment:", error);
-      alert("Failed to update appointment. Please try again.");
+      toast.error(t("appointments.update_failed"));
     }
   };
 
@@ -163,7 +165,7 @@ const AppointmentsCalendar = () => {
       handleCloseDetailsModal();
     } catch (error) {
       console.error("Error deleting appointment:", error);
-      alert("Failed to delete appointment. Please try again.");
+      toast.error(t("appointments.update_failed"));
     }
   };
   const handleNavigate = (date) => {
@@ -180,10 +182,10 @@ const AppointmentsCalendar = () => {
       const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
       const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
       await fetchAppointmentsFrom(startOfMonth, endOfMonth);
-      alert("The appointments Sync Succesfully");
+      toast.success(t("appointments.syncSuccess"));
     } catch (error) {
       console.error("Error syncing appointments:", error);
-      alert("Failed to sync appointments. Please try again.");
+      toast.error(t("appointments.syncFailed"));
     } finally {
       setIsSyncing(false);
     }

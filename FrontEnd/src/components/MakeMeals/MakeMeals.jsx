@@ -9,7 +9,8 @@ import MealCard from "./MealCard";
 import styles from "../../styles/MakeMeals.module.css";
 import { useTranslation } from "react-i18next";
 import { postMealPlanAI } from "../../services/mealPlanAI";
-import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialMealState = {
   title: "",
@@ -99,7 +100,7 @@ export default function MakeMeals() {
       );
 
       if (mealOnSameDay) {
-        alert(
+        toast.error(
           `"${t("make_meals.a_meal_with_the_title")}" "${
             currentMeal.title
           }" "${t("make_meals.already_exist")}" ${t(`days.${dayKey}`)}.`
@@ -119,7 +120,7 @@ export default function MakeMeals() {
     if (!file) return;
 
     if (!client || !client.dieticianId) {
-      alert("Client data is not loaded yet, or dietician ID is missing.");
+      toast.error("Client data is not loaded yet, or dietician ID is missing.");
       return;
     }
 
@@ -154,11 +155,11 @@ export default function MakeMeals() {
 
         setMeals((prevMeals) => [...prevMeals, ...groupedMeals]);
       } else {
-        alert(t("make_meals.invalid_file_format"));
+        toast.error(t("make_meals.invalid_file_format"));
       }
     } catch (error) {
       console.error("Error importing meal plan:", error);
-      alert(t("make_meals.error_importing_file"));
+      toast.error(t("make_meals.error_importing_file"));
     } finally {
       setIsLoading(false);
     }
@@ -195,20 +196,21 @@ export default function MakeMeals() {
 
     try {
       const createdMealPlan = await createMealPlan(mealPlanData);
-      alert("Meal plan created successfully!");
+      toast.success("Meal plan created successfully!");
       navigate(`/meal-plan-details/${createdMealPlan.id}`);
     } catch (error) {
       const errorData = JSON.parse(error.message);
       if (errorData.errors && errorData.errors["$.clientId"]) {
-        alert("Invalid Client ID. Please check the URL.");
+        toast.error("Invalid Client ID. Please check the URL.");
       } else {
-        alert("An error occurred while creating the meal plan.");
+        toast.error("An error occurred while creating the meal plan.");
       }
     }
   };
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       {isLoading && (
         <div className={styles.loadingOverlay}>
           <div className={styles.loadingSpinner}></div>

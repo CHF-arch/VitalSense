@@ -9,7 +9,8 @@ import AppointmentForm from "./AppointmentForm";
 import ClientSearch from "./ClientSearch";
 import AddClientForm from "./AddClientForm";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function NewAppointmentModal() {
   const {
@@ -78,7 +79,7 @@ export default function NewAppointmentModal() {
           createdAt: createdAt,
         };
         const createdClient = await createClient(newClientData);
-        // Removed alert as per user request
+        toast.success(t("appointments.client_created_success"));
         finalClientId = createdClient.id;
 
         setSelectedClient(createdClient);
@@ -86,7 +87,7 @@ export default function NewAppointmentModal() {
         setMode("search");
       } catch (error) {
         console.error("Error creating new client:", error);
-        console.log("Returning: Error creating new client");
+        toast.error(t("appointments.client_created_failed"));
         return;
       }
     } else {
@@ -112,12 +113,12 @@ export default function NewAppointmentModal() {
           end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
           clientId: finalClientId,
         });
-        console.log("onSubmit called successfully.");
+        toast.success(t("appointments.creation_success"));
         resetForm(); // Reset the form after successful submission
         onClose(); // Close the modal after successful submission
       } catch (error) {
         console.error("Error creating appointment:", error);
-        alert(t("appointments.creation_failed")); // Show error to user
+        toast.error(t("appointments.creation_failed")); // Show error to user
       }
     } else {
       console.warn(

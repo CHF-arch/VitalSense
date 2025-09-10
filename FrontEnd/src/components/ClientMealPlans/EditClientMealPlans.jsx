@@ -5,7 +5,8 @@ import { useTheme } from "../../hooks/useTheme";
 import styles from "../../styles/EditClientMealPlans.module.css";
 import { useTranslation } from "react-i18next";
 import PlanDetails from "../MakeMeals/PlanDetails";
-import MealCard from "../MakeMeals/MealCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialMealState = {
   title: "",
@@ -115,7 +116,7 @@ export default function EditClientMealPlans() {
       );
 
       if (mealOnSameDay) {
-        alert(
+        toast.error(
           `"${t("make_meals.a_meal_with_the_title")}" "${
             currentMeal.title
           }" "${t("make_meals.already_exist")}" ${t(`days.${dayKey}`)}.`
@@ -157,7 +158,7 @@ export default function EditClientMealPlans() {
 
     try {
       await editMealPlan(mealPlanId, updatedMealPlanData);
-      alert(t("edit_meal_plan.success_message"));
+      toast.success(t("edit_meal_plan.success_message"));
       navigate(`/meal-plan-details/${mealPlanId}`);
     } catch (err) {
       setError("Failed to update meal plan.");

@@ -70,7 +70,9 @@
     "create_client_appointment": "Create Client & Appointment",
     "time": "Time",
     "sync": "Sync All Features Appointments with Google Calendar",
-    "syncing": "Syncing..."
+    "syncing": "Syncing...",
+    "update_failed": "Failed to update appointment. Please try again.",
+    "update_synced_suc": "The appointments Sync Successfully"
   },
   "clientlist": {
     "select_gender": "Select Gender",
