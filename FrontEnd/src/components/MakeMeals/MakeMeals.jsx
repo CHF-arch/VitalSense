@@ -9,6 +9,7 @@ import MealCard from "./MealCard";
 import styles from "../../styles/MakeMeals.module.css";
 import { useTranslation } from "react-i18next";
 import { postMealPlanAI } from "../../services/mealPlanAI";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -32,6 +33,7 @@ export default function MakeMeals() {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const weekDayKeys = [
     "monday",
     "tuesday",
@@ -73,7 +75,6 @@ export default function MakeMeals() {
     };
     fetchClient();
   }, [clientId]);
-  const navigate = useNavigate();
   const handleAddMeal = () => {
     setMeals([...meals, { ...initialMealState, id: Date.now() }]);
   };
