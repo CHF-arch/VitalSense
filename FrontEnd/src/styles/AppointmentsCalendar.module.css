@@ -35,10 +35,12 @@
     sans-serif;
   box-sizing: border-box;
   border: none;
+  margin-top: 20px;
 }
 .button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
+  cursor: pointer;
 }
 @media (max-width: 768px) {
   .calendar {

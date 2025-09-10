@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useModal } from "../../context/useModal";
-import clientsListStyles from "../../styles/ClientsList.module.css"; // Import ClientsList styles
+import styles from "../../styles/AppointmentsCalendar.module.css"; // Import ClientsList styles
 
 export default function NewAppointmentButton({ onSuccess }) {
   const { t } = useTranslation();
@@ -12,10 +12,10 @@ export default function NewAppointmentButton({ onSuccess }) {
   };
 
   return (
-    <div className={clientsListStyles.addQuickClientContainer}>
+    <div className={styles.addQuickClientContainer}>
       {" "}
       {/* Reusing this container style for consistency */}
-      <button onClick={handleOpenModal} className={clientsListStyles.button}>
+      <button onClick={handleOpenModal} className={styles.button}>
         {t("appointments.new_appointment")}
       </button>
     </div>

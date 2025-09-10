@@ -15,7 +15,7 @@ import AppointmentDetailsModal from "./AppointmentDetailsModal";
 import styles from "../../styles/AppointmentsCalendar.module.css";
 import { useTranslation } from "react-i18next";
 import NewAppointmentButton from "./NewAppointmentButton";
-
+import { SyncAllFeaturesAppointments } from "../../services/google";
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -171,6 +171,23 @@ const AppointmentsCalendar = () => {
     const endOfMonth = moment(date).endOf("month").format("YYYY-MM-DD");
     fetchAppointmentsFrom(startOfMonth, endOfMonth);
   };
+  const [isSyncing, setIsSyncing] = useState(false);
+  const SyncAppointments = async () => {
+    setIsSyncing(true);
+    try {
+      await SyncAllFeaturesAppointments();
+      // Refresh appointments after syncing
+      const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
+      const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
+      await fetchAppointmentsFrom(startOfMonth, endOfMonth);
+      alert("The appointments Sync Succesfully");
+    } catch (error) {
+      console.error("Error syncing appointments:", error);
+      alert("Failed to sync appointments. Please try again.");
+    } finally {
+      setIsSyncing(false);
+    }
+  };
 
   return (
     <div
@@ -193,6 +210,13 @@ const AppointmentsCalendar = () => {
       />
       <div className={styles.buttonContainer}>
         <NewAppointmentButton onSuccess={handleNewAppointment} />
+        <button
+          className={styles.button}
+          onClick={SyncAppointments}
+          disabled={isSyncing}
+        >
+          {isSyncing ? t("appointments.syncing") : t("appointments.sync")}
+        </button>
       </div>
 
       {showDetailsModal && selectedEvent && (

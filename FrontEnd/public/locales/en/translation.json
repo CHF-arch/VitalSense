@@ -68,7 +68,9 @@
     "add_new_client": "Add New Client",
     "create_appointment": "Create Appointment",
     "create_client_appointment": "Create Client & Appointment",
-    "time": "Time"
+    "time": "Time",
+    "sync": "Sync All Features Appointments with Google Calendar",
+    "syncing": "Syncing..."
   },
   "clientlist": {
     "select_gender": "Select Gender",

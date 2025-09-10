@@ -65,3 +65,18 @@ export async function disconnectGoogle() {
 
   return response.json();
 }
+
+export async function SyncAllFeaturesAppointments() {
+  const response = await fetchWithAuth(
+    `${API_BASE_URL}/integrations/google-calendar/sync-all-future-appointments`,
+    {
+      method: "POST",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch Google Calendar events");
+  }
+
+  return response.json();
+}

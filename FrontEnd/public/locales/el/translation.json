@@ -68,7 +68,9 @@
     "add_new_client": "Προσθήκη Νέου Πελάτη",
     "create_appointment": "Δημιουργία Ραντεβού",
     "create_client_appointment": "Δημιουργία Πελάτη και Ραντεβού",
-    "time": "Ώρα"
+    "time": "Ώρα",
+    "sync": "Συγχρονισμός όλων των μελλοντικών ραντεβού με το Google Calendar",
+    "syncing": "Συγχρονισμός..."
   },
   "clientlist": {
     "select_gender": "Επιλέξτε Φύλο",
