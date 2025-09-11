@@ -9,6 +9,7 @@ import AppointmentForm from "./AppointmentForm";
 import ClientSearch from "./ClientSearch";
 import AddClientForm from "./AddClientForm";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -79,7 +80,7 @@ export default function NewAppointmentModal() {
           createdAt: createdAt,
         };
         const createdClient = await createClient(newClientData);
-        toast.success(t("appointments.client_created_success"));
+        toast.success(t("appointments.client_create_suc"));
         finalClientId = createdClient.id;
 
         setSelectedClient(createdClient);
@@ -113,19 +114,19 @@ export default function NewAppointmentModal() {
           end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
           clientId: finalClientId,
         });
-        toast.success(t("appointments.creation_success"));
+        toast.success(t("appointments.create_suc"));
         resetForm(); // Reset the form after successful submission
         onClose(); // Close the modal after successful submission
       } catch (error) {
         console.error("Error creating appointment:", error);
-        toast.error(t("appointments.creation_failed")); // Show error to user
+        toast.error(t("appointments.create_failed")); // Show error to user
       }
     } else {
       console.warn(
         "onSubmit prop is not a function or is missing. Appointment will not be created."
       );
     }
-    window.location.reload();
+    // window.location.reload();
   };
 
   const resetForm = () => {

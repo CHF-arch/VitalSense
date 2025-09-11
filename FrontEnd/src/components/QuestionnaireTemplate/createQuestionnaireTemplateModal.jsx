@@ -5,6 +5,7 @@ import styles from "../../styles/Modal.module.css";
 import { FaPlus, FaGripLines } from "react-icons/fa";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { toast } from "react-toastify";
 
 const ItemType = "QUESTION";
 
@@ -87,7 +88,10 @@ const QuestionItem = ({
   );
 };
 
-export default function CreateQuestionnaireTemplateModal({ closeModal }) {
+export default function CreateQuestionnaireTemplateModal({
+  closeModal,
+  onSuccess,
+}) {
   const { t } = useTranslation();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -127,10 +131,16 @@ export default function CreateQuestionnaireTemplateModal({ closeModal }) {
         description,
         questions: orderedQuestions,
       });
-      closeModal();
-      window.location.reload();
+      toast.success(t("toast.operationSuccessful"));
+      if (onSuccess) {
+        onSuccess();
+      }
+      setTimeout(() => {
+        closeModal();
+      }, 200);
     } catch (error) {
       console.error("Failed to create questionnaire template", error);
+      toast.error(t("toast.errorOccurred"));
     }
   };
 

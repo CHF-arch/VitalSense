@@ -3,7 +3,7 @@ import {
   fetchQuestionnaireTemplates,
   deleteQuestionnaireTemplate,
 } from "../../services/questionnaireTemplate";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styles from "../../styles/QuestionnaireTemplate.module.css";
 import CreateQuestionnaireTemplateButton from "./createQuestionnaireTemplateButton";
 import { MdVisibility, MdEdit, MdDelete } from "react-icons/md"; // Import icons
@@ -15,13 +15,14 @@ export default function QuestionnaireTemplate() {
   const [templates, setTemplates] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchTemplates() {
-      const data = await fetchQuestionnaireTemplates();
-      setTemplates(data);
-    }
-    fetchTemplates();
+  const fetchTemplates = useCallback(async () => {
+    const data = await fetchQuestionnaireTemplates();
+    setTemplates(data);
   }, []);
+
+  useEffect(() => {
+    fetchTemplates();
+  }, [fetchTemplates]);
 
   const handleEdit = (id) => {
     navigate(`/questionnaire-templates/edit/${id}`);
@@ -41,7 +42,7 @@ export default function QuestionnaireTemplate() {
     <div className={styles.container}>
       <div className={styles.headerWithButton}>
         <h2 className={styles.h1}>{t("questionnaire_template.title")}</h2>
-        <CreateQuestionnaireTemplateButton />
+        <CreateQuestionnaireTemplateButton onSuccess={fetchTemplates} />
       </div>
       <div>
         <ul className={styles.templateList}>

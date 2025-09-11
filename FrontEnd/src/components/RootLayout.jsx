@@ -16,6 +16,7 @@ const RootLayout = () => {
     closeAddQuickClientModal,
     isCreateQuestionnaireTemplateModalOpen,
     closeCreateQuestionnaireTemplateModal,
+    onQuestionnaireCreated,
   } = useModal();
 
   return (
@@ -33,6 +34,7 @@ const RootLayout = () => {
       {isCreateQuestionnaireTemplateModalOpen && (
         <CreateQuestionnaireTemplateModal
           closeModal={closeCreateQuestionnaireTemplateModal}
+          onSuccess={onQuestionnaireCreated}
         />
       )}
     </div>

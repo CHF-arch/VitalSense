@@ -144,7 +144,7 @@
   font-size: 14px;
   letter-spacing: 0.02em;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
-  width: 80%;
+  width: 100%;
 }
 
 .button:hover {

@@ -3,6 +3,7 @@ import modalStyles from "../../styles/Modal.module.css"; // New import for modal
 import { useTranslation } from "react-i18next";
 import { createClient } from "../../services/client";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function AddQuickClient({ isOpen, onClose }) {
   const [firstName, setFirstName] = useState("");
@@ -13,17 +14,24 @@ export default function AddQuickClient({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createClient({
-      firstName,
-      lastName,
-      email,
-      phone,
-    });
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPhone("");
-    onClose(); // Close the modal after submission
+    try {
+      await createClient({
+        firstName,
+        lastName,
+        email,
+        phone,
+      });
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      onClose();
+    } catch (error) {
+      console.error("Error creating client:", error);
+      toast.error(t("appointments.client_create_failed"));
+      return;
+    }
+    toast.success(t("appointments.client_create_suc"));
   };
 
   if (!isOpen) return null;
@@ -35,7 +43,9 @@ export default function AddQuickClient({ isOpen, onClose }) {
           &times;
         </button>
         <div className={styles.container}>
-          <h1 className={styles.title}>{t("clientlist.add_quick_client_title")}</h1>
+          <h1 className={styles.title}>
+            {t("clientlist.add_quick_client_title")}
+          </h1>
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label} htmlFor="firstName">
               {t("add_client.first_name")}
@@ -87,7 +97,11 @@ export default function AddQuickClient({ isOpen, onClose }) {
               onChange={(e) => setPhone(e.target.value)}
             />
             <div className={styles.buttonContainer}>
-              <button type="button" className={styles.cancelButton} onClick={onClose}>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={onClose}
+              >
                 {t("common.cancel")}
               </button>
               <button type="submit" className={styles.button}>

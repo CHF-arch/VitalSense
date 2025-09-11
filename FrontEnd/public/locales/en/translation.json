@@ -72,7 +72,14 @@
     "sync": "Sync All Features Appointments with Google Calendar",
     "syncing": "Syncing...",
     "update_failed": "Failed to update appointment. Please try again.",
-    "update_synced_suc": "The appointments Sync Successfully"
+    "update_synced_suc": "The appointments Sync Successfully",
+    "update_synced_fail": "Failed to sync appointments. Please try again.",
+    "create_failed": "Failed to create appointment. Please try again.",
+    "create_suc": "The appointment created successfully",
+    "delete_failed": "Failed to delete appointment. Please try again.",
+    "delete_suc": "The appointment deleted successfully",
+    "client_create_failed": "Failed to create client. Please try again.",
+    "client_create_suc": "The client created successfully"
   },
   "clientlist": {
     "select_gender": "Select Gender",
@@ -322,5 +329,9 @@
     "end_date": "End Date",
     "save_changes": "Save Changes",
     "success_message": "Meal plan updated successfully!"
+  },
+  "toast": {
+    "errorOccurred": "An error occurred. Please try again.",
+    "operationSuccessful": "Operation completed successfully!"
   }
 }

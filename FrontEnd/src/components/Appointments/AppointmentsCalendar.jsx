@@ -10,14 +10,12 @@ import {
 import { getClientById } from "../../services/client"; // Import getClientById
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useTheme } from "../../hooks/useTheme";
-import NewAppointmentModal from "./NewAppointmentModal";
 import AppointmentDetailsModal from "./AppointmentDetailsModal";
 import styles from "../../styles/AppointmentsCalendar.module.css";
 import { useTranslation } from "react-i18next";
 import NewAppointmentButton from "./NewAppointmentButton";
 import { SyncAllFeaturesAppointments } from "../../services/google";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -121,7 +119,6 @@ const AppointmentsCalendar = () => {
         appointmentId,
         updatedData
       );
-      // After update, fetch the full client details for the updated appointment
       let clientDetails = null;
       if (updatedAppointment.clientId) {
         try {
@@ -151,21 +148,18 @@ const AppointmentsCalendar = () => {
       handleCloseDetailsModal();
     } catch (error) {
       console.error("Error updating appointment:", error);
-      toast.error(t("appointments.update_failed"));
     }
   };
 
   const handleDeleteAppointment = async (appointmentId) => {
     try {
       await deleteAppointment(appointmentId);
-      // Remove the deleted appointment from the events state
       setEvents((prevEvents) =>
         prevEvents.filter((event) => event.id !== appointmentId)
       );
       handleCloseDetailsModal();
     } catch (error) {
       console.error("Error deleting appointment:", error);
-      toast.error(t("appointments.update_failed"));
     }
   };
   const handleNavigate = (date) => {
@@ -178,17 +172,16 @@ const AppointmentsCalendar = () => {
     setIsSyncing(true);
     try {
       await SyncAllFeaturesAppointments();
-      // Refresh appointments after syncing
       const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
       const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
       await fetchAppointmentsFrom(startOfMonth, endOfMonth);
-      toast.success(t("appointments.syncSuccess"));
     } catch (error) {
       console.error("Error syncing appointments:", error);
-      toast.error(t("appointments.syncFailed"));
+      toast.error(t("toast.errorOccurred"));
     } finally {
       setIsSyncing(false);
     }
+    toast.success(t("toast.operationSuccessful"));
   };
 
   return (

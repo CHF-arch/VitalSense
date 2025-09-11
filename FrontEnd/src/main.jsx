@@ -32,6 +32,9 @@ import "./i18n.js";
 import "./index.css";
 import "./styles/themes.css"; // Import the new themes.css
 import MealPlansPage from "./pages/MealPlansPage.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "./hooks/useTheme.js";
 
 const router = createBrowserRouter([
   {
@@ -112,10 +115,22 @@ const router = createBrowserRouter([
     element: <Navigate to="/login" replace />,
   },
 ]);
+
+const App = () => {
+  const { theme } = useTheme();
+
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer theme={theme} />
+    </>
+  );
+};
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider>
     <ModalProvider>
-      <RouterProvider router={router} />
+      <App />
     </ModalProvider>
   </ThemeProvider>
 );

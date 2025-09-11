@@ -12,6 +12,7 @@ import { postMealPlanAI } from "../../services/mealPlanAI";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTheme } from "../../hooks/useTheme";
 
 const initialMealState = {
   title: "",
@@ -33,6 +34,7 @@ export default function MakeMeals() {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const weekDayKeys = [
     "monday",
@@ -211,7 +213,7 @@ export default function MakeMeals() {
 
   return (
     <div className={styles.container}>
-      <ToastContainer />
+      <ToastContainer theme={theme} />
       {isLoading && (
         <div className={styles.loadingOverlay}>
           <div className={styles.loadingSpinner}></div>

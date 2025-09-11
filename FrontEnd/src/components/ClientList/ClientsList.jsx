@@ -1,26 +1,30 @@
-import {
-  getAllClients,
-  deleteClient,
-} from "../../services/client";
+import { getAllClients, deleteClient } from "../../services/client";
 import { useEffect, useState } from "react";
 import styles from "../../styles/ClientsList.module.css";
 import * as XLSX from "xlsx";
 import Toolbar from "./Toolbar";
 import ClientCard from "./ClientCard";
 import EmptyState from "./EmptyState";
+import Pagination from "../common/Pagination";
 import { useTranslation } from "react-i18next";
+
+const PAGE_SIZE = 12;
 
 export default function ClientsList() {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const { t } = useTranslation();
 
   const fetchClients = async () => {
     try {
       const data = await getAllClients();
-      setClients(data);
+      const sortedData = data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setClients(sortedData);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -31,6 +35,10 @@ export default function ClientsList() {
   useEffect(() => {
     fetchClients();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   const handleDelete = async (clientId) => {
     try {
@@ -66,6 +74,15 @@ export default function ClientsList() {
     }
   });
 
+  const totalPages = Math.ceil(filteredClients.length / PAGE_SIZE);
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const paginatedClients = filteredClients.slice(startIndex, endIndex);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   if (loading) {
     return (
       <div className={styles.container}>
@@ -95,8 +112,17 @@ export default function ClientsList() {
         handleExport={handleExport}
         onClientAdded={fetchClients}
       />
+      <div>
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
+      </div>
       <div className={styles.clientGrid}>
-        {filteredClients.map((client) => (
+        {paginatedClients.map((client) => (
           <ClientCard
             key={client.id}
             client={client}
@@ -104,6 +130,13 @@ export default function ClientsList() {
           />
         ))}
       </div>
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }
