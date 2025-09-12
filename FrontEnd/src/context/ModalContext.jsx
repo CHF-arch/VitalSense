@@ -9,6 +9,7 @@ export const ModalProvider = ({ children }) => {
   const [isNewAppointmentModalOpen, setIsNewAppointmentModalOpen] =
     useState(false);
   const [onAppointmentCreated, setOnAppointmentCreated] = useState(null);
+  const [initialAppointmentData, setInitialAppointmentData] = useState(null);
   const [
     isCreateQuestionnaireTemplateModalOpen,
     setIsCreateQuestionnaireTemplateModalOpen,
@@ -18,19 +19,21 @@ export const ModalProvider = ({ children }) => {
   const openAddQuickClientModal = () => setIsAddQuickClientModalOpen(true);
   const closeAddQuickClientModal = () => setIsAddQuickClientModalOpen(false);
 
-  const openNewAppointmentModal = (callback) => {
+  const openNewAppointmentModal = (callback, initialData = null) => {
     setOnAppointmentCreated(() => callback);
+    setInitialAppointmentData(initialData);
     setIsNewAppointmentModalOpen(true);
   };
 
   const closeNewAppointmentModal = () => {
     setIsNewAppointmentModalOpen(false);
     setOnAppointmentCreated(null);
+    setInitialAppointmentData(null);
   };
 
   const openCreateQuestionnaireTemplateModal = (callback) => {
     setOnQuestionnaireCreated(() => callback);
-    setIsCreateQuestionnaireTemplateModalOpen(true);
+setIsCreateQuestionnaireTemplateModalOpen(true);
   };
 
   const closeCreateQuestionnaireTemplateModal = () => {
@@ -82,6 +85,7 @@ export const ModalProvider = ({ children }) => {
         openNewAppointmentModal,
         closeNewAppointmentModal,
         handleNewAppointment,
+        initialAppointmentData,
         isCreateQuestionnaireTemplateModalOpen,
         openCreateQuestionnaireTemplateModal,
         closeCreateQuestionnaireTemplateModal,

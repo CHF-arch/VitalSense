@@ -16,22 +16,27 @@ import { useTranslation } from "react-i18next";
 import NewAppointmentButton from "./NewAppointmentButton";
 import { SyncAllFeaturesAppointments } from "../../services/google";
 import { toast } from "react-toastify";
+import { useModal } from "../../context/useModal";
+
 const AppointmentsCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { theme } = useTheme();
   const { t, i18n } = useTranslation();
+  const { openNewAppointmentModal } = useModal();
 
   // Memoize the localizer and other locale-dependent props to ensure they update
   // when the language changes. This is the key to solving the localization issue.
   const { localizer, messages, formats } = useMemo(() => {
     // Set the locale for moment before creating the localizer
     moment.locale(i18n.language);
-    console.log("Current moment locale:", moment.locale());
-    console.log("Available moment locales:", moment.locales());
+
+    // Create a custom localizer that uses the current language
+    const loc = momentLocalizer(moment);
+
     return {
-      localizer: momentLocalizer(moment),
+      localizer: loc,
       messages: {
         today: t("calendar.today"),
         previous: t("calendar.previous"),
@@ -48,9 +53,57 @@ const AppointmentsCalendar = () => {
         showMore: (total) => `+${total} ${t("calendar.showMore")}`,
       },
       formats: {
-        weekdayFormat: "ddd",
-        monthHeaderFormat: (date, culture, localizer) =>
-          localizer.format(date, "MMMM YYYY", culture),
+        // Custom format for weekdays
+        weekdayFormat: (date) => {
+          const day = date.getDay();
+          const days = {
+            0: t("calendar.sunday"),
+            1: t("calendar.monday"),
+            2: t("calendar.tuesday"),
+            3: t("calendar.wednesday"),
+            4: t("calendar.thursday"),
+            5: t("calendar.friday"),
+            6: t("calendar.saturday"),
+          };
+          return days[day].substring(0, 3); // Get first 3 letters
+        },
+        // Custom format for month header
+        monthHeaderFormat: (date) => {
+          const month = date.getMonth();
+          const months = [
+            "Ιανουάριος",
+            "Φεβρουάριος",
+            "Μάρτιος",
+            "Απρίλιος",
+            "Μάιος",
+            "Ιούνιος",
+            "Ιούλιος",
+            "Αύγουστος",
+            "Σεπτέμβριος",
+            "Οκτώβριος",
+            "Νοέμβριος",
+            "Δεκέμβριος",
+          ];
+          return `${
+            i18n.language === "el" ? months[month] : moment(date).format("MMMM")
+          } ${date.getFullYear()}`;
+        },
+        // Format for days of the month
+        dayFormat: (date) => {
+          const dayNum = date.getDate();
+          const dayOfWeek = date.getDay();
+          const days = {
+            0: t("calendar.sunday"),
+            1: t("calendar.monday"),
+            2: t("calendar.tuesday"),
+            3: t("calendar.wednesday"),
+            4: t("calendar.thursday"),
+            5: t("calendar.friday"),
+            6: t("calendar.saturday"),
+          };
+          const dayName = days[dayOfWeek].substring(0, 3);
+          return `${dayNum} ${dayName}`;
+        },
       },
     };
   }, [i18n.language, t]);
@@ -106,6 +159,13 @@ const AppointmentsCalendar = () => {
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
     setShowDetailsModal(true);
+  };
+
+  const handleSelectSlot = (slotInfo) => {
+    openNewAppointmentModal(handleNewAppointment, {
+      start: slotInfo.start,
+      end: slotInfo.end,
+    });
   };
 
   const handleCloseDetailsModal = () => {
@@ -197,6 +257,8 @@ const AppointmentsCalendar = () => {
         endAccessor="end"
         className={styles.calendar}
         onSelectEvent={handleSelectEvent}
+        onSelectSlot={handleSelectSlot}
+        selectable
         key={i18n.language} // Force a full re-render on language change
         culture={i18n.language} // Explicitly set the culture
         messages={messages}

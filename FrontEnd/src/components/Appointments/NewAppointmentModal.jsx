@@ -18,6 +18,7 @@ export default function NewAppointmentModal() {
     isNewAppointmentModalOpen: isOpen,
     closeNewAppointmentModal: onClose,
     handleNewAppointment: onSubmit,
+    initialAppointmentData,
   } = useModal();
   const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
@@ -147,8 +148,14 @@ export default function NewAppointmentModal() {
   useEffect(() => {
     if (isOpen) {
       resetForm();
+      if (initialAppointmentData) {
+        setStart(
+          moment(initialAppointmentData.start).format("YYYY-MM-DDTHH:mm")
+        );
+        setEnd(moment(initialAppointmentData.end).format("YYYY-MM-DDTHH:mm"));
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, initialAppointmentData]);
 
   const handleClientSelect = (client) => {
     setSelectedClient(client);
