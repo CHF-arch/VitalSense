@@ -1,4 +1,12 @@
 import { getAllClients, deleteClient } from "../../services/client";
+import {
+  getMealPlansByClientId,
+  deleteMealPlan,
+} from "../../services/mealPlan";
+import {
+  getAppointments,
+  deleteAppointment,
+} from "../../services/appointment";
 import { useEffect, useState } from "react";
 import styles from "../../styles/ClientsList.module.css";
 import * as XLSX from "xlsx";
@@ -7,6 +15,7 @@ import ClientCard from "./ClientCard";
 import EmptyState from "./EmptyState";
 import Pagination from "../common/Pagination";
 import { useTranslation } from "react-i18next";
+import { useModal } from "../../context/useModal";
 
 const PAGE_SIZE = 12;
 
@@ -17,6 +26,7 @@ export default function ClientsList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { t } = useTranslation();
+  const { openConfirmationModal } = useModal();
 
   const fetchClients = async () => {
     try {
@@ -40,13 +50,40 @@ export default function ClientsList() {
     setCurrentPage(1);
   }, [searchTerm]);
 
-  const handleDelete = async (clientId) => {
-    try {
-      await deleteClient(clientId);
-      setClients(clients.filter((client) => client.id !== clientId));
-    } catch (error) {
-      console.error("Error deleting client:", error);
-    }
+  const handleDelete = (clientId) => {
+    openConfirmationModal(t("clientlist.delete_confirmation"), async () => {
+      try {
+        // THIS IS NOT A ROBUST SOLUTION.
+        // This logic should be handled on the backend to ensure data integrity.
+        // If any of these requests fail, the data will be in an inconsistent state.
+        // A backend transaction is the correct way to handle this.
+
+        // 1. Fetch and delete meal plans
+        const mealPlans = await getMealPlansByClientId(clientId);
+        for (const mealPlan of mealPlans) {
+          await deleteMealPlan(mealPlan.id);
+        }
+
+        // 2. Fetch and delete appointments
+        // Inefficient: fetching all appointments and filtering on the client.
+        // This should be a backend endpoint: GET /appointments?clientId=...
+        const allAppointments = await getAppointments();
+        const clientAppointments = allAppointments.filter(
+          (appointment) => appointment.clientId === clientId
+        );
+        for (const appointment of clientAppointments) {
+          await deleteAppointment(appointment.id);
+        }
+
+        // 3. Delete the client
+        await deleteClient(clientId);
+
+        setClients(clients.filter((client) => client.id !== clientId));
+      } catch (error) {
+        console.error("Error during client deletion process:", error);
+        // Optionally, show an error message to the user
+      }
+    });
   };
 
   const handleExport = () => {

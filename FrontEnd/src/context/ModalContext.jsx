@@ -15,6 +15,8 @@ export const ModalProvider = ({ children }) => {
     setIsCreateQuestionnaireTemplateModalOpen,
   ] = useState(false);
   const [onQuestionnaireCreated, setOnQuestionnaireCreated] = useState(null);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [confirmationModalProps, setConfirmationModalProps] = useState(null);
 
   const openAddQuickClientModal = () => setIsAddQuickClientModalOpen(true);
   const closeAddQuickClientModal = () => setIsAddQuickClientModalOpen(false);
@@ -33,12 +35,22 @@ export const ModalProvider = ({ children }) => {
 
   const openCreateQuestionnaireTemplateModal = (callback) => {
     setOnQuestionnaireCreated(() => callback);
-setIsCreateQuestionnaireTemplateModalOpen(true);
+    setIsCreateQuestionnaireTemplateModalOpen(true);
   };
 
   const closeCreateQuestionnaireTemplateModal = () => {
     setIsCreateQuestionnaireTemplateModalOpen(false);
     setOnQuestionnaireCreated(null);
+  };
+
+  const openConfirmationModal = (message, onConfirm) => {
+    setConfirmationModalProps({ message, onConfirm });
+    setIsConfirmationModalOpen(true);
+  };
+
+  const closeConfirmationModal = () => {
+    setConfirmationModalProps(null);
+    setIsConfirmationModalOpen(false);
   };
 
   const handleNewAppointment = useCallback(
@@ -90,6 +102,10 @@ setIsCreateQuestionnaireTemplateModalOpen(true);
         openCreateQuestionnaireTemplateModal,
         closeCreateQuestionnaireTemplateModal,
         onQuestionnaireCreated,
+        isConfirmationModalOpen,
+        openConfirmationModal,
+        closeConfirmationModal,
+        confirmationModalProps,
       }}
     >
       {children}

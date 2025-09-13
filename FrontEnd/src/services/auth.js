@@ -2,6 +2,8 @@ import { API_BASE_URL } from "../config/api";
 
 export async function logoutUser() {
   sessionStorage.removeItem("token");
+  sessionStorage.removeItem("refreshToken");
+  sessionStorage.removeItem("accessTokenExpiry");
   window.location.href = "/login";
 }
 
@@ -23,6 +25,8 @@ export async function loginUser(username, password) {
     const data = await response.json();
     if (data.accessToken) {
       sessionStorage.setItem("token", data.accessToken);
+      sessionStorage.setItem("refreshToken", data.refreshToken);
+      sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
     }
     return data;
   } catch (error) {

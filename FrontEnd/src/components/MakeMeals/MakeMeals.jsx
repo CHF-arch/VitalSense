@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "../../hooks/useTheme";
+import BackButton from "../common/BackButton";
 
 const initialMealState = {
   title: "",
@@ -213,6 +214,7 @@ export default function MakeMeals() {
 
   return (
     <div className={styles.container}>
+      <BackButton />
       <ToastContainer theme={theme} />
       {isLoading && (
         <div className={styles.loadingOverlay}>

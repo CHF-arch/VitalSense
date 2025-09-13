@@ -9,6 +9,7 @@ import { getAllClients } from "../../services/client";
 import styles from "../../styles/TodoApp.module.css";
 import { useTranslation } from "react-i18next";
 import AddTaskModal from "./AddTaskModal";
+import { useModal } from "../../context/useModal";
 
 export default function TodoApp() {
   const [tasks, setTasks] = useState([]);
@@ -18,6 +19,7 @@ export default function TodoApp() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState("all"); // "all", "active", "completed"
   const { t } = useTranslation();
+  const { openConfirmationModal } = useModal();
 
   useEffect(() => {
     fetchTasksAndClients();
@@ -50,14 +52,15 @@ export default function TodoApp() {
     }
   };
 
-  const handleDeleteTask = async (id) => {
-    try {
-      await deleteTask(id);
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-    } catch (err) {
-      setError("Failed to delete task.");
-      console.error("Error deleting task:", err);
-    }
+  const handleDeleteTask = (id) => {
+    openConfirmationModal(t("todo.delete_confirmation"), async () => {
+      try {
+        await deleteTask(taskId);
+        setTasks(tasks.filter((task) => task.id !== taskId));
+      } catch (error) {
+        console.error("Error deleting task:", error);
+      }
+    });
   };
 
   const handleToggleComplete = async (id) => {

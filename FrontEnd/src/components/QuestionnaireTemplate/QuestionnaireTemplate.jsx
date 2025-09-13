@@ -9,11 +9,13 @@ import CreateQuestionnaireTemplateButton from "./createQuestionnaireTemplateButt
 import { MdVisibility, MdEdit, MdDelete } from "react-icons/md"; // Import icons
 import moment from "moment"; // Import moment for date formatting
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/useModal";
 
 export default function QuestionnaireTemplate() {
   const { t } = useTranslation();
   const [templates, setTemplates] = useState([]);
   const navigate = useNavigate();
+  const { openConfirmationModal } = useModal();
 
   const fetchTemplates = useCallback(async () => {
     const data = await fetchQuestionnaireTemplates();
@@ -28,14 +30,19 @@ export default function QuestionnaireTemplate() {
     navigate(`/questionnaire-templates/edit/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteQuestionnaireTemplate(id);
-      setTemplates(templates.filter((template) => template.id !== id));
-    } catch (error) {
-      console.error("Failed to delete template:", error);
-    }
-    window.location.reload();
+  const handleDelete = (id) => {
+    openConfirmationModal(
+      t("questionnaire_template.delete_confirmation"),
+      async () => {
+        try {
+          await deleteQuestionnaireTemplate(id);
+          setTemplates(templates.filter((template) => template.id !== id));
+        } catch (error) {
+          console.error("Failed to delete template:", error);
+        }
+        window.location.reload();
+      }
+    );
   };
 
   return (

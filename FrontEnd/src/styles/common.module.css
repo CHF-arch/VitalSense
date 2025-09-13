@@ -12,3 +12,22 @@
 .themeToggleButton:hover {
   background-color: var(--gradient-blue-end);
 }
+
+.backButton {
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.backButton:hover {
+  background-color: var(--card-border);
+  box-shadow: 0 2px 8px var(--card-shadow);
+}

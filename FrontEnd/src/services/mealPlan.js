@@ -155,3 +155,24 @@ export const editMealPlan = async (mealPlanId, updatedData, dietitianId) => {
     throw error;
   }
 };
+
+export const deleteMealPlan = async (mealPlanId) => {
+  try {
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/meal-plans/${mealPlanId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to delete meal plan.");
+    }
+
+    return true; // Or handle as needed
+  } catch (error) {
+    console.error("Error deleting meal plan:", error);
+    throw error;
+  }
+};

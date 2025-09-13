@@ -5,6 +5,7 @@ import BottomNavBar from "./BottomNavBar";
 import AddQuickClient from "./AddQuickClient/AddQuickClient";
 import CreateQuestionnaireTemplateModal from "./QuestionnaireTemplate/createQuestionnaireTemplateModal";
 import NewAppointmentModal from "./Appointments/NewAppointmentModal";
+import ConfirmationModal from "./common/ConfirmationModal"; // Import the new component
 import { useModal } from "../context/useModal";
 import styles from "../styles/RootLayout.module.css";
 
@@ -17,6 +18,9 @@ const RootLayout = () => {
     isCreateQuestionnaireTemplateModalOpen,
     closeCreateQuestionnaireTemplateModal,
     onQuestionnaireCreated,
+    isConfirmationModalOpen,
+    closeConfirmationModal,
+    confirmationModalProps,
   } = useModal();
 
   return (
@@ -35,6 +39,16 @@ const RootLayout = () => {
         <CreateQuestionnaireTemplateModal
           closeModal={closeCreateQuestionnaireTemplateModal}
           onSuccess={onQuestionnaireCreated}
+        />
+      )}
+      {isConfirmationModalOpen && (
+        <ConfirmationModal
+          message={confirmationModalProps.message}
+          onConfirm={() => {
+            confirmationModalProps.onConfirm();
+            closeConfirmationModal();
+          }}
+          onCancel={closeConfirmationModal}
         />
       )}
     </div>

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getClientById, updateClient } from "../../services/client";
 import styles from "../../styles/AddClient.module.css";
 import { useTranslation } from "react-i18next";
+import BackButton from "../common/BackButton";
 
 export default function EditClient() {
   const { clientId } = useParams();
@@ -56,6 +57,7 @@ export default function EditClient() {
 
   return (
     <div className={styles.addClientContainer}>
+      <BackButton />
       <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.h2}>{t("edit_client.title")}</h2>
         <div className={styles.formRow}>

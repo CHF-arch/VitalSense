@@ -147,6 +147,26 @@
   color: var(--link-color);
 }
 
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--text-color-secondary);
+}
+
+.deleteButton:hover {
+  background: var(--status-no-background);
+  color: var(--status-no-color);
+}
+
 .mealPlanInfo {
   display: flex;
   flex-direction: column;

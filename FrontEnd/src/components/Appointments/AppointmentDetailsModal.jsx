@@ -7,6 +7,7 @@ import moment from "moment";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { el } from "date-fns/locale/el";
 import { enUS } from "date-fns/locale/en-US";
+import { useModal } from "../../context/useModal"; // Import useModal
 
 // Register locales for react-datepicker
 registerLocale("el", el);
@@ -18,6 +19,7 @@ const AppointmentDetailsModal = ({
   onUpdate,
   onDelete,
 }) => {
+  const { openConfirmationModal } = useModal(); // Get the function from context
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(() => {
     if (appointment.title && appointment.client) {
@@ -99,9 +101,9 @@ const AppointmentDetailsModal = ({
   };
 
   const handleDeleteClick = () => {
-    if (window.confirm("Are you sure you want to delete this appointment?")) {
-      onDelete(appointment.id);
-    }
+    openConfirmationModal(t("appointments.delete_confirmation"), () =>
+      onDelete(appointment.id)
+    );
   };
 
   const handleClientSelect = (client) => {

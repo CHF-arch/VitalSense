@@ -79,7 +79,8 @@
     "delete_failed": "Failed to delete appointment. Please try again.",
     "delete_suc": "The appointment deleted successfully",
     "client_create_failed": "Failed to create client. Please try again.",
-    "client_create_suc": "The client created successfully"
+    "client_create_suc": "The client created successfully",
+    "delete_confirmation": "Are you sure you want to delete this appointment?"
   },
   "clientlist": {
     "select_gender": "Select Gender",
@@ -99,7 +100,8 @@
     "search_clients": "Search Clients... (Name or Phone)",
     "set_card": "Set Card",
     "add_quick_client": "Add Quick Client",
-    "add_quick_client_title": "Add Quick Client"
+    "add_quick_client_title": "Add Quick Client",
+    "delete_confirmation": "Are you sure you want to delete this client? This will also delete all their meal plans and appointments."
   },
   "client_meal_plans": {
     "title": "Meal Plans for",
@@ -108,7 +110,8 @@
     "view_meal_plan": "View Meal Plan Details",
     "edit_meal_plan": "Edit Meal Plan",
     "start_date": "Start Date",
-    "end_date": "End Date"
+    "end_date": "End Date",
+    "delete_confirmation": "Are you sure you want to delete this meal plan?"
   },
   "dashboard": {
     "new_clients_this_month": "New Clients This Month",
@@ -202,7 +205,8 @@
     "all_tasks": "All Tasks",
     "active_tasks": "Active Tasks",
     "completed_tasks": "Completed Tasks",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete_confirmation": "Are you sure you want to delete this task?"
   },
   "cancel": "Cancel",
   "weekly_meal_plan_table": {
@@ -318,7 +322,8 @@
     "back": "Back",
     "remove": "Remove",
     "create": "Create :",
-    "last": "Last Updated :"
+    "last": "Last Updated :",
+    "delete_confirmation": "Are you sure you want to delete this template?"
   },
   "edit_meal_plan": {
     "title": "Edit Meal Plan",

@@ -1,7 +1,8 @@
 import { logoutUser } from "./auth";
+import { isAccessTokenExpired, refreshAccessToken } from "./token";
 
-const getAuthHeaders = () => {
-  const accessToken = sessionStorage.getItem("token");
+const getAuthHeaders = (token) => {
+  const accessToken = token || sessionStorage.getItem("token");
   const headers = new Headers({
     "Content-Type": "application/json",
   });
@@ -12,6 +13,13 @@ const getAuthHeaders = () => {
 };
 
 export const fetchWithAuth = async (url, options = {}) => {
+  if (isAccessTokenExpired()) {
+    const newAccessToken = await refreshAccessToken();
+    if (!newAccessToken) {
+      throw new Error("Session expired. Please log in again.");
+    }
+  }
+
   const config = {
     ...options,
     headers: getAuthHeaders(),
@@ -28,6 +36,13 @@ export const fetchWithAuth = async (url, options = {}) => {
 };
 
 export const fetchWithAuthForFormData = async (url, options = {}) => {
+  if (isAccessTokenExpired()) {
+    const newAccessToken = await refreshAccessToken();
+    if (!newAccessToken) {
+      throw new Error("Session expired. Please log in again.");
+    }
+  }
+
   const accessToken = sessionStorage.getItem("token");
   const headers = new Headers(options.headers);
 
