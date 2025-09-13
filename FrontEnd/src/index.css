@@ -135,20 +135,49 @@ body[data-theme="dark"] {
 
 /* Adjustments specifically for dark theme */
 body[data-theme="dark"] {
-  /* Ensure the overall calendar background is distinct */
+  /* Calendar styles with thinner borders */
   .rbc-calendar {
-    background-color: var(--background-color-secondary); /* #2d3748 */
-    border-color: var(--border-color-light); /* #4a5568 */
+    background-color: var(--background-color-secondary);
+    border: 0.5px solid var(--border-color-medium);
   }
 
   .rbc-header {
-    color: var(--text-color-primary); /* #e2e8f0 */
+    color: var(--text-color-primary);
+    border-bottom: 0.5px solid var(--border-color-medium);
   }
 
   .rbc-day-bg {
-    background-color: var(--background-color-secondary); /* #2d3748 */
+    background-color: var(--background-color-secondary);
   }
 
+  .rbc-month-row {
+    border: 0.5px solid var(--border-color-medium);
+  }
+
+  .rbc-day-bg + .rbc-day-bg {
+    border-left: 0.5px solid var(--border-color-medium);
+  }
+
+  .rbc-month-view {
+    border: 0.5px solid var(--border-color-medium);
+  }
+
+  .rbc-time-view {
+    border: 0.5px solid var(--border-color-medium);
+  }
+
+  /* Additional adjustments for time slots */
+  .rbc-time-slot {
+    border-top: 0.5px solid var(--border-color-medium);
+  }
+
+  .rbc-timeslot-group {
+    border-bottom: 0.5px solid var(--border-color-medium);
+  }
+
+  .rbc-time-header-content {
+    border-left: 0.5px solid var(--border-color-medium);
+  }
   .rbc-off-range-bg {
     background-color: var(
       --background-color-primary
