@@ -23,6 +23,29 @@
   max-height: 100vh;
   display: flex;
   flex-direction: column;
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalContent h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modalContent p {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--text-color-secondary);
 }
 
 .modalForm {
@@ -44,7 +67,7 @@
   right: 10px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   color: var(--text-color-secondary);
 }
@@ -183,6 +206,36 @@
   height: 20px;
   accent-color: var(--link-color);
   cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.modalButton {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: var(--gradient-blue-start);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+}
+
+.modalButton:hover {
+  background-color: var(--gradient-blue-end);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+}
+
+.modalButton:disabled {
+  background-color: var(--gray-light);
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

@@ -64,10 +64,15 @@
 .navItem:hover {
   background: var(--sidebar-nav-item-hover-background);
   color: var(--sidebar-nav-item-hover-color);
+  text-decoration: none;
 }
 
 .navItem.active {
-  background: linear-gradient(135deg, var(--gradient-blue-start) 0%, var(--gradient-blue-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
   color: white;
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
   border: none;
@@ -91,7 +96,11 @@
   padding: 16px 32px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--gradient-red-start) 0%, var(--gradient-red-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-red-start) 0%,
+    var(--gradient-red-end) 100%
+  );
   color: white;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -140,13 +149,25 @@
 
 .buttonGroup {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-top: auto;
   padding-top: 20px;
   border-top: 1px solid var(--sidebar-border);
 }
 
+.miniLink {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 0;
+  transition: color 0.2s ease;
+}
 
+.miniLink:hover {
+  color: var(--link-color);
+}
 
 @media (max-width: 768px) {
   .sidebar {

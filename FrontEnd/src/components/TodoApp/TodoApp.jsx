@@ -55,8 +55,8 @@ export default function TodoApp() {
   const handleDeleteTask = (id) => {
     openConfirmationModal(t("todo.delete_confirmation"), async () => {
       try {
-        await deleteTask(taskId);
-        setTasks(tasks.filter((task) => task.id !== taskId));
+        await deleteTask(id);
+        setTasks(tasks.filter((task) => task.id !== id));
       } catch (error) {
         console.error("Error deleting task:", error);
       }

@@ -3,6 +3,8 @@ import { useTheme } from "../../hooks/useTheme";
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FaExclamationTriangle } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import nfc_tools_1 from "../../images/nfc_tools_1.jpg";
 import nfc_tools_2 from "../../images/nfc_tools_2.jpg";
 import nfc_tools_3 from "../../images/nfc_tools_3.jpg";
@@ -13,7 +15,9 @@ import nfc_tools_7 from "../../images/nfc_tools_7.jpg";
 import nfc_tools_8 from "../../images/nfc_tools_8.jpg";
 import nfc_tools_9 from "../../images/nfc_tools_9.jpg";
 
-export default function SetCard({ clientId }) {
+export default function SetCard() {
+  console.log("SetCard component rendered");
+  const { clientId } = useParams();
   // By using useTheme, the component will re-render when the theme changes.
   useTheme();
   const [isCopied, setIsCopied] = useState(false);
@@ -75,11 +79,11 @@ export default function SetCard({ clientId }) {
       <div className={styles.step}>
         <div className={styles.stepTitle}>{t("setcard.step_1")}</div>
         <div className={styles.stepContent}>
-          <p>{t("setcard.scan")}</p>
+          <p className={styles.infoBox}>{t("setcard.scan")}</p>
           <div className={styles.qrCode}>
             <QRCodeSVG value={url} />
           </div>
-          <p>{t("setcard.if_phone")}</p>
+          <p className={styles.infoBox}>{t("setcard.if_phone")}</p>
           <button onClick={handleCopy} className={styles.copyButton}>
             {isCopied ? "Copied!" : "Copy Link"}
           </button>
@@ -88,24 +92,7 @@ export default function SetCard({ clientId }) {
       <div className={styles.step}>
         <div className={styles.stepTitle}>{t("setcard.step_2")}</div>
         <div className={styles.stepContent}>
-          <div className={styles.photoGrid}>
-            {nfcSteps.map((step, index) => (
-              <div key={index} className={styles.photoContainer}>
-                <img
-                  src={step.image}
-                  alt={step.text}
-                  className={styles.photo}
-                />
-                <p>{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className={styles.step}>
-        <div className={styles.stepTitle}>{t("setcard.step_3")}</div>
-        <div className={styles.stepContent}>
-          <p>{t("setcard.nfc_instructions")}</p>
+          <p className={styles.infoBox}>{t("setcard.nfc_instructions")}</p>
           <div className={styles.instructionBoxesContainer}>
             <div className={styles.instructionBox}>
               <strong>{t("setcard.android")}</strong>
@@ -116,7 +103,27 @@ export default function SetCard({ clientId }) {
               <p>{t("setcard.ios_instructions")}</p>
             </div>
           </div>
-          <p className={styles.nfcNote}>{t("setcard.nfc_note")}</p>
+        </div>
+      </div>
+      <div className={styles.step}>
+        <div className={styles.stepTitle}>{t("setcard.step_3")}</div>
+        <div className={styles.stepContent}>
+          <div className={styles.photoGrid}>
+            {nfcSteps.map((step, index) => (
+              <div key={index} className={styles.photoContainer}>
+                <p className={styles.infoBox}>{step.text}</p>
+                <img
+                  src={step.image}
+                  alt={step.text}
+                  className={styles.photo}
+                />
+              </div>
+            ))}
+          </div>
+          <p className={styles.nfcNote}>
+            <FaExclamationTriangle className={styles.warningIcon} />
+            {t("setcard.nfc_note")}
+          </p>
         </div>
       </div>
     </div>

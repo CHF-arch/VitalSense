@@ -21,6 +21,10 @@ const RootLayout = () => {
     isConfirmationModalOpen,
     closeConfirmationModal,
     confirmationModalProps,
+    // Generic modal state and functions
+    isGenericModalOpen,
+    genericModalContent,
+    closeModal, // This is the generic closeModal
   } = useModal();
 
   return (
@@ -51,6 +55,8 @@ const RootLayout = () => {
           onCancel={closeConfirmationModal}
         />
       )}
+      {isGenericModalOpen &&
+        React.cloneElement(genericModalContent, { closeModal })}
     </div>
   );
 };

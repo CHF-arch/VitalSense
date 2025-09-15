@@ -145,6 +145,13 @@
   letter-spacing: 0.02em;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
   width: 100%;
+  border: none;
+}
+
+.cardButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+  cursor: pointer;
 }
 
 .button:hover {

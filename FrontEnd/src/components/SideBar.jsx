@@ -48,7 +48,9 @@ export default function SideBar() {
         <Link
           to="/questionnaire-templates"
           className={`${styles.navItem} ${
-            location.pathname === "/questionnaire-templates" ? styles.active : ""
+            location.pathname === "/questionnaire-templates"
+              ? styles.active
+              : ""
           }`}
         >
           {t("sidebar.questionnaire_templates")}
@@ -65,6 +67,9 @@ export default function SideBar() {
           <button onClick={handleLogout} className={styles.logoutButton}>
             {t("sidebar.logout")}
           </button>
+          <Link to="/privacy-policy" className={styles.miniLink}>
+            {t("sidebar.privacy_policy")}
+          </Link>
         </div>
       </nav>
     </div>

@@ -11,7 +11,7 @@ export const createMealPlan = async (mealPlanData) => {
       dataToSend.days = dataToSend.days.map((day) => {
         if (day.meals && Array.isArray(day.meals)) {
           day.meals = day.meals.map((meal) => {
-            const { id, ...rest } = meal; // Destructure to exclude id
+            const { id: _id, ...rest } = meal; // Destructure to exclude id
             return rest;
           });
         }
@@ -118,7 +118,7 @@ export const editMealPlan = async (mealPlanId, updatedData, dietitianId) => {
     // Remove meal IDs from the meals array if it exists (top-level)
     if (dataToSend.meals && Array.isArray(dataToSend.meals)) {
       dataToSend.meals = dataToSend.meals.map((meal) => {
-        const { id, ...rest } = meal; // Destructure to exclude id
+        const { id: _id, ...rest } = meal; // Destructure to exclude id
         return rest;
       });
     }
@@ -128,7 +128,7 @@ export const editMealPlan = async (mealPlanId, updatedData, dietitianId) => {
       dataToSend.days = dataToSend.days.map((day) => {
         if (day.meals && Array.isArray(day.meals)) {
           day.meals = day.meals.map((meal) => {
-            const { id, ...rest } = meal; // Destructure to exclude id
+            const { id: _id, ...rest } = meal; // Destructure to exclude id
             return rest;
           });
         }

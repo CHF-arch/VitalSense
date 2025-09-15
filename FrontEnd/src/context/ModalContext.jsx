@@ -18,6 +18,10 @@ export const ModalProvider = ({ children }) => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [confirmationModalProps, setConfirmationModalProps] = useState(null);
 
+  // New state for generic modal
+  const [isGenericModalOpen, setIsGenericModalOpen] = useState(false);
+  const [genericModalContent, setGenericModalContent] = useState(null);
+
   const openAddQuickClientModal = () => setIsAddQuickClientModalOpen(true);
   const closeAddQuickClientModal = () => setIsAddQuickClientModalOpen(false);
 
@@ -51,6 +55,18 @@ export const ModalProvider = ({ children }) => {
   const closeConfirmationModal = () => {
     setConfirmationModalProps(null);
     setIsConfirmationModalOpen(false);
+  };
+
+  // New generic modal functions
+  const openModal = (content) => {
+    console.log("openModal called with content:", content);
+    setGenericModalContent(content);
+    setIsGenericModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setGenericModalContent(null);
+    setIsGenericModalOpen(false);
   };
 
   const handleNewAppointment = useCallback(
@@ -90,22 +106,27 @@ export const ModalProvider = ({ children }) => {
   return (
     <ModalContext.Provider
       value={{
-        isAddQuickClientModalOpen,
-        openAddQuickClientModal,
-        closeAddQuickClientModal,
-        isNewAppointmentModalOpen,
-        openNewAppointmentModal,
-        closeNewAppointmentModal,
-        handleNewAppointment,
-        initialAppointmentData,
-        isCreateQuestionnaireTemplateModalOpen,
-        openCreateQuestionnaireTemplateModal,
-        closeCreateQuestionnaireTemplateModal,
-        onQuestionnaireCreated,
-        isConfirmationModalOpen,
-        openConfirmationModal,
-        closeConfirmationModal,
-        confirmationModalProps,
+        isAddQuickClientModalOpen: isAddQuickClientModalOpen,
+        openAddQuickClientModal: openAddQuickClientModal,
+        closeAddQuickClientModal: closeAddQuickClientModal,
+        isNewAppointmentModalOpen: isNewAppointmentModalOpen,
+        openNewAppointmentModal: openNewAppointmentModal,
+        closeNewAppointmentModal: closeNewAppointmentModal,
+        handleNewAppointment: handleNewAppointment,
+        initialAppointmentData: initialAppointmentData,
+        isCreateQuestionnaireTemplateModalOpen: isCreateQuestionnaireTemplateModalOpen,
+        openCreateQuestionnaireTemplateModal: openCreateQuestionnaireTemplateModal,
+        closeCreateQuestionnaireTemplateModal: closeCreateQuestionnaireTemplateModal,
+        onQuestionnaireCreated: onQuestionnaireCreated,
+        isConfirmationModalOpen: isConfirmationModalOpen,
+        openConfirmationModal: openConfirmationModal,
+        closeConfirmationModal: closeConfirmationModal,
+        confirmationModalProps: confirmationModalProps,
+        // New generic modal values
+        openModal: openModal,
+        closeModal: closeModal,
+        isGenericModalOpen: isGenericModalOpen,
+        genericModalContent: genericModalContent,
       }}
     >
       {children}

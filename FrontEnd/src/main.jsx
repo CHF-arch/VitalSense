@@ -21,10 +21,10 @@ import SettingsPage from "./pages/SettingsPage.jsx";
 import SetCardPage from "./pages/SetCardPage.jsx";
 import QuestionnaireTemplatePage from "./pages/QuestionnaireTemplatePage.jsx";
 import EditClientMealPlansPage from "./pages/EditClientMealPlansPage.jsx";
-
 import QuestionnaireTemplateEditPage from "./pages/QuestionnaireTemplateEditPage.jsx";
-
+import PrivacyAndTermsPage from "./pages/PrivacyAndTermsPage.jsx";
 import EditClientPage from "./pages/EditClientPage.jsx";
+import SetCardPCPage from "./pages/SetCardPCPage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { ModalProvider } from "./context/ModalContext.jsx";
 import "react-datepicker/dist/react-datepicker.css";
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "today-meal/:clientId/active",
     element: <TodayMeal />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyAndTermsPage />,
   },
   {
     element: <ProtectedRoute />,
@@ -90,6 +94,10 @@ const router = createBrowserRouter([
             element: <SetCardPage />,
           },
           {
+            path: "set-card-pc/:clientId",
+            element: <SetCardPCPage />,
+          },
+          {
             path: "edit-client/:clientId",
             element: <EditClientPage />,
           },
@@ -116,6 +124,7 @@ const router = createBrowserRouter([
   },
 ]);
 
+// eslint-disable-next-line react-refresh/only-export-components
 const App = () => {
   const { theme } = useTheme();
 

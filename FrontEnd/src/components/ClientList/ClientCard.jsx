@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import styles from "../../styles/ClientsList.module.css";
 import { useTranslation } from "react-i18next";
+import { useModal } from "../../context/useModal"; // Import useModal
+import SetCardOptionModal from "../SetCard/SetCardOptionModal"; // Import SetCardOptionModal
 
 export default function ClientCard({
   client,
   handleDelete,
 }) {
   const { t } = useTranslation();
+  const { openModal } = useModal(); // Get openModal from useModal
+
+  const handleSetCardClick = () => {
+    console.log("handleSetCardClick called");
+    openModal(<SetCardOptionModal client={client} />);
+  };
   return (
     <div key={client.id} className={styles.clientCard}>
         <>
@@ -149,9 +157,9 @@ export default function ClientCard({
             <Link to={`/meal-plans/${client.id}`} className={styles.cardButton}>
               {t("clientlist.meal_plans")}
             </Link>
-            <Link to={`/set-card/${client.id}`} className={styles.cardButton}>
+            <button onClick={handleSetCardClick} className={styles.cardButton}>
               {t("clientlist.set_card")}
-            </Link>
+            </button>
           </div>
         </>
     </div>
