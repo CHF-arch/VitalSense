@@ -292,7 +292,7 @@
     "title": "Set Card Option or NFC Tag",
     "description": "How are you setting up the card or NFC tag?",
     "phone": "With my Phone",
-    "computer": "With my Computer"
+    "computer": "With my PC"
   },
   "setcardpc": {
     "how_to_set_card_pc": "How to Set Up an NFC Card or NFC tag for a Client (Using a Computer)",

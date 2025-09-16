@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "../styles/SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "../services/auth";
+import logo from "../images/VitalSense_Logo_tr.png";
 
 export default function SideBar() {
   const location = useLocation();
@@ -14,6 +15,7 @@ export default function SideBar() {
   return (
     <div className={styles.sidebar}>
       <div className={styles.brandSection}>
+        <img src={logo} alt="" className={styles.logo} />
         <div className={styles.brandTitle}>Vital Sense</div>
         <div className={styles.brandSubtitle}>
           {t("sidebar.management_system")}

@@ -126,6 +126,11 @@
   transform: translateY(0);
 }
 
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
 .brandSection {
   margin-bottom: 32px;
   text-align: center;
