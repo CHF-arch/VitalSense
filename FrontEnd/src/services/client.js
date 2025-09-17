@@ -45,10 +45,13 @@ export async function createClient(clientData) {
 
 export async function updateClient(clientId, clientData) {
   try {
-    const response = await fetchWithAuth(`${API_BASE_URL}/clients/${clientId}`, {
-      method: "PUT",
-      body: JSON.stringify(clientData),
-    });
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/clients/${clientId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(clientData),
+      }
+    );
     if (!response.ok) {
       throw new Error(`Failed to update client with ID ${clientId}`);
     }
@@ -64,9 +67,12 @@ export async function updateClient(clientId, clientData) {
 
 export async function deleteClient(clientId) {
   try {
-    const response = await fetchWithAuth(`${API_BASE_URL}/clients/${clientId}`, {
-      method: "DELETE",
-    });
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/clients/${clientId}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (!response.ok) {
       throw new Error(`Failed to delete client with ID ${clientId}`);
     }

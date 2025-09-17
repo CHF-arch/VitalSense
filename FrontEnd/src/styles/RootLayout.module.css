@@ -17,6 +17,14 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.desktopSidebar {
+  display: block;
+}
+
+.mobileSidebar {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .rootLayout {
     display: block;
@@ -27,6 +35,14 @@
   .mainContent {
     height: auto;
     overflow: visible;
-    padding-bottom: 100px; /* Add space for the fixed bottom navigation bar */
+    padding-top: 60px; /* Add space for the fixed top navigation bar */
+  }
+
+  .desktopSidebar {
+    display: none;
+  }
+
+  .mobileSidebar {
+    display: block;
   }
 }

@@ -1,8 +1,8 @@
 import { logoutUser } from "./auth";
-import { isAccessTokenExpired, refreshAccessToken } from "./token";
+import { refreshAccessToken } from "./token";
 
 const getAuthHeaders = (token) => {
-  const accessToken = token || sessionStorage.getItem("token");
+  const accessToken = token || localStorage.getItem("token");
   const headers = new Headers({
     "Content-Type": "application/json",
   });
@@ -13,53 +13,59 @@ const getAuthHeaders = (token) => {
 };
 
 export const fetchWithAuth = async (url, options = {}) => {
-  if (isAccessTokenExpired()) {
-    const newAccessToken = await refreshAccessToken();
-    if (!newAccessToken) {
-      throw new Error("Session expired. Please log in again.");
-    }
-  }
-
-  const config = {
+  let config = {
     ...options,
     headers: getAuthHeaders(),
   };
 
-  const response = await fetch(url, config);
+  let response = await fetch(url, config);
 
   if (response.status === 401) {
-    logoutUser();
-    throw new Error("Session expired. Please log in again.");
+    const newAccessToken = await refreshAccessToken();
+    if (newAccessToken) {
+      config = {
+        ...options,
+        headers: getAuthHeaders(newAccessToken),
+      };
+      response = await fetch(url, config);
+    } else {
+      logoutUser();
+      throw new Error("Session expired. Please log in again.");
+    }
   }
 
   return response;
 };
 
 export const fetchWithAuthForFormData = async (url, options = {}) => {
-  if (isAccessTokenExpired()) {
-    const newAccessToken = await refreshAccessToken();
-    if (!newAccessToken) {
-      throw new Error("Session expired. Please log in again.");
+  const getHeaders = (token) => {
+    const accessToken = token || localStorage.getItem("token");
+    const headers = new Headers(options.headers);
+    if (accessToken) {
+      headers.set("Authorization", `Bearer ${accessToken}`);
     }
-  }
-
-  const accessToken = sessionStorage.getItem("token");
-  const headers = new Headers(options.headers);
-
-  if (accessToken) {
-    headers.set("Authorization", `Bearer ${accessToken}`);
-  }
-
-  const config = {
-    ...options,
-    headers,
+    return headers;
   };
 
-  const response = await fetch(url, config);
+  let config = {
+    ...options,
+    headers: getHeaders(),
+  };
+
+  let response = await fetch(url, config);
 
   if (response.status === 401) {
-    logoutUser();
-    throw new Error("Session expired. Please log in again.");
+    const newAccessToken = await refreshAccessToken();
+    if (newAccessToken) {
+      config = {
+        ...options,
+        headers: getHeaders(newAccessToken),
+      };
+      response = await fetch(url, config);
+    } else {
+      logoutUser();
+      throw new Error("Session expired. Please log in again.");
+    }
   }
 
   return response;

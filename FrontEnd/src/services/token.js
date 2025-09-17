@@ -2,15 +2,7 @@ import { API_BASE_URL } from "../config/api";
 import { logoutUser } from "./auth";
 
 export function getRefreshToken() {
-  return sessionStorage.getItem("refreshToken");
-}
-
-export function isAccessTokenExpired() {
-  const expiry = sessionStorage.getItem("accessTokenExpiry");
-  if (!expiry) {
-    return true;
-  }
-  return new Date() > new Date(expiry);
+  return localStorage.getItem("refreshToken");
 }
 
 export async function refreshAccessToken() {
@@ -36,9 +28,9 @@ export async function refreshAccessToken() {
 
     const data = await response.json();
     if (data.accessToken) {
-      sessionStorage.setItem("token", data.accessToken);
-      sessionStorage.setItem("refreshToken", data.refreshToken);
-      sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
       return data.accessToken;
     }
     return null;
