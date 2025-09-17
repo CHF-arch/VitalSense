@@ -106,3 +106,9 @@
   width: 20px;
   height: 20px;
 }
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}

@@ -4,6 +4,7 @@ export async function logoutUser() {
   sessionStorage.removeItem("token");
   sessionStorage.removeItem("refreshToken");
   sessionStorage.removeItem("accessTokenExpiry");
+  sessionStorage.removeItem("username");
   window.location.href = "/login";
 }
 
@@ -27,6 +28,7 @@ export async function loginUser(username, password) {
       sessionStorage.setItem("token", data.accessToken);
       sessionStorage.setItem("refreshToken", data.refreshToken);
       sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
+      sessionStorage.setItem("username", username);
     }
     return data;
   } catch (error) {
@@ -57,6 +59,98 @@ export async function signUpUser(username, email, password, confirmPassword) {
     return await response.json();
   } catch (error) {
     console.error("Sign-up failed:", error);
+    throw error;
+  }
+}
+
+export async function changePassword(
+  currentPassword,
+  newPassword,
+  confirmNewPassword
+) {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/change-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmNewPassword: confirmNewPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "Change password failed. Please try again."
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Change password failed:", error);
+    throw error;
+  }
+}
+
+export async function changeEmail(newEmail, currentPassword) {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/change-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        newEmail: newEmail,
+        currentPassword: currentPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "Change email failed. Please try again."
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Change email failed:", error);
+    throw error;
+  }
+}
+
+export async function changeUsername(newUsername, currentPassword) {
+  const token = sessionStorage.getItem("token");
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/change-username`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        newUsername: newUsername,
+        currentPassword: currentPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "Change username failed. Please try again."
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Change username failed:", error);
     throw error;
   }
 }

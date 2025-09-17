@@ -9,11 +9,16 @@ import {
   sendGoogleCallback,
 } from "../../services/google";
 import googleIcon from "../../assets/google-icon.svg";
+import { useModal } from "../../context/useModal";
+import EmailChangeModal from "./EmailChangeModal";
+import PasswordChangeModal from "./PasswordChangeModal";
+import UsernameChangeModal from "./UsernameChangeModal";
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme();
   const { t, i18n } = useTranslation();
   const [isGoogleConnected, setIsGoogleConnected] = useState(false);
+  const { openModal } = useModal();
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -105,6 +110,26 @@ export default function Settings() {
         <h2 className={styles.sectionTitle}>
           {t("settings.account_section_title")}
         </h2>
+        <div className={styles.buttonContainer}>
+          <button
+            onClick={() => openModal(<UsernameChangeModal />)}
+            className={styles.button}
+          >
+            {t("settings.change_username")}
+          </button>
+          <button
+            onClick={() => openModal(<EmailChangeModal />)}
+            className={styles.button}
+          >
+            {t("settings.change_email")}
+          </button>
+          <button
+            onClick={() => openModal(<PasswordChangeModal />)}
+            className={styles.button}
+          >
+            {t("settings.change_password")}
+          </button>
+        </div>
         <button
           onClick={
             isGoogleConnected ? handleGoogleDisconnect : handleGoogleSignIn

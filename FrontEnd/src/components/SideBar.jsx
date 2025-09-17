@@ -3,10 +3,19 @@ import styles from "../styles/SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "../services/auth";
 import logo from "../images/VitalSense_Logo_tr.png";
+import { useEffect, useState } from "react";
 
 export default function SideBar() {
   const location = useLocation();
   const { t } = useTranslation();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogout = () => {
     logoutUser();
@@ -65,7 +74,13 @@ export default function SideBar() {
         >
           {t("sidebar.settings")}
         </Link>
+
         <div className={styles.buttonGroup}>
+          <div className={styles.dieticianNameBox}>
+            <p>
+              {t("sidebar.welcome")}, {username}
+            </p>
+          </div>
           <button onClick={handleLogout} className={styles.logoutButton}>
             {t("sidebar.logout")}
           </button>

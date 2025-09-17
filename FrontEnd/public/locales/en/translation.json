@@ -3,7 +3,8 @@
     "meal": "Meal",
     "back": "Back",
     "cancel": "Cancel",
-    "create": "Create"
+    "create": "Create",
+    "save": "Save"
   },
   "settings": {
     "title": "Settings",
@@ -15,7 +16,22 @@
     "greek": "Greek",
     "account_section_title": "Account",
     "sign_in_with_google": "Sign in with Google",
-    "disconnect_google": "Disconnect Google"
+    "disconnect_google": "Disconnect Google",
+    "change_username": "Change Username",
+    "change_password": "Change Password",
+    "change_email": "Change Email",
+    "new_username": "New Username",
+    "current_password": "Current Password",
+    "username_changed_successfully": "Username changed successfully",
+    "username_change_failed": "Failed to change username",
+    "new_email": "New Email",
+    "email_changed_successfully": "Email changed successfully",
+    "email_change_failed": "Failed to change email",
+    "new_password": "New Password",
+    "confirm_new_password": "Confirm New Password",
+    "passwords_do_not_match": "Passwords do not match",
+    "password_changed_successfully": "Password changed successfully",
+    "password_change_failed": "Failed to change password"
   },
   "add_client": {
     "title": "Add Client",
@@ -252,7 +268,12 @@
     "password": "Password",
     "confirm_password": "Confirm Password",
     "already_have_an_account": "Already have an account?",
-    "dont_have_an_account": "Don't have an account?"
+    "dont_have_an_account": "Don't have an account?",
+    "password_requirements_title": "Password Requirements:",
+    "password_requirement_8_chars": "At least 8 characters long",
+    "password_requirement_case_letters": "Contains both uppercase and lowercase letters",
+    "password_requirement_one_number": "Includes at least one number",
+    "password_requirement_special_char": "Includes at least one special character (e.g., !@#$%^&*)"
   },
   "sidebar": {
     "management_system": "Management System",
@@ -262,7 +283,8 @@
     "settings": "Settings",
     "logout": "Logout",
     "questionnaire_templates": "Questionnaires",
-    "privacy_policy": "Privacy Policy"
+    "privacy_policy": "Privacy Policy",
+    "welcome": "Welcome"
   },
   "setcard": {
     "how_to_set_card": "How to Set Up an NFC Card for a Client",

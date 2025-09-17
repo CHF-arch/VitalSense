@@ -3,7 +3,8 @@
     "meal": "Γεύμα",
     "back": "Πίσω",
     "cancel": "Ακύρωση",
-    "create": "Δημιουργία"
+    "create": "Δημιουργία",
+    "save": "Αποθήκευση"
   },
   "settings": {
     "title": "Ρυθμίσεις",
@@ -15,7 +16,22 @@
     "greek": "Ελληνικά",
     "account_section_title": "Λογαριασμός",
     "sign_in_with_google": "Σύνδεση με Google",
-    "disconnect_google": "Αποσύνδεση"
+    "disconnect_google": "Αποσύνδεση από Google",
+    "change_username": "Αλλαγή Ονόματος Χρήστη",
+    "change_password": "Αλλαγή Κωδικού",
+    "change_email": "Αλλαγή Email",
+    "new_username": "Νέο Όνομα Χρήστη",
+    "current_password": "Τρέχων Κωδικός",
+    "username_changed_successfully": "Το όνομα χρήστη άλλαξε επιτυχώς",
+    "username_change_failed": "Αποτυχία αλλαγής ονόματος χρήστη",
+    "new_email": "Νέο Email",
+    "email_changed_successfully": "Το email άλλαξε επιτυχώς",
+    "email_change_failed": "Αποτυχία αλλαγής email",
+    "new_password": "Νέος Κωδικός",
+    "confirm_new_password": "Επιβεβαίωση Νέου Κωδικού",
+    "passwords_do_not_match": "Οι κωδικοί δεν ταιριάζουν",
+    "password_changed_successfully": "Ο κωδικός άλλαξε επιτυχώς",
+    "password_change_failed": "Αποτυχία αλλαγής κωδικού"
   },
   "add_client": {
     "title": "Προσθήκη Πελάτη",
@@ -251,7 +267,12 @@
     "password": "Κωδικός",
     "confirm_password": "Επιβεβαίωση Κωδικού",
     "already_have_an_account": "Έχετε ήδη λογαριασμό;",
-    "dont_have_an_account": "Δεν έχετε λογαριασμό;"
+    "dont_have_an_account": "Δεν έχετε λογαριασμό;",
+    "password_requirements_title": "Απαιτήσεις Κωδικού Πρόσβασης:",
+    "password_requirement_8_chars": "Τουλάχιστον 8 χαρακτήρες",
+    "password_requirement_case_letters": "Περιέχει κεφαλαία και πεζά γράμματα",
+    "password_requirement_one_number": "Περιλαμβάνει τουλάχιστον έναν αριθμό",
+    "password_requirement_special_char": "Περιλαμβάνει τουλάχιστον έναν ειδικό χαρακτήρα (π.χ., !@#$%^&*)"
   },
   "sidebar": {
     "management_system": "Διαχειριστικό Πρόγραμμα",
@@ -261,7 +282,8 @@
     "settings": "Ρυθμίσεις",
     "logout": "Αποσύνδεση",
     "questionnaire_templates": "Ερωτηματολόγια",
-    "privacy_policy": "Πολιτική Απορρήτου"
+    "privacy_policy": "Πολιτική Απορρήτου",
+    "welcome": "Καλωσήρθες"
   },
   "setcard": {
     "how_to_set_card": "Πώς να ρυθμίσετε μια κάρτα NFC για έναν πελάτη",

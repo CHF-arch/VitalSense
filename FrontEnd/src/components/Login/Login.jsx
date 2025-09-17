@@ -1,9 +1,10 @@
 import { useState } from "react";
-import styles from "../styles/Login.module.css";
-import { loginUser, signUpUser } from "../services/auth.js"; // Assuming these functions are defined in authService.js
+import styles from "../../styles/Login.module.css";
+import { loginUser, signUpUser } from "../../services/auth.js"; // Assuming these functions are defined in authService.js
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme.js";
 import { useTranslation } from "react-i18next";
+import LoginRequerments from "./LoginRequerments.jsx";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -128,6 +129,7 @@ export default function Login() {
               {t("login.login")}
             </button>
           </p>
+          <LoginRequerments password={password} />
         </div>
       ) : (
         <div className={styles.form}>
