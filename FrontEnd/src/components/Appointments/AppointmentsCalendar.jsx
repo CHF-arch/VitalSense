@@ -266,6 +266,7 @@ const AppointmentsCalendar = () => {
         onNavigate={handleNavigate}
         min={new Date(0, 0, 0, 7, 10, 0)}
         defaultView="week"
+        style={{ width: "95%" }}
       />
       <div className={styles.buttonContainer}>
         <NewAppointmentButton onSuccess={handleNewAppointment} />

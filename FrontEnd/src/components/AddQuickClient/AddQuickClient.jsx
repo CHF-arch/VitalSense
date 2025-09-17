@@ -32,6 +32,7 @@ export default function AddQuickClient({ isOpen, onClose }) {
       return;
     }
     toast.success(t("appointments.client_create_suc"));
+    window.location.reload();
   };
 
   if (!isOpen) return null;
@@ -79,7 +80,6 @@ export default function AddQuickClient({ isOpen, onClose }) {
               type="email"
               id="email"
               name="email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

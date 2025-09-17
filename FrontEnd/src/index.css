@@ -144,6 +144,7 @@ body[data-theme="dark"] {
   .rbc-header {
     color: var(--text-color-primary);
     border-bottom: 0.5px solid var(--border-color-medium);
+    width: 100% !important;
   }
 
   .rbc-day-bg {

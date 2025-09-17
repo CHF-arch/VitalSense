@@ -49,7 +49,9 @@ export default function QuestionnaireTemplate() {
     <div className={styles.container}>
       <div className={styles.headerWithButton}>
         <h2 className={styles.h1}>{t("questionnaire_template.title")}</h2>
-        <CreateQuestionnaireTemplateButton onSuccess={fetchTemplates} />
+        <div>
+          <CreateQuestionnaireTemplateButton onSuccess={fetchTemplates} />
+        </div>
       </div>
       <div>
         <ul className={styles.templateList}>

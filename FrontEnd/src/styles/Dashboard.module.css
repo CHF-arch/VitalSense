@@ -280,6 +280,7 @@
   flex-direction: column;
   gap: 10px;
   margin-top: 15px;
+  width: 100%;
 }
 
 @media (max-width: 1440px) {

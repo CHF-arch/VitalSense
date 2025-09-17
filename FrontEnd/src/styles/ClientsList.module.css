@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   min-height: 100vh;
   padding: 40px 48px;
@@ -47,6 +50,7 @@
   border: 1px solid var(--border-color-light);
   border-radius: 20px;
   box-shadow: 0 8px 32px var(--shadow-color-medium);
+  width: 100%;
 }
 
 .searchInput {
@@ -116,6 +120,7 @@
   letter-spacing: 0.02em;
   box-shadow: 0 6px 16px var(--shadow-color-medium);
   border: none;
+  width: 100%;
 }
 .buttonsContainer {
   display: flex;
@@ -174,6 +179,7 @@
   gap: 20px;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 .clientCard {
@@ -727,12 +733,14 @@
   text-align: center;
   padding: 60px 20px;
   color: var(--text-color-secondary);
+  width: 40%;
 }
 
 .emptyState .h1 {
   font-size: 1.5rem;
   margin-bottom: 24px;
   color: var(--text-color-secondary);
+  text-align: center;
 }
 
 /* Enhanced animations */
