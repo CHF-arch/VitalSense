@@ -3,7 +3,12 @@ import styles from "../../styles/ClientsList.module.css";
 import { useTranslation } from "react-i18next";
 import AddQuickClientButton from "./AddQuickClientButton";
 
-export default function Toolbar({ searchTerm, setSearchTerm, handleExport, onClientAdded }) {
+export default function Toolbar({
+  searchTerm,
+  setSearchTerm,
+  handleExport,
+  onClientAdded,
+}) {
   const { t } = useTranslation();
   return (
     <div className={styles.toolbar}>

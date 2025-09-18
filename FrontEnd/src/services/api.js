@@ -2,7 +2,7 @@ import { logoutUser } from "./auth";
 import { refreshAccessToken } from "./token";
 
 const getAuthHeaders = (token) => {
-  const accessToken = token || localStorage.getItem("token");
+  const accessToken = token || sessionStorage.getItem("token");
   const headers = new Headers({
     "Content-Type": "application/json",
   });
@@ -39,7 +39,7 @@ export const fetchWithAuth = async (url, options = {}) => {
 
 export const fetchWithAuthForFormData = async (url, options = {}) => {
   const getHeaders = (token) => {
-    const accessToken = token || localStorage.getItem("token");
+    const accessToken = token || sessionStorage.getItem("token");
     const headers = new Headers(options.headers);
     if (accessToken) {
       headers.set("Authorization", `Bearer ${accessToken}`);

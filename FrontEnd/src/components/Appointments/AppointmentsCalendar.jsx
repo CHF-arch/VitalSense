@@ -104,6 +104,69 @@ const AppointmentsCalendar = () => {
           const dayName = days[dayOfWeek].substring(0, 3);
           return `${dayNum} ${dayName}`;
         },
+        dayHeaderFormat: (date) => {
+          const month = date.getMonth();
+          const months = [
+            "Ιανουάριος",
+            "Φεβρουάριος",
+            "Μάρτιος",
+            "Απρίλιος",
+            "Μάιος",
+            "Ιούνιος",
+            "Ιούλιος",
+            "Αύγουστος",
+            "Σεπτέμβριος",
+            "Οκτώβριος",
+            "Νοέμβριος",
+            "Δεκέμβριος",
+          ];
+          const daysOfWeek = [
+            t("calendar.sunday"),
+            t("calendar.monday"),
+            t("calendar.tuesday"),
+            t("calendar.wednesday"),
+            t("calendar.thursday"),
+            t("calendar.friday"),
+            t("calendar.saturday"),
+          ];
+          if (i18n.language === "el") {
+            const dayOfWeekIndex = date.getDay();
+            const dayOfMonth = moment(date).format("D");
+            return `${daysOfWeek[dayOfWeekIndex]} ${dayOfMonth} ${months[month]}`;
+          }
+          return moment(date).locale(i18n.language).format("dddd DD MMMM");
+        },
+        dayRangeHeaderFormat: ({ start, end }) => {
+          const startMonthIndex = start.getMonth();
+          const endMonthIndex = end.getMonth();
+          const months = [
+            "Ιανουάριος",
+            "Φεβρουάριος",
+            "Μάρτιος",
+            "Απρίλιος",
+            "Μάιος",
+            "Ιούνιος",
+            "Ιούλιος",
+            "Αύγουστος",
+            "Σεπτέμβριος",
+            "Οκτώβριος",
+            "Νοέμβριος",
+            "Δεκέμβριος",
+          ];
+          if (i18n.language === "el") {
+            const startDay = moment(start).format("D");
+            const endDay = moment(end).format("D");
+            if (startMonthIndex === endMonthIndex) {
+              return `${startDay} – ${endDay} ${months[startMonthIndex]}`;
+            }
+            return `${startDay} ${months[startMonthIndex]} – ${endDay} ${months[endMonthIndex]}`;
+          }
+          return `${moment(start)
+            .locale(i18n.language)
+            .format("DD MMMM")} – ${moment(end)
+            .locale(i18n.language)
+            .format("DD MMMM")}`;
+        },
       },
     };
   }, [i18n.language, t]);

@@ -1,24 +1,16 @@
 import { API_BASE_URL } from "../config/api";
 import { logoutUser } from "./auth";
 
-export function getRefreshToken() {
-  return localStorage.getItem("refreshToken");
-}
-
 export async function refreshAccessToken() {
-  const refreshToken = getRefreshToken();
-  if (!refreshToken) {
-    logoutUser();
-    return null;
-  }
-
   try {
+    // The POST request should be empty, as the refresh token is in an HttpOnly cookie.
     const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ refreshToken }),
+      credentials: "include", // Send cookies
+      body: JSON.stringify({}), // Empty body
     });
 
     if (!response.ok) {
@@ -28,9 +20,9 @@ export async function refreshAccessToken() {
 
     const data = await response.json();
     if (data.accessToken) {
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
+      // Only save the new access token. The new refresh token is handled by the backend in the cookie.
+      sessionStorage.setItem("token", data.accessToken);
+      sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
       return data.accessToken;
     }
     return null;

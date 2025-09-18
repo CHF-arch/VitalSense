@@ -79,74 +79,91 @@ export default function Settings() {
   };
 
   return (
-    <div className={styles.settingsContainer}>
-      <h1 className={styles.title}>{t("settings.title")}</h1>
-      <div className={styles.settingsSection}>
-        <h2 className={styles.sectionTitle}>
-          {t("settings.theme_section_title")}
-        </h2>
-        <button onClick={toggleTheme} className={styles.button}>
-          {theme === "light"
-            ? t("settings.switch_to_dark_theme")
-            : t("settings.switch_to_light_theme")}
-        </button>
-      </div>
-      <div className={styles.settingsSection}>
-        <h2 className={styles.sectionTitle}>
-          {t("settings.language_section_title")}
-        </h2>
-        <div className={styles.buttonGroup}>
-          <select
-            value={i18n.resolvedLanguage}
-            onChange={(e) => changeLanguage(e.target.value)}
-            className={styles.languageSelect}
-          >
-            <option value="en">{t("settings.english")}</option>
-            <option value="el">{t("settings.greek")}</option>
-          </select>
-        </div>
-      </div>
-      <div className={styles.settingsSection}>
-        <h2 className={styles.sectionTitle}>
-          {t("settings.account_section_title")}
-        </h2>
-        <div className={styles.buttonContainer}>
-          <button
-            onClick={() => openModal(<UsernameChangeModal />)}
-            className={styles.button}
-          >
-            {t("settings.change_username")}
-          </button>
-          <button
-            onClick={() => openModal(<EmailChangeModal />)}
-            className={styles.button}
-          >
-            {t("settings.change_email")}
-          </button>
-          <button
-            onClick={() => openModal(<PasswordChangeModal />)}
-            className={styles.button}
-          >
-            {t("settings.change_password")}
+    <div className={styles.mainWrapper}>
+      <div className={styles.settingsContainer}>
+        <h1 className={styles.title}>{t("settings.title")}</h1>
+        <div className={styles.settingsSection}>
+          <h2 className={styles.sectionTitle}>
+            {t("settings.theme_section_title")}
+          </h2>
+          <button onClick={toggleTheme} className={styles.button}>
+            {theme === "light"
+              ? t("settings.switch_to_dark_theme")
+              : t("settings.switch_to_light_theme")}
           </button>
         </div>
-        <button
-          onClick={
-            isGoogleConnected ? handleGoogleDisconnect : handleGoogleSignIn
-          }
-          className={isGoogleConnected ? styles.button : styles.googleButton}
-        >
-          {!isGoogleConnected && (
-            <img
-              src={googleIcon}
-              alt="Google icon"
-              className={styles.googleIcon}
-            />
-          )}
-          {isGoogleConnected
-            ? t("settings.disconnect_google")
-            : t("settings.sign_in_with_google")}
-        </button>
+        <div className={styles.settingsSection}>
+          <h2 className={styles.sectionTitle}>
+            {t("settings.language_section_title")}
+          </h2>
+          <div className={styles.buttonGroup}>
+            <select
+              value={i18n.resolvedLanguage}
+              onChange={(e) => changeLanguage(e.target.value)}
+              className={styles.languageSelect}
+            >
+              <option value="en">{t("settings.english")}</option>
+              <option value="el">{t("settings.greek")}</option>
+            </select>
+          </div>
+        </div>
+        <div className={styles.settingsSection}>
+          <h2 className={styles.sectionTitle}>
+            {t("settings.account_section_title")}
+          </h2>
+          <div className={styles.buttonContainer}>
+            <div className={styles.buttonWrapper}>
+              <button
+                onClick={() => openModal(<UsernameChangeModal />)}
+                className={styles.button}
+              >
+                {t("settings.change_username")}
+              </button>
+            </div>
+            <div className={styles.buttonWrapper}>
+              <button
+                onClick={() => openModal(<EmailChangeModal />)}
+                className={styles.button}
+              >
+                {t("settings.change_email")}
+              </button>
+            </div>
+            <div className={styles.buttonWrapper}>
+              <button
+                onClick={() => openModal(<PasswordChangeModal />)}
+                className={styles.button}
+              >
+                {t("settings.change_password")}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.settingsSection}>
+          <h2 className={styles.sectionTitle}>
+            {t("settings.connections_section_title")}
+          </h2>
+          <div className={styles.googleButtonWrapper}>
+            <button
+              onClick={
+                isGoogleConnected ? handleGoogleDisconnect : handleGoogleSignIn
+              }
+              className={`${
+                isGoogleConnected ? styles.button : styles.googleButton
+              }`}
+            >
+              {!isGoogleConnected && (
+                <img
+                  src={googleIcon}
+                  alt="Google icon"
+                  className={styles.googleIcon}
+                />
+              )}
+              {isGoogleConnected
+                ? t("settings.disconnect_google")
+                : t("settings.sign_in_with_google")}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -31,7 +31,8 @@
     "confirm_new_password": "Επιβεβαίωση Νέου Κωδικού",
     "passwords_do_not_match": "Οι κωδικοί δεν ταιριάζουν",
     "password_changed_successfully": "Ο κωδικός άλλαξε επιτυχώς",
-    "password_change_failed": "Αποτυχία αλλαγής κωδικού"
+    "password_change_failed": "Αποτυχία αλλαγής κωδικού",
+    "connections_section_title": "Συνδέσεις"
   },
   "add_client": {
     "title": "Προσθήκη Πελάτη",

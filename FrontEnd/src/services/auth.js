@@ -1,10 +1,9 @@
 import { API_BASE_URL } from "../config/api";
 
 export async function logoutUser() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("refreshToken");
-  localStorage.removeItem("accessTokenExpiry");
-  localStorage.removeItem("username");
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("accessTokenExpiry");
+  sessionStorage.removeItem("username");
   window.location.href = "/login";
 }
 
@@ -25,10 +24,9 @@ export async function loginUser(username, password) {
 
     const data = await response.json();
     if (data.accessToken) {
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
-      localStorage.setItem("username", username);
+      sessionStorage.setItem("token", data.accessToken);
+      sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
+      sessionStorage.setItem("username", username);
     }
     return data;
   } catch (error) {
@@ -68,7 +66,7 @@ export async function changePassword(
   newPassword,
   confirmNewPassword
 ) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   try {
     const response = await fetch(`${API_BASE_URL}/auth/change-password`, {
       method: "POST",
@@ -98,7 +96,7 @@ export async function changePassword(
 }
 
 export async function changeEmail(newEmail, currentPassword) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   try {
     const response = await fetch(`${API_BASE_URL}/auth/change-email`, {
       method: "POST",
@@ -127,7 +125,7 @@ export async function changeEmail(newEmail, currentPassword) {
 }
 
 export async function changeUsername(newUsername, currentPassword) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   try {
     const response = await fetch(`${API_BASE_URL}/auth/change-username`, {
       method: "POST",
