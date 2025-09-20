@@ -16,6 +16,7 @@ import EmptyState from "./EmptyState";
 import Pagination from "../common/Pagination";
 import { useTranslation } from "react-i18next";
 import { useModal } from "../../context/useModal";
+import { Link } from "react-router-dom";
 
 const PAGE_SIZE = 12;
 

@@ -4,7 +4,9 @@
     "back": "Back",
     "cancel": "Cancel",
     "create": "Create",
-    "save": "Save"
+    "save": "Save",
+    "select": "Select",
+    "submit": "Submit"
   },
   "settings": {
     "title": "Settings",
@@ -118,7 +120,10 @@
     "set_card": "Set Card",
     "add_quick_client": "Add Quick Client",
     "add_quick_client_title": "Add Quick Client",
-    "delete_confirmation": "Are you sure you want to delete this client? This will also delete all their meal plans and appointments."
+    "delete_confirmation": "Are you sure you want to delete this client? This will also delete all their meal plans and appointments.",
+    "submit_questionnaire": "Submit Questionnaire",
+    "select_questionnaire_template": "Select Questionnaire Template",
+    "template": "Templates"
   },
   "client_meal_plans": {
     "title": "Meal Plans for",
@@ -359,7 +364,9 @@
     "remove": "Remove",
     "create": "Create :",
     "last": "Last Updated :",
-    "delete_confirmation": "Are you sure you want to delete this template?"
+    "delete_confirmation": "Are you sure you want to delete this template?",
+    "answer_modal_title": "Questionnaire Answers",
+    "select_questionnaire_template": "Select Questionnaire Template"
   },
   "edit_meal_plan": {
     "title": "Edit Meal Plan",
@@ -467,5 +474,23 @@
     "contact_us_paragraph": "If you have any questions about this Privacy Policy, You can contact us:",
     "contact_method_1": "By visiting this page on our website:",
     "contact_method_2": "Generated using TermsFeed Privacy Policy Generator"
-  }
+  },
+  "client": {
+    "loading": "Loading...",
+    "error": "Failed to fetch client data.",
+    "not_found": "Client not found.",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "dob": "Date of Birth",
+    "gender": "Gender",
+    "hasCard": "Has Card",
+    "notes": "Notes",
+    "createdAt": "Created At",
+    "questionnaire_answers": "Questionnaire Answers",
+    "submission_date": "Submission Date",
+    "no_submissions": "No questionnaire submissions found."
+  },
+  "yes": "Yes",
+  "no": "No"
 }

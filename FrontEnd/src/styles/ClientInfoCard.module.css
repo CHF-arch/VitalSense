@@ -1,23 +1,29 @@
 .card {
   background-color: var(--card-background);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px var(--shadow-color-light);
-  padding: 25px;
-  margin-bottom: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px var(--shadow-color-light);
+  padding: 2rem;
+  margin: 2rem;
   border: 1px solid var(--card-border);
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px var(--shadow-color-medium);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color-light);
 }
 
 .name {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text-color-primary);
   margin: 0;
@@ -26,19 +32,21 @@
 .headerActions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .status {
-  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   background-color: var(--status-no-background);
   color: var(--status-no-color);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  box-shadow: 0 4px 8px var(--shadow-color-light);
 }
 
 .hasCard {
@@ -46,15 +54,15 @@
   color: var(--status-yes-color);
 }
 
-.editButton {
+.editLink {
   background: linear-gradient(
     135deg,
     var(--gradient-blue-start) 0%,
     var(--gradient-blue-end) 100%
   );
   color: white;
-  padding: 8px 15px;
-  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -62,49 +70,123 @@
   box-shadow: 0 6px 16px var(--shadow-color-medium);
   border: none;
   cursor: pointer;
+  text-align: center;
 }
 
-.editButton:hover {
+.editLink:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px var(--shadow-color-medium);
+  box-shadow: 0 10px 20px var(--shadow-color-medium);
 }
 
 .body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .infoRow {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
+  background-color: var(--background-color-light);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
 }
 
 .label {
   font-weight: 600;
   color: var(--text-color-secondary);
-  min-width: 80px;
 }
 
 .value {
   color: var(--text-color-primary);
+  font-weight: 500;
 }
 
 .footer {
-  padding-top: 15px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border-color-light);
+}
+
+.notesTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color-primary);
+  margin-bottom: 0.5rem;
 }
 
 .notes {
   font-style: italic;
   color: var(--text-color-secondary);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+.questionnaire {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color-light);
+}
+
+.questionnaire h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.submission {
+  background-color: var(--background-color-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.submission h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  margin-bottom: 1rem;
+}
+
+.answer {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--background-color-secondary);
+  margin-bottom: 1rem;
+}
+
+.answer p {
+  margin: 0;
+  color: white;
 }
 
 @media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .name {
+    font-size: 1.8rem;
+  }
+
+  .headerActions {
+    justify-content: space-between;
+  }
+
+  .card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
   .body {
     grid-template-columns: 1fr;
   }

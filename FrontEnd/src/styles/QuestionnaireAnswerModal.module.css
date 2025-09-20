@@ -1,0 +1,76 @@
+
+.questionnaireFormGroup {
+  margin-bottom: 15px;
+}
+
+.questionLabel {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+  color: var(--text-color); /* Assuming a CSS variable for text color */
+}
+
+.questionTextarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color-medium);
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--input-background);
+  color: var(--text-color-primary);
+  font-weight: 400;
+  box-shadow: none;
+  min-height: 80px; /* Retain min-height */
+}
+
+.questionTextarea:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: none;
+  transform: none;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Adds space between buttons */
+  margin-top: 20px;
+}
+
+.cancelButton {
+  background: var(--gradient-gray-start);
+  color: var(--text-color-primary);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancelButton:hover {
+  /* No specific hover for gradient-gray-start in Modal.module.css, so keep it subtle */
+  opacity: 0.9;
+}
+
+.submitButton {
+  background: var(--gradient-blue-start);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  /* No specific hover for gradient-blue-start in Modal.module.css, so keep it subtle */
+  opacity: 0.9;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

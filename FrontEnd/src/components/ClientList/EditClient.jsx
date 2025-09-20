@@ -25,10 +25,24 @@ export default function EditClient() {
     const fetchClient = async () => {
       try {
         const client = await getClientById(clientId);
-        setClientData({
-          ...client,
-          dateOfBirth: client.dateOfBirth ? client.dateOfBirth.split("T")[0] : "",
-        });
+        if (client) {
+          const {
+            id,
+            dieticianId,
+            createdAt,
+            updatedAt,
+            ...editableClientData
+          } = client;
+          setClientData({
+            ...editableClientData,
+            dateOfBirth: editableClientData.dateOfBirth
+              ? editableClientData.dateOfBirth.split("T")[0]
+              : "",
+          });
+        } else {
+          console.warn("Client not found for ID:", clientId);
+          navigate("/clients"); // Example: navigate back to client list
+        }
       } catch (error) {
         console.error("Error fetching client:", error);
       }
@@ -48,7 +62,11 @@ export default function EditClient() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateClient(clientId, clientData);
+      const dataToSend = {
+        ...clientData,
+        dateOfBirth: clientData.dateOfBirth || null,
+      };
+      await updateClient(clientId, dataToSend);
       navigate(-1); // Navigate back after successful update
     } catch (error) {
       console.error("Error updating client:", error);
@@ -98,7 +116,6 @@ export default function EditClient() {
                 name="email"
                 value={clientData.email}
                 onChange={handleInputChange}
-                required
               />
             </label>
           </div>
@@ -127,7 +144,6 @@ export default function EditClient() {
                 name="dateOfBirth"
                 value={clientData.dateOfBirth}
                 onChange={handleInputChange}
-                required
               />
             </label>
           </div>
@@ -139,11 +155,10 @@ export default function EditClient() {
                 name="gender"
                 value={clientData.gender}
                 onChange={handleInputChange}
-                required
               >
                 <option value="">{t("add_client.select_gender")}</option>
-                <option value="male">{t("add_client.male")}</option>
-                <option value="female">{t("add_client.female")}</option>
+                <option value="Male">{t("add_client.male")}</option>
+                <option value="Female">{t("add_client.female")}</option>
               </select>
             </label>
           </div>

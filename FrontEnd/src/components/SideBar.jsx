@@ -19,7 +19,7 @@ export default function SideBar({ isOpen, onClose }) {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
+    const storedUsername = sessionStorage.getItem("username");
     if (storedUsername) {
       setUsername(storedUsername);
     }
@@ -41,7 +41,7 @@ export default function SideBar({ isOpen, onClose }) {
       label: t("sidebar.appointments"),
     },
     {
-      path: "/clients",
+      path: "/clients-list",
       icon: <MdPeople size={24} />,
       label: t("sidebar.clients"),
     },

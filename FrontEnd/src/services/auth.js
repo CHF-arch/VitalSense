@@ -23,10 +23,11 @@ export async function loginUser(username, password) {
     }
 
     const data = await response.json();
-    if (data.accessToken) {
+    if (data.accessToken && data.refreshToken) {
       sessionStorage.setItem("token", data.accessToken);
       sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
       sessionStorage.setItem("username", username);
+      sessionStorage.setItem("refreshToken", data.refreshToken);
     }
     return data;
   } catch (error) {

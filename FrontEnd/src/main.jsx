@@ -35,6 +35,7 @@ import MealPlansPage from "./pages/MealPlansPage.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "./hooks/useTheme.js";
+import ClientPage from "./pages/ClientPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -61,8 +62,12 @@ const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path: "clients",
+            path: "clients-list",
             element: <ClientsListPage />,
+          },
+          {
+            path: "clients/:clientId",
+            element: <ClientPage />,
           },
           {
             path: "add-client",

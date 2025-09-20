@@ -157,6 +157,7 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 24px var(--shadow-color-medium);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .button:hover {
@@ -773,4 +774,12 @@
 
 .clientItem:nth-child(5) {
   animation-delay: 0.4s;
+}
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardLink:hover {
+  text-decoration: none;
 }

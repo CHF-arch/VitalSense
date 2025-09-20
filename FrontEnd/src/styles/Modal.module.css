@@ -83,6 +83,7 @@
 
 .formGroup input,
 .formGroup textarea,
+.formGroup select,
 .questionInput {
   width: 100%;
   padding: 14px 18px;
@@ -100,6 +101,7 @@
 
 .formGroup input:focus,
 .formGroup textarea:focus,
+.formGroup select:focus,
 .questionInput:focus {
   outline: none;
   border-color: var(--input-focus-border);
@@ -169,16 +171,27 @@
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.3s ease; /* Add transition for smooth hover */
 }
 
 .submitButton {
   background: var(--gradient-blue-start);
   color: white;
+  margin: 10px;
+}
+
+.submitButton:hover {
+  background: var(--gradient-blue-end);
 }
 
 .cancelButton {
   background: var(--gradient-gray-start);
   color: var(--text-color-primary);
+  margin: 10px;
+}
+
+.cancelButton:hover {
+  opacity: 0.9;
 }
 
 .checkboxLabel {

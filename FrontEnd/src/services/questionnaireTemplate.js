@@ -65,3 +65,30 @@ export async function fetchQuestionnaireTemplateById(id) {
   }
   return response.json();
 }
+
+export async function SubmitQuestionnaire(data) {
+  const response = await fetchWithAuth(
+    `${API_BASE_URL}/questionnaire-templates/submissions`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to submit questionnaire");
+  }
+  return response.json();
+}
+
+export async function fetchQuestionnaireSubmissionsByClientId(clientId) {
+  const response = await fetchWithAuth(
+    `${API_BASE_URL}/questionnaire-templates/submissions/client/${clientId}`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch questionnaire submissions");
+  }
+  return response.json();
+}
