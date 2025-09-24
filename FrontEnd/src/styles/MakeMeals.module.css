@@ -280,6 +280,7 @@
 }
 .checkboxGroup {
   display: flex;
+  flex-wrap: wrap; /* This allows the items to wrap to the next line */
   flex-direction: row;
   gap: 12px;
   margin-bottom: 20px;

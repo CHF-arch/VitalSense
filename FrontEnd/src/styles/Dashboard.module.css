@@ -248,6 +248,7 @@
   flex-shrink: 0;
   box-sizing: border-box;
   flex-grow: 1;
+  height: 50%;
 }
 
 .sideContentWrapper {

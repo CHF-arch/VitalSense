@@ -66,7 +66,9 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
             />
           </div>
           <div>
-            <label htmlFor={`carbs-${mealIndex}`}>{t("make_meals.carbs")}</label>
+            <label htmlFor={`carbs-${mealIndex}`}>
+              {t("make_meals.carbs")}
+            </label>
             <input
               id={`carbs-${mealIndex}`}
               type="number"
@@ -110,7 +112,7 @@ const MealCard = ({ meal, mealIndex, onMealChange, onDayToggle }) => {
           onClick={() => setShowNutrition(true)}
           className={styles.addNutritionButton}
         >
-          {t("make_meals.add_nutrition", "Add Nutritional Info")}
+          {t("make_meals.add_nutrition_info")}
         </button>
       )}
       <div className={styles.daysSelection}>

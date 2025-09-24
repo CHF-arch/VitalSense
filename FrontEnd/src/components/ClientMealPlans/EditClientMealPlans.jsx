@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import PlanDetails from "../MakeMeals/PlanDetails";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MealCard from "../MakeMeals/MealCard";
 
 const initialMealState = {
   title: "",

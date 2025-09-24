@@ -27,10 +27,10 @@ export default function EditClient() {
         const client = await getClientById(clientId);
         if (client) {
           const {
-            id,
-            dieticianId,
-            createdAt,
-            updatedAt,
+            id, // eslint-disable-line no-unused-vars
+            dieticianId, // eslint-disable-line no-unused-vars
+            createdAt, // eslint-disable-line no-unused-vars
+            updatedAt, // eslint-disable-line no-unused-vars
             ...editableClientData
           } = client;
           setClientData({
@@ -49,7 +49,7 @@ export default function EditClient() {
     };
 
     fetchClient();
-  }, [clientId]);
+  }, [clientId, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;

@@ -34,6 +34,13 @@ const Client = () => {
     fetchData();
   }, [clientId, t]);
 
+  const getGender = (gender) => {
+    if (!gender) return "";
+    return gender.toLowerCase() === "male"
+      ? t("client.male", "Male")
+      : t("client.female", "Female");
+  };
+
   if (loading) {
     return <div>{t("client.loading")}</div>;
   }
@@ -88,13 +95,17 @@ const Client = () => {
           <div className={styles.infoRow}>
             <span className={styles.icon}>🚻</span>
             <span className={styles.label}>{t("client.gender")}:</span>
-            <span className={styles.value}>{client.gender}</span>
+            <span className={styles.value}>{getGender(client.gender)}</span>
           </div>
         )}
         <div className={styles.infoRow}>
           <span className={styles.icon}>💳</span>
           <span className={styles.label}>{t("client.hasCard")}:</span>
-          <span className={`${styles.value} ${client.hasCard ? styles.hasCard : ''}`}>
+          <span
+            className={`${styles.value} ${
+              client.hasCard ? styles.hasCard : ""
+            }`}
+          >
             {client.hasCard ? t("yes") : t("no")}
           </span>
         </div>

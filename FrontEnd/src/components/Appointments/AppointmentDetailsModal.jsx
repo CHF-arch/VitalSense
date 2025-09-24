@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { searchClients } from "../../services/client"; // Needed for client search in edit mode
-import styles from "../../styles/AppointmentDetailsModal.module.css"; // Import styles
+import { searchClients } from "../../services/client";
+import styles from "../../styles/AppointmentDetailsModal.module.css";
 import { useTranslation } from "react-i18next";
 import { getDisplayNameForClient } from "./ClientUtils";
 import moment from "moment";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { el } from "date-fns/locale/el";
 import { enUS } from "date-fns/locale/en-US";
-import { useModal } from "../../context/useModal"; // Import useModal
+import { useModal } from "../../context/useModal";
 
-// Register locales for react-datepicker
 registerLocale("el", el);
 registerLocale("en", enUS);
 
@@ -19,12 +18,17 @@ const AppointmentDetailsModal = ({
   onUpdate,
   onDelete,
 }) => {
-  const { openConfirmationModal } = useModal(); // Get the function from context
+  const { openConfirmationModal } = useModal();
   const [isEditing, setIsEditing] = useState(false);
+
+  const clientFromAppointment = appointment.client || {
+    firstName: appointment.clientFirstName,
+    lastName: appointment.clientLastName,
+  };
+
   const [title, setTitle] = useState(() => {
-    if (appointment.title && appointment.client) {
-      const clientDisplayName = getDisplayNameForClient(appointment.client);
-      // Attempt to remove the appended client name for editing
+    if (appointment.title && clientFromAppointment) {
+      const clientDisplayName = getDisplayNameForClient(clientFromAppointment);
       const regex = new RegExp(` - ${clientDisplayName}`);
       if (regex.test(appointment.title)) {
         return appointment.title.replace(regex, "");
@@ -44,19 +48,16 @@ const AppointmentDetailsModal = ({
       : ""
   );
 
-  // For client search/selection in edit mode
   const [clientSearchTerm, setClientSearchTerm] = useState(
-    getDisplayNameForClient(appointment.client)
+    getDisplayNameForClient(clientFromAppointment)
   );
   const [filteredClients, setFilteredClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState(
-    appointment.client || null
-  ); // Stores { id, fullName, phoneNumber }
+    clientFromAppointment || null
+  );
 
-  // Debounced search for clients (only in edit mode)
   useEffect(() => {
     if (!isEditing) {
-      // If not in edit mode, clear search results
       setFilteredClients([]);
       return;
     }
@@ -65,7 +66,7 @@ const AppointmentDetailsModal = ({
       const handler = setTimeout(async () => {
         try {
           const results = await searchClients(clientSearchTerm);
-          console.log("DEBUG: Results from searchClients:", results); // Keep for now
+          console.log("DEBUG: Results from searchClients:", results);
           setFilteredClients(results);
         } catch (error) {
           console.error("Error searching clients in details modal:", error);
@@ -77,7 +78,6 @@ const AppointmentDetailsModal = ({
         clearTimeout(handler);
       };
     } else {
-      // If clientSearchTerm is empty, clear search results
       setFilteredClients([]);
     }
   }, [clientSearchTerm, isEditing]);
@@ -85,12 +85,11 @@ const AppointmentDetailsModal = ({
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     if (!title || !start || !end || !selectedClient) {
-      // Removed alert as per user request
       return;
     }
 
     const updatedData = {
-      ...appointment, // Keep existing properties
+      ...appointment,
       title,
       start: moment(start, "YYYY-MM-DDTHH:mm").utc().toISOString(),
       end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
@@ -140,7 +139,7 @@ const AppointmentDetailsModal = ({
             </p>
             <p className={styles.detailText}>
               <strong>{t("appointments.client")}:</strong>{" "}
-              {getDisplayNameForClient(appointment.client)}
+              {getDisplayNameForClient(clientFromAppointment)}
             </p>
             <div className={styles.buttonContainer}>
               <button

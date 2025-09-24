@@ -3,25 +3,13 @@ import styles from "../../styles/Dashboard.module.css";
 import TodoApp from "../TodoApp/TodoApp";
 import { getAppointmentsByDate } from "../../services/appointment";
 import { getDashboardData } from "../../services/dashboard";
-import { getClientById } from "../../services/client"; // Import getClientById
 import moment from "moment";
 import ClientChangeChart from "./ClientChangeChart";
 import { useTranslation } from "react-i18next";
 import AddQuickClientButton from "../ClientList/AddQuickClientButton";
 import NewAppointmentButton from "../Appointments/NewAppointmentButton";
 import CreateQuestionnaireTemplateButton from "../QuestionnaireTemplate/createQuestionnaireTemplateButton";
-import { FaRegClock, FaRegCalendarAlt } from "react-icons/fa";
-
-// Helper function to get client's display name
-const getDisplayNameForClient = (client) => {
-  if (!client) return "N/A";
-  if (client.fullName) return client.fullName;
-  if (client.firstName && client.lastName)
-    return `${client.firstName} ${client.lastName}`;
-  if (client.firstName) return client.firstName;
-  if (client.lastName) return client.lastName;
-  return "N/A";
-};
+import { FaRegClock, FaRegCalendarAlt, FaUser } from "react-icons/fa";
 
 export default function Dashboard() {
   const [todayAppointments, setTodayAppointments] = useState([]);
@@ -38,30 +26,7 @@ export default function Dashboard() {
       try {
         const today = moment().format("YYYY-MM-DD");
         const appointments = await getAppointmentsByDate(today);
-
-        const appointmentsWithClientNames = await Promise.all(
-          appointments.map(async (appointment) => {
-            let clientDetails = appointment.client;
-            if (!clientDetails && appointment.clientId) {
-              try {
-                clientDetails = await getClientById(appointment.clientId);
-              } catch (clientError) {
-                console.error(
-                  `Error fetching client ${appointment.clientId}:`,
-                  clientError
-                );
-                clientDetails = null;
-              }
-            }
-            const clientDisplayName = getDisplayNameForClient(clientDetails);
-            return {
-              ...appointment,
-              clientName: clientDisplayName,
-              title: `${appointment.title} - ${clientDisplayName}`,
-            };
-          })
-        );
-        setTodayAppointments(appointmentsWithClientNames);
+        setTodayAppointments(appointments);
       } catch (error) {
         console.error("Error fetching today's appointments:", error);
       }
@@ -98,8 +63,9 @@ export default function Dashboard() {
                         : styles.appointmentUpcoming
                     }`}
                   >
-                    <FaRegCalendarAlt /> {appointment.title} {t("dashboard.at")}{" "}
-                    <FaRegClock />{" "}
+                    <FaRegCalendarAlt /> {appointment.title} <FaUser />{" "}
+                    {appointment.clientFirstName} {appointment.clientLastName}{" "}
+                    {t("dashboard.at")} <FaRegClock />{" "}
                     {moment.utc(appointment.start).local().format("HH:mm")}-
                     {moment.utc(appointment.end).local().format("HH:mm")}
                   </li>

@@ -1,18 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/ClientsList.module.css";
 import { useTranslation } from "react-i18next";
-import { useModal } from "../../context/useModal"; // Import useModal
-import SetCardOptionModal from "../SetCard/SetCardOptionModal"; // Import SetCardOptionModal
+import { useModal } from "../../context/useModal";
+import SetCardOptionModal from "../SetCard/SetCardOptionModal";
 import {
   fetchQuestionnaireTemplates,
   SubmitQuestionnaire,
 } from "../../services/questionnaireTemplate";
 import QuestionnaireTemplateSelectionModal from "./QuestionnaireTemplateSelectionModal";
-import QuestionnaireAnswerModal from "./QuestionnaireAnswerModal"; // Import QuestionnaireAnswerModal
+import QuestionnaireAnswerModal from "./QuestionnaireAnswerModal";
 
 export default function ClientCard({ client, handleDelete }) {
   const { t } = useTranslation();
-  const { openModal, closeModal } = useModal(); // Get openModal and closeModal from useModal
+  const { openModal, closeModal } = useModal();
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -68,6 +68,17 @@ export default function ClientCard({ client, handleDelete }) {
       alert("Failed to submit questionnaire.");
     }
   };
+
+  const getGender = (gender) => {
+    if (!gender) return { text: "", badge: "◦" };
+    if (gender.toLowerCase() === "male") {
+      return { text: t("client.male", "Male"), badge: "♂" };
+    } else {
+      return { text: t("client.female", "Female"), badge: "♀" };
+    }
+  };
+
+  const genderInfo = getGender(client.gender);
 
   return (
     <div
@@ -172,13 +183,9 @@ export default function ClientCard({ client, handleDelete }) {
               {new Date(client.dateOfBirth).toLocaleDateString()}
             </span>
             <span className={styles.genderBadge}>
-              {client.gender === "Male"
-                ? "♂"
-                : client.gender === "Female"
-                ? "♀"
-                : "◦"}
+              {genderInfo.badge}
             </span>
-            <span className={styles.genderText}>{client.gender}</span>
+            <span className={styles.genderText}>{genderInfo.text}</span>
           </div>
         </div>
 
@@ -218,13 +225,6 @@ export default function ClientCard({ client, handleDelete }) {
           </div>
         )}
         <div className={styles.buttonsContainer}>
-          <Link
-            to={`/make-meals/${client.id}`}
-            className={styles.cardButton}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {t("clientlist.create_meal_plan")}
-          </Link>
           <Link
             to={`/meal-plans/${client.id}`}
             className={styles.cardButton}

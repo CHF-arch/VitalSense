@@ -85,9 +85,7 @@ export default function SideBar({ isOpen, onClose }) {
         </nav>
 
         <div className={styles.buttonGroup}>
-          <div className={styles.dieticianNameBox}>
-            <p>{username}</p>
-          </div>
+          <div className={styles.dieticianNameBox}>{username}</div>
           <button onClick={handleLogout} className={styles.logoutButton}>
             <MdLogout size={24} />
             <span>{t("sidebar.logout")}</span>

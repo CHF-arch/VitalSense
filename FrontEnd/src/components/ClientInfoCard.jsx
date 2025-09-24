@@ -2,14 +2,6 @@ import React from "react";
 import styles from "../styles/ClientInfoCard.module.css";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import {
-  FaEnvelope,
-  FaPhone,
-  FaBirthdayCake,
-  FaUser,
-  FaIdCard,
-  FaVenusMars,
-} from "react-icons/fa";
 
 export default function ClientInfoCard({ client }) {
   const { t } = useTranslation();
@@ -18,23 +10,23 @@ export default function ClientInfoCard({ client }) {
     return null;
   }
 
-  const renderInfo = (Icon, label, value) => (
+  const renderInfo = (emoji, label, value) => (
     <div className={styles.infoRow}>
-      <Icon className={styles.icon} />
+      <span className={styles.icon}>{emoji}</span>
       <span className={styles.label}>{label}:</span>
-      <span className={styles.value}>{value || t("common.not_provided")}</span>
+      <span className={styles.value}>{value}</span>
     </div>
   );
 
   const getGender = (gender) => {
-    if (!gender) return t("common.not_provided");
-    return gender === "male"
+    if (!gender) return null;
+    return gender.toLowerCase() === "male"
       ? t("client_info_card.male")
       : t("client_info_card.female");
   };
 
   const formatDate = (date) => {
-    if (!date) return t("common.not_provided");
+    if (!date) return null;
     return new Date(date).toLocaleDateString();
   };
 
@@ -50,7 +42,7 @@ export default function ClientInfoCard({ client }) {
               client.hasCard ? styles.hasCard : ""
             }`}
           >
-            <FaIdCard />
+            <span className={styles.icon}>💳</span>
             <span className={styles.statusText}>
               {client.hasCard
                 ? t("client_info_card.card_holder")
@@ -63,26 +55,28 @@ export default function ClientInfoCard({ client }) {
         </div>
       </div>
       <div className={styles.body}>
-        {renderInfo(
-          FaEnvelope,
-          t("client_info_card.email"),
-          client.email
-        )}
-        {renderInfo(FaPhone, t("client_info_card.phone_number"), client.phone)}
-        {renderInfo(
-          FaBirthdayCake,
-          t("client_info_card.date_of_birth"),
-          formatDate(client.dateOfBirth)
-        )}
-        {renderInfo(
-          FaVenusMars,
-          t("client_info_card.gender"),
-          getGender(client.gender)
-        )}
+        {client.email &&
+          renderInfo("📧", t("client_info_card.email"), client.email)}
+        {client.phone &&
+          renderInfo("📞", t("client_info_card.phone_number"), client.phone)}
+        {client.dateOfBirth &&
+          renderInfo(
+            "🎂",
+            t("client_info_card.date_of_birth"),
+            formatDate(client.dateOfBirth)
+          )}
+        {client.gender &&
+          renderInfo(
+            "🚻",
+            t("client_info_card.gender"),
+            getGender(client.gender)
+          )}
       </div>
       {client.notes && (
         <div className={styles.footer}>
-          <h4 className={styles.notesTitle}>{t("client_info_card.notes")}</h4>
+          <h4 className={styles.notesTitle}>
+            📝 {t("client_info_card.notes")}
+          </h4>
           <p className={styles.notes}>{client.notes}</p>
         </div>
       )}

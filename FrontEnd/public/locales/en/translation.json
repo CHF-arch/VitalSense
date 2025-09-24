@@ -3,6 +3,7 @@
     "meal": "Meal",
     "back": "Back",
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "create": "Create",
     "save": "Save",
     "select": "Select",
@@ -212,7 +213,8 @@
     "import_from_excel": "Import from Excel",
     "save_meal_plan": "Save Meal Plan",
     "create_new_meal_plan": "Create New Meal Plan",
-    "loading": "Processing your meal plan..."
+    "loading": "Processing your meal plan...",
+    "add_nutrition_info": "Add Nutrition Info"
   },
   "todo": {
     "my_tasks": "My Tasks",

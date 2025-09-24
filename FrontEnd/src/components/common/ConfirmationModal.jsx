@@ -1,17 +1,19 @@
 import React from "react";
 import styles from "../../styles/ConfirmationModal.module.css";
+import { useTranslation } from "react-i18next";
 
 const ConfirmationModal = ({ message, onConfirm, onCancel }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <p>{message}</p>
         <div className={styles.buttons}>
           <button onClick={onConfirm} className={styles.confirmButton}>
-            Confirm
+            {t("common.confirm")}
           </button>
           <button onClick={onCancel} className={styles.cancelButton}>
-            Cancel
+            {t("common.cancel")}
           </button>
         </div>
       </div>

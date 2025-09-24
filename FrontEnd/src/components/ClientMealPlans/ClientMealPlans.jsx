@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getMealPlansByClientId, deleteMealPlan } from "../../services/mealPlan";
+import {
+  getMealPlansByClientId,
+  deleteMealPlan,
+} from "../../services/mealPlan";
 import { getClientById } from "../../services/client";
 import { useTheme } from "../../hooks/useTheme";
 import styles from "../../styles/ClientMealPlans.module.css";
@@ -75,6 +78,13 @@ export default function ClientMealPlans() {
       <h1 className={styles.title}>
         {t("client_meal_plans.title")} {clientName}
       </h1>
+      <Link
+        to={`/make-meals/${clientId}`}
+        className={styles.cardButton}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {t("clientlist.create_meal_plan")}
+      </Link>
       {mealPlans.length === 0 ? (
         <p className={styles.noMealPlans}>{t("client_meal_plans.no_meals")}</p>
       ) : (

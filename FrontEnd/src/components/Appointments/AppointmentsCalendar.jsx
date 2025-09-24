@@ -25,14 +25,9 @@ const AppointmentsCalendar = () => {
   const { theme } = useTheme();
   const { t, i18n } = useTranslation();
   const { openNewAppointmentModal } = useModal();
-
-  // Memoize the localizer and other locale-dependent props to ensure they update
-  // when the language changes. This is the key to solving the localization issue.
   const { localizer, messages, formats } = useMemo(() => {
-    // Set the locale for moment before creating the localizer
     moment.locale(i18n.language);
 
-    // Create a custom localizer that uses the current language
     const loc = momentLocalizer(moment);
 
     return {
@@ -53,7 +48,6 @@ const AppointmentsCalendar = () => {
         showMore: (total) => `+${total} ${t("calendar.showMore")}`,
       },
       formats: {
-        // Custom format for weekdays
         weekdayFormat: (date) => {
           const day = date.getDay();
           const days = {
@@ -65,9 +59,8 @@ const AppointmentsCalendar = () => {
             5: t("calendar.friday"),
             6: t("calendar.saturday"),
           };
-          return days[day].substring(0, 3); // Get first 3 letters
+          return days[day].substring(0, 3);
         },
-        // Custom format for month header
         monthHeaderFormat: (date) => {
           const month = date.getMonth();
           const months = [
@@ -88,7 +81,6 @@ const AppointmentsCalendar = () => {
             i18n.language === "el" ? months[month] : moment(date).format("MMMM")
           } ${date.getFullYear()}`;
         },
-        // Format for days of the month
         dayFormat: (date) => {
           const dayNum = date.getDate();
           const dayOfWeek = date.getDay();
@@ -176,24 +168,13 @@ const AppointmentsCalendar = () => {
       const appointments = await getAppointmentsFrom(from, to);
       const formattedEvents = await Promise.all(
         appointments.map(async (appointment) => {
-          let clientDetails = appointment.client;
-          if (!clientDetails && appointment.clientId) {
-            try {
-              clientDetails = await getClientById(appointment.clientId);
-            } catch (clientError) {
-              console.error(
-                `Error fetching client ${appointment.clientId}:`,
-                clientError
-              );
-              clientDetails = null; // Set to null if fetching fails
-            }
-          }
           return {
             ...appointment,
-            title: appointment.title, // Use the title as is
+            title: `${appointment.title}`,
             start: moment.utc(appointment.start).local().toDate(),
             end: moment.utc(appointment.end).local().toDate(),
-            client: clientDetails, // Ensure client details are attached
+            clientFirstName: appointment.clientFirstName,
+            clientLastName: appointment.clientLastName,
           };
         })
       );
@@ -210,7 +191,6 @@ const AppointmentsCalendar = () => {
   }, []);
 
   const handleNewAppointment = (createdAppointment) => {
-    // Add the new appointment to the events state
     const eventWithClient = {
       ...createdAppointment,
       start: moment.utc(createdAppointment.start).local().toDate(),
@@ -253,13 +233,12 @@ const AppointmentsCalendar = () => {
           );
         }
       }
-      // Update events state with the updated appointment including client details
       setEvents((prevEvents) =>
         prevEvents.map((event) => {
           if (event.id === appointmentId) {
             return {
               ...updatedAppointment,
-              title: updatedAppointment.title, // Use the title as is
+              title: updatedAppointment.title,
               start: moment.utc(updatedAppointment.start).local().toDate(),
               end: moment.utc(updatedAppointment.end).local().toDate(),
               client: clientDetails,
@@ -330,6 +309,7 @@ const AppointmentsCalendar = () => {
         min={new Date(0, 0, 0, 7, 10, 0)}
         defaultView="week"
         style={{ width: "95%" }}
+        views={["month", "week", "day"]}
       />
       <div className={styles.buttonContainer}>
         <NewAppointmentButton onSuccess={handleNewAppointment} />
