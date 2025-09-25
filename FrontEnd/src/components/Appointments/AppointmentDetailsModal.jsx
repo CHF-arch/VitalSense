@@ -22,6 +22,7 @@ const AppointmentDetailsModal = ({
   const [isEditing, setIsEditing] = useState(false);
 
   const clientFromAppointment = appointment.client || {
+    id: appointment.clientId, // add id fallback
     firstName: appointment.clientFirstName,
     lastName: appointment.clientLastName,
   };
@@ -84,7 +85,8 @@ const AppointmentDetailsModal = ({
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !start || !end || !selectedClient) {
+    const effectiveClientId = selectedClient?.id ?? appointment.clientId;
+    if (!title || !start || !end || !effectiveClientId) {
       return;
     }
 
@@ -93,7 +95,7 @@ const AppointmentDetailsModal = ({
       title,
       start: moment(start, "YYYY-MM-DDTHH:mm").utc().toISOString(),
       end: moment(end, "YYYY-MM-DDTHH:mm").utc().toISOString(),
-      clientId: selectedClient.id,
+      clientId: effectiveClientId, // use fallback id if needed
     };
     await onUpdate(appointment.id, updatedData);
     window.location.reload();

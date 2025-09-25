@@ -151,6 +151,9 @@
   box-shadow: 0 6px 16px var(--shadow-color-medium);
   width: 100%;
   border: none;
+  white-space: normal;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .cardButton:hover {
@@ -625,6 +628,10 @@
 @media (max-width: 1200px) {
   .clientGrid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .cardButton {
+    font-size: 13px;
+    padding: 12px 14px;
   }
 }
 
