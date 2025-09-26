@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   width: auto;
-  max-width: 100%;
+  max-width: 80vh;
   min-width: 0; /* prevents overflow in flex layout */
 }
 
@@ -284,13 +284,6 @@
   width: 100%;
 }
 
-@media (min-width: 1700px) and (max-width: 1919px) {
-  .leftDiv {
-    flex-basis: 520px;
-    max-width: 520px;
-  }
-}
-
 @media (max-width: 1440px) {
   .dashboardContainer {
     flex-direction: column;
@@ -320,8 +313,7 @@
 
   .leftDiv {
     width: 100vh;
-    max-height: 35vh; /* Assign a portion of the height */
-    overflow-y: auto; /* Add scroll for appointments */
+    max-height: 35vh;
     margin: 0 0 15px 0;
   }
 
