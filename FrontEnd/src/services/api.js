@@ -1,33 +1,23 @@
 import { logoutUser } from "./auth";
 import { refreshAccessToken } from "./token";
 
-const getAuthHeaders = (token) => {
-  const accessToken = token || sessionStorage.getItem("token");
-  const headers = new Headers({
-    "Content-Type": "application/json",
-  });
-  if (accessToken) {
-    headers.set("Authorization", `Bearer ${accessToken}`);
-  }
-  return headers;
-};
-
-export const fetchWithAuth = async (url, options = {}) => {
-  let config = {
-    ...options,
-    headers: getAuthHeaders(),
+const baseFetchWithAuth = async (url, options, getHeaders) => {
+  const makeRequest = async (token) => {
+    const config = {
+      ...options,
+      headers: getHeaders(token),
+      credentials: "include",
+      mode: "cors",
+    };
+    return fetch(url, config);
   };
 
-  let response = await fetch(url, config);
-
-  if (response.status === 401) {
+  let response = await makeRequest();
+  if (response.status === 401 && !options._retry) {
     const newAccessToken = await refreshAccessToken();
+
     if (newAccessToken) {
-      config = {
-        ...options,
-        headers: getAuthHeaders(newAccessToken),
-      };
-      response = await fetch(url, config);
+      response = await makeRequest(newAccessToken);
     } else {
       logoutUser();
       throw new Error("Session expired. Please log in again.");
@@ -35,6 +25,21 @@ export const fetchWithAuth = async (url, options = {}) => {
   }
 
   return response;
+};
+
+export const fetchWithAuth = async (url, options = {}) => {
+  const getHeaders = (token) => {
+    const accessToken = token || sessionStorage.getItem("token");
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      ...options.headers,
+    });
+    if (accessToken) {
+      headers.set("Authorization", `Bearer ${accessToken}`);
+    }
+    return headers;
+  };
+  return baseFetchWithAuth(url, options, getHeaders);
 };
 
 export const fetchWithAuthForFormData = async (url, options = {}) => {
@@ -46,27 +51,5 @@ export const fetchWithAuthForFormData = async (url, options = {}) => {
     }
     return headers;
   };
-
-  let config = {
-    ...options,
-    headers: getHeaders(),
-  };
-
-  let response = await fetch(url, config);
-
-  if (response.status === 401) {
-    const newAccessToken = await refreshAccessToken();
-    if (newAccessToken) {
-      config = {
-        ...options,
-        headers: getHeaders(newAccessToken),
-      };
-      response = await fetch(url, config);
-    } else {
-      logoutUser();
-      throw new Error("Session expired. Please log in again.");
-    }
-  }
-
-  return response;
+  return baseFetchWithAuth(url, options, getHeaders);
 };

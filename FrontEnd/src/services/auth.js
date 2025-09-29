@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../config/api";
+import { fetchWithAuth } from "./api";
 
 export async function logoutUser() {
   sessionStorage.removeItem("token");
@@ -23,11 +24,10 @@ export async function loginUser(username, password) {
     }
 
     const data = await response.json();
-    if (data.accessToken && data.refreshToken) {
+    if (data.accessToken) {
       sessionStorage.setItem("token", data.accessToken);
       sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
       sessionStorage.setItem("username", username);
-      sessionStorage.setItem("refreshToken", data.refreshToken);
     }
     return data;
   } catch (error) {
@@ -67,89 +67,59 @@ export async function changePassword(
   newPassword,
   confirmNewPassword
 ) {
-  const token = sessionStorage.getItem("token");
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/change-password`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        currentPassword: currentPassword,
-        newPassword: newPassword,
-        confirmNewPassword: confirmNewPassword,
-      }),
-    });
+  const response = await fetchWithAuth(`${API_BASE_URL}/auth/change-password`, {
+    method: "POST",
+    body: JSON.stringify({
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      confirmNewPassword: confirmNewPassword,
+    }),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        errorData.message || "Change password failed. Please try again."
-      );
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Change password failed:", error);
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(
+      errorData.message || "Change password failed. Please try again."
+    );
   }
+
+  return await response.json();
 }
 
 export async function changeEmail(newEmail, currentPassword) {
-  const token = sessionStorage.getItem("token");
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/change-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        newEmail: newEmail,
-        currentPassword: currentPassword,
-      }),
-    });
+  const response = await fetchWithAuth(`${API_BASE_URL}/auth/change-email`, {
+    method: "POST",
+    body: JSON.stringify({
+      newEmail: newEmail,
+      currentPassword: currentPassword,
+    }),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        errorData.message || "Change email failed. Please try again."
-      );
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Change email failed:", error);
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(
+      errorData.message || "Change email failed. Please try again."
+    );
   }
+
+  return await response.json();
 }
 
 export async function changeUsername(newUsername, currentPassword) {
-  const token = sessionStorage.getItem("token");
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/change-username`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        newUsername: newUsername,
-        currentPassword: currentPassword,
-      }),
-    });
+  const response = await fetchWithAuth(`${API_BASE_URL}/auth/change-username`, {
+    method: "POST",
+    body: JSON.stringify({
+      newUsername: newUsername,
+      currentPassword: currentPassword,
+    }),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        errorData.message || "Change username failed. Please try again."
-      );
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Change username failed:", error);
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(
+      errorData.message || "Change username failed. Please try again."
+    );
   }
+
+  return await response.json();
 }
