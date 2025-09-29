@@ -7,7 +7,6 @@ const baseFetchWithAuth = async (url, options, getHeaders) => {
       ...options,
       headers: getHeaders(token),
       credentials: "include",
-      mode: "cors",
     };
     return fetch(url, config);
   };

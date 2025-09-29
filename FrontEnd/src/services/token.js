@@ -8,7 +8,6 @@ export async function refreshAccessToken() {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      mode: "cors",
       body: JSON.stringify({}),
     });
 
