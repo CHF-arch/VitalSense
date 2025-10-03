@@ -1,0 +1,18 @@
+.questionnaire {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-primary);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 30px;
+}
+
+.submission {
+  border: 1px solid var(--border-color-light);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.answer {
+  margin-left: 20px;
+}

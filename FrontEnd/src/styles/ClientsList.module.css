@@ -102,6 +102,30 @@
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
 
+.importButton {
+  padding: 16px 28px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-green-start) 0%,
+    var(--gradient-green-end) 100%
+  );
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 16px var(--shadow-color-medium);
+  margin-top: 20px;
+}
+
+.importButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
 .button {
   display: inline-block;
   padding: 16px 32px;
@@ -198,12 +222,6 @@
   min-height: 240px;
   display: flex;
   flex-direction: column;
-}
-
-.clientCard:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px var(--card-hover-shadow);
-  border-color: var(--border-color-medium);
 }
 
 .cardHeader {
@@ -414,8 +432,15 @@
   font-weight: 600;
   color: var(--text-color-primary);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.4;  
 }
+
+.clientName:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--link-color);
+}
+
 
 .clientDetails {
   display: grid;

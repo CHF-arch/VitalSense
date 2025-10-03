@@ -1,9 +1,11 @@
 import { API_BASE_URL } from "../config/api";
-import { fetchWithAuth } from "./api";
+import { fetchWithAuth, fetchWithAuthForFormData } from "./api";
 
-export async function getAllClients() {
+export async function getAllClients(pageNumber, pageSize) {
   try {
-    const response = await fetchWithAuth(`${API_BASE_URL}/clients`);
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/clients?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch clients");
     }
@@ -90,7 +92,9 @@ export async function deleteClient(clientId) {
 export async function searchClients(searchTerm) {
   try {
     const response = await fetchWithAuth(
-      `${API_BASE_URL}/clients/search?q=${encodeURIComponent(searchTerm)}`
+      `${API_BASE_URL}/clients/search?q=${encodeURIComponent(
+        searchTerm
+      )}`
     );
     if (!response.ok) {
       throw new Error("Failed to search clients");
@@ -100,4 +104,23 @@ export async function searchClients(searchTerm) {
     console.error("Error searching clients:", error);
     throw error;
   }
+}
+
+export async function importClientsFromExcel(file) {
+  try {
+    const formData = new FormData();
+    formData.append("excelFile", file);
+    const response = await fetchWithAuthForFormData(`${API_BASE_URL}/clients/import`, {
+      method: "POST",
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error("Failed to import clients from Excel");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error importing clients from Excel:", error);
+    throw error;
+  }
+  
 }

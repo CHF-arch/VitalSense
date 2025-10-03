@@ -8,11 +8,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 32px var(--shadow-color-medium);
-}
-
 p {
   margin: 0;
   color: var(--text-color-primary);
@@ -79,8 +74,10 @@ p {
 }
 
 .editLink:hover {
+  text-decoration: none;
+  cursor: pointer;
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px var(--shadow-color-medium);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
 
 .body {

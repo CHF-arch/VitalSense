@@ -4,6 +4,17 @@ import { getClientById } from "../../services/client";
 import { fetchQuestionnaireSubmissionsByClientId } from "../../services/questionnaireTemplate";
 import styles from "../../styles/ClientInfoCard.module.css";
 import { useTranslation } from "react-i18next";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaHome,
+  FaBirthdayCake,
+  FaVenusMars,
+  FaCreditCard,
+  FaStickyNote,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import { useTheme } from "../../hooks/useTheme";
 
 const Client = () => {
   const { clientId } = useParams();
@@ -12,6 +23,7 @@ const Client = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +65,8 @@ const Client = () => {
     return <div>{t("client.not_found")}</div>;
   }
 
+  const iconColor = theme === "dark" ? "white" : "black";
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -63,28 +77,36 @@ const Client = () => {
       <div className={styles.body}>
         {client.email && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>📧</span>
+            <span className={styles.icon}>
+              <FaEnvelope color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.email")}:</span>
             <span className={styles.value}>{client.email}</span>
           </div>
         )}
         {client.phone && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>📞</span>
+            <span className={styles.icon}>
+              <FaPhone color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.phone")}:</span>
             <span className={styles.value}>{client.phone}</span>
           </div>
         )}
         {client.address && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>🏠</span>
+            <span className={styles.icon}>
+              <FaHome color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.address")}:</span>
             <span className={styles.value}>{client.address}</span>
           </div>
         )}
         {client.dateOfBirth && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>🎂</span>
+            <span className={styles.icon}>
+              <FaBirthdayCake color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.dob")}:</span>
             <span className={styles.value}>
               {new Date(client.dateOfBirth).toLocaleDateString()}
@@ -93,13 +115,17 @@ const Client = () => {
         )}
         {client.gender && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>🚻</span>
+            <span className={styles.icon}>
+              <FaVenusMars color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.gender")}:</span>
             <span className={styles.value}>{getGender(client.gender)}</span>
           </div>
         )}
         <div className={styles.infoRow}>
-          <span className={styles.icon}>💳</span>
+          <span className={styles.icon}>
+            <FaCreditCard color={iconColor} />
+          </span>
           <span className={styles.label}>{t("client.hasCard")}:</span>
           <span
             className={`${styles.value} ${
@@ -111,14 +137,18 @@ const Client = () => {
         </div>
         {client.notes && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>📝</span>
+            <span className={styles.icon}>
+              <FaStickyNote color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.notes")}:</span>
             <span className={styles.value}>{client.notes}</span>
           </div>
         )}
         {client.createdAt && (
           <div className={styles.infoRow}>
-            <span className={styles.icon}>🗓️</span>
+            <span className={styles.icon}>
+              <FaCalendarAlt color={iconColor} />
+            </span>
             <span className={styles.label}>{t("client.createdAt")}:</span>
             <span className={styles.value}>
               {new Date(client.createdAt).toLocaleDateString()}

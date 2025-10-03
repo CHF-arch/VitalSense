@@ -35,7 +35,8 @@
     "passwords_do_not_match": "Οι κωδικοί δεν ταιριάζουν",
     "password_changed_successfully": "Ο κωδικός άλλαξε επιτυχώς",
     "password_change_failed": "Αποτυχία αλλαγής κωδικού",
-    "connections_section_title": "Συνδέσεις"
+    "connections_section_title": "Συνδέσεις",
+    "data_management_section_title": "Διαχείριση Δεδομένων"
   },
   "add_client": {
     "title": "Προσθήκη Πελάτη",
@@ -124,7 +125,8 @@
     "delete_confirmation": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον πελάτη; Αυτό θα διαγράψει επίσης όλα τα προγράμματα διατροφής και τα ραντεβού του.",
     "submit_questionnaire": "Υποβολή Ερωτηματολογίου",
     "select_questionnaire_template": "Επιλογή Προτύπου Ερωτηματολογίου",
-    "template": "Πρότυπα"
+    "template": "Πρότυπα",
+    "import_from_excel": "Εισαγωγή από Excel"
   },
   "client_meal_plans": {
     "title": "Διατροφικά Πλάνα για",

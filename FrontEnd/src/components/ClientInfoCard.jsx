@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../styles/ClientInfoCard.module.css";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import {
+  FaCreditCard,
+  FaEnvelope,
+  FaPhone,
+  FaBirthdayCake,
+  FaVenusMars,
+  FaStickyNote,
+} from "react-icons/fa";
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function ClientInfoCard({ client }) {
   const { t } = useTranslation();
+  const { theme } = useContext(ThemeContext);
 
   if (!client) {
     return null;
   }
 
-  const renderInfo = (emoji, label, value) => (
+  const iconColor = theme === "light" ? "#333" : "#fff";
+
+  const renderInfo = (icon, label, value) => (
     <div className={styles.infoRow}>
-      <span className={styles.icon}>{emoji}</span>
+      <span className={styles.icon}>{icon}</span>
       <span className={styles.label}>{label}:</span>
       <span className={styles.value}>{value}</span>
     </div>
@@ -42,7 +54,9 @@ export default function ClientInfoCard({ client }) {
               client.hasCard ? styles.hasCard : ""
             }`}
           >
-            <span className={styles.icon}>💳</span>
+            <span className={styles.icon}>
+              <FaCreditCard color={iconColor} />
+            </span>
             <span className={styles.statusText}>
               {client.hasCard
                 ? t("client_info_card.card_holder")
@@ -56,18 +70,26 @@ export default function ClientInfoCard({ client }) {
       </div>
       <div className={styles.body}>
         {client.email &&
-          renderInfo("📧", t("client_info_card.email"), client.email)}
+          renderInfo(
+            <FaEnvelope color={iconColor} />,
+            t("client_info_card.email"),
+            client.email
+          )}
         {client.phone &&
-          renderInfo("📞", t("client_info_card.phone_number"), client.phone)}
+          renderInfo(
+            <FaPhone color={iconColor} />,
+            t("client_info_card.phone_number"),
+            client.phone
+          )}
         {client.dateOfBirth &&
           renderInfo(
-            "🎂",
+            <FaBirthdayCake color={iconColor} />,
             t("client_info_card.date_of_birth"),
             formatDate(client.dateOfBirth)
           )}
         {client.gender &&
           renderInfo(
-            "🚻",
+            <FaVenusMars color={iconColor} />,
             t("client_info_card.gender"),
             getGender(client.gender)
           )}
@@ -75,7 +97,7 @@ export default function ClientInfoCard({ client }) {
       {client.notes && (
         <div className={styles.footer}>
           <h4 className={styles.notesTitle}>
-            📝 {t("client_info_card.notes")}
+            <FaStickyNote color={iconColor} /> {t("client_info_card.notes")}
           </h4>
           <p className={styles.notes}>{client.notes}</p>
         </div>

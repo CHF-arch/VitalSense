@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import styles from "../../styles/Settings.module.css";
 import { useTranslation } from "react-i18next";
@@ -13,12 +13,30 @@ import { useModal } from "../../context/useModal";
 import EmailChangeModal from "./EmailChangeModal";
 import PasswordChangeModal from "./PasswordChangeModal";
 import UsernameChangeModal from "./UsernameChangeModal";
+import { importClientsFromExcel } from "../../services/client";
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme();
   const { t, i18n } = useTranslation();
   const [isGoogleConnected, setIsGoogleConnected] = useState(false);
   const { openModal } = useModal();
+  const fileInputRef = useRef(null);
+
+  const handleImportClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleImport = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      await importClientsFromExcel(file);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error importing clients:", error);
+    }
+  };
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -162,6 +180,29 @@ export default function Settings() {
                 ? t("settings.disconnect_google")
                 : t("settings.sign_in_with_google")}
             </button>
+          </div>
+        </div>
+        <div className={styles.settingsSection}>
+          <h2 className={styles.sectionTitle}>
+            {t("settings.data_management_section_title")}
+          </h2>
+          <div className={styles.buttonContainer}>
+            <div className={styles.buttonWrapper}>
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleImport}
+                accept=".xlsx, .xls"
+              />
+              <button
+                id="import-excel-button"
+                className={styles.excleButton}
+                onClick={handleImportClick}
+              >
+                {t("clientlist.import_from_excel")}
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -35,7 +35,8 @@
     "passwords_do_not_match": "Passwords do not match",
     "password_changed_successfully": "Password changed successfully",
     "password_change_failed": "Failed to change password",
-    "connections_section_title": "Connections"
+    "connections_section_title": "Connections",
+    "data_management_section_title": "Data Management"
   },
   "add_client": {
     "title": "Add Client",
@@ -124,7 +125,8 @@
     "delete_confirmation": "Are you sure you want to delete this client? This will also delete all their meal plans and appointments.",
     "submit_questionnaire": "Submit Questionnaire",
     "select_questionnaire_template": "Select Questionnaire Template",
-    "template": "Templates"
+    "template": "Templates",
+    "import_from_excel": "Import from Excel"
   },
   "client_meal_plans": {
     "title": "Meal Plans for",

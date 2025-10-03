@@ -306,7 +306,7 @@ const AppointmentsCalendar = () => {
         messages={messages}
         formats={formats}
         onNavigate={handleNavigate}
-        min={new Date(0, 0, 0, 7, 10, 0)}
+        min={new Date(0, 0, 0, 7, 0, 0)}
         defaultView="week"
         style={{ width: "95%" }}
         views={["month", "week", "day"]}

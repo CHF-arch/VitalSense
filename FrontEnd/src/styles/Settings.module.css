@@ -62,6 +62,32 @@
   box-shadow: 0 8px 20px var(--shadow-color-medium);
 }
 
+.excleButton{
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-green-start) 0%,
+    var(--gradient-green-end) 100%
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  border: none;
+  cursor: pointer;
+}
+
+.excleButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 
+}
+
+
 .buttonGroup {
   display: flex;
   gap: 10px;
