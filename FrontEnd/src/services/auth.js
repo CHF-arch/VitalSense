@@ -1,10 +1,9 @@
 import { API_BASE_URL } from "../config/api";
 import { fetchWithAuth } from "./api";
+import useAuthStore from "../context/authStore";
 
 export async function logoutUser() {
-  sessionStorage.removeItem("token");
-  sessionStorage.removeItem("accessTokenExpiry");
-  sessionStorage.removeItem("username");
+  useAuthStore.getState().clearAuthData();
   window.location.href = "/login";
 }
 
@@ -26,9 +25,9 @@ export async function loginUser(username, password) {
 
     const data = await response.json();
     if (data.accessToken) {
-      sessionStorage.setItem("token", data.accessToken);
-      sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
-      sessionStorage.setItem("username", username);
+      useAuthStore
+        .getState()
+        .setAuthData(data.accessToken, data.accessTokenExpiry, username);
     }
     return data;
   } catch (error) {

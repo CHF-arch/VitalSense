@@ -1,5 +1,6 @@
 import { logoutUser } from "./auth";
 import { refreshAccessToken } from "./token";
+import useAuthStore from "../context/authStore";
 
 const baseFetchWithAuth = async (url, options, getHeaders) => {
   const makeRequest = async (token) => {
@@ -28,7 +29,7 @@ const baseFetchWithAuth = async (url, options, getHeaders) => {
 
 export const fetchWithAuth = async (url, options = {}) => {
   const getHeaders = (token) => {
-    const accessToken = token || sessionStorage.getItem("token");
+    const accessToken = token || useAuthStore.getState().token;
     const headers = new Headers({
       "Content-Type": "application/json",
       ...options.headers,
@@ -43,7 +44,7 @@ export const fetchWithAuth = async (url, options = {}) => {
 
 export const fetchWithAuthForFormData = async (url, options = {}) => {
   const getHeaders = (token) => {
-    const accessToken = token || sessionStorage.getItem("token");
+    const accessToken = token || useAuthStore.getState().token;
     const headers = new Headers(options.headers);
     if (accessToken) {
       headers.set("Authorization", `Bearer ${accessToken}`);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import useAuthStore from '../context/authStore';
 
 const ProtectedRoute = () => {
-    const isAuthenticated = sessionStorage.getItem('token'); // Check for access token
+    const token = useAuthStore.getState().token; // Check for access token
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+  return token ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

@@ -141,10 +141,14 @@ const App = () => {
   );
 };
 
+import AuthInitializer from "./components/AuthInitializer.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider>
     <ModalProvider>
-      <App />
+      <AuthInitializer>
+        <App />
+      </AuthInitializer>
     </ModalProvider>
   </ThemeProvider>
 );

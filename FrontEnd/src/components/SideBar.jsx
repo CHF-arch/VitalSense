@@ -3,7 +3,8 @@ import styles from "../styles/SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "../services/auth";
 import logo from "../images/VitalSense_Logo_tr.png";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import useAuthStore from "../context/authStore";
 import {
   MdDashboard,
   MdEventNote,
@@ -16,14 +17,7 @@ import {
 export default function SideBar({ isOpen, onClose }) {
   const location = useLocation();
   const { t } = useTranslation();
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    const storedUsername = sessionStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-  }, []);
+  const username = useAuthStore((state) => state.username);
 
   const handleLogout = () => {
     logoutUser();

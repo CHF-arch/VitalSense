@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../config/api";
+import useAuthStore from "../context/authStore";
 
 export async function refreshAccessToken() {
   try {
@@ -17,8 +18,14 @@ export async function refreshAccessToken() {
 
     const data = await response.json();
     if (data.accessToken) {
-      sessionStorage.setItem("token", data.accessToken);
-      sessionStorage.setItem("accessTokenExpiry", data.accessTokenExpiry);
+      const currentState = useAuthStore.getState();
+      useAuthStore
+        .getState()
+        .setAuthData(
+          data.accessToken,
+          data.accessTokenExpiry,
+          currentState.username
+        );
       return data.accessToken;
     }
     return null;
