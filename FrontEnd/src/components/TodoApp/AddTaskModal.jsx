@@ -46,9 +46,15 @@ export default function AddTaskModal({ onAddTask, onClose }) {
     const taskData = {
       title: newTaskTitle,
       description: newTaskDescription,
-      clientId: newClientId || null,
       dueDate: newDueDate ? new Date(newDueDate).toISOString() : null,
+      clientFirstName: selectedClient ? selectedClient.firstName : null,
+      clientLastName: selectedClient ? selectedClient.lastName : null,
     };
+
+    if (newClientId) {
+      taskData.clientId = newClientId;
+    }
+
     onAddTask(taskData);
     onClose();
   };

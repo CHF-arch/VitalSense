@@ -18,15 +18,14 @@ export async function refreshAccessToken() {
 
     const data = await response.json();
     if (data.accessToken) {
-      const currentState = useAuthStore.getState();
       useAuthStore
         .getState()
         .setAuthData(
           data.accessToken,
           data.accessTokenExpiry,
-          currentState.username
+          data.user.username
         );
-      return data.accessToken;
+      return data;
     }
     return null;
   } catch (error) {

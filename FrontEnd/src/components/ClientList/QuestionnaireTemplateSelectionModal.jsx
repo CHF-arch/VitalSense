@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useModal } from "../../context/useModal";
 import styles from "../../styles/Modal.module.css"; // Import modal styles
+import { toast } from "react-toastify";
 
 export default function QuestionnaireTemplateSelectionModal({
   templates,
@@ -18,7 +19,7 @@ export default function QuestionnaireTemplateSelectionModal({
     if (selectedTemplate) {
       onSubmit(selectedTemplate);
     } else {
-      alert("Please select a template.");
+      toast.info(t("questionnaire.select_template"));
     }
   };
 

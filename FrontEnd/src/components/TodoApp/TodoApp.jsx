@@ -5,7 +5,6 @@ import {
   deleteTask,
   toggleTaskCompletion,
 } from "../../services/task";
-import { getAllClients } from "../../services/client";
 import styles from "../../styles/TodoApp.module.css";
 import { useTranslation } from "react-i18next";
 import AddTaskModal from "./AddTaskModal";
@@ -13,7 +12,6 @@ import { useModal } from "../../context/useModal";
 
 export default function TodoApp() {
   const [tasks, setTasks] = useState([]);
-  const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,18 +20,14 @@ export default function TodoApp() {
   const { openConfirmationModal } = useModal();
 
   useEffect(() => {
-    fetchTasksAndClients();
+    fetchTasks();
   }, []);
 
-  const fetchTasksAndClients = async () => {
+  const fetchTasks = async () => {
     try {
       setLoading(true);
-      const [tasksData, clientsData] = await Promise.all([
-        getTasks(),
-        getAllClients(),
-      ]);
+      const tasksData = await getTasks();
       setTasks(tasksData);
-      setClients(clientsData);
     } catch (err) {
       setError("Failed to fetch data.");
       console.error("Error fetching data:", err);
@@ -45,7 +39,7 @@ export default function TodoApp() {
   const handleAddTask = async (taskData) => {
     try {
       await createTask(taskData);
-      fetchTasksAndClients(); // Refetch all data
+      fetchTasks();
     } catch (err) {
       setError("Failed to add task.");
       console.error("Error adding task:", err);
@@ -73,11 +67,6 @@ export default function TodoApp() {
       setError("Failed to toggle task completion.");
       console.error("Error toggling task completion:", err);
     }
-  };
-
-  const getClientName = (clientId) => {
-    const client = clients.find((c) => String(c.id) === String(clientId));
-    return client ? `${client.firstName} ${client.lastName}` : "N/A";
   };
 
   if (loading) {
@@ -151,9 +140,9 @@ export default function TodoApp() {
                   <p className={styles.taskDescription}>{task.description}</p>
                 )}
                 <div className={styles.taskMeta}>
-                  {task.clientId && (
+                  {task.clientName && (
                     <span className={styles.taskClient}>
-                      Client: {getClientName(task.clientId)}
+                      Client: {task.clientName} {task.clientSurname}
                     </span>
                   )}
                   {task.dueDate && (

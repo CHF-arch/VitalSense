@@ -352,6 +352,13 @@
     "saturday": "Σάββατο",
     "sunday": "Κυριακή"
   },
+  "questionnaire": {
+    "submit_success": "Το ερωτηματολόγιο υποβλήθηκε με επιτυχία!",
+    "submit_error": "Αποτυχία υποβολής ερωτηματολογίου.",
+    "no_templates_found": "Δεν βρέθηκαν πρότυπα ερωτηματολογίων.",
+    "select_template": "Παρακαλώ επιλέξτε ένα πρότυπο.",
+    "fetch_template_error": "Αποτυχία ανάκτησης προτύπου ερωτηματολογίου."
+  },
   "questionnaire_template": {
     "title": "Πρότυπα Ερωτηματολόγια",
     "title_input": "Τίτλος",

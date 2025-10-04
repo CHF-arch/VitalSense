@@ -353,6 +353,13 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
+  "questionnaire": {
+    "submit_success": "Questionnaire submitted successfully!",
+    "submit_error": "Failed to submit questionnaire.",
+    "no_templates_found": "No questionnaire templates found.",
+    "select_template": "Please select a template.",
+    "fetch_template_error": "Failed to fetch questionnaire template."
+  },
   "questionnaire_template": {
     "title": "Questionnaire Templates",
     "title_input": "Title",

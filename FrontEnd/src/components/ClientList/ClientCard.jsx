@@ -9,6 +9,7 @@ import {
 } from "../../services/questionnaireTemplate";
 import QuestionnaireTemplateSelectionModal from "./QuestionnaireTemplateSelectionModal";
 import QuestionnaireAnswerModal from "./QuestionnaireAnswerModal";
+import { toast } from "react-toastify";
 
 export default function ClientCard({ client, handleDelete }) {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ export default function ClientCard({ client, handleDelete }) {
             questionnaireTemplateId={templates[0].id}
             onClose={closeModal}
             onSubmitSuccess={() => {
-              alert("Questionnaire submitted successfully!");
+              toast.success(t("questionnaire.submit_success"));
               closeModal();
             }}
           />
@@ -52,7 +53,7 @@ export default function ClientCard({ client, handleDelete }) {
                   questionnaireTemplateId={templateId}
                   onClose={closeModal}
                   onSubmitSuccess={() => {
-                    alert("Questionnaire submitted successfully!");
+                    toast.success(t("questionnaire.submit_success"));
                     closeModal();
                   }}
                 />
@@ -61,11 +62,11 @@ export default function ClientCard({ client, handleDelete }) {
           />
         );
       } else {
-        alert("No questionnaire templates found.");
+        toast.info(t("questionnaire.no_templates_found"));
       }
     } catch (error) {
       console.error("Failed to submit questionnaire:", error);
-      alert("Failed to submit questionnaire.");
+      toast.error(t("questionnaire.submit_error"));
     }
   };
 

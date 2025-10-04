@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import modalStyles from "../../styles/Modal.module.css";
 import styles from "../../styles/QuestionnaireAnswerModal.module.css"; // Assuming a generic modal style
-import {
-  fetchQuestionnaireTemplateById,
-  SubmitQuestionnaire,
-} from "../../services/questionnaireTemplate"; // SubmitQuestionnaireAnswers will be created
+import { toast } from "react-toastify";
+import { fetchQuestionnaireTemplateById, SubmitQuestionnaire } from "../../services/questionnaireTemplate";
 
 export default function QuestionnaireAnswerModal({
   clientId,
@@ -35,6 +33,7 @@ export default function QuestionnaireAnswerModal({
       } catch (err) {
         setError(err);
         console.error("Failed to fetch questionnaire template:", err);
+        toast.error(t("questionnaire.fetch_template_error"));
       } finally {
         setLoading(false);
       }
@@ -68,7 +67,7 @@ export default function QuestionnaireAnswerModal({
     } catch (err) {
       setError(err);
       console.error("Failed to submit questionnaire answers:", err);
-      alert(t("questionnaire.submit_error")); // Localize this message
+      toast.error(t("questionnaire.submit_error"));
     } finally {
       setLoading(false);
     }
