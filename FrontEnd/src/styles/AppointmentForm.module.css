@@ -16,6 +16,7 @@
   border: 1px solid var(--border-color-medium);
   background-color: var(--input-background);
   color: var(--text-color-primary);
+  overflow-y: none;
 }
 
 .lastFormGroup {

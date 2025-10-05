@@ -232,7 +232,9 @@
     "active_tasks": "Active Tasks",
     "completed_tasks": "Completed Tasks",
     "cancel": "Cancel",
-    "delete_confirmation": "Are you sure you want to delete this task?"
+    "delete_confirmation": "Are you sure you want to delete this task?",
+    "client_name": "Client",
+    "due_date": "Due Date"
   },
   "cancel": "Cancel",
   "weekly_meal_plan_table": {

@@ -175,7 +175,7 @@ export default function NewAppointmentModal() {
 
         <ModeSwitcher mode={mode} setMode={setMode} />
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.appointmentForm}>
           <AppointmentForm
             title={title}
             setTitle={setTitle}

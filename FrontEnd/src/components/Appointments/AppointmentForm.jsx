@@ -6,8 +6,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import moment from "moment";
 import { el } from "date-fns/locale/el";
 import { enUS } from "date-fns/locale/en-US";
-
-// Register locales for react-datepicker
+import "react-datepicker/dist/react-datepicker.css";
 registerLocale("el", el);
 registerLocale("en", enUS);
 
@@ -37,10 +36,12 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
           showTimeSelect
           dateFormat="dd-MM-yyyy HH:mm"
           timeFormat="HH:mm"
-          timeIntervals={15}
+          timeIntervals={10}
           timeCaption={t("appointments.time")}
           className={styles.textInput}
           locale={i18n.language}
+          popperClassName={styles.datepickerPopper}
+          required
         />
       </div>
       <div className={styles.lastFormGroup}>
@@ -53,10 +54,12 @@ const AppointmentForm = ({ title, setTitle, start, setStart, end, setEnd }) => {
           showTimeSelect
           dateFormat="dd-MM-yyyy HH:mm"
           timeFormat="HH:mm"
-          timeIntervals={15}
+          timeIntervals={10}
           timeCaption={t("appointments.time")}
           className={styles.textInput}
           locale={i18n.language}
+          popperClassName={styles.datepickerPopper}
+          required
         />
       </div>
     </>

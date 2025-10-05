@@ -6,8 +6,8 @@ import {
 import { useEffect, useState, useCallback } from "react";
 import styles from "../../styles/QuestionnaireTemplate.module.css";
 import CreateQuestionnaireTemplateButton from "./createQuestionnaireTemplateButton";
-import { MdVisibility, MdEdit, MdDelete } from "react-icons/md"; // Import icons
-import moment from "moment"; // Import moment for date formatting
+import { MdVisibility, MdEdit, MdDelete } from "react-icons/md"; 
+import moment from "moment"; 
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/useModal";
 
@@ -84,12 +84,21 @@ export default function QuestionnaireTemplate() {
               <div className={styles.dateInfo}>
                 <p>
                   {t("questionnaire_template.create")}{" "}
-                  {moment(template.createdAt).format("DD-MM-YYYY HH:mm")}
+                  {moment
+                    .utc(template.createdAt)
+                    .local()
+                    .format("DD-MM-YYYY HH:mm")}
                 </p>
-                <p>
-                  {t("questionnaire_template.last")}{" "}
-                  {moment(template.updatedAt).format("DD-MM-YYYY HH:mm")}
-                </p>
+                {moment(template.updatedAt).isValid() &&
+                  template.updatedAt !== template.createdAt && (
+                    <p>
+                      {t("questionnaire_template.last")}{" "}
+                      {moment
+                        .utc(template.updatedAt)
+                        .local()
+                        .format("DD-MM-YYYY HH:mm")}
+                    </p>
+                  )}
               </div>
             </li>
           ))}

@@ -88,7 +88,7 @@ export default function TodoApp() {
     if (filter === "completed") {
       return task.isCompleted;
     }
-    return true; // "all"
+    return true;
   });
 
   return (
@@ -142,13 +142,13 @@ export default function TodoApp() {
                 <div className={styles.taskMeta}>
                   {task.clientName && (
                     <span className={styles.taskClient}>
-                      Client: {task.clientName} {task.clientSurname}
+                      {t("todo.client_name")}: {task.clientName} {task.clientSurname}
                     </span>
                   )}
                   {task.dueDate && (
                     <div>
                       <span className={styles.taskDueDate}>
-                        Due: {new Date(task.dueDate).toLocaleDateString()}
+                        {t("todo.due_date")}: {new Date(task.dueDate).toLocaleDateString()}
                       </span>
                     </div>
                   )}

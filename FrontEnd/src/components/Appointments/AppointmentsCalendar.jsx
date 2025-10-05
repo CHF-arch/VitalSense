@@ -185,9 +185,9 @@ const AppointmentsCalendar = () => {
   };
 
   useEffect(() => {
-    const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
-    const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
-    fetchAppointmentsFrom(startOfMonth, endOfMonth);
+    const startOfWeek = moment().startOf("week").format("YYYY-MM-DD");
+    const endOfWeek = moment().endOf("week").format("YYYY-MM-DD");
+    fetchAppointmentsFrom(startOfWeek, endOfWeek);
   }, []);
 
   const handleNewAppointment = (createdAppointment) => {
@@ -264,11 +264,21 @@ const AppointmentsCalendar = () => {
       console.error("Error deleting appointment:", error);
     }
   };
-  const handleNavigate = (date) => {
-    const startOfMonth = moment(date).startOf("month").format("YYYY-MM-DD");
-    const endOfMonth = moment(date).endOf("month").format("YYYY-MM-DD");
-    fetchAppointmentsFrom(startOfMonth, endOfMonth);
+
+  const handleRangeChange = (range) => {
+    let start, end;
+
+    if (Array.isArray(range)) {
+      start = moment(range[0]).format("YYYY-MM-DD");
+      end = moment(range[range.length - 1]).format("YYYY-MM-DD");
+    } else {
+      start = moment(range.start).format("YYYY-MM-DD");
+      end = moment(range.end).format("YYYY-MM-DD");
+    }
+
+    fetchAppointmentsFrom(start, end);
   };
+
   const [isSyncing, setIsSyncing] = useState(false);
   const SyncAppointments = async () => {
     setIsSyncing(true);
@@ -305,7 +315,7 @@ const AppointmentsCalendar = () => {
         culture={i18n.language} // Explicitly set the culture
         messages={messages}
         formats={formats}
-        onNavigate={handleNavigate}
+        onRangeChange={handleRangeChange}
         min={new Date(0, 0, 0, 7, 0, 0)}
         defaultView="week"
         style={{ width: "95%" }}
