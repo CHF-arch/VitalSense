@@ -5,7 +5,7 @@ import { createClient } from "../../services/client";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function AddQuickClient({ isOpen, onClose }) {
+export default function AddQuickClient({ isOpen, onClose, onClientAdded }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,6 +25,9 @@ export default function AddQuickClient({ isOpen, onClose }) {
       setLastName("");
       setEmail("");
       setPhone("");
+      if (onClientAdded) {
+        onClientAdded();
+      }
       onClose();
     } catch (error) {
       console.error("Error creating client:", error);
@@ -32,7 +35,6 @@ export default function AddQuickClient({ isOpen, onClose }) {
       return;
     }
     toast.success(t("appointments.client_create_suc"));
-    window.location.reload();
   };
 
   if (!isOpen) return null;

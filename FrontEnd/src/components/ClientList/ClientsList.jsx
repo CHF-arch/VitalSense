@@ -19,6 +19,7 @@ import ClientCard from "./ClientCard";
 import EmptyState from "./EmptyState";
 import Pagination from "../common/Pagination";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { useModal } from "../../context/useModal";
 
 const PAGE_SIZE = 12;
@@ -45,15 +46,10 @@ export default function ClientsList() {
 
       setClients(fetchedClients);
 
-      if (fetchedClients.length > 0) {
-        setKnownTotalPages(prevTotal => {
-          if (currentPage === prevTotal) {
-            return currentPage + 1;
-          }
-          return prevTotal;
-        });
-      } else {
+      if (fetchedClients.length < PAGE_SIZE) {
         setKnownTotalPages(currentPage);
+      } else {
+        setKnownTotalPages(currentPage + 1);
       }
     } catch (error) {
       setError(error);
@@ -92,8 +88,10 @@ export default function ClientsList() {
         await deleteClient(clientId);
 
         fetchClients();
+        toast.success(t("clientlist.delete_success"));
       } catch (error) {
         console.error("Error during client deletion process:", error);
+        toast.error(t("clientlist.delete_error"));
       }
     });
   };

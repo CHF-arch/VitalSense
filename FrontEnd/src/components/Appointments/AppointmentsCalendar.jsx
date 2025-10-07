@@ -248,8 +248,10 @@ const AppointmentsCalendar = () => {
         })
       );
       handleCloseDetailsModal();
+      toast.success(t("toast.appointmentEditSuccess"));
     } catch (error) {
       console.error("Error updating appointment:", error);
+      toast.error(t("toast.errorOccurred"));
     }
   };
 
@@ -260,8 +262,10 @@ const AppointmentsCalendar = () => {
         prevEvents.filter((event) => event.id !== appointmentId)
       );
       handleCloseDetailsModal();
+      toast.success(t("toast.appointmentDeleteSuccess"));
     } catch (error) {
       console.error("Error deleting appointment:", error);
+      toast.error(t("toast.errorOccurred"));
     }
   };
 

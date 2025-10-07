@@ -6,6 +6,8 @@ import ModalContext from "./ModalContextInstance";
 export const ModalProvider = ({ children }) => {
   const [isAddQuickClientModalOpen, setIsAddQuickClientModalOpen] =
     useState(false);
+  const [onClientAddedCallback, setOnClientAddedCallback] = useState(null);
+
   const [isNewAppointmentModalOpen, setIsNewAppointmentModalOpen] =
     useState(false);
   const [onAppointmentCreated, setOnAppointmentCreated] = useState(null);
@@ -22,8 +24,15 @@ export const ModalProvider = ({ children }) => {
   const [isGenericModalOpen, setIsGenericModalOpen] = useState(false);
   const [genericModalContent, setGenericModalContent] = useState(null);
 
-  const openAddQuickClientModal = () => setIsAddQuickClientModalOpen(true);
-  const closeAddQuickClientModal = () => setIsAddQuickClientModalOpen(false);
+  const openAddQuickClientModal = (callback) => {
+    setOnClientAddedCallback(() => callback);
+    setIsAddQuickClientModalOpen(true);
+  };
+
+  const closeAddQuickClientModal = () => {
+    setIsAddQuickClientModalOpen(false);
+    setOnClientAddedCallback(null);
+  };
 
   const openNewAppointmentModal = (callback, initialData = null) => {
     setOnAppointmentCreated(() => callback);
@@ -109,6 +118,7 @@ export const ModalProvider = ({ children }) => {
         isAddQuickClientModalOpen: isAddQuickClientModalOpen,
         openAddQuickClientModal: openAddQuickClientModal,
         closeAddQuickClientModal: closeAddQuickClientModal,
+        onClientAddedCallback: onClientAddedCallback,
         isNewAppointmentModalOpen: isNewAppointmentModalOpen,
         openNewAppointmentModal: openNewAppointmentModal,
         closeNewAppointmentModal: closeNewAppointmentModal,

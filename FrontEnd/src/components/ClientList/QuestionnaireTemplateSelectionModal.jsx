@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 export default function QuestionnaireTemplateSelectionModal({
   templates,
-  clientId,
   onSubmit,
 }) {
   const { t } = useTranslation();

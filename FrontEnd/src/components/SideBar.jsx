@@ -3,7 +3,6 @@ import styles from "../styles/SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "../services/auth";
 import logo from "../images/VitalSense_Logo_tr.png";
-import { useEffect } from "react";
 import useAuthStore from "../context/authStore";
 import {
   MdDashboard,

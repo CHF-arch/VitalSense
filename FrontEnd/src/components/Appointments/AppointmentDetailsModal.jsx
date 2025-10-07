@@ -98,7 +98,6 @@ const AppointmentDetailsModal = ({
       clientId: effectiveClientId, // use fallback id if needed
     };
     await onUpdate(appointment.id, updatedData);
-    window.location.reload();
   };
 
   const handleDeleteClick = () => {

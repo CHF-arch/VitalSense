@@ -9,6 +9,7 @@ import styles from "../styles/QuestionnaireTemplate.module.css";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { FaGripLines } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const ItemType = "QUESTION";
 
@@ -157,9 +158,13 @@ export default function QuestionnaireTemplateEditPage() {
         description,
         questions: orderedQuestions,
       });
-      navigate("/questionnaire-templates");
+      toast.success(t("questionnaire_template.update_success"));
+      setTimeout(() => {
+        navigate("/questionnaire-templates");
+      }, 1000);
     } catch (error) {
       console.error("Failed to update template:", error);
+      toast.error(t("questionnaire_template.update_error"));
     }
   };
 

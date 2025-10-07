@@ -24,7 +24,6 @@ export default function QuestionnaireAnswerModal({
           questionnaireTemplateId
         );
         setTemplate(fetchedTemplate);
-        // Initialize answers state with empty strings for each question
         const initialAnswers = {};
         fetchedTemplate.questions.forEach((q) => {
           initialAnswers[q.id] = "";
@@ -40,7 +39,7 @@ export default function QuestionnaireAnswerModal({
     };
 
     getTemplate();
-  }, [questionnaireTemplateId]);
+  }, [questionnaireTemplateId, t]);
 
   const handleAnswerChange = (questionId, value) => {
     setAnswers((prevAnswers) => ({

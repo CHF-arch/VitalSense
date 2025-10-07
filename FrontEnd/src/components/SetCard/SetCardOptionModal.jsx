@@ -31,7 +31,7 @@ const SetCardOptionModal = ({ client, closeModal }) => {
           <button
             onClick={handleComputerClick}
             className={styles.modalButton}
-            disabled={true} // Disable the button
+            // disabled={true} // Disable the button
           >
             {t("set_card_option.computer")}
           </button>

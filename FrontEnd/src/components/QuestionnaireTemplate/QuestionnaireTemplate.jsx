@@ -10,6 +10,7 @@ import { MdVisibility, MdEdit, MdDelete } from "react-icons/md";
 import moment from "moment"; 
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/useModal";
+import { toast } from "react-toastify";
 
 export default function QuestionnaireTemplate() {
   const { t } = useTranslation();
@@ -36,11 +37,12 @@ export default function QuestionnaireTemplate() {
       async () => {
         try {
           await deleteQuestionnaireTemplate(id);
-          setTemplates(templates.filter((template) => template.id !== id));
+          await fetchTemplates();
+          toast.success(t("questionnaire_template.delete_success"));
         } catch (error) {
           console.error("Failed to delete template:", error);
+          toast.error(t("questionnaire_template.delete_error"));
         }
-        window.location.reload();
       }
     );
   };

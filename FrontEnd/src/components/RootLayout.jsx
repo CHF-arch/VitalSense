@@ -17,6 +17,7 @@ const RootLayout = () => {
   const {
     isAddQuickClientModalOpen,
     closeAddQuickClientModal,
+    onClientAddedCallback,
     isCreateQuestionnaireTemplateModalOpen,
     closeCreateQuestionnaireTemplateModal,
     onQuestionnaireCreated,
@@ -62,6 +63,7 @@ const RootLayout = () => {
       <AddQuickClient
         isOpen={isAddQuickClientModalOpen}
         onClose={closeAddQuickClientModal}
+        onClientAdded={onClientAddedCallback}
       />
       <NewAppointmentModal />
       {isCreateQuestionnaireTemplateModalOpen && (

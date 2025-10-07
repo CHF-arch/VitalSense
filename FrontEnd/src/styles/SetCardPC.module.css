@@ -6,7 +6,6 @@
   box-shadow: 0 2px 4px var(--shadow-color-light);
   margin: 20px;
 }
-
 .title {
   font-size: 24px;
   font-weight: bold;
@@ -14,7 +13,6 @@
   color: var(--text-color-primary);
   text-align: center;
 }
-
 .step {
   margin-bottom: 15px;
   padding: 15px;
@@ -22,7 +20,6 @@
   border-radius: 6px;
   background-color: var(--background-color-primary);
 }
-
 .stepTitle {
   font-size: 18px;
   font-weight: bold;
@@ -30,7 +27,6 @@
   color: var(--text-color-secondary);
   text-align: center;
 }
-
 .stepContent {
   font-size: 16px;
   color: var(--text-color-primary);
@@ -46,7 +42,6 @@
   background-color: white;
   max-width: 20vw;
 }
-
 .copyButton {
   background-color: var(--gradient-blue-start);
   color: white;
@@ -57,11 +52,9 @@
   transition: background-color 0.3s;
   margin-top: 10px;
 }
-
 .copyButton:hover {
   background-color: var(--gradient-blue-end);
 }
-
 .instructionBoxesContainer {
   display: flex;
   flex-direction: row;
@@ -69,7 +62,6 @@
   gap: 15px;
   width: 100%;
 }
-
 .instructionBox {
   border: 1px solid var(--border-color-light);
   border-radius: 6px;
@@ -77,7 +69,6 @@
   margin-top: 15px;
   width: 50%;
 }
-
 .nfcNote {
   margin-top: 35px;
   font-weight: bold;
@@ -88,24 +79,20 @@
   justify-content: center;
   text-align: center;
 }
-
 .warningIcon {
   font-size: 3rem; /* Increase size further */
   margin-bottom: 8px;
   color: #f9a825; /* Yellow/Orange warning color */
 }
-
 @media (max-width: 768px) {
   .instructionBoxesContainer {
     flex-direction: column;
     align-items: center;
   }
-
   .instructionBox {
     width: 100%;
   }
 }
-
 .infoBox {
   border: 1px solid var(--border-color-light);
   border-radius: 6px;
@@ -115,21 +102,60 @@
   margin-bottom: 10px;
   max-width: 80%;
 }
-
 .instructionsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+  width: 100%;
+  max-width: 1800px;
   margin-top: 15px;
 }
-
 .instructionItem {
   background-color: var(--background-color-primary);
   border: 1px solid var(--border-color-light);
   border-radius: 6px;
   padding: 15px;
-  text-align: left;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.stepImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+.imageButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalContent {
+  max-width: 80%;
+  max-height: 80%;
+}
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
 }
