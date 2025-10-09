@@ -230,7 +230,7 @@ export default function ClientCard({ client, handleDelete }) {
 
         {client.notes && (
           <div className={styles.notesSection}>
-            <div className={styles.notesContent}>{client.notes}</div>.{" "}
+            <textarea value={client.notes} disabled className={styles.notesContent}/>
           </div>
         )}
         <div className={styles.buttonsContainer}>

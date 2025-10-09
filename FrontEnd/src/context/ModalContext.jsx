@@ -20,7 +20,6 @@ export const ModalProvider = ({ children }) => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [confirmationModalProps, setConfirmationModalProps] = useState(null);
 
-  // New state for generic modal
   const [isGenericModalOpen, setIsGenericModalOpen] = useState(false);
   const [genericModalContent, setGenericModalContent] = useState(null);
 
@@ -66,7 +65,6 @@ export const ModalProvider = ({ children }) => {
     setIsConfirmationModalOpen(false);
   };
 
-  // New generic modal functions
   const openModal = (content) => {
     console.log("openModal called with content:", content);
     setGenericModalContent(content);
@@ -132,7 +130,6 @@ export const ModalProvider = ({ children }) => {
         openConfirmationModal: openConfirmationModal,
         closeConfirmationModal: closeConfirmationModal,
         confirmationModalProps: confirmationModalProps,
-        // New generic modal values
         openModal: openModal,
         closeModal: closeModal,
         isGenericModalOpen: isGenericModalOpen,

@@ -1,7 +1,8 @@
-import React from 'react';
 import styles from '../../styles/Pagination.module.css';
+import { useTranslation } from "react-i18next";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const { t } = useTranslation();
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -14,7 +15,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === 1}
         className={styles.pageButton}
       >
-        Previous
+        {t("common.previous")}
       </button>
       {
         pageNumbers.map(number => (
@@ -32,7 +33,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === totalPages}
         className={styles.pageButton}
       >
-        Next
+        {t("common.next")}
       </button>
     </nav>
   );

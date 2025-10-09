@@ -53,7 +53,6 @@ export async function deleteQuestionnaireTemplate(id) {
   if (!response.ok) {
     throw new Error("Failed to delete questionnaire template");
   }
-  return response.json();
 }
 
 export async function fetchQuestionnaireTemplateById(id) {

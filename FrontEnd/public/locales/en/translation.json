@@ -7,7 +7,9 @@
     "create": "Create",
     "save": "Save",
     "select": "Select",
-    "submit": "Submit"
+    "submit": "Submit",
+    "next": "Next",
+    "previous": "Previous"
   },
   "settings": {
     "title": "Settings",
@@ -270,7 +272,8 @@
     "card_holder": "Card Holder",
     "no_card": "No Card",
     "male": "Male",
-    "female": "Female"
+    "female": "Female",
+    "notes": "Notes"
   },
   "login": {
     "dark_mode": "Dark Mode",
@@ -388,6 +391,8 @@
     "create": "Create :",
     "last": "Last Updated :",
     "delete_confirmation": "Are you sure you want to delete this template?",
+    "create_success": "Template created successfully.",
+    "create_error": "Failed to create template.",
     "update_success": "Template updated successfully.",
     "update_error": "Failed to update template.",
     "delete_success": "Template deleted successfully.",
@@ -407,7 +412,6 @@
   },
   "toast": {
     "errorOccurred": "An error occurred. Please try again.",
-    "operationSuccessful": "Operation completed successfully!",
     "appointmentEditSuccess": "Appointment Edited Successfully",
     "appointmentDeleteSuccess": "Appointment Deleted Successfully"
   },

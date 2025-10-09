@@ -291,13 +291,13 @@ const AppointmentsCalendar = () => {
       const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
       const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
       await fetchAppointmentsFrom(startOfMonth, endOfMonth);
+      toast.success(t("appointments.update_synced_suc"));
     } catch (error) {
       console.error("Error syncing appointments:", error);
       toast.error(t("toast.errorOccurred"));
     } finally {
       setIsSyncing(false);
     }
-    toast.success(t("toast.operationSuccessful"));
   };
 
   return (

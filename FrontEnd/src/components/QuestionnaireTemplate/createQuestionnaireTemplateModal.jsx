@@ -131,7 +131,7 @@ export default function CreateQuestionnaireTemplateModal({
         description,
         questions: orderedQuestions,
       });
-      toast.success(t("toast.operationSuccessful"));
+      toast.success(t("questionnaire_template.create_success"));
       if (onSuccess) {
         onSuccess();
       }
@@ -140,7 +140,7 @@ export default function CreateQuestionnaireTemplateModal({
       }, 200);
     } catch (error) {
       console.error("Failed to create questionnaire template", error);
-      toast.error(t("toast.errorOccurred"));
+      toast.error(t("questionnaire_template.create_error"));
     }
   };
 

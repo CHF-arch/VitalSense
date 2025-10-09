@@ -367,19 +367,11 @@
 }
 
 .notesSection {
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px solid var(--border-color-light);
-}
-
-.notesContent {
-  padding: 6px 8px;
-  background: var(--background-color-primary);
-  border-radius: 4px;
-  color: var(--text-color-secondary);
-  font-size: 11px;
-  line-height: 1.4;
-  font-style: italic;
 }
 
 .mealButtons {
@@ -479,7 +471,7 @@
 
 .notesContent {
   margin-top: 12px;
-  padding: 20px;
+  padding: 10px;
   background: linear-gradient(
     135deg,
     var(--background-color-primary) 0%,
@@ -491,6 +483,24 @@
   font-size: 15px;
   line-height: 1.6;
   box-shadow: 0 2px 8px var(--shadow-color-light);
+  resize: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-color-secondary) var(--background-color-primary);
+}
+
+.notesContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notesContent::-webkit-scrollbar-track {
+  background: var(--background-color-primary);
+  border-radius: 10px;
+}
+
+.notesContent::-webkit-scrollbar-thumb {
+  background-color: var(--text-color-secondary);
+  border-radius: 10px;
+  border: 2px solid var(--background-color-primary);
 }
 
 .actions {
