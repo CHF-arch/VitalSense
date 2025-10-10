@@ -17,7 +17,8 @@ const baseFetchWithAuth = async (url, options, getHeaders) => {
     const newAccessToken = await refreshAccessToken();
 
     if (newAccessToken) {
-      response = await makeRequest(newAccessToken);
+      const newOptions = { ...options, _retry: true };
+      response = await baseFetchWithAuth(url, newOptions, getHeaders);
     } else {
       logoutUser();
       throw new Error("Session expired. Please log in again.");

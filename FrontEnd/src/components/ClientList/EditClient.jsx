@@ -27,10 +27,10 @@ export default function EditClient() {
         const client = await getClientById(clientId);
         if (client) {
           const {
-            id, // eslint-disable-line no-unused-vars
-            dieticianId, // eslint-disable-line no-unused-vars
-            createdAt, // eslint-disable-line no-unused-vars
-            updatedAt, // eslint-disable-line no-unused-vars
+            id, 
+            dieticianId, 
+            createdAt, 
+            updatedAt, 
             ...editableClientData
           } = client;
           setClientData({

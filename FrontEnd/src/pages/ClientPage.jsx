@@ -45,12 +45,12 @@ const ClientPage = () => {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", padding: "30px" }}>
+    <div style={{ display: "flex", flexDirection: "column", padding: "30px", alignItems: "center" }}>
       <BackButton/>
-      <div style={{ padding: "20px" }}>
+      {/* <div style={{ padding: "20px" }}> */}
         <ClientInfoCard client={client} />
         <QuestionnaireSubmissions submissions={submissions} />
-      </div>
+      {/* </div> */}
     </div>
   );
 };

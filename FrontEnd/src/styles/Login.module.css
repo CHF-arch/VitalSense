@@ -195,3 +195,21 @@
 .requirementUnmet {
   color: #dc3545;
 }
+
+/* Added styles for password visibility toggle */
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInputContainer .input {
+  padding-right: 40px; /* Make space for the icon */
+}
+
+.passwordToggleIcon {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  color: var(--text-color-secondary);
+}

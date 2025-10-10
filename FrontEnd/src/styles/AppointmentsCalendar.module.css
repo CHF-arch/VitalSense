@@ -2,15 +2,17 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  width: 100%;
 }
 
 .calendar {
-  margin: 20px;
+  margin: 10px;
   padding: 20px;
   border-radius: 10px;
-  width: 95%; /* Ensure calendar takes up most of the width */
+  width: 90vw; /* Ensure calendar takes up most of the width */
   flex-grow: 1; /* Allow calendar to grow and fill available space */
 }
 

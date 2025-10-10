@@ -370,7 +370,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 8px;
-  padding-top: 8px;
+  padding: 8px 10px;
   border-top: 1px solid var(--border-color-light);
 }
 
@@ -470,7 +470,6 @@
 }
 
 .notesContent {
-  margin-top: 12px;
   padding: 10px;
   background: linear-gradient(
     135deg,
@@ -486,6 +485,7 @@
   resize: none;
   scrollbar-width: thin;
   scrollbar-color: var(--text-color-secondary) var(--background-color-primary);
+  width: 100%;
 }
 
 .notesContent::-webkit-scrollbar {

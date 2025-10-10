@@ -126,13 +126,14 @@ export default function TodoApp() {
       {filteredTasks.length === 0 ? (
         <p className={styles.noTasks}>{t("todo.no_tasks")}</p>
       ) : (
+      <div className={styles.taskListDiv}>
         <ul className={styles.taskList}>
           {filteredTasks.map((task) => (
             <li
-              key={task.id}
-              className={`${styles.taskItem} ${
-                task.isCompleted ? styles.completed : ""
-              }`}
+            key={task.id}
+            className={`${styles.taskItem} ${
+              task.isCompleted ? styles.completed : ""
+            }`}
             >
               <div>
                 <strong className={styles.taskTitle}>{task.title}</strong>
@@ -158,7 +159,7 @@ export default function TodoApp() {
                 <button
                   onClick={() => handleToggleComplete(task.id)}
                   className={styles.toggleButton}
-                >
+                  >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -169,7 +170,7 @@ export default function TodoApp() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                  >
+                    >
                     <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
                     <polyline points="9 11 12 14 22 4"></polyline>
                   </svg>
@@ -177,7 +178,7 @@ export default function TodoApp() {
                 <button
                   onClick={() => handleDeleteTask(task.id)}
                   className={styles.deleteButton}
-                >
+                  >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -189,7 +190,7 @@ export default function TodoApp() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="feather feather-trash-2"
-                  >
+                    >
                     <polyline points="3 6 5 6 21 6"></polyline>
                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                     <line x1="10" y1="11" x2="10" y2="17"></line>
@@ -200,6 +201,7 @@ export default function TodoApp() {
             </li>
           ))}
         </ul>
+      </div>
       )}
     </div>
   );

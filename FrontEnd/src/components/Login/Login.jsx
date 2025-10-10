@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/useTheme.js";
 import { useTranslation } from "react-i18next";
 import LoginRequerments from "./LoginRequerments.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -16,6 +18,8 @@ export default function Login() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleToggleForm = () => {
     setIsSignUp(!isSignUp);
@@ -93,26 +97,40 @@ export default function Login() {
 
             <label className={styles.label}>
               {t("login.password")}:
-              <input
-                type="password"
-                name="password"
-                placeholder={t("login.password")}
-                className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className={styles.passwordInputContainer}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder={t("login.password")}
+                  className={styles.input}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEye : faEyeSlash}
+                  className={styles.passwordToggleIcon}
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </div>
             </label>
 
             <label className={styles.label}>
               {t("login.confirm_password")}:
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder={t("login.confirm_password")}
-                className={styles.input}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <div className={styles.passwordInputContainer}>
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  placeholder={t("login.confirm_password")}
+                  className={styles.input}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <FontAwesomeIcon
+                  icon={showConfirmPassword ? faEye : faEyeSlash}
+                  className={styles.passwordToggleIcon}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                />
+              </div>
             </label>
 
             <button type="submit" className={styles.button}>
@@ -150,14 +168,21 @@ export default function Login() {
 
             <label className={styles.label}>
               {t("login.password")}:
-              <input
-                type="password"
-                name="password"
-                placeholder={t("login.password")}
-                className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className={styles.passwordInputContainer}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder={t("login.password")}
+                  className={styles.input}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEye : faEyeSlash}
+                  className={styles.passwordToggleIcon}
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </div>
             </label>
 
             <button type="submit" className={styles.button}>

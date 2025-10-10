@@ -16,3 +16,9 @@
 .answer {
   margin-left: 20px;
 }
+@media (max-width: 1040px) {
+  .questionnaire{
+    width: 100%;
+  }
+  
+}

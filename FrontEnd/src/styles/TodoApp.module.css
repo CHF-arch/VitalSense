@@ -120,11 +120,15 @@
   box-shadow: 0 12px 24px var(--shadow-color-medium);
 }
 
+.taskListDiv{
+  max-height: 300px;
+  overflow-y: auto; 
+}
+
+
 .taskList {
   list-style: none;
-  padding: 0;
-  max-height: 280px; /* Adjust as needed */
-  overflow-y: auto;
+  /* padding: 0;*/
 }
 
 .taskList::-webkit-scrollbar {
