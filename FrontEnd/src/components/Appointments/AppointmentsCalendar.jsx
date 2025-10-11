@@ -159,6 +159,14 @@ const AppointmentsCalendar = () => {
             .locale(i18n.language)
             .format("DD MMMM")}`;
         },
+        timeGutterFormat: "HH:mm",
+        agendaTimeFormat: "HH:mm",
+        eventTimeRangeFormat: ({ start, end }, culture, local) =>
+          `${local.format(start, "HH:mm", culture)} - ${local.format(
+            end,
+            "HH:mm",
+            culture
+          )}`,
       },
     };
   }, [i18n.language, t]);
@@ -324,6 +332,7 @@ const AppointmentsCalendar = () => {
         defaultView="week"
         style={{ width: "95%" }}
         views={["month", "week", "day"]}
+        step={15}
       />
       <div className={styles.buttonContainer}>
         <NewAppointmentButton onSuccess={handleNewAppointment} />

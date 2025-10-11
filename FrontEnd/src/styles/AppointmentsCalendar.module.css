@@ -14,6 +14,7 @@
   border-radius: 10px;
   width: 90vw; /* Ensure calendar takes up most of the width */
   flex-grow: 1; /* Allow calendar to grow and fill available space */
+  height: 10px;
 }
 
 .buttonContainer {
