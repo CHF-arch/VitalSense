@@ -233,6 +233,14 @@
   border-color: var(--gradient-blue-start) !important;
 }
 
+@media (max-width: 1024px){
+  .taskListDiv{
+  max-height: 10vh;
+  overflow-y: auto; 
+}
+}
+
+
 @media (max-width: 768px) {
   .clientSearchContainer {
     flex-direction: column;
