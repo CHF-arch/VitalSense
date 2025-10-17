@@ -74,6 +74,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .addMealButton {
@@ -95,6 +96,11 @@
   border: none;
   cursor: pointer;
 }
+.addMealButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px var(--shadow-color-medium);
+}
+
 
 .importButton {
   padding: 16px 32px;
@@ -114,7 +120,7 @@
   box-shadow: 0 6px 16px var(--shadow-color-medium);
   border: none;
   cursor: pointer;
-  margin-left: 1rem; /* Add some spacing */
+  /* margin-left: 1rem;  */
 }
 
 .importButton:hover {
@@ -127,6 +133,33 @@
   flex-direction: column;
   gap: 1.5rem;
 }
+
+/* .downloadButton {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  margin-top: 10px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+.downloadButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-color-medium);
+  text-decoration: none;
+} */
 
 .mealCard {
   background: var(--card-background);
@@ -460,5 +493,32 @@
 
 .addNutritionButton:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-color-medium);
+}
+
+.downloadButton {
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.downloadButton:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
   box-shadow: 0 8px 20px var(--shadow-color-medium);
 }

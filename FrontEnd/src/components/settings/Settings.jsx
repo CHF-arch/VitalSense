@@ -203,6 +203,15 @@ export default function Settings() {
                 {t("clientlist.import_from_excel")}
               </button>
             </div>
+            <div className={styles.buttonWrapper}>
+              <a
+                href="/locales/RequiredExcel/Clients.xlsx"
+                download
+                className={styles.downloadButton}
+              >
+                {t("clientlist.download_template")}
+              </a>
+            </div>
           </div>
         </div>
       </div>

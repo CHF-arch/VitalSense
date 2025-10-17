@@ -17,6 +17,44 @@
   box-sizing: border-box;
 }
 
+.downloadButton {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-blue-start) 0%,
+    var(--gradient-blue-end) 100%
+  );
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  margin-top: 10px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.downloadButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-color-medium);
+  text-decoration: none;
+}
+
+.emptyStateButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+
 .h1 {
   text-align: left;
   color: var(--text-color-primary);

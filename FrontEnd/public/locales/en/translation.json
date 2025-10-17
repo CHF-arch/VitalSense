@@ -130,7 +130,8 @@
     "submit_questionnaire": "Submit Questionnaire",
     "select_questionnaire_template": "Select Questionnaire Template",
     "template": "Templates",
-    "import_from_excel": "Import from Excel"
+    "import_from_excel": "Import from Excel",
+    "download_template": "Download Template"
   },
   "client_meal_plans": {
     "title": "Meal Plans for",
@@ -220,7 +221,8 @@
     "save_meal_plan": "Save Meal Plan",
     "create_new_meal_plan": "Create New Meal Plan",
     "loading": "Processing your meal plan...",
-    "add_nutrition_info": "Add Nutrition Info"
+    "add_nutrition_info": "Add Nutrition Info",
+    "download_template": "Download Template"
   },
   "todo": {
     "my_tasks": "My Tasks",

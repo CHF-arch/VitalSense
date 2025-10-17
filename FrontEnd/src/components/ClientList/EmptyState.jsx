@@ -45,6 +45,13 @@ export default function EmptyState({ onClientAdded }) {
           >
             {t("clientlist.import_from_excel")}
           </button>
+          <a
+            href="/locales/RequiredExcel/Clients.xlsx"
+            download
+            className={styles.downloadButton}
+          >
+            {t("clientlist.download_template")}
+          </a>
         </div>
       </div>
     </div>

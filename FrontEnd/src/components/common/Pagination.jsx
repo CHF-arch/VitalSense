@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const { t } = useTranslation();
   const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
+  for (let i = 1; i <= totalPages+1; i++) {
     pageNumbers.push(i);
   }
 

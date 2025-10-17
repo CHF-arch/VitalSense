@@ -27,10 +27,10 @@ export default function EditClient() {
         const client = await getClientById(clientId);
         if (client) {
           const {
-            id, 
-            dieticianId, 
-            createdAt, 
-            updatedAt, 
+            // id, 
+            // dieticianId, 
+            // createdAt, 
+            // updatedAt, 
             ...editableClientData
           } = client;
           setClientData({

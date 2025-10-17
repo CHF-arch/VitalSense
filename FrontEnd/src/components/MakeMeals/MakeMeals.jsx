@@ -262,7 +262,6 @@ export default function MakeMeals() {
           >
             {t("make_meals.add_meal")}
           </button>
-          {/* New Import Button */}
           <input
             type="file"
             id="excelFileInput"
@@ -277,6 +276,13 @@ export default function MakeMeals() {
           >
             {t("make_meals.import_from_excel")}
           </button>
+          <a
+            href="/locales/RequiredExcel/MealPlan.xlsx"
+            download
+            className={styles.downloadButton}
+          >
+            {t("make_meals.download_template")}
+          </a>
         </div>
 
         <button type="submit" className={styles.saveMealPlanButton}>

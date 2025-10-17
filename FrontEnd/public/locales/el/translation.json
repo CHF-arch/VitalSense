@@ -130,7 +130,8 @@
     "submit_questionnaire": "Υποβολή Ερωτηματολογίου",
     "select_questionnaire_template": "Επιλογή Προτύπου Ερωτηματολογίου",
     "template": "Πρότυπα",
-    "import_from_excel": "Εισαγωγή από Excel"
+    "import_from_excel": "Εισαγωγή από Excel",
+    "download_template": "Λήψη προτύπου"
   },
   "client_meal_plans": {
     "title": "Διατροφικά Πλάνα για",
@@ -220,7 +221,8 @@
     "save_meal_plan": "Αποθήκευση Διατροφικού Πλάνου",
     "create_new_meal_plan": "Δημιουργία Νέου Διατροφικού Πλάνου",
     "loading": "Επεξεργασία του προγράμματος διατροφής σας...",
-    "add_nutrition_info": "Προσθήκη Πληροφοριών Διατροφής"
+    "add_nutrition_info": "Προσθήκη Πληροφοριών Διατροφής",
+    "download_template": "Λήψη προτύπου"
   },
   "todo": {
     "my_tasks": "Οι εργασίες μου",
