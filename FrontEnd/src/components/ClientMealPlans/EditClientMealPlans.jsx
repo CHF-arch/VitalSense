@@ -212,13 +212,13 @@ export default function EditClientMealPlans() {
           setPlanTitle={(value) => handlePlanDetailsChange("title", value)}
           startDate={
             mealPlan.startDate
-              ? new Date(mealPlan.startDate).toISOString().split("T")[0]
+              ? mealPlan.startDate.split("T")[0]
               : ""
           }
           setStartDate={(value) => handlePlanDetailsChange("startDate", value)}
           endDate={
             mealPlan.endDate
-              ? new Date(mealPlan.endDate).toISOString().split("T")[0]
+              ? mealPlan.endDate.split("T")[0]
               : ""
           }
           setEndDate={(value) => handlePlanDetailsChange("endDate", value)}

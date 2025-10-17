@@ -196,7 +196,7 @@
 
 .cardButton {
   display: inline-block;
-  padding: 15px;
+  padding: 12px;
   background: linear-gradient(
     135deg,
     var(--gradient-blue-start) 0%,
